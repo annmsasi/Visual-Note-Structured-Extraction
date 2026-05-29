@@ -1,0 +1,39 @@
+[project]
+name = "miso"
+version = "0.1.0"
+description = "Visual note structured extraction — cache/RAG subsystem."
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+# sentence-transformers supplies both the embedder and the cross-encoder reranker.
+embeddings = ["sentence-transformers>=3.0"]
+lexicon = ["wordfreq>=3.0"]
+sparse = ["rank-bm25>=0.2"]
+vectordb = ["sqlite-vec>=0.1.7"]
+fuzzy = ["rapidfuzz>=3.0"]
+ocr-azure = ["azure-ai-documentintelligence>=1.0"]
+llm-anthropic = ["anthropic>=0.40"]
+env = ["python-dotenv>=1.0"]
+all = [
+    "sentence-transformers>=3.0",
+    "wordfreq>=3.0",
+    "rank-bm25>=0.2",
+    "sqlite-vec>=0.1.7",
+    "rapidfuzz>=3.0",
+    "azure-ai-documentintelligence>=1.0",
+    "anthropic>=0.40",
+    "python-dotenv>=1.0",
+]
+
+[project.scripts]
+miso-replay = "miso.replay:main"
+miso-eval = "miso.eval.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["miso", "miso.eval", "miso.tests"]
+package-data = {"miso" = ["schema.sql"]}

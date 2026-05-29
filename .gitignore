@@ -1,0 +1,19 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+
+# Miso runtime artifacts
+runs/
+*.db
+
+# Literature-review PDFs (third-party; not committed)
+papers/
+
+# Loose test images and derived artifacts
+*.webp
+*.prepared.jpg
