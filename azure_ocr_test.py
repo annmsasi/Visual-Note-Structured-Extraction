@@ -1,24 +1,10 @@
-"""Azure Document Intelligence OCR step  (branch: azure-preprocessing).
+"""Azure prebuilt-read OCR step; alternative to ocr_test.py (Tesseract).
 
-Drop-in alternative to ocr_test.py (Tesseract). It reads the RAW image from
-data/inbox, runs Azure's `prebuilt-read` model, prints the recognized text with
-a per-word confidence summary, and writes ocr_output.txt — the file
-extract_test.py already expects but that the Tesseract path never produced.
+Reads the raw image from data/inbox (Azure does its own deskew/binarization, so
+the OpenCV grayscale output is bypassed), prints the text with a per-word
+confidence summary, and writes ocr_output.txt for extract_test.py.
 
-It deliberately does NOT use the OpenCV grayscale + equalizeHist output: Azure
-already does its own deskew / binarization / contrast normalization, and an A/B
-on this repo's note showed that extra preprocessing *lowered* mean confidence
-(0.88 -> 0.84) and nearly doubled low-confidence words (10% -> 19%). The only
-prep Azure needs is conforming the file to its size/format limits, which
-`_prepare_for_azure` handles. (The Tesseract path still uses the OpenCV
-preprocessing, where it helps.)
-
-Self-contained: depends only on the azure SDK + python-dotenv, not on the miso
-pipeline (that lives on the `full-pipeline` branch).
-
-.env must contain:
-    AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT=https://<resource>.cognitiveservices.azure.com/
-    AZURE_DOCUMENT_INTELLIGENCE_KEY=<key>
+.env: AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT, AZURE_DOCUMENT_INTELLIGENCE_KEY
 """
 from pathlib import Path
 import os
@@ -31,9 +17,7 @@ _IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".tif", ".tiff", ".bmp"}
 
 
 def _pick_image() -> Path:
-    """Use the raw inbox image — Azure handles its own preprocessing internally,
-    so the OpenCV grayscale/equalize output is intentionally bypassed here.
-    """
+    """Return the first image in data/inbox."""
     imgs = sorted(p for p in Path("data/inbox").glob("*") if p.suffix.lower() in _IMAGE_EXTS)
     if not imgs:
         raise SystemExit("No image found in data/inbox")
@@ -41,9 +25,7 @@ def _pick_image() -> Path:
 
 
 def _prepare_for_azure(path: Path, max_edge: int = 4000) -> Path:
-    """Azure caps upload size and dimensions; downscale + re-encode if needed.
-    No-op for already-small JPEG/PNG so the preprocessed file is used as-is.
-    """
+    """Downscale/re-encode to fit Azure's size and format limits."""
     try:
         from PIL import Image
     except ImportError:
