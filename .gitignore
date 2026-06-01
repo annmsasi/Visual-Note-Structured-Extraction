@@ -3,9 +3,18 @@
 # miso pipeline runtime artifacts
 miso_cache.db
 miso_cache.db-*
+cache_*.db
+cache_*.db-*
 runs/
+.ocr_cache/
 *.prepared.jpg
 *.azure.jpg
+
+# eval artifacts
+corpora/
+ocr_dump.json
+*.html
+ocr_output.txt
 
 # Google Docs OAuth (never commit)
 credentials.json

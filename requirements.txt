@@ -1,5 +1,5 @@
-# full-pipeline branch: the complete vendored miso pipeline.
-# Core (required):
+# eval branch: full pipeline + corpus/eval tooling.
+# Core pipeline:
 azure-ai-documentintelligence
 azure-core
 anthropic
@@ -8,11 +8,17 @@ pillow
 wordfreq
 pylatexenc
 
-# Google Docs export (only needed for --drive):
+# Google Docs export:
 google-api-python-client
 google-auth-oauthlib
 google-auth-httplib2
 
-# Optional: dense retrieval + cross-encoder rerank (heavy; BM25-only without them).
-# sentence-transformers
+# Retrieval (needed to evaluate the retrieval cache):
+sentence-transformers
+
+# Corpus staging (download + render HuggingFace note datasets):
+datasets
+pymupdf
+
+# Optional: faster on-disk vector index.
 # sqlite-vec

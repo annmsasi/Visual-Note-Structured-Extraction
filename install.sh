@@ -8,5 +8,7 @@ python3 -m venv .venv
 
 echo
 echo "Installed. Next:"
-echo "  1. Create .env with your Azure + Anthropic keys (see README_full.md)."
-echo "  2. Run: .venv/bin/python run_full_pipeline.py data/inbox/notes.jpg"
+echo "  1. Create .env with Azure + Anthropic keys (see README_eval.md)."
+echo "  2. Stage a corpus, e.g.:"
+echo "     .venv/bin/python stage_corpus.py HumynLabs/Handwritten-Computer-Science-Notes-Dataset corpora/cs cs"
+echo "  3. Run it: .venv/bin/python run_corpus.py corpora/cs --course cs --config full"
