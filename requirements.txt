@@ -1,0 +1,8 @@
+# azure-preprocessing branch: OpenCV preprocess -> Azure OCR -> OpenAI extract
+opencv-python
+pytesseract
+pillow
+openai
+python-dotenv
+azure-ai-documentintelligence
+azure-core
