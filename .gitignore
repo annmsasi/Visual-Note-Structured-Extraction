@@ -1,1 +1,17 @@
 .env
+
+# miso pipeline runtime artifacts
+miso_cache.db
+miso_cache.db-*
+runs/
+*.prepared.jpg
+*.azure.jpg
+
+# Google Docs OAuth (never commit)
+credentials.json
+token.json
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
