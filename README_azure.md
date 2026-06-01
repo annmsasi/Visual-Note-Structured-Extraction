@@ -5,15 +5,22 @@ Same shape as `main`, but the OCR step uses **Azure Document Intelligence**
 removed — `ocr_test.py` (Tesseract) still works; this branch just adds an Azure
 alternative and connects the OCR output to extraction.
 
-## Pipeline
+## Pipeline (Azure)
 
-1. `preprocess_test.py` — OpenCV grayscale + contrast → `data/output/*_clean.png`
-2. `azure_ocr_test.py`  — Azure `prebuilt-read` → prints text + confidence, writes `ocr_output.txt`
-3. `extract_test.py`    — OpenAI GPT-4.1-mini: image + `ocr_output.txt` → structured JSON
+1. `azure_ocr_test.py` — Azure `prebuilt-read` on the **raw** `data/inbox` image → prints text + confidence, writes `ocr_output.txt`
+2. `extract_test.py`   — OpenAI GPT-4.1-mini: image + `ocr_output.txt` → structured JSON
 
-> Note: `extract_test.py` reads `ocr_output.txt`. The Tesseract step
-> (`ocr_test.py`) only printed to stdout, so that file was never created;
-> `azure_ocr_test.py` writes it, closing the gap.
+> **No grayscale step for Azure.** Azure does its own deskew / binarization /
+> contrast normalization, so feeding it the OpenCV `equalizeHist` output
+> measurably *hurt* (mean confidence 0.88 → 0.84, low-confidence words 10% →
+> 19% on this repo's note). Azure reads the raw image; the only prep is a Pillow
+> downscale/format safeguard inside `azure_ocr_test.py`.
+>
+> The Tesseract path (`preprocess_test.py` → `ocr_test.py`) is left intact for
+> comparison — grayscale + equalize helps there.
+>
+> `extract_test.py` reads `ocr_output.txt`, which the Tesseract step never wrote;
+> `azure_ocr_test.py` writes it, closing that gap.
 
 ## Setup
 
@@ -32,7 +39,7 @@ AZURE_DOCUMENT_INTELLIGENCE_KEY=...
 ## Run
 
 ```bash
-python preprocess_test.py && python azure_ocr_test.py && python extract_test.py
+python azure_ocr_test.py && python extract_test.py
 ```
 
 The full miso pipeline (lexicon correction, RAG retrieval, schema-forced

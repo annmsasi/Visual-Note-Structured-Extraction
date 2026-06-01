@@ -1,10 +1,17 @@
 """Azure Document Intelligence OCR step  (branch: azure-preprocessing).
 
-Drop-in alternative to ocr_test.py (Tesseract). It reads the preprocessed image
-from data/output (falling back to data/inbox), runs Azure's `prebuilt-read`
-model, prints the recognized text with a per-word confidence summary, and
-writes ocr_output.txt — the file extract_test.py already expects but that the
-Tesseract path never produced.
+Drop-in alternative to ocr_test.py (Tesseract). It reads the RAW image from
+data/inbox, runs Azure's `prebuilt-read` model, prints the recognized text with
+a per-word confidence summary, and writes ocr_output.txt — the file
+extract_test.py already expects but that the Tesseract path never produced.
+
+It deliberately does NOT use the OpenCV grayscale + equalizeHist output: Azure
+already does its own deskew / binarization / contrast normalization, and an A/B
+on this repo's note showed that extra preprocessing *lowered* mean confidence
+(0.88 -> 0.84) and nearly doubled low-confidence words (10% -> 19%). The only
+prep Azure needs is conforming the file to its size/format limits, which
+`_prepare_for_azure` handles. (The Tesseract path still uses the OpenCV
+preprocessing, where it helps.)
 
 Self-contained: depends only on the azure SDK + python-dotenv, not on the miso
 pipeline (that lives on the `full-pipeline` branch).
@@ -24,12 +31,13 @@ _IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".tif", ".tiff", ".bmp"}
 
 
 def _pick_image() -> Path:
-    """Prefer the preprocessed image; fall back to the raw inbox image."""
-    for folder in ("data/output", "data/inbox"):
-        imgs = sorted(p for p in Path(folder).glob("*") if p.suffix.lower() in _IMAGE_EXTS)
-        if imgs:
-            return imgs[0]
-    raise SystemExit("No image found in data/output or data/inbox")
+    """Use the raw inbox image — Azure handles its own preprocessing internally,
+    so the OpenCV grayscale/equalize output is intentionally bypassed here.
+    """
+    imgs = sorted(p for p in Path("data/inbox").glob("*") if p.suffix.lower() in _IMAGE_EXTS)
+    if not imgs:
+        raise SystemExit("No image found in data/inbox")
+    return imgs[0]
 
 
 def _prepare_for_azure(path: Path, max_edge: int = 4000) -> Path:
