@@ -7,9 +7,7 @@ into a structured document (HTML, and optionally a Google Doc):
     -> Claude (schema-forced document IR) -> write-back to miso_cache.db
     -> HTML / Google Docs export
 
-The original team scripts (`preprocess_test.py`, `ocr_test.py`,
-`extract_test.py`) are kept alongside; `run_full_pipeline.py` is the entry point
-for the full pipeline.
+`run_full_pipeline.py` is the entry point.
 
 ## Install
 ```bash
@@ -64,7 +62,7 @@ inline Unicode (e.g. `∑ᵢ₌₁ⁿ xᵢ`), never images.
 miso/                  the pipeline package (ocr, layout, lexicon, retrieval,
                        extraction, export, eval harness)
 run_full_pipeline.py   entry point
-preprocess_test.py, ocr_test.py, extract_test.py   original team scripts
+data/inbox/            sample input image
 ```
 The eval/experiment scripts (corpus runs, bilingual cleanup, CER/WER ablations)
 live on the `eval` branch.
