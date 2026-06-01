@@ -1,7 +1,1 @@
 .env
-.venv/
-__pycache__/
-*.pyc
-.DS_Store
-ocr_output.txt
-*.azure.jpg
