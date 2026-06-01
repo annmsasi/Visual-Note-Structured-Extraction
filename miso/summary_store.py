@@ -1,11 +1,4 @@
-"""Per-note summary storage. The retrievable unit lives here.
-
-Indexed two ways for hybrid retrieval: a `bm25_text` column rebuilt into an
-in-memory BM25 index on demand, and a dense embedding in the sqlite-vec
-virtual table (or a Python fallback when sqlite-vec isn't loaded).
-
-Read primitives live here; retrieval composition lives in `retrieval.py`.
-"""
+"""Per-note summary storage."""
 from __future__ import annotations
 
 import json
@@ -22,9 +15,7 @@ EMBEDDING_DIM = 768  # bge-base-en-v1.5
 
 class SummaryStore:
     def __init__(self, conn: sqlite3.Connection, *, embedder=None):
-        """`embedder` is any object with `.encode(list[str]) -> list[list[float]]`.
-        When None, the BM25 side still works; the dense side stores zero vectors.
-        """
+        """When `embedder` is None, the dense side stores zero vectors."""
         self.conn = conn
         self.embedder = embedder
 
@@ -75,7 +66,7 @@ class SummaryStore:
         from miso.db import has_sqlite_vec
         if not has_sqlite_vec(self.conn):
             return
-        # Zero vector when no embedder is wired — keeps the table populated for replay determinism.
+        # Zero vector when no embedder is wired.
         vec = [0.0] * EMBEDDING_DIM if self.embedder is None else list(self.embedder.encode([text])[0])
         self.conn.execute(
             "INSERT OR REPLACE INTO summary_vectors(note_id, embedding) VALUES (?, ?)",

@@ -1,9 +1,4 @@
-"""Real embedder + reranker wrappers, both backed by sentence-transformers.
-
-We use sentence-transformers' `CrossEncoder` for reranking rather than
-FlagEmbedding's `FlagReranker`; FlagEmbedding ≤ 1.4 is incompatible with
-transformers 5.x. Same model weights, one fewer dependency.
-"""
+"""Embedder and reranker wrappers backed by sentence-transformers."""
 from __future__ import annotations
 
 import math
@@ -11,11 +6,7 @@ from typing import Any
 
 
 class STEmbedder:
-    """Sentence-transformers embedder. Default `BAAI/bge-base-en-v1.5` (768-dim).
-
-    Returns L2-normalised vectors so cosine similarity equals dot product, per
-    the bge model card.
-    """
+    """Sentence-transformers embedder returning L2-normalised vectors."""
 
     def __init__(self, model_name: str = "BAAI/bge-base-en-v1.5"):
         from sentence_transformers import SentenceTransformer
@@ -35,11 +26,7 @@ class STEmbedder:
 
 
 class BGEReranker:
-    """Cross-encoder reranker. Default `BAAI/bge-reranker-base`.
-
-    Raw model scores are sigmoided into [0, 1] so the reranker threshold
-    reads as a probability.
-    """
+    """Cross-encoder reranker; scores are sigmoided into [0, 1]."""
 
     def __init__(self, model_name: str = "BAAI/bge-reranker-base"):
         from sentence_transformers import CrossEncoder

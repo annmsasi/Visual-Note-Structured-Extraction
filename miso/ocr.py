@@ -1,4 +1,4 @@
-"""OCR adapter — a Protocol + a deterministic stub + an Azure-backed implementation."""
+"""OCR adapters: a Protocol, a stub, and an Azure-backed implementation."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -12,9 +12,7 @@ class OCRAdapter(Protocol):
 
 
 class StubOCR:
-    """Deterministic stub. Returns a fixed page with one deliberately mis-OCR'd
-    distinctive token, so the lexicon layer has something to correct.
-    """
+    """Return a fixed page with one mis-OCR'd token for the lexicon layer to correct."""
 
     _DEFAULT_PAGE: list[OCRWord] = [
         OCRWord("lecture", 0.98),
@@ -37,7 +35,7 @@ class StubOCR:
 
 
 class AzureOCR:
-    """Azure AI Document Intelligence (`prebuilt-read`). Returns per-word confidence."""
+    """Run Azure AI Document Intelligence (`prebuilt-read`) with per-word confidence."""
 
     def __init__(self, endpoint: str, key: str):
         from azure.ai.documentintelligence import DocumentIntelligenceClient
@@ -63,13 +61,52 @@ class AzureOCR:
 
 
 def _polygon_to_bbox(polygon) -> tuple[float, float, float, float] | None:
-    """Reduce Azure's 8-point polygon to an axis-aligned (x, y, w, h)."""
+    """Reduce an 8-point polygon to an axis-aligned (x, y, w, h)."""
     if not polygon or len(polygon) < 8:
         return None
     xs = polygon[0::2]
     ys = polygon[1::2]
     return (float(min(xs)), float(min(ys)),
             float(max(xs) - min(xs)), float(max(ys) - min(ys)))
+
+
+class CachedOCR:
+    """Content-addressed disk cache around any OCRAdapter."""
+
+    def __init__(self, inner: "OCRAdapter", cache_dir: Path = Path(".ocr_cache")):
+        self._inner = inner
+        self._dir = cache_dir
+        self._dir.mkdir(parents=True, exist_ok=True)
+
+    def run(self, image_path: Path) -> OCRResult:
+        import hashlib
+        import json
+        digest = hashlib.sha256(Path(image_path).read_bytes()).hexdigest()
+        cache_file = self._dir / f"{digest}.json"
+        if cache_file.exists():
+            return _ocr_from_dict(json.loads(cache_file.read_text()))
+        result = self._inner.run(image_path)
+        cache_file.write_text(json.dumps(_ocr_to_dict(result)))
+        return result
+
+
+def _ocr_to_dict(r: OCRResult) -> dict:
+    return {
+        "raw_text": r.raw_text,
+        "layout_text": r.layout_text,
+        "words": [{"text": w.text, "confidence": w.confidence,
+                   "bbox": list(w.bbox) if w.bbox else None, "line_id": w.line_id}
+                  for w in r.words],
+    }
+
+
+def _ocr_from_dict(d: dict) -> OCRResult:
+    words = [OCRWord(text=w["text"], confidence=w["confidence"],
+                     bbox=tuple(w["bbox"]) if w["bbox"] else None,
+                     line_id=w.get("line_id"))
+             for w in d["words"]]
+    return OCRResult(words=words, raw_text=d["raw_text"],
+                     layout_text=d.get("layout_text", ""))
 
 
 def make_ocr(engine: str) -> OCRAdapter:

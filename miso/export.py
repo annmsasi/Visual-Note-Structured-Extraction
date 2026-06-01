@@ -1,21 +1,8 @@
-"""Render extracted notes (the document IR) to HTML and, optionally, push them
-to Google Docs.
-
-Two layers, deliberately decoupled:
-  - `render_*` turns the IR into HTML. Pure, no network, no creds — always works.
-  - `upload_html_to_drive` converts that HTML into a Google Doc via the Drive API.
-
-HTML (not markdown) is the rendering target: Drive's HTML->Doc import maps
-headings, nested lists, and inline styles far more faithfully than markdown,
-and keeps a path open to tables/images later. The IR stays canonical, so a
-native Docs `batchUpdate` renderer can be added without touching extraction.
-
-One Google Doc per note. A course just exports each of its notes as a separate
-doc (looped), so the unit of export is always a single note.
+"""Render extracted notes to HTML and optionally upload them to Google Docs.
 
 CLI:
     python -m miso.export --db ./miso_cache.db --note <id>   [--out doc.html] [--drive]
-    python -m miso.export --db ./miso_cache.db --course <id> [--drive]   # one doc per note
+    python -m miso.export --db ./miso_cache.db --course <id> [--drive]
 """
 from __future__ import annotations
 
@@ -36,9 +23,6 @@ _DRIVE_SCOPES = ["https://www.googleapis.com/auth/drive.file"]
 
 # ----------------------------------------------------------------------------- math
 
-# Equation blocks become inline Unicode text — never images, never raw LaTeX.
-# Unicode super/subscript characters; anything not representable degrades to a
-# parenthesised linear form (e.g. ^(n+1)), so the output is always editable text.
 _SUP = dict(zip("0123456789+-=()ni", "⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ⁿⁱ"))
 _SUB = dict(zip("0123456789+-=()aeioxjhklmnpst", "₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎ₐₑᵢₒₓⱼₕₖₗₘₙₚₛₜ"))
 _SENT = ""  # private-use sentinel; survives pylatexenc untouched
@@ -52,10 +36,7 @@ def _script_to_unicode(kind: str, body: str) -> str:
 
 
 def latex_to_unicode(latex: str) -> str:
-    """LaTeX -> editable Unicode text. pylatexenc handles symbols/structure; we
-    protect super/subscript groups with a sentinel first (so their grouping
-    survives pylatexenc dropping the braces) and substitute Unicode after.
-    """
+    """Convert LaTeX to editable Unicode text."""
     latex = latex.strip()
     for d in ("$$", "$", r"\(", r"\)", r"\[", r"\]"):
         latex = latex.replace(d, "")
@@ -73,12 +54,11 @@ def latex_to_unicode(latex: str) -> str:
     try:
         from pylatexenc.latex2text import LatexNodes2Text
         text = LatexNodes2Text().latex_to_text(latex)
-    except Exception:  # pylatexenc absent: strip commands/braces rather than leak LaTeX
+    except Exception:
         text = re.sub(r"\\[a-zA-Z]+|[{}]", "", latex)
 
     text = re.sub(f"{_SENT}(\\d+){_SENT}",
                   lambda m: _script_to_unicode(*store[int(m.group(1))]), text)
-    # leftover command-bodied scripts pylatexenc converted, e.g. ^\infty -> ^∞
     text = re.sub(r"([_^])(\S)", lambda m: _script_to_unicode(m.group(1), m.group(2)), text)
     return re.sub(r"\s+", " ", text).strip()
 
@@ -86,7 +66,7 @@ def latex_to_unicode(latex: str) -> str:
 # ----------------------------------------------------------------------------- rendering
 
 def render_note_html(doc: dict[str, Any]) -> str:
-    """Render one note's document IR to a full HTML page (one doc per note)."""
+    """Render one note's document IR to a full HTML page."""
     title = html.escape(doc.get("title") or "(untitled)")
     parts = [f"<h1>{title}</h1>"]
     for block in _coalesce_lists(doc.get("blocks") or []):
@@ -95,11 +75,7 @@ def render_note_html(doc: dict[str, Any]) -> str:
 
 
 def _coalesce_lists(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Merge consecutive `list` blocks into one so adjacent bullets share a single
-    <ul>. The model sometimes splits one logical list across several blocks;
-    separate <ul>s render with extra inter-list margin, which reads as uneven
-    spacing in the doc.
-    """
+    """Merge consecutive `list` blocks so adjacent bullets share one <ul>."""
     out: list[dict[str, Any]] = []
     for b in blocks:
         if b.get("type") == "list" and out and out[-1].get("type") == "list":
@@ -112,7 +88,7 @@ def _coalesce_lists(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def _render_block(block: dict[str, Any]) -> str:
     t = block.get("type")
     if t == "heading":
-        lvl = min(6, int(block.get("level", 1)) + 1)  # +1: the note title owns <h1>
+        lvl = min(6, int(block.get("level", 1)) + 1)  # note title owns <h1>
         return f"<h{lvl}>{html.escape(block.get('text', ''))}</h{lvl}>"
     if t == "paragraph":
         return f"<p>{html.escape(block.get('text', ''))}</p>"
@@ -124,9 +100,7 @@ def _render_block(block: dict[str, Any]) -> str:
 
 
 def _render_list(items: list[dict[str, Any]]) -> str:
-    """Nested <ul> driven by each item's `level`. A level-N item lives inside
-    N+1 nested <ul>s (level 0 = one list deep).
-    """
+    """Render items as nested <ul>s driven by each item's `level`."""
     out: list[str] = []
     depth = 0
     for it in items:
@@ -150,27 +124,25 @@ def _page(title: str, body: str) -> str:
 # ----------------------------------------------------------------------------- data access
 
 def load_notes(db_path: Path, *, note_id: str | None = None,
-               course_id: str | None = None) -> list[tuple[str, dict[str, Any]]]:
-    """Read note IR(s) as (note_id, doc) pairs. One of note_id / course_id required.
-
-    A course returns its notes in processing_order — each becomes its own doc.
-    """
+               course_id: str | None = None) -> list[tuple[str, str, dict[str, Any]]]:
+    """Read note IR(s) as (note_id, course_id, doc) tuples; one of note_id or course_id required."""
     conn = sqlite3.connect(str(db_path))
     conn.row_factory = sqlite3.Row
     if note_id is not None:
         rows = conn.execute(
-            "SELECT note_id, extracted_json FROM notes WHERE note_id = ?", (note_id,),
+            "SELECT note_id, course_id, extracted_json FROM notes WHERE note_id = ?",
+            (note_id,),
         ).fetchall()
     else:
         rows = conn.execute(
-            "SELECT note_id, extracted_json FROM notes WHERE course_id = ? "
+            "SELECT note_id, course_id, extracted_json FROM notes WHERE course_id = ? "
             "ORDER BY processing_order", (course_id,),
         ).fetchall()
     conn.close()
-    out: list[tuple[str, dict[str, Any]]] = []
+    out: list[tuple[str, str, dict[str, Any]]] = []
     for r in rows:
         try:
-            out.append((r["note_id"], json.loads(r["extracted_json"])))
+            out.append((r["note_id"], r["course_id"], json.loads(r["extracted_json"])))
         except (TypeError, json.JSONDecodeError):
             continue
     return out
@@ -179,9 +151,7 @@ def load_notes(db_path: Path, *, note_id: str | None = None,
 # ----------------------------------------------------------------------------- Google Docs
 
 def _drive_credentials():
-    """OAuth installed-app flow, drive.file scope. Caches a token next to the
-    client secrets. Paths come from env so nothing is hard-coded.
-    """
+    """Return Drive OAuth credentials, caching a token to disk."""
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
     from google_auth_oauthlib.flow import InstalledAppFlow
@@ -207,20 +177,37 @@ def _drive_credentials():
     return creds
 
 
-def upload_html_to_drive(html_doc: str, name: str) -> str:
+def _ensure_folder(service, name: str) -> str:
+    """Return the id of an app-created folder named `name`, creating it if needed."""
+    safe = name.replace("\\", "\\\\").replace("'", "\\'")
+    res = service.files().list(
+        q=("mimeType='application/vnd.google-apps.folder' and trashed=false "
+           f"and name='{safe}'"),
+        fields="files(id,name)", spaces="drive",
+    ).execute()
+    found = res.get("files", [])
+    if found:
+        return found[0]["id"]
+    folder = service.files().create(
+        body={"name": name, "mimeType": "application/vnd.google-apps.folder"},
+        fields="id",
+    ).execute()
+    return folder["id"]
+
+
+def upload_html_to_drive(html_doc: str, name: str, folder: str | None = None) -> str:
     """Create a Google Doc from HTML and return its web link."""
     from googleapiclient.discovery import build
     from googleapiclient.http import MediaInMemoryUpload
 
     service = build("drive", "v3", credentials=_drive_credentials())
+    body: dict[str, Any] = {"name": name, "mimeType": "application/vnd.google-apps.document"}
+    if folder:
+        body["parents"] = [_ensure_folder(service, folder)]
     media = MediaInMemoryUpload(html_doc.encode("utf-8"), mimetype="text/html")
     created = service.files().create(
-        body={"name": name, "mimeType": "application/vnd.google-apps.document"},
-        media_body=media,
-        fields="id,webViewLink",
+        body=body, media_body=media, fields="id,webViewLink",
     ).execute()
-    # NOTE: creates a new doc each run. For idempotent updates, persist this id
-    # (e.g. a `course_id -> drive_file_id` table) and call files().update instead.
     return created.get("webViewLink", created.get("id", ""))
 
 
@@ -234,6 +221,7 @@ def main(argv: list[str] | None = None) -> int:
     grp.add_argument("--course", help="export every note in a course as its own doc")
     ap.add_argument("--out", type=Path, help="write a single note's HTML here (--note only)")
     ap.add_argument("--drive", action="store_true", help="also upload each note to Google Docs")
+    ap.add_argument("--folder", help="Drive folder name (default: the note's course_id)")
     args = ap.parse_args(argv)
 
     notes = load_notes(args.db, note_id=args.note, course_id=args.course)
@@ -241,14 +229,15 @@ def main(argv: list[str] | None = None) -> int:
         print(f"No notes found for {'note ' + args.note if args.note else 'course ' + args.course!r}")
         return 1
 
-    for note_id, doc in notes:
+    for note_id, course_id, doc in notes:
         html_doc = render_note_html(doc)
         out = args.out if (args.note and args.out) else Path(f"{note_id}.html")
         out.write_text(html_doc)
         line = f"wrote {out}"
         if args.drive:
             name = doc.get("title") or note_id
-            line += f"  →  Google Doc: {upload_html_to_drive(html_doc, name=name)}"
+            folder = args.folder or course_id
+            line += f"  →  [{folder}] Google Doc: {upload_html_to_drive(html_doc, name=name, folder=folder)}"
         print(line)
     return 0
 

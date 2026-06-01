@@ -1,8 +1,4 @@
-"""Run-time configuration threaded through the pipeline.
-
-Every ablation toggle lives on a `RunConfig`; each run is tagged with its
-config so traces can be grouped and compared without re-coding the pipeline.
-"""
+"""Run-time configuration threaded through the pipeline."""
 from __future__ import annotations
 
 import json
@@ -15,12 +11,11 @@ from typing import Any
 @dataclass
 class LexiconConfig:
     enabled: bool = True
-    # Inclusion threshold: admit a term only after this many sightings.
+    # admit a term only after this many sightings
     n_recurrence: int = 2
-    # Only attempt correction for OCR words below this confidence.
+    # only correct OCR words below this confidence
     confidence_threshold: float = 0.7
     max_edit_distance: float = 2.0
-    # Bounded reweight: can tip a close OCR call, cannot override a confident one.
     boost_magnitude: float = 0.3
     also_feed_llm_glossary: bool = True
 
@@ -34,7 +29,6 @@ class RetrievalConfig:
     reranker_threshold: float = 0.5
     cold_start_note_count: int = 5
     recency_tie_break: bool = True
-    # RRF k=60 follows common practice; treated as parameter-free.
     rrf_k: int = 60
 
 
@@ -59,7 +53,7 @@ class ExtractionConfig:
     use_ocr_hint: bool = True
     use_retrieved_summaries: bool = True
     use_glossary: bool = True
-    # Emit summary fields as part of the extraction JSON; no separate summariser call.
+    # emit summary fields in the extraction JSON, no separate summariser call
     piggyback_summary: bool = True
 
 
@@ -67,7 +61,7 @@ class ExtractionConfig:
 class EvalConfig:
     enable_faithfulness_check: bool = False
     bootstrap_samples: int = 1000
-    # Propagation-tax ablation: seed the cache from gold extractions instead of self-extractions.
+    # seed the cache from gold extractions instead of self-extractions
     cache_from_corrected_ground_truth: bool = False
 
 
@@ -95,8 +89,7 @@ class RunConfig:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(self.to_dict(), indent=2, default=str))
 
-    # Factories for the ablation grid. C3 is the no-cache baseline; C6 is the full system.
-    # The arithmetic between them (C3→C4, C3→C5, C3→C6) attributes effect to each cache piece.
+    # Factories for the ablation grid: C3 is the no-cache baseline, C6 is the full system.
 
     @classmethod
     def config_3_llm_ocr_only(cls, tag: str = "C3_llm_ocr_only") -> "RunConfig":

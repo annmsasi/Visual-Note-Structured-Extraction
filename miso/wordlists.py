@@ -1,11 +1,4 @@
-"""Common-words filter used by the lexicon to skip generic English vocabulary.
-
-Primary source is `wordfreq.top_n_list("en", N)`. If wordfreq isn't installed,
-falls back to a small embedded stop-word set. `/usr/share/dict/words` is *not*
-included by default — it's an "is this an English word at all" list and would
-filter out distinctive technical terms (e.g. "eigenvector") that the lexicon
-exists to capture.
-"""
+"""Common-words filter used by the lexicon to skip generic English vocabulary."""
 from __future__ import annotations
 
 import logging

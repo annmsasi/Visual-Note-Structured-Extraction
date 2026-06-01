@@ -1,8 +1,4 @@
-"""Pure metric functions — no I/O, no module-level state.
-
-Character / word error rate, structural F1 over JSON paths, lexicon
-precision/recall/over-correction, and a percentile-bootstrap CI helper.
-"""
+"""Metric functions: error rates, structural F1, correction stats, bootstrap CI."""
 from __future__ import annotations
 
 import random
@@ -10,7 +6,7 @@ from typing import Iterable, Sequence
 
 
 def levenshtein(a: Sequence, b: Sequence) -> int:
-    """Edit distance over any sequence (characters or token lists)."""
+    """Edit distance over any sequence."""
     n, m = len(a), len(b)
     if n == 0:
         return m
@@ -42,9 +38,7 @@ def wer(reference: str, hypothesis: str) -> float:
 
 
 def structural_f1(reference_json, hypothesis_json) -> float:
-    """F1 over dotted-path keys present in each JSON tree. Captures whether the
-    extraction recovered the right shape (headings, sections, code blocks).
-    """
+    """F1 over dotted-path keys present in each JSON tree."""
     ref_keys = _collect_paths(reference_json)
     hyp_keys = _collect_paths(hypothesis_json)
     if not ref_keys and not hyp_keys:
@@ -79,14 +73,7 @@ def correction_precision_recall(
     gold_text: str,
     raw_text: str,
 ) -> tuple[float, float, float]:
-    """Returns (precision, recall, over_correction_rate).
-
-    A correction "helped" if the suggested token appears in the gold text and
-    the original did not; "hurt" if the original was in gold and the suggestion
-    isn't. Both-or-neither are neutral and excluded from the denominators.
-    The recall denominator counts raw tokens close to a gold token but not
-    themselves in gold — an approximation of "fixable" mistakes.
-    """
+    """Return (precision, recall, over_correction_rate) for accepted corrections."""
     if not corrections:
         return (0.0, 0.0, 0.0)
 
@@ -132,11 +119,7 @@ def bootstrap_ci(
     n_samples: int = 1000,
     seed: int = 0,
 ) -> tuple[float, float, float]:
-    """Percentile bootstrap of the mean. Returns (mean, lower, upper).
-
-    Designed for per-note delta vectors. With ~60 notes the CI will be wide;
-    that's the honest treatment of the under-power risk.
-    """
+    """Percentile bootstrap of the mean. Return (mean, lower, upper)."""
     vals = list(values)
     if not vals:
         return (0.0, 0.0, 0.0)

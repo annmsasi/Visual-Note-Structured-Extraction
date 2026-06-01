@@ -1,12 +1,4 @@
-"""Hybrid retrieval (BM25 + dense via RRF) → cross-encoder rerank → gate.
-
-The gate has two parts: a cold-start skip while the course has too few notes,
-and a filter-returns-empty skip when nothing rises above the reranker threshold.
-Either skip results in zero summaries being injected into the extraction prompt.
-
-The default reranker is a token-overlap stub; pass a real cross-encoder to
-`RetrievalLayer(reranker=...)` for production. Same for the embedder.
-"""
+"""Hybrid retrieval (BM25 + dense via RRF), cross-encoder rerank, then gate."""
 from __future__ import annotations
 
 import logging
@@ -49,7 +41,7 @@ def _jaccard(a: set[str], b: set[str]) -> float:
 
 
 class _MiniBM25:
-    """In-Python BM25. Adequate at Miso's corpus size; swap for rank-bm25 if needed."""
+    """In-Python BM25."""
 
     def __init__(self, corpus: list[list[str]], k1: float = 1.5, b: float = 0.75):
         self.corpus = corpus
@@ -126,7 +118,7 @@ class RetrievalLayer:
             doc_vecs = self.embedder.encode(texts)
             dense_ranks = _ranks_from_scores([_cosine(query_vec, v) for v in doc_vecs])
         else:
-            # No embedder → all tied last, so RRF contribution is constant and BM25 decides.
+            # No embedder: all tied last, so BM25 decides.
             dense_ranks = [len(texts)] * len(texts)
 
         rrf = [

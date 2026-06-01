@@ -1,8 +1,4 @@
-"""Per-note pipeline: OCR → lexicon → retrieval → extraction → write-back.
-
-The same function runs every cell of the ablation grid; behaviour is
-selected by `RunConfig` switches. A `TraceRecord` is written for every note.
-"""
+"""Per-note pipeline: OCR, lexicon, retrieval, extraction, write-back."""
 from __future__ import annotations
 
 import logging

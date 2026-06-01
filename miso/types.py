@@ -1,7 +1,4 @@
-"""Dataclasses passed between pipeline components.
-
-Kept minimal and JSON-serialisable so per-note traces serialise cleanly.
-"""
+"""Dataclasses passed between pipeline components."""
 from __future__ import annotations
 
 import dataclasses
@@ -16,14 +13,14 @@ class OCRWord:
     text: str
     confidence: float
     bbox: tuple[float, float, float, float] | None = None  # x, y, w, h
-    line_id: int | None = None  # set by miso.layout; groups words into lines
+    line_id: int | None = None  # set by miso.layout
 
 
 @dataclass
 class OCRResult:
     words: list[OCRWord]
-    raw_text: str               # flat, space-joined — the CER/WER eval path
-    layout_text: str = ""       # line/indent-structured — for the LLM + renderer
+    raw_text: str               # flat, space-joined
+    layout_text: str = ""       # line/indent-structured
 
     @classmethod
     def from_words(cls, words: list[OCRWord]) -> "OCRResult":
@@ -41,19 +38,19 @@ class LexiconCorrection:
     token_index: int
     original: str
     suggested: str
-    match_strength: float    # 1.0 = exact; lower = farther under the shape-aware metric
+    match_strength: float    # 1.0 = exact match
     ocr_confidence: float
-    accepted: bool           # True if the OCR word's confidence was reweighted
+    accepted: bool
 
 
 @dataclass
 class CorrectedOCR:
-    """OCR after the lexicon layer. Reweighted, not hard-overwritten."""
+    """OCR after the lexicon layer."""
     words: list[OCRWord]
-    corrected_text: str          # flat — used for the retrieval query
+    corrected_text: str          # flat, used for the retrieval query
     corrections: list[LexiconCorrection]
-    touched_terms: list[str]  # the matched lexicon entries; passed to the LLM as the glossary
-    layout_text: str = ""        # line/indent-structured, corrections applied — for the LLM
+    touched_terms: list[str]  # matched lexicon entries, passed to the LLM as the glossary
+    layout_text: str = ""        # line/indent-structured, corrections applied
 
 
 @dataclass
@@ -82,7 +79,7 @@ class RetrievedSummary:
     summary: Summary
     retrieval_score: float           # RRF fusion score
     reranker_score: float | None
-    layer_of_origin: str = "summary"  # placeholder; only one layer in v1
+    layer_of_origin: str = "summary"
 
 
 @dataclass
@@ -112,12 +109,12 @@ class Note:
 
 @dataclass
 class ExtractedNote:
-    """LLM extraction output. Summary fields are piggybacked from the same call."""
+    """LLM extraction output."""
     note_id: str
     structured_json: dict[str, Any]
     summary_topic_line: str
     summary_gist: str
-    model_id: str  # captured for reproducibility — model versions drift
+    model_id: str
 
 
 @dataclass
@@ -133,7 +130,7 @@ class StageLatencies:
 
 @dataclass
 class TraceRecord:
-    """One JSON record per note per run. The eval harness reads these."""
+    """One JSON record per note per run."""
     note_id: str
     course_id: str
     processing_order: int

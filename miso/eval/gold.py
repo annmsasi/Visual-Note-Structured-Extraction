@@ -1,13 +1,7 @@
-"""Load gold extractions for evaluation, or synthesise them for smoke tests.
+"""Load gold extractions, or synthesize them for smoke tests.
 
-Expected on-disk layout: a directory of JSON files, one per note. Filename
-stem = note_id. Each file contains:
-
-    {
-        "note_id": "...",
-        "extracted_json": {...},
-        "transcription": "..."   # optional; derived from extracted_json otherwise
-    }
+On-disk layout: a directory of JSON files, one per note, filename stem = note_id.
+Each file contains note_id, extracted_json, and optional transcription.
 """
 from __future__ import annotations
 
@@ -20,7 +14,7 @@ from pathlib import Path
 class GoldNote:
     note_id: str
     extracted_json: dict
-    transcription: str  # flat text used as the CER/WER reference
+    transcription: str  # CER/WER reference
 
 
 def load_gold(gold_dir: Path) -> dict[str, GoldNote]:
@@ -30,19 +24,14 @@ def load_gold(gold_dir: Path) -> dict[str, GoldNote]:
     for path in sorted(gold_dir.glob("*.json")):
         data = json.loads(path.read_text())
         note_id = data.get("note_id") or path.stem
-        ej = data.get("extracted_json", {})
-        transcription = data.get("transcription") or _flatten_strings(ej)
-        out[note_id] = GoldNote(note_id=note_id, extracted_json=ej, transcription=transcription)
+        extracted = data.get("extracted_json", {})
+        transcription = data.get("transcription") or _flatten_strings(extracted)
+        out[note_id] = GoldNote(note_id=note_id, extracted_json=extracted, transcription=transcription)
     return out
 
 
 def synthesize_gold_from_traces(traces: list[dict]) -> dict[str, GoldNote]:
-    """Fabricate gold from each trace's raw OCR — smoke-test only.
-
-    "Fixes" the demo's deliberate `eigenvecter → eigenvector` mis-OCR so the
-    lexicon's effect is at least measurable end-to-end. Replace with real
-    `load_gold(...)` once annotated data exists.
-    """
+    """Fabricate gold from each trace's raw OCR for smoke tests."""
     out: dict[str, GoldNote] = {}
     for r in traces:
         note_id = r["note_id"]

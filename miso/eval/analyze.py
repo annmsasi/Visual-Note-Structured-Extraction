@@ -54,7 +54,7 @@ def compute_run_report(records: list[dict], gold: dict[str, GoldNote]) -> RunRep
             continue
         ext = r.get("extraction") or {}
         ext_json = ext.get("structured_json", {})
-        # The stub stores its flat text under `ocr_text`; for real extractions, flatten the JSON.
+        # Stub stores flat text under `ocr_text`; otherwise flatten the JSON.
         hyp_text = ext_json.get("ocr_text") or _flatten_strings(ext_json)
 
         corrected = r.get("corrected_ocr") or {}
@@ -78,26 +78,19 @@ def compute_run_report(records: list[dict], gold: dict[str, GoldNote]) -> RunRep
 
 
 def ramp_curve(report: RunReport) -> list[tuple[int, float]]:
-    """CER vs processing_order. The cache's claim is `improves over time` —
-    a ramp curve is more honest than a single before/after.
-    """
+    """CER vs processing_order."""
     pairs = [(p.processing_order, p.cer) for p in report.per_note]
     pairs.sort()
     return pairs
 
 
 def compare_attribution(
-    baseline: RunReport,        # C3: no cache
-    lexicon_only: RunReport,    # C4
-    retrieval_only: RunReport,  # C5
-    full: RunReport,            # C6: both
+    baseline: RunReport,
+    lexicon_only: RunReport,
+    retrieval_only: RunReport,
+    full: RunReport,
 ) -> dict[str, tuple[float, float, float]]:
-    """CER reduction vs baseline for each cache piece, with bootstrap CIs.
-
-    Aligned per-note by note_id; only notes appearing in all four reports
-    contribute. Interaction = both − (lexicon + retrieval); a non-zero value
-    means the two pieces aren't strictly additive.
-    """
+    """CER reduction vs baseline for each cache piece, with bootstrap CIs."""
     def cer_by_id(rep: RunReport) -> dict[str, float]:
         return {p.note_id: p.cer for p in rep.per_note}
 

@@ -1,8 +1,4 @@
-"""Eval-mode pipeline driver. Runs a fixed note sequence under a chosen
-`RunConfig` from an empty cache and writes a per-note JSONL trace.
-
-Components auto-select real vs stub based on installed packages and env vars.
-Production cron pipelines use a separate driver; this module is for replay only.
+"""Run a fixed note sequence under a RunConfig and write a per-note JSONL trace.
 
     python -m miso.replay demo       # smoke test: 5 fake notes
     python -m miso.replay ablation   # the 4 cache-cell configs
@@ -60,8 +56,9 @@ def _make_ocr(cfg: RunConfig):
         key = os.environ.get("AZURE_DOCUMENT_INTELLIGENCE_KEY")
         if endpoint and key:
             try:
-                from miso.ocr import AzureOCR
-                return AzureOCR(endpoint, key)
+                from miso.ocr import AzureOCR, CachedOCR
+                # disk-cache so re-runs never re-bill a page
+                return CachedOCR(AzureOCR(endpoint, key))
             except Exception as e:
                 log.warning("AzureOCR construction failed (%s); falling back to StubOCR", e)
         else:
@@ -95,7 +92,7 @@ def run(cfg: RunConfig, notes: list[Note]) -> Path:
     )
     conn.commit()
 
-    # Only load the (heavy) bge models when retrieval is actually on.
+    # only load the heavy models when retrieval is on
     embedder = _maybe_real_embedder() if cfg.retrieval.enabled else None
     reranker = _maybe_real_reranker() if cfg.retrieval.enabled else None
     ocr = _make_ocr(cfg)
@@ -143,9 +140,7 @@ def _make_fake_notes(course_id: str, n: int) -> list[Note]:
 
 
 def _load_env() -> None:
-    """Load the project-root .env into the environment if python-dotenv is present.
-    Existing shell variables win; the .env only fills the gaps.
-    """
+    """Load the project-root .env into the environment if python-dotenv is present."""
     try:
         from dotenv import load_dotenv
     except ImportError:
@@ -162,7 +157,6 @@ def _configure_logging() -> None:
 
 
 def _default_extractor_model() -> str:
-    # Default to Haiku when a key is set so deltas appear; stub otherwise.
     return os.environ.get(
         "MISO_EXTRACTOR",
         "claude-haiku-4-5-20251001" if os.environ.get("ANTHROPIC_API_KEY") else "stub",
@@ -170,11 +164,7 @@ def _default_extractor_model() -> str:
 
 
 def _prepare_image(path: Path, max_edge: int = 4000) -> Path:
-    """Normalise an image for Azure: RGB JPEG with bounded dimensions.
-
-    Azure rejects WebP and caps upload size (4 MB on the free tier), so we
-    downscale oversized images and re-encode as JPEG, which shrinks photos a lot.
-    """
+    """Normalise an image for Azure: RGB JPEG with bounded dimensions."""
     from PIL import Image
     img = Image.open(path).convert("RGB")
     if max(img.size) > max_edge:
@@ -216,7 +206,7 @@ def cmd_ablation(args) -> int:
 
 
 def cmd_note(args) -> int:
-    """Run the baseline (Azure OCR -> Claude extraction) on one real image."""
+    """Run the baseline on one real image."""
     _configure_logging()
     image_path = _prepare_image(Path(args.image))
     cfg = RunConfig.config_3_llm_ocr_only(tag="single_note")

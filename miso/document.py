@@ -1,17 +1,9 @@
-"""The document IR — the contract between extraction and rendering.
-
-The extractor emits this block structure (schema-enforced via Anthropic tool
-use); renderers in `export.py` turn it into HTML / Google Docs. Keeping a typed
-IR — rather than letting the model emit markdown directly — means the renderer
-is swappable: HTML today, native Docs `batchUpdate` or rendered-equation images
-later, without changing the extractor.
-"""
+"""Document IR: the block structure shared between extraction and rendering."""
 from __future__ import annotations
 
 from typing import Any
 
-# JSON Schema handed to the model as a tool's `input_schema`. The piggybacked
-# summary fields ride along so there is still no separate summariser call.
+# JSON Schema handed to the model as a tool's `input_schema`.
 DOCUMENT_SCHEMA: dict[str, Any] = {
     "type": "object",
     "properties": {
@@ -54,10 +46,7 @@ _BLOCK_TYPES = {"heading", "paragraph", "list", "equation"}
 
 
 def validate(payload: Any) -> dict[str, Any]:
-    """Coerce a model payload into a well-formed document. Tolerant by design:
-    the model is steered by the schema but not strictly bound to it, so we drop
-    malformed blocks rather than fail the whole note.
-    """
+    """Coerce a model payload into a well-formed document, dropping malformed blocks."""
     if not isinstance(payload, dict):
         return _empty("(extraction returned no object)")
 

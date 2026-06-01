@@ -1,4 +1,4 @@
-"""Append-only JSONL writer — one record per note, one file per run."""
+"""Append-only JSONL writer: one record per note, one file per run."""
 from __future__ import annotations
 
 import json

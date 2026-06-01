@@ -1,9 +1,4 @@
-"""SQLite connection management.
-
-Tries to load sqlite-vec for fast vector search; falls back to in-Python
-cosine if the extension isn't installed. The fallback is adequate at Miso's
-scale (hundreds to low-thousands of summaries).
-"""
+"""SQLite connection management."""
 from __future__ import annotations
 
 import logging

@@ -1,10 +1,4 @@
-"""Extraction adapter — a Protocol + a deterministic stub + an Anthropic-backed implementation.
-
-The stub returns canned JSON keyed by the assembled prompt so the pipeline
-runs end-to-end without an API key. The Anthropic adapter expects the model
-to emit strict JSON including the piggybacked `summary_topic_line` and
-`summary_gist` fields (no separate summariser call).
-"""
+"""Extraction adapters: a Protocol, a deterministic stub, and an Anthropic implementation."""
 from __future__ import annotations
 
 import base64
@@ -35,12 +29,7 @@ class ExtractionAdapter(Protocol):
 
 
 class StubExtractor:
-    """Deterministic stub. Builds the prompt (so augmentation is exercised) and
-    turns the layout-structured OCR into a document IR with a simple heuristic:
-    the first line is the title, short stand-alone lines become headings, and
-    everything else becomes nested list items keyed off the preserved indent.
-    Lets the renderer + export path run end-to-end without an API key.
-    """
+    """Deterministic extractor that maps layout-structured OCR to a document IR."""
 
     def extract(
         self,
@@ -51,7 +40,7 @@ class StubExtractor:
         glossary: list[str],
         cfg: ExtractionConfig,
     ) -> ExtractedNote:
-        assemble_prompt(  # exercise augmentation for parity with the real path
+        assemble_prompt(
             corrected_ocr=corrected_ocr, retrieved=retrieved, glossary=glossary, cfg=cfg,
         )
         layout = (corrected_ocr.layout_text or corrected_ocr.corrected_text) if corrected_ocr else ""
@@ -60,16 +49,9 @@ class StubExtractor:
 
 
 def _layout_to_document(layout_text: str, *, course_id: str) -> dict:
-    """Crude layout -> IR mapping for the stub (no model judgement).
-
-    Classifies each logical line by shape: a short top-level line that isn't a
-    sentence and doesn't start with a date is a heading; long top-level prose is
-    a paragraph; everything else (dated entries, fragments, indented points) is
-    a list item nested by its indent depth. The real AnthropicExtractor does
-    this far better off the image — this only keeps the preview sensible.
-    """
-    raw_lines = [ln for ln in layout_text.splitlines() if ln.strip()]
-    title = raw_lines[0].strip() if raw_lines else f"Notes ({course_id})"
+    """Map layout text to a document IR by classifying each line's shape."""
+    lines = [line for line in layout_text.splitlines() if line.strip()]
+    title = lines[0].strip() if lines else f"Notes ({course_id})"
     blocks: list[dict] = []
     items: list[dict] = []
 
@@ -78,9 +60,9 @@ def _layout_to_document(layout_text: str, *, course_id: str) -> dict:
             blocks.append({"type": "list", "items": list(items)})
             items.clear()
 
-    for ln in raw_lines[1:]:
-        depth = (len(ln) - len(ln.lstrip(" "))) // 2
-        text = ln.strip()
+    for line in lines[1:]:
+        depth = (len(line) - len(line.lstrip(" "))) // 2
+        text = line.strip()
         words = text.split()
         starts_with_date = bool(words) and words[0][0].isdigit()
         if depth == 0 and len(words) <= 6 and not starts_with_date and not text.endswith("."):
@@ -96,7 +78,7 @@ def _layout_to_document(layout_text: str, *, course_id: str) -> dict:
         "title": title,
         "blocks": blocks,
         "summary_topic_line": title,
-        "summary_gist": " ".join(raw_lines[1:4]),
+        "summary_gist": " ".join(lines[1:4]),
     }
 
 
@@ -134,8 +116,7 @@ class AnthropicExtractor:
             })
         content.append({"type": "text", "text": text_prompt})
 
-        # Force the document-IR tool so the model must return schema-shaped blocks
-        # rather than free-text JSON we have to scrape.
+        # Force the tool so the model returns schema-shaped blocks.
         msg = self._client.messages.create(
             model=self.model_id,
             max_tokens=4096,

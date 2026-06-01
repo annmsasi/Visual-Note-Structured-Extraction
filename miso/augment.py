@@ -1,9 +1,4 @@
-"""Build the text portion of the extraction prompt.
-
-The page image is attached separately by the extraction adapter. This module
-assembles the text: system prompt → retrieved summaries (reverse-ordered so
-the most relevant sits nearest the OCR) → glossary → OCR → task line.
-"""
+"""Build the text portion of the extraction prompt."""
 from __future__ import annotations
 
 from miso.config import ExtractionConfig
@@ -43,7 +38,7 @@ def assemble_prompt(
 
     if cfg.use_retrieved_summaries and retrieved:
         parts.append("Related prior notes (weak context):")
-        # Reverse-ordered: least-relevant first, most-relevant adjacent to the OCR.
+        # Most-relevant placed adjacent to the OCR.
         for r in reversed(retrieved):
             tag = f"[course={r.summary.course_id} order={r.summary.processing_order}]"
             parts.append(f"- {tag} {r.summary.topic_line}\n  {r.summary.gist}")
@@ -55,8 +50,7 @@ def assemble_prompt(
         parts.append("")
 
     if cfg.use_ocr_hint and corrected_ocr is not None:
-        # Prefer the line/indent-structured text so section layout survives into
-        # the prompt; fall back to the flat join if no geometry was available.
+        # Prefer layout text so structure survives; fall back to flat text.
         ocr_hint = corrected_ocr.layout_text or corrected_ocr.corrected_text
         parts.append("OCR (weak hint, line breaks and indentation preserved):")
         parts.append(ocr_hint)
