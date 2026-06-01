@@ -7,12 +7,12 @@ python-dotenv
 pillow
 wordfreq
 pylatexenc
+sentence-transformers
 
 # Google Docs export (only needed for --drive):
 google-api-python-client
 google-auth-oauthlib
 google-auth-httplib2
 
-# Optional: dense retrieval + cross-encoder rerank (heavy; BM25-only without them).
-# sentence-transformers
+# Optional: faster on-disk vector index.
 # sqlite-vec

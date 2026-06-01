@@ -13,11 +13,6 @@ into a structured document (HTML, and optionally a Google Doc):
 ```bash
 ./install.sh        # creates .venv and installs requirements
 ```
-Dense retrieval and the cross-encoder reranker are optional and need
-`sentence-transformers`; without it, retrieval falls back to BM25:
-```bash
-.venv/bin/python -m pip install sentence-transformers
-```
 
 ## Configure
 `.env` in the repo root:
