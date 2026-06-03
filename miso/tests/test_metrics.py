@@ -7,11 +7,14 @@ from __future__ import annotations
 import unittest
 
 from miso.eval.metrics import (
+    align_tokens,
     bootstrap_ci,
     cer,
     correction_precision_recall,
     levenshtein,
     structural_f1,
+    term_recall,
+    term_restricted_cer,
     wer,
 )
 
@@ -112,6 +115,70 @@ class CorrectionPrecisionRecallTests(unittest.TestCase):
         )
         self.assertEqual(precision, 0.0)
         self.assertEqual(over, 0.0)
+
+    def test_position_aware_correct_token_made_wrong(self):
+        # 'note' is already correct at its position; changing it away from gold hurts —
+        # the set-membership version could miss this. Alignment catches it.
+        corrections = [{"original": "note", "suggested": "bar", "accepted": True}]
+        precision, _, over = correction_precision_recall(
+            corrections, gold_text="foo note", raw_text="foo note",
+        )
+        self.assertEqual(precision, 0.0)
+        self.assertEqual(over, 1.0)
+
+
+class AlignTokensTests(unittest.TestCase):
+    def test_identical(self):
+        self.assertEqual(align_tokens(["a", "b"], ["a", "b"]), [("a", "a"), ("b", "b")])
+
+    def test_substitution(self):
+        self.assertEqual(
+            align_tokens(["a", "b", "c"], ["a", "x", "c"]),
+            [("a", "a"), ("b", "x"), ("c", "c")],
+        )
+
+    def test_insertion_and_deletion(self):
+        self.assertEqual(align_tokens(["a", "c"], ["a", "b", "c"]),
+                         [("a", "a"), (None, "b"), ("c", "c")])
+        self.assertEqual(align_tokens(["a", "b", "c"], ["a", "c"]),
+                         [("a", "a"), ("b", None), ("c", "c")])
+
+
+class TermRecallTests(unittest.TestCase):
+    def test_none_when_no_terms(self):
+        self.assertIsNone(term_recall([], "anything at all"))
+
+    def test_all_present_case_insensitive(self):
+        self.assertEqual(term_recall(["eigenvector", "matrix"], "the eigenvector of a Matrix."), 1.0)
+
+    def test_partial(self):
+        self.assertAlmostEqual(term_recall(["eigenvector", "kernel"], "only the eigenvector here"), 0.5)
+
+    def test_multiword_needs_adjacency(self):
+        self.assertEqual(term_recall(["dynamic programming"], "we use Dynamic Programming today"), 1.0)
+        self.assertEqual(term_recall(["dynamic programming"], "dynamic and programming apart"), 0.0)
+
+
+class TermRestrictedCERTests(unittest.TestCase):
+    def test_none_when_term_absent_from_reference(self):
+        self.assertIsNone(term_restricted_cer("plain words here", "plain words here", ["eigenvector"]))
+
+    def test_perfect_recognition_is_zero(self):
+        self.assertEqual(
+            term_restricted_cer("the eigenvector x", "the eigenvector x", ["eigenvector"]), 0.0,
+        )
+
+    def test_misrecognised_term(self):
+        # 'eigenvector' (11 chars) → 'eigenvecter' is one edit.
+        self.assertAlmostEqual(
+            term_restricted_cer("the eigenvector x", "the eigenvecter x", ["eigenvector"]), 1 / 11,
+        )
+
+    def test_only_term_spans_count(self):
+        # Non-term words differ but don't count; the term matches → 0.
+        self.assertEqual(
+            term_restricted_cer("foo eigenvector bar", "XXX eigenvector YYY", ["eigenvector"]), 0.0,
+        )
 
 
 class BootstrapCITests(unittest.TestCase):

@@ -17,3 +17,10 @@ __pycache__/
 *.egg-info/
 
 .DS_Store
+
+corpora/
+.synth_cache/
+/augraphy_cache/
+/fonts/
+runs/
+*.db

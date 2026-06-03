@@ -23,7 +23,7 @@ def discover_runs(runs_dir: Path) -> list[Path]:
 
 
 def load_runs(run_dirs: Iterable[Path]) -> dict[str, list[dict]]:
-    """Concatenate runs that share a config_tag."""
+    """Concatenate runs that share a config_tag — useful for pooling re-runs."""
     out: dict[str, list[dict]] = {}
     for d in run_dirs:
         records = load_trace(d)

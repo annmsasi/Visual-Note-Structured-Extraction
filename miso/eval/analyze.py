@@ -6,7 +6,8 @@ from typing import Iterable
 
 from miso.eval.gold import GoldNote
 from miso.eval.metrics import (
-    bootstrap_ci, cer, correction_precision_recall, structural_f1, wer,
+    bootstrap_ci, cer, correction_precision_recall, structural_f1,
+    term_recall, term_restricted_cer, wer,
 )
 
 
@@ -20,6 +21,8 @@ class PerNote:
     correction_precision: float
     correction_recall: float
     over_correction_rate: float
+    term_recall: float | None = None          # end-to-end: terms surfaced in the extraction
+    term_restricted_cer: float | None = None   # intrinsic: OCR-corrected term spans vs verbatim
 
 
 @dataclass
@@ -44,6 +47,14 @@ class RunReport:
     def mean_over_correction(self) -> float:
         return _mean(p.over_correction_rate for p in self.per_note)
 
+    @property
+    def mean_term_recall(self) -> float | None:
+        return _mean_opt(p.term_recall for p in self.per_note)
+
+    @property
+    def mean_term_restricted_cer(self) -> float | None:
+        return _mean_opt(p.term_restricted_cer for p in self.per_note)
+
 
 def compute_run_report(records: list[dict], gold: dict[str, GoldNote]) -> RunReport:
     tag = records[0]["config_tag"] if records else "unknown"
@@ -54,16 +65,20 @@ def compute_run_report(records: list[dict], gold: dict[str, GoldNote]) -> RunRep
             continue
         ext = r.get("extraction") or {}
         ext_json = ext.get("structured_json", {})
-        # Stub stores flat text under `ocr_text`; otherwise flatten the JSON.
-        hyp_text = ext_json.get("ocr_text") or _flatten_strings(ext_json)
+        # Stub stores flat text under `ocr_text`; real extractions: flatten the
+        # document BODY only (title + blocks), excluding the piggybacked summary
+        # so the ~150-token abstract doesn't pollute the body CER/WER.
+        hyp_text = ext_json.get("ocr_text") or flatten_document_body(ext_json)
 
         corrected = r.get("corrected_ocr") or {}
+        corrected_text = corrected.get("corrected_text", "")
         raw_text = (r.get("ocr_raw") or {}).get("raw_text", "")
         corrections = corrected.get("corrections", []) or []
 
         precision, recall, over_correction = correction_precision_recall(
             corrections, g.transcription, raw_text,
         )
+        terms = g.distinctive_terms
         report.per_note.append(PerNote(
             note_id=r["note_id"],
             processing_order=r.get("processing_order", 0),
@@ -73,24 +88,37 @@ def compute_run_report(records: list[dict], gold: dict[str, GoldNote]) -> RunRep
             correction_precision=precision,
             correction_recall=recall,
             over_correction_rate=over_correction,
+            # End-to-end: did the final extraction surface the recurring terms?
+            term_recall=term_recall(terms, hyp_text) if terms else None,
+            # Intrinsic lexicon: OCR-corrected text vs verbatim, over term spans.
+            term_restricted_cer=(
+                term_restricted_cer(g.transcription, corrected_text, terms) if terms else None
+            ),
         ))
     return report
 
 
 def ramp_curve(report: RunReport) -> list[tuple[int, float]]:
-    """CER vs processing_order."""
+    """CER vs processing_order. The cache's claim is `improves over time` —
+    a ramp curve is more honest than a single before/after.
+    """
     pairs = [(p.processing_order, p.cer) for p in report.per_note]
     pairs.sort()
     return pairs
 
 
 def compare_attribution(
-    baseline: RunReport,
-    lexicon_only: RunReport,
-    retrieval_only: RunReport,
-    full: RunReport,
+    baseline: RunReport,        # C3: no cache
+    lexicon_only: RunReport,    # C4
+    retrieval_only: RunReport,  # C5
+    full: RunReport,            # C6: both
 ) -> dict[str, tuple[float, float, float]]:
-    """CER reduction vs baseline for each cache piece, with bootstrap CIs."""
+    """CER reduction vs baseline for each cache piece, with bootstrap CIs.
+
+    Aligned per-note by note_id; only notes appearing in all four reports
+    contribute. Interaction = both − (lexicon + retrieval); a non-zero value
+    means the two pieces aren't strictly additive.
+    """
     def cer_by_id(rep: RunReport) -> dict[str, float]:
         return {p.note_id: p.cer for p in rep.per_note}
 
@@ -119,18 +147,31 @@ def _mean(it: Iterable[float]) -> float:
     return sum(vals) / len(vals) if vals else 0.0
 
 
-def _flatten_strings(value) -> str:
+def _mean_opt(it: Iterable[float | None]) -> float | None:
+    vals = [v for v in it if v is not None]
+    return sum(vals) / len(vals) if vals else None
+
+
+_SUMMARY_KEYS = {"summary_topic_line", "summary_gist", "summary"}
+
+
+def flatten_document_body(value) -> str:
+    """Flatten a structured extraction to its body text, EXCLUDING summary fields,
+    so the body CER/WER isn't polluted by the ~150-token piggybacked abstract.
+    """
     parts: list[str] = []
-    _collect(value, parts)
+    _collect_body(value, parts)
     return " ".join(parts).strip()
 
 
-def _collect(value, out: list[str]) -> None:
+def _collect_body(value, out: list[str]) -> None:
     if isinstance(value, str):
         out.append(value)
     elif isinstance(value, dict):
-        for v in value.values():
-            _collect(v, out)
+        for k, v in value.items():
+            if k in _SUMMARY_KEYS:
+                continue
+            _collect_body(v, out)
     elif isinstance(value, list):
         for v in value:
-            _collect(v, out)
+            _collect_body(v, out)

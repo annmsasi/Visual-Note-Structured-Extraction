@@ -16,6 +16,10 @@ from miso.eval.gold import load_gold, synthesize_gold_from_traces
 from miso.eval.loader import discover_runs, load_trace
 
 
+def _fmt_opt(x: float | None) -> str:
+    return "n/a" if x is None else f"{x:.4f}"
+
+
 def cmd_analyze(args) -> int:
     runs: list[Path] = []
     for r in args.runs:
@@ -51,11 +55,15 @@ def cmd_analyze(args) -> int:
     print(f"- Configs analysed: {len(reports)} ({', '.join(reports)})\n")
 
     print("## Per-config means\n")
-    print("| config_tag | n | mean CER | mean WER | structural F1 | over-correction |")
-    print("|---|---:|---:|---:|---:|---:|")
+    print("_Headline = term-recall (end-to-end) and term CER (intrinsic lexicon); "
+          "global CER is secondary — it barely moves even when the cache helps._\n")
+    print("| config_tag | n | term-recall | term CER | mean CER | mean WER "
+          "| structural F1 | over-correction |")
+    print("|---|---:|---:|---:|---:|---:|---:|---:|")
     for tag, report in reports.items():
         print(
-            f"| `{tag}` | {report.n_notes} | {report.mean_cer:.4f} "
+            f"| `{tag}` | {report.n_notes} | {_fmt_opt(report.mean_term_recall)} "
+            f"| {_fmt_opt(report.mean_term_restricted_cer)} | {report.mean_cer:.4f} "
             f"| {report.mean_wer:.4f} | {report.mean_structural_f1:.4f} "
             f"| {report.mean_over_correction:.4f} |"
         )
