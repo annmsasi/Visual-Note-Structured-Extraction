@@ -12,7 +12,7 @@ stem = note_id. Each file contains:
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 
@@ -21,6 +21,9 @@ class GoldNote:
     note_id: str
     extracted_json: dict
     transcription: str  # flat text used as the CER/WER reference
+    # Recurring course-distinctive vocabulary the cache targets; drives the
+    # term-recall and term-restricted-CER metrics. Empty → those are reported n/a.
+    distinctive_terms: list[str] = field(default_factory=list)
 
 
 def load_gold(gold_dir: Path) -> dict[str, GoldNote]:
@@ -32,7 +35,12 @@ def load_gold(gold_dir: Path) -> dict[str, GoldNote]:
         note_id = data.get("note_id") or path.stem
         ej = data.get("extracted_json", {})
         transcription = data.get("transcription") or _flatten_strings(ej)
-        out[note_id] = GoldNote(note_id=note_id, extracted_json=ej, transcription=transcription)
+        out[note_id] = GoldNote(
+            note_id=note_id,
+            extracted_json=ej,
+            transcription=transcription,
+            distinctive_terms=data.get("distinctive_terms") or [],
+        )
     return out
 
 
@@ -52,6 +60,9 @@ def synthesize_gold_from_traces(traces: list[dict]) -> dict[str, GoldNote]:
             note_id=note_id,
             extracted_json={"ocr_text": gold_text},
             transcription=gold_text,
+            # The demo's deliberate mis-OCR is on this term, so the term metrics
+            # have something to measure in smoke-test mode.
+            distinctive_terms=["eigenvector"],
         )
     return out
 

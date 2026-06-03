@@ -11,6 +11,15 @@ __pycache__/
 runs/
 *.db
 
+# Synthetic eval corpus (generated) + source download cache
+corpora/
+.synth_cache/
+
+# Stray augraphy artifacts (augraphy no longer used); root-anchored so it
+# doesn't match assets/fonts/.
+/augraphy_cache/
+/fonts/
+
 # Literature-review PDFs (third-party; not committed)
 papers/
 

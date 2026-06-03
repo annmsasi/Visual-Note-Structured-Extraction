@@ -6,6 +6,8 @@ precision/recall/over-correction, and a percentile-bootstrap CI helper.
 from __future__ import annotations
 
 import random
+import re
+from collections import defaultdict, deque
 from typing import Iterable, Sequence
 
 
@@ -26,6 +28,47 @@ def levenshtein(a: Sequence, b: Sequence) -> int:
     return prev[m]
 
 
+def align_tokens(a: Sequence, b: Sequence) -> list[tuple]:
+    """Needleman-Wunsch token alignment (unit costs). Returns ordered
+    (a_tok | None, b_tok | None) pairs — None marks an insertion/deletion gap.
+    Shared by the term and correction metrics so they judge by *position*.
+    """
+    n, m = len(a), len(b)
+    dp = [[0] * (m + 1) for _ in range(n + 1)]
+    for i in range(1, n + 1):
+        dp[i][0] = i
+    for j in range(1, m + 1):
+        dp[0][j] = j
+    for i in range(1, n + 1):
+        ai = a[i - 1]
+        for j in range(1, m + 1):
+            cost = 0 if ai == b[j - 1] else 1
+            dp[i][j] = min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + cost)
+    i, j, out = n, m, []
+    while i > 0 or j > 0:
+        if i > 0 and j > 0 and dp[i][j] == dp[i - 1][j - 1] + (0 if a[i - 1] == b[j - 1] else 1):
+            out.append((a[i - 1], b[j - 1])); i -= 1; j -= 1
+        elif i > 0 and dp[i][j] == dp[i - 1][j] + 1:
+            out.append((a[i - 1], None)); i -= 1
+        else:
+            out.append((None, b[j - 1])); j -= 1
+    out.reverse()
+    return out
+
+
+_PUNCT = ".,;:!?()[]{}\"'`"
+
+
+def _norm_token(t: str) -> str:
+    """Lowercase + strip surrounding punctuation — for token comparison/alignment."""
+    return t.lower().strip(_PUNCT)
+
+
+def _norm_phrase(s: str) -> str:
+    """Lowercase, non-alphanumerics → single spaces, collapsed. For term matching."""
+    return " ".join(re.sub(r"[^0-9a-z]+", " ", s.lower()).split())
+
+
 def cer(reference: str, hypothesis: str) -> float:
     """Character Error Rate. May exceed 1.0 when the hypothesis is longer."""
     if not reference:
@@ -39,6 +82,56 @@ def wer(reference: str, hypothesis: str) -> float:
     if not ref:
         return 0.0 if not hyp else 1.0
     return levenshtein(ref, hyp) / len(ref)
+
+
+def term_recall(terms: Iterable[str], text: str) -> float | None:
+    """Fraction of distinct distinctive terms present in `text` (case-insensitive,
+    word/phrase-boundary aware). Returns None when there are no terms, so callers
+    can exclude the note from the average.
+
+    This is the END-TO-END headline metric: did the final extraction surface the
+    recurring course vocabulary the cache targets? It is robust to the LLM's
+    legitimate normalization (unlike global CER), which is why it — not CER — is
+    the number that should move when the cache helps.
+    """
+    norm_terms = {_norm_phrase(t) for t in terms}
+    norm_terms.discard("")
+    if not norm_terms:
+        return None
+    hay = f" {_norm_phrase(text)} "
+    hits = sum(1 for t in norm_terms if f" {t} " in hay)
+    return hits / len(norm_terms)
+
+
+def term_restricted_cer(reference: str, hypothesis: str, terms: Iterable[str]) -> float | None:
+    """CER restricted to occurrences of `terms` in the reference, token-aligned to
+    the hypothesis. Returns None if no term occurs in the reference.
+
+    This is the INTRINSIC lexicon metric: score the OCR-stage text against a
+    verbatim reference, over only the distinctive-term spans. Global CER hides the
+    ~5% of tokens the lexicon actually moves; this exposes them.
+    """
+    ref = [_norm_token(t) for t in reference.split()]
+    hyp = [_norm_token(t) for t in hypothesis.split()]
+    seqs = [[_norm_token(w) for w in t.split()] for t in terms]
+    seqs = [s for s in seqs if s and all(s)]
+    covered: set[int] = set()
+    for s in seqs:
+        L = len(s)
+        for i in range(len(ref) - L + 1):
+            if ref[i:i + L] == s:
+                covered.update(range(i, i + L))
+    if not covered:
+        return None
+    ri, total, dist = -1, 0, 0
+    for r, h in align_tokens(ref, hyp):
+        if r is None:
+            continue
+        ri += 1
+        if ri in covered:
+            total += len(r)
+            dist += levenshtein(r, h or "")
+    return dist / total if total else None
 
 
 def structural_f1(reference_json, hypothesis_json) -> float:
@@ -78,52 +171,61 @@ def correction_precision_recall(
     corrections: list[dict],
     gold_text: str,
     raw_text: str,
+    max_diff: int = 2,
 ) -> tuple[float, float, float]:
-    """Returns (precision, recall, over_correction_rate).
+    """Returns (precision, recall, over_correction_rate), alignment-based.
 
-    A correction "helped" if the suggested token appears in the gold text and
-    the original did not; "hurt" if the original was in gold and the suggestion
-    isn't. Both-or-neither are neutral and excluded from the denominators.
-    The recall denominator counts raw tokens close to a gold token but not
-    themselves in gold — an approximation of "fixable" mistakes.
+    Raw OCR tokens are token-aligned to the gold, so each correction is judged
+    against the gold token at *its own position* — not mere set membership, which
+    the earlier version used and which over-credited a suggestion that happened to
+    appear somewhere else in the gold. A correction "helped" if it changed the
+    token to its aligned gold token; "hurt" if it changed an already-correct token
+    away from gold. Recall's denominator is raw tokens aligned to a different but
+    close (≤max_diff) gold token — an approximation of "fixable" errors.
     """
     if not corrections:
         return (0.0, 0.0, 0.0)
 
-    gold_tokens = set(gold_text.lower().split())
-    helped = 0
-    hurt = 0
+    gold_tokens = [_norm_token(t) for t in gold_text.split()]
+    raw_tokens = [_norm_token(t) for t in raw_text.split()]
+    gold_set = set(gold_tokens)
+    pairs = align_tokens(raw_tokens, gold_tokens)
+
+    aligned: dict[str, deque] = defaultdict(deque)
+    for r, g in pairs:
+        if r is not None:
+            aligned[r].append(g)  # g may be None (raw token with no gold counterpart)
+
+    _MISSING = object()
+    helped = hurt = 0
     for c in corrections:
         if not c.get("accepted"):
             continue
-        orig = c.get("original", "").lower()
-        sug = c.get("suggested", "").lower()
-        in_gold_orig = orig in gold_tokens
-        in_gold_sug = sug in gold_tokens
-        if in_gold_sug and not in_gold_orig:
+        orig = _norm_token(c.get("original", ""))
+        sug = _norm_token(c.get("suggested", ""))
+        g = aligned[orig].popleft() if aligned[orig] else _MISSING
+        if g is _MISSING or g is None:
+            # No aligned gold token (inserted/garbage OCR) — fall back to membership.
+            in_o, in_s = orig in gold_set, sug in gold_set
+            if in_s and not in_o:
+                helped += 1
+            elif in_o and not in_s:
+                hurt += 1
+            continue
+        if sug == g and orig != g:
             helped += 1
-        elif in_gold_orig and not in_gold_sug:
+        elif orig == g and sug != g:
             hurt += 1
 
     decisive = helped + hurt
     precision = helped / decisive if decisive else 0.0
     over_correction = hurt / decisive if decisive else 0.0
-
-    raw_tokens = raw_text.lower().split()
-    gold_list = list(gold_tokens)
     fixable = sum(
-        1
-        for r in raw_tokens
-        if r not in gold_tokens and any(_close(r, w) for w in gold_list)
+        1 for r, g in pairs
+        if r is not None and g is not None and r != g and levenshtein(r, g) <= max_diff
     )
     recall = helped / fixable if fixable else 0.0
     return (precision, recall, over_correction)
-
-
-def _close(a: str, b: str, max_diff: int = 2) -> bool:
-    if abs(len(a) - len(b)) > max_diff:
-        return False
-    return levenshtein(a, b) <= max_diff
 
 
 def bootstrap_ci(
