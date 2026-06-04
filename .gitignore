@@ -15,5 +15,10 @@ token.json
 __pycache__/
 *.pyc
 *.egg-info/
+.venv/
+.ocr_cache/
+
+# corpora / staged note images
+corpora/
 
 .DS_Store

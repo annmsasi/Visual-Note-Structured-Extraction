@@ -1,7 +1,8 @@
-"""Run the full miso pipeline on a note image and export the result.
+"""Run the base (no-cache) miso pipeline on a note image and export the result.
 
-Usage:
-    python run_full_pipeline.py [data/inbox/notes.jpg] [--drive]
+    python run_full_pipeline.py data/inbox/notes.jpg
+    python run_full_pipeline.py notes.jpg --ocr tesseract --model qwen/qwen2.5-vl-72b-instruct
+    python run_full_pipeline.py --drive          # also create a Google Doc
 """
 from __future__ import annotations
 
@@ -29,19 +30,23 @@ def main(argv: list[str] | None = None) -> int:
     _load_env()
     _configure_logging()
 
-    ap = argparse.ArgumentParser(description="Run the full miso pipeline on a note image.")
+    ap = argparse.ArgumentParser(description="Run the base (no-cache) miso pipeline on a note image.")
     ap.add_argument("image", nargs="?", help="note image (default: first in data/inbox)")
-    ap.add_argument("--course", default="adhoc")
-    ap.add_argument("--model", default="claude-sonnet-4-6")
-    ap.add_argument("--out", type=Path)
+    ap.add_argument("--course", default="adhoc", help="Drive folder name for --drive")
+    ap.add_argument("--ocr", default="azure", choices=["stub", "azure", "paddle", "tesseract"],
+                    help="OCR engine; paddle/tesseract are free + local")
+    ap.add_argument("--model", default="claude-sonnet-4-6",
+                    help="extraction model: a claude-* id, or an open VLM id like "
+                         "qwen/qwen2.5-vl-72b-instruct (served via OPENROUTER_API_KEY)")
+    ap.add_argument("--out", type=Path, help="HTML output path (default: <note_id>.html)")
     ap.add_argument("--drive", action="store_true", help="also upload to Google Docs")
     args = ap.parse_args(argv)
 
     src = Path(args.image) if args.image else _default_image()
     image_path = _prepare_image(src)
 
-    cfg = RunConfig.config_6_full(tag="full_pipeline")
-    cfg.ocr.engine = "azure"
+    cfg = RunConfig.base(tag="full_pipeline")
+    cfg.ocr.engine = args.ocr
     cfg.extraction.model_id = args.model
 
     note = Note(
@@ -51,13 +56,11 @@ def main(argv: list[str] | None = None) -> int:
         processing_order=0,
         timestamp=datetime(2026, 1, 1),
     )
-    run(cfg, [note])
-
-    docs = export.load_notes(cfg.cache_path, note_id=note.note_id)
-    if not docs:
-        print("Pipeline produced no extracted note (check API keys / logs above).")
+    extracted = run(cfg, [note])
+    if not extracted:
+        print("Pipeline produced no note (check API keys / logs above).")
         return 1
-    _, course_id, doc = docs[0]
+    doc = extracted[0].structured_json
 
     html = export.render_note_html(doc)
     out = args.out or Path(f"{note.note_id}.html")
@@ -66,7 +69,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Wrote {out}")
 
     if args.drive:
-        url = export.upload_html_to_drive(html, name=doc.get("title") or note.note_id, folder=course_id)
+        url = export.upload_html_to_drive(html, name=doc.get("title") or note.note_id, folder=args.course)
         print(f"Google Doc: {url}")
     return 0
 
