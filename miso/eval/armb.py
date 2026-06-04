@@ -72,6 +72,39 @@ _DRAFT_PROMPT = (
 )
 
 
+def stage_local(pdfs: list[str], out_dir: str, course: str, dpi: int) -> int:
+    """Render local handwritten-note PDFs to page images — the local counterpart
+    of `stage` (which only reads HuggingFace datasets).
+
+    PDFs are rendered in the order given and pages numbered sequentially, so the
+    chronological course order is preserved (note_id = ``{course}-{NNN}``). A
+    manifest.json maps each image back to its source PDF + page, so hand-correction
+    of the drafted gold stays traceable.
+    """
+    import shutil
+    from pdf2image import convert_from_path
+
+    poppler = shutil.which("pdfinfo")
+    poppler_dir = os.path.dirname(poppler) if poppler else None
+
+    out = Path(out_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    manifest: list[dict] = []
+    i = 0
+    for pdf in pdfs:
+        pages = convert_from_path(pdf, dpi=dpi, poppler_path=poppler_dir)
+        for pno, page in enumerate(pages, start=1):
+            nid = f"{course}-{i:03d}"
+            page.convert("RGB").save(out / f"{nid}.jpg", quality=92)
+            manifest.append({"note_id": nid, "source_pdf": os.path.basename(pdf), "page": pno})
+            i += 1
+        log.info("rendered %s (%d pages)", os.path.basename(pdf), len(pages))
+    (out / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False))
+    print(f"staged {i} page images to {out}/  (manifest.json written)")
+    print(f"next (bills API): python -m miso.eval.armb draft {out_dir} --course {course}")
+    return i
+
+
 def stage(repo: str, out_dir: str, course: str, limit: int | None) -> int:
     from datasets import load_dataset
     from PIL import Image
@@ -174,6 +207,12 @@ def main(argv: list[str] | None = None) -> int:
     s.add_argument("out_dir")
     s.add_argument("--course", required=True)
     s.add_argument("--limit", type=int, default=30)
+    sl = sub.add_parser("stage-local", help="Render local note PDFs to page images (chronological).")
+    sl.add_argument("out_dir")
+    sl.add_argument("--pdf", action="append", required=True, dest="pdfs",
+                    metavar="PDF", help="a source PDF (repeat in chronological order)")
+    sl.add_argument("--course", required=True)
+    sl.add_argument("--dpi", type=int, default=200)
     d = sub.add_parser("draft", help="LLM-draft gold for the staged images.")
     d.add_argument("corpus_dir")
     d.add_argument("--course", required=True)
@@ -181,6 +220,8 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
     if args.cmd == "stage":
         return 0 if stage(args.repo, args.out_dir, args.course, args.limit) else 1
+    if args.cmd == "stage-local":
+        return 0 if stage_local(args.pdfs, args.out_dir, args.course, args.dpi) else 1
     if args.cmd == "draft":
         return 0 if draft(args.corpus_dir, args.course, args.model) else 1
     return 2
