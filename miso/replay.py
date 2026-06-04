@@ -85,6 +85,32 @@ def run(cfg: RunConfig, notes: list[Note]) -> list[ExtractedNote]:
     return out
 
 
+def run_document(cfg: RunConfig, *, note_id: str, course: str,
+                 pages: list[Path], timestamp: datetime) -> dict:
+    """Map-reduce over a multi-page document: extract each page (MAP), then merge
+    the per-page IRs into one combined document (REDUCE). Returns the merged IR.
+
+    Each MAP call sees a single page image and the REDUCE call is text-only, so this
+    works with any model — including small / short-context open VLMs.
+    """
+    ocr = _make_ocr(cfg)
+    extractor = _make_extractor(cfg)
+    run_dir = cfg.traces_dir / cfg.run_id
+    cfg.save(run_dir / "config.json")
+    page_docs: list[dict] = []
+    with TraceWriter(run_dir) as trace:
+        for i, p in enumerate(pages):
+            note = Note(note_id=f"{note_id}-p{i:03d}", course_id=course,
+                        image_path=p, processing_order=i, timestamp=timestamp)
+            page_docs.append(
+                process_note(note, cfg, ocr=ocr, extractor=extractor, trace=trace).structured_json
+            )
+    if len(page_docs) <= 1:
+        return page_docs[0] if page_docs else {}
+    log.info("merging %d page extractions into one document", len(page_docs))
+    return extractor.combine(page_docs)
+
+
 def _make_fake_notes(course_id: str, n: int) -> list[Note]:
     base = datetime(2026, 5, 1, 12, 0, 0)
     return [

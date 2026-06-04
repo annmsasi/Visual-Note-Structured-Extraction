@@ -15,6 +15,25 @@ log = logging.getLogger(__name__)
 
 _TOOL_NAME = "emit_structured_note"
 
+COMBINE_SYSTEM = (
+    "You merge the per-page structured notes of ONE multi-page document into a single "
+    "coherent structured note. Concatenate content in page order; merge any heading, "
+    "list, or sentence split across a page break into one block; drop repeated running "
+    "headers, footers, and page numbers; and produce ONE title and ONE summary (topic "
+    "line + gist) for the whole document. Call the `emit_structured_note` tool with the "
+    "merged document."
+)
+
+
+def _merge_prompt(page_docs: list[dict]) -> str:
+    import json
+    pages = "\n\n".join(
+        f"=== Page {i + 1} ===\n{json.dumps(d, ensure_ascii=False)}"
+        for i, d in enumerate(page_docs)
+    )
+    return ("Per-page structured notes of one document, in reading order:\n\n"
+            + pages + "\n\nMerge them into a single document.")
+
 
 class ExtractionAdapter(Protocol):
     def extract(
@@ -46,6 +65,17 @@ class StubExtractor:
         layout = (corrected_ocr.layout_text or corrected_ocr.corrected_text) if corrected_ocr else ""
         payload = _layout_to_document(layout, course_id=note.course_id)
         return _to_note(note, payload, model_id="stub-extractor-v1")
+
+    def combine(self, page_docs: list[dict]) -> dict:
+        """Deterministic merge: concatenate blocks, keep the first title, join gists."""
+        if not page_docs:
+            return {"title": "(empty)", "blocks": [], "summary_topic_line": "", "summary_gist": ""}
+        return {
+            "title": page_docs[0].get("title", "(untitled)"),
+            "blocks": [b for d in page_docs for b in d.get("blocks", [])],
+            "summary_topic_line": page_docs[0].get("summary_topic_line", ""),
+            "summary_gist": " ".join(d.get("summary_gist", "") for d in page_docs).strip(),
+        }
 
 
 def _layout_to_document(layout_text: str, *, course_id: str) -> dict:
@@ -140,6 +170,27 @@ class AnthropicExtractor:
 
         return _to_note(note, payload, model_id=self.model_id)
 
+    def combine(self, page_docs: list[dict]) -> dict:
+        """REDUCE: merge per-page IRs into one document via a text-only call."""
+        msg = self._client.messages.create(
+            model=self.model_id,
+            max_tokens=8192,
+            system=COMBINE_SYSTEM,
+            tools=[{
+                "name": _TOOL_NAME,
+                "description": "Return the merged document.",
+                "input_schema": DOCUMENT_SCHEMA,
+            }],
+            tool_choice={"type": "tool", "name": _TOOL_NAME},
+            messages=[{"role": "user", "content": _merge_prompt(page_docs)}],
+        )
+        payload = next((b.input for b in msg.content
+                        if getattr(b, "type", None) == "tool_use" and b.name == _TOOL_NAME), None)
+        if payload is None:
+            log.warning("combine returned no tool_use block; stop_reason=%s", msg.stop_reason)
+            payload = {}
+        return validate(payload)
+
 
 class OpenAIVisionExtractor:
     """Extraction via any OpenAI-compatible vision endpoint — a local server
@@ -203,6 +254,24 @@ class OpenAIVisionExtractor:
             tool_choice={"type": "function", "function": {"name": _TOOL_NAME}},
         )
         return _to_note(note, _payload_from_openai(msg), model_id=self.model_id)
+
+    def combine(self, page_docs: list[dict]) -> dict:
+        """REDUCE: merge per-page IRs into one document (text-only — works on any model)."""
+        msg = self._client.chat.completions.create(
+            model=self.model_id,
+            max_tokens=8192,
+            messages=[
+                {"role": "system", "content": COMBINE_SYSTEM},
+                {"role": "user", "content": _merge_prompt(page_docs)},
+            ],
+            tools=[{"type": "function", "function": {
+                "name": _TOOL_NAME,
+                "description": "Return the merged document.",
+                "parameters": DOCUMENT_SCHEMA,
+            }}],
+            tool_choice={"type": "function", "function": {"name": _TOOL_NAME}},
+        )
+        return validate(_payload_from_openai(msg))
 
 
 def _payload_from_openai(msg) -> dict:

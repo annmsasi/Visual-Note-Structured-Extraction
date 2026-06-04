@@ -1,18 +1,19 @@
-# full-pipeline branch: the complete vendored miso pipeline.
+# base-pipeline branch: OCR + LLM -> structured doc -> HTML / Google Doc. No cache.
 # Core (required):
-azure-ai-documentintelligence
-azure-core
-anthropic
-python-dotenv
+anthropic                       # claude-* extraction
+openai                          # open VLMs via OpenRouter / vLLM / Ollama
 pillow
-wordfreq
-pylatexenc
-sentence-transformers
+pdf2image                       # multi-page PDF input (needs the system `poppler`)
+pylatexenc                      # equations -> inline unicode in export
+python-dotenv
+
+# OCR engines (pick what you use):
+azure-ai-documentintelligence   # --ocr azure (paid; per-word confidence)
+azure-core
+# --ocr tesseract : needs the system `tesseract` binary (no Python dep)
+# --ocr paddle    : pip install paddleocr paddlepaddle (finicky on Apple Silicon)
 
 # Google Docs export (only needed for --drive):
 google-api-python-client
 google-auth-oauthlib
 google-auth-httplib2
-
-# Optional: faster on-disk vector index.
-# sqlite-vec
