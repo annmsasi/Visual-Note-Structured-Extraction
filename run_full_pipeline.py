@@ -11,6 +11,7 @@ are merged into a single combined note.
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -61,7 +62,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--model", default="claude-sonnet-4-6",
                     help="extraction model: a claude-* id, or an open VLM id like "
                          "qwen/qwen2.5-vl-72b-instruct (served via OPENROUTER_API_KEY)")
-    ap.add_argument("--out", type=Path, help="HTML output path (default: <name>.html)")
+    ap.add_argument("--format", choices=["md", "html"], default="md",
+                    help="output format (default: md)")
+    ap.add_argument("--out", type=Path, help="output path (default: <name>.<format>)")
     ap.add_argument("--drive", action="store_true", help="also upload to Google Docs")
     args = ap.parse_args(argv)
 
@@ -80,14 +83,22 @@ def main(argv: list[str] | None = None) -> int:
         print("Pipeline produced no note (check API keys / logs above).")
         return 1
 
-    html = export.render_note_html(doc)
-    out = args.out or Path(f"{src.stem[:60]}.html")
-    out.write_text(html)
+    stem = src.stem[:60]
+    if args.format == "md":
+        body, default_out = export.render_note_markdown(doc), Path(f"{stem}.md")
+    else:
+        body, default_out = export.render_note_html(doc), Path(f"{stem}.html")
+    out = args.out or default_out
+    out.write_text(body)
+    # save the IR alongside, so you can re-render to any format later without re-running
+    out.with_suffix(".json").write_text(json.dumps(doc, ensure_ascii=False, indent=2))
     print(f"Structured note: {doc.get('title')!r}  ({len(pages)} page(s) merged)")
     print(f"Wrote {out}")
 
     if args.drive:
-        url = export.upload_html_to_drive(html, name=doc.get("title") or src.stem, folder=args.course)
+        # HTML import gives the better-looking Doc; markdown is the local format.
+        url = export.upload_html_to_drive(
+            export.render_note_html(doc), name=doc.get("title") or stem, folder=args.course)
         print(f"Google Doc: {url}")
     return 0
 
