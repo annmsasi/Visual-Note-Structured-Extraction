@@ -121,6 +121,38 @@ def _page(title: str, body: str) -> str:
     )
 
 
+# ----------------------------------------------------------------------------- markdown
+
+def render_note_markdown(doc: dict[str, Any]) -> str:
+    """Render one note's document IR to Markdown."""
+    lines: list[str] = [f"# {doc.get('title') or '(untitled)'}", ""]
+    for block in _coalesce_lists(doc.get("blocks") or []):
+        md = _block_to_md(block)
+        if md:
+            lines.append(md)
+            lines.append("")
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def _block_to_md(block: dict[str, Any]) -> str:
+    t = block.get("type")
+    if t == "heading":
+        lvl = min(6, int(block.get("level", 1)) + 1)  # the note title owns `#`
+        return f"{'#' * lvl} {(block.get('text') or '').strip()}"
+    if t == "paragraph":
+        return (block.get("text") or "").strip()
+    if t == "equation":
+        latex = (block.get("latex") or "").strip()
+        return f"$$\n{latex}\n$$" if latex else ""
+    if t == "list":
+        items = block.get("items") or []
+        return "\n".join(
+            f"{'  ' * max(0, int(it.get('level', 0)))}- {(it.get('text') or '').strip()}"
+            for it in items
+        )
+    return ""
+
+
 # ----------------------------------------------------------------------------- data access
 
 def load_notes(db_path: Path, *, note_id: str | None = None,
@@ -195,8 +227,8 @@ def _ensure_folder(service, name: str) -> str:
     return folder["id"]
 
 
-def upload_html_to_drive(html_doc: str, name: str, folder: str | None = None) -> str:
-    """Create a Google Doc from HTML and return its web link."""
+def _create_doc(content: str, src_mimetype: str, name: str, folder: str | None) -> str:
+    """Create a Google Doc by uploading `content` and letting Drive convert it."""
     from googleapiclient.discovery import build
     from googleapiclient.http import MediaInMemoryUpload
 
@@ -204,11 +236,22 @@ def upload_html_to_drive(html_doc: str, name: str, folder: str | None = None) ->
     body: dict[str, Any] = {"name": name, "mimeType": "application/vnd.google-apps.document"}
     if folder:
         body["parents"] = [_ensure_folder(service, folder)]
-    media = MediaInMemoryUpload(html_doc.encode("utf-8"), mimetype="text/html")
+    media = MediaInMemoryUpload(content.encode("utf-8"), mimetype=src_mimetype)
     created = service.files().create(
         body=body, media_body=media, fields="id,webViewLink",
     ).execute()
     return created.get("webViewLink", created.get("id", ""))
+
+
+def upload_html_to_drive(html_doc: str, name: str, folder: str | None = None) -> str:
+    """Create a Google Doc from HTML and return its web link."""
+    return _create_doc(html_doc, "text/html", name, folder)
+
+
+def upload_markdown_to_drive(md_doc: str, name: str, folder: str | None = None) -> str:
+    """Create a Google Doc from Markdown. Drive's markdown importer maps headings,
+    lists, and spacing to native Doc styles — cleaner than the HTML importer."""
+    return _create_doc(md_doc, "text/markdown", name, folder)
 
 
 # ----------------------------------------------------------------------------- CLI
