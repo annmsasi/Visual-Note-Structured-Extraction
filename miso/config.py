@@ -42,7 +42,7 @@ class AugmentationConfig:
 
 @dataclass
 class OCRConfig:
-    engine: str = "stub"                   # "stub" | "azure"
+    engine: str = "stub"                   # "stub" | "azure" | "paddle" | "tesseract" (last two free, local)
     stub_inject_errors: bool = True
 
 

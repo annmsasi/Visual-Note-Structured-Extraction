@@ -51,6 +51,13 @@ def _maybe_real_reranker():
 
 
 def _make_ocr(cfg: RunConfig):
+    if cfg.ocr.engine in ("paddle", "tesseract"):
+        try:
+            from miso.ocr import CachedOCR, make_ocr
+            return CachedOCR(make_ocr(cfg.ocr.engine))  # disk-cache so re-runs skip re-OCR
+        except Exception as e:
+            log.warning("%s construction failed (%s); falling back to StubOCR", cfg.ocr.engine, e)
+        return StubOCR()
     if cfg.ocr.engine == "azure":
         endpoint = os.environ.get("AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT")
         key = os.environ.get("AZURE_DOCUMENT_INTELLIGENCE_KEY")
@@ -67,16 +74,27 @@ def _make_ocr(cfg: RunConfig):
 
 
 def _make_extractor(cfg: RunConfig):
-    if cfg.extraction.model_id.startswith("claude"):
+    model = cfg.extraction.model_id
+    if model.startswith("claude"):
         key = os.environ.get("ANTHROPIC_API_KEY")
         if key:
             try:
                 from miso.extraction import AnthropicExtractor
-                return AnthropicExtractor(api_key=key, model_id=cfg.extraction.model_id)
+                return AnthropicExtractor(api_key=key, model_id=model)
             except Exception as e:
                 log.warning("AnthropicExtractor construction failed (%s); falling back to stub", e)
         else:
             log.warning("ANTHROPIC_API_KEY not set; falling back to StubExtractor")
+    elif model not in ("stub", "") and (
+        os.environ.get("OPENROUTER_API_KEY")
+        or os.environ.get("OPENAI_BASE_URL")
+        or os.environ.get("OPENAI_API_KEY")
+    ):
+        try:
+            from miso.extraction import OpenAIVisionExtractor
+            return OpenAIVisionExtractor(model)  # open VLM via OpenRouter/vLLM/Ollama
+        except Exception as e:
+            log.warning("OpenAIVisionExtractor construction failed (%s); falling back to stub", e)
     return StubExtractor()
 
 
