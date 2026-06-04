@@ -141,6 +141,88 @@ class AnthropicExtractor:
         return _to_note(note, payload, model_id=self.model_id)
 
 
+class OpenAIVisionExtractor:
+    """Extraction via any OpenAI-compatible vision endpoint — a local server
+    (vLLM / Ollama) or a hosted gateway (OpenRouter, Together) serving an
+    open-weight VLM. Drop-in for `AnthropicExtractor`: same image + OCR-hint
+    prompt, same schema-forced `emit_structured_note` tool, same document IR.
+
+    Recommended model: Qwen2.5-VL — the strongest open VLM for handwriting +
+    structured extraction. Point it at a server via OPENAI_BASE_URL / OPENAI_API_KEY.
+    """
+
+    _OPENROUTER_URL = "https://openrouter.ai/api/v1"
+
+    def __init__(self, model_id: str, *, base_url: str | None = None, api_key: str | None = None):
+        import os
+        from openai import OpenAI
+        # Zero-setup default: set OPENROUTER_API_KEY and pass a model id like
+        # "qwen/qwen2.5-vl-72b-instruct". Falls back to a generic OpenAI-compatible
+        # server (vLLM/Ollama) via OPENAI_BASE_URL / OPENAI_API_KEY.
+        router_key = os.environ.get("OPENROUTER_API_KEY")
+        if base_url is None and api_key is None and router_key:
+            base_url, api_key = self._OPENROUTER_URL, router_key
+        self._client = OpenAI(
+            base_url=base_url or os.environ.get("OPENAI_BASE_URL"),
+            api_key=api_key or os.environ.get("OPENAI_API_KEY") or "EMPTY",
+        )
+        self.model_id = model_id
+
+    def extract(
+        self,
+        *,
+        note: Note,
+        corrected_ocr: CorrectedOCR | None,
+        retrieved: list[RetrievedSummary],
+        glossary: list[str],
+        cfg: ExtractionConfig,
+    ) -> ExtractedNote:
+        text_prompt = assemble_prompt(
+            corrected_ocr=corrected_ocr, retrieved=retrieved, glossary=glossary, cfg=cfg,
+        )
+        content: list[dict] = []
+        if cfg.use_image:
+            mime, _ = mimetypes.guess_type(str(note.image_path))
+            mime = mime or "image/jpeg"
+            with open(note.image_path, "rb") as fh:
+                b64 = base64.b64encode(fh.read()).decode()
+            content.append({"type": "image_url",
+                            "image_url": {"url": f"data:{mime};base64,{b64}"}})
+        content.append({"type": "text", "text": text_prompt})
+
+        tools = [{"type": "function", "function": {
+            "name": _TOOL_NAME,
+            "description": "Return the page as a structured document.",
+            "parameters": DOCUMENT_SCHEMA,
+        }}]
+        msg = self._client.chat.completions.create(
+            model=self.model_id,
+            max_tokens=4096,
+            messages=[{"role": "user", "content": content}],
+            tools=tools,
+            tool_choice={"type": "function", "function": {"name": _TOOL_NAME}},
+        )
+        return _to_note(note, _payload_from_openai(msg), model_id=self.model_id)
+
+
+def _payload_from_openai(msg) -> dict:
+    """Pull the tool-call arguments, falling back to a JSON object in the content."""
+    import json
+    choice = msg.choices[0].message
+    calls = getattr(choice, "tool_calls", None)
+    if calls:
+        try:
+            return json.loads(calls[0].function.arguments)
+        except (ValueError, AttributeError):
+            pass
+    text = getattr(choice, "content", None) or ""
+    try:
+        return json.loads(text[text.index("{"): text.rindex("}") + 1])
+    except (ValueError, json.JSONDecodeError):
+        log.warning("OpenAI-compatible extractor returned no parseable JSON")
+        return {}
+
+
 def _to_note(note: Note, payload: dict, *, model_id: str) -> ExtractedNote:
     doc = validate(payload)
     return ExtractedNote(
@@ -158,4 +240,5 @@ def make_extractor(model_id: str) -> ExtractionAdapter:
     if model_id.startswith("claude"):
         import os
         return AnthropicExtractor(api_key=os.environ["ANTHROPIC_API_KEY"], model_id=model_id)
-    raise ValueError(f"Unknown extractor for model_id={model_id!r}")
+    # any other id → an OpenAI-compatible vision endpoint (open-weight VLM)
+    return OpenAIVisionExtractor(model_id)
