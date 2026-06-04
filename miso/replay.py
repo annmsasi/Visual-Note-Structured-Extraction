@@ -163,7 +163,9 @@ def _load_env() -> None:
         from dotenv import load_dotenv
     except ImportError:
         return
-    load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+    # override=True: the project .env is authoritative, even over an already-exported
+    # (possibly stale) shell variable.
+    load_dotenv(Path(__file__).resolve().parent.parent / ".env", override=True)
 
 
 def _configure_logging() -> None:
