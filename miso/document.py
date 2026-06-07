@@ -1,6 +1,7 @@
 """Document IR: the block structure shared between extraction and rendering."""
 from __future__ import annotations
 
+import re
 from typing import Any
 
 # JSON Schema handed to the model as a tool's `input_schema`.
@@ -134,4 +135,11 @@ def _empty(title: str) -> dict[str, Any]:
 
 
 def _as_str(v: Any) -> str:
-    return v.strip() if isinstance(v, str) else ""
+    if not isinstance(v, str):
+        return ""
+    # A VLM may emit the HTML non-breaking-space entity or the literal NBSP char to
+    # fake the page's horizontal layout (the gold drafter did exactly this). Both
+    # pollute scoring — term-recall's normalizer turns `&nbsp;` into a spurious
+    # "nbsp" token and CER counts the literal chars — so collapse them to a space.
+    v = v.replace("&nbsp;", " ").replace("\u00a0", " ")
+    return re.sub(r" {2,}", " ", v).strip()

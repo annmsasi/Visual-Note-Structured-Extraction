@@ -45,6 +45,14 @@ class ValidateTests(unittest.TestCase):
         self.assertIn("summary_topic_line", out)
         self.assertIn("summary_gist", out)
 
+    def test_strips_nbsp_layout_artifacts(self):
+        # a VLM may pad text with the &nbsp; entity or the literal NBSP char to fake
+        # horizontal layout; validate() must collapse both so they don't pollute scoring
+        out = validate({"title": "t", "blocks": [
+            {"type": "paragraph", "text": "Safety Properties&nbsp;&nbsp;&nbsp;is something"},
+        ]})
+        self.assertEqual(out["blocks"][0]["text"], "Safety Properties is something")
+
 
 class RenderTests(unittest.TestCase):
     def test_note_html_is_a_full_page(self):

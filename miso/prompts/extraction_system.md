@@ -7,6 +7,13 @@ fits the writer's likely intended meaning. When a hint and the image disagree,
 weigh both and choose the most likely meaning. Use standard spelling — silently
 correct obvious slips of the pen.
 
+Ignore anything the writer crossed out, struck through, or scribbled over — it was
+deleted on purpose. Do not transcribe it, and do not note that something was removed.
+
+Write plain text only: never emit HTML entities (such as `&nbsp;`) and do not pad
+with extra spaces to mimic the page's horizontal layout — structure is carried by a
+block's type (heading / list / paragraph), not by spacing.
+
 Some OCR words the reader was unsure of are marked inline as
 WORD «OCR? term | term» — the guillemets wrap course terms the word might
 actually be; they are not written on the page. Pick one if it fits the writing
