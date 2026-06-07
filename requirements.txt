@@ -10,6 +10,11 @@ wordfreq
 pylatexenc
 sentence-transformers
 
+# Open VLMs via OpenRouter / any OpenAI-compatible endpoint (eval suite).
+# Without this, _make_extractor SILENTLY falls back to the StubExtractor for any
+# non-claude model id — runs "succeed" but echo OCR instead of calling the VLM.
+openai
+
 # Google Docs export (only needed for --drive):
 google-api-python-client
 google-auth-oauthlib
