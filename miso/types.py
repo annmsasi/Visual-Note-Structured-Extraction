@@ -44,6 +44,24 @@ class LexiconCorrection:
 
 
 @dataclass
+class Candidate:
+    """A course-vocabulary term offered as a possible reading of an OCR word."""
+    term: str
+    distance: float       # length-normalised edit distance (0.0 = identical)
+    frequency: int        # course-corpus count, the relevance prior
+    relevance: float      # (1 - conf) * exp(-decay * distance) * freq ** weight
+
+
+@dataclass
+class WordFlag:
+    """A low-confidence OCR word with ranked candidate corrections (flag mode)."""
+    token_index: int
+    original: str
+    confidence: float
+    candidates: list[Candidate]   # ranked, best first
+
+
+@dataclass
 class CorrectedOCR:
     """OCR after the lexicon layer."""
     words: list[OCRWord]
@@ -51,6 +69,8 @@ class CorrectedOCR:
     corrections: list[LexiconCorrection]
     touched_terms: list[str]  # matched lexicon entries, passed to the LLM as the glossary
     layout_text: str = ""        # line/indent-structured, corrections applied
+    # flag mode: per-word candidate corrections handed to the LLM (words left untouched)
+    flags: list[WordFlag] = field(default_factory=list)
 
 
 @dataclass
