@@ -19,7 +19,8 @@ from miso.db import open_db, reset
 from miso.extraction import StubExtractor
 from miso.lexicon import LexiconLayer
 from miso.ocr import StubOCR
-from miso.pipeline import process_note
+from miso.export import render_note_markdown
+from miso.pipeline import finalize_note, process_note
 from miso.retrieval import RetrievalLayer
 from miso.summary_store import SummaryStore
 from miso.trace import TraceWriter
@@ -124,14 +125,20 @@ def run(cfg: RunConfig, notes: list[Note]) -> Path:
     cfg.save(run_dir / "config.json")
     with TraceWriter(run_dir) as trace:
         for note in notes:
-            process_note(
+            # In this driver each Note is a whole (single-page) note, so finalize
+            # runs per note right after extraction.
+            ext = process_note(
                 note, cfg,
                 ocr=ocr,
                 lexicon_layer=lexicon_layer,
-                summary_store=summary_store,
                 retrieval_layer=retrieval_layer,
                 extractor=extractor,
                 trace=trace,
+            )
+            finalize_note(
+                ext.structured_json, note,
+                extractor=extractor, summary_store=summary_store,
+                lexicon_layer=lexicon_layer, cfg=cfg,
             )
 
     conn.execute(
@@ -141,6 +148,15 @@ def run(cfg: RunConfig, notes: list[Note]) -> Path:
     conn.commit()
     conn.close()
     return run_dir
+
+
+def _prior_window(prior_md: list[str], k: int) -> list[str]:
+    """The prior-page markdown to inject: all if k<0, none if k==0, else last k."""
+    if k < 0:
+        return list(prior_md)
+    if k == 0:
+        return []
+    return prior_md[-k:]
 
 
 def run_document(cfg: RunConfig, *, note_id: str, course: str,
@@ -166,24 +182,38 @@ def run_document(cfg: RunConfig, *, note_id: str, course: str,
     run_dir = cfg.traces_dir / cfg.run_id
     cfg.save(run_dir / "config.json")
     page_docs: list[dict] = []
+    prior_md: list[str] = []
+    k = cfg.extraction.prior_page_context
     with TraceWriter(run_dir) as trace:
         for i, p in enumerate(pages):
             note = Note(note_id=f"{note_id}-p{i:03d}", course_id=course,
                         image_path=p, processing_order=i, timestamp=timestamp)
-            page_docs.append(
-                process_note(
-                    note, cfg, ocr=ocr,
-                    lexicon_layer=lexicon_layer,
-                    summary_store=summary_store,
-                    retrieval_layer=retrieval_layer,
-                    extractor=extractor, trace=trace,
-                ).structured_json
-            )
+            window = _prior_window(prior_md, k)
+            page_doc = process_note(
+                note, cfg, ocr=ocr,
+                lexicon_layer=lexicon_layer,
+                retrieval_layer=retrieval_layer,
+                extractor=extractor, trace=trace,
+                prior_pages_md=window,
+            ).structured_json
+            page_docs.append(page_doc)
+            prior_md.append(render_note_markdown(page_doc))
+
+    if not page_docs:
+        conn.close()
+        return {}
+    if len(page_docs) == 1:
+        combined = page_docs[0]
+    else:
+        log.info("merging %d page extractions into one document", len(page_docs))
+        combined = extractor.combine(page_docs)
+    # One whole-note summary + harvest, stored at note granularity (no -pNNN).
+    whole = Note(note_id=note_id, course_id=course, image_path=pages[0],
+                 processing_order=0, timestamp=timestamp)
+    finalize_note(combined, whole, extractor=extractor,
+                  summary_store=summary_store, lexicon_layer=lexicon_layer, cfg=cfg)
     conn.close()
-    if len(page_docs) <= 1:
-        return page_docs[0] if page_docs else {}
-    log.info("merging %d page extractions into one document", len(page_docs))
-    return extractor.combine(page_docs)
+    return combined
 
 
 def _make_fake_notes(course_id: str, n: int) -> list[Note]:

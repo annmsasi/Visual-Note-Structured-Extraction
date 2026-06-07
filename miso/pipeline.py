@@ -20,10 +20,10 @@ def process_note(
     *,
     ocr,
     lexicon_layer,
-    summary_store,
     retrieval_layer,
     extractor,
     trace: TraceWriter,
+    prior_pages_md: list[str] | None = None,
 ) -> ExtractedNote:
     latencies = StageLatencies()
     record = TraceRecord(
@@ -90,17 +90,42 @@ def process_note(
         retrieved=retrieval.injected if cfg.extraction.use_retrieved_summaries else [],
         glossary=corrected.touched_terms if cfg.extraction.use_glossary else [],
         cfg=cfg.extraction,
+        prior_pages_md=prior_pages_md,
     )
     latencies.extraction_ms = (time.perf_counter() - t) * 1000
     record.extraction = extracted
 
-    t = time.perf_counter()
-    summary_store.add(extracted, note)
-    if cfg.lexicon.enabled:
-        lexicon_layer.harvest(extracted, note.course_id)
-        lexicon_layer.promote_pending(note.course_id, cfg.lexicon.n_recurrence)
-    latencies.writeback_ms = (time.perf_counter() - t) * 1000
-
+    # Summary + harvest are per-NOTE, not per-page; finalize_note does them once
+    # the whole note (all pages) is assembled.
     record.latencies = latencies
     trace.write(record)
     return extracted
+
+
+def finalize_note(
+    note_doc: dict,
+    note: Note,
+    *,
+    extractor,
+    summary_store,
+    lexicon_layer,
+    cfg: RunConfig,
+) -> ExtractedNote:
+    """Per-note finalize, run once after any multi-page merge: a dedicated
+    whole-note summary (stored for retrieval) and the lexicon harvest over the
+    complete note. Mutates `note_doc` to carry the summary for export."""
+    topic, gist = extractor.summarize(note_doc)
+    note_doc["summary_topic_line"] = topic
+    note_doc["summary_gist"] = gist
+    ext = ExtractedNote(
+        note_id=note.note_id,
+        structured_json=note_doc,
+        summary_topic_line=topic,
+        summary_gist=gist,
+        model_id=cfg.extraction.model_id,
+    )
+    summary_store.add(ext, note)
+    if cfg.lexicon.enabled:
+        lexicon_layer.harvest(ext, note.course_id)
+        lexicon_layer.promote_pending(note.course_id, cfg.lexicon.n_recurrence)
+    return ext

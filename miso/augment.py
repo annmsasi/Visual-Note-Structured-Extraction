@@ -21,6 +21,10 @@ SYSTEM_PROMPT = (
     "earlier in this course, and any inline term suggestions are all hints — use "
     "them to disambiguate messy handwriting, abbreviations, and notation, but when "
     "a hint disagrees with the image, follow the image.\n"
+    "If earlier pages of THIS note are shown, they are already-transcribed context "
+    "for continuity — a heading, list, or sentence may continue across the page "
+    "break, and terminology should stay consistent. Transcribe ONLY the current "
+    "page; never repeat content from the earlier pages.\n"
     "A few OCR words the reader was unsure of are marked inline as "
     "WORD «OCR? term | term» — the guillemets wrap course terms the word might "
     "actually be; they are not written on the page. Pick one only if it matches "
@@ -68,8 +72,19 @@ def assemble_prompt(
     retrieved: list[RetrievedSummary],
     glossary: list[str],
     cfg: ExtractionConfig,
+    prior_pages_md: list[str] | None = None,
 ) -> str:
     parts: list[str] = [SYSTEM_PROMPT, ""]
+
+    if prior_pages_md:
+        parts.append(
+            "Earlier pages of THIS note, already transcribed (context for "
+            "continuity only — do NOT re-output them; transcribe only the current "
+            "page's image):"
+        )
+        for n, md in enumerate(prior_pages_md, 1):
+            parts.append(f"--- earlier page {n} ---\n{md}")
+        parts.append("")
 
     if cfg.use_retrieved_summaries and retrieved:
         parts.append(

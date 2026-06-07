@@ -14,15 +14,38 @@ from miso.types import CorrectedOCR, ExtractedNote, Note, RetrievedSummary
 log = logging.getLogger(__name__)
 
 _TOOL_NAME = "emit_structured_note"
+_SUMMARY_TOOL = "emit_summary"
 
 COMBINE_SYSTEM = (
     "You merge the per-page structured notes of ONE multi-page document into a single "
     "coherent structured note. Concatenate content in page order; merge any heading, "
     "list, or sentence split across a page break into one block; drop repeated running "
-    "headers, footers, and page numbers; and produce ONE title and ONE summary (topic "
-    "line + gist) for the whole document. Call the `emit_structured_note` tool with the "
-    "merged document."
+    "headers, footers, and page numbers; and produce ONE title for the whole document. "
+    "Call the `emit_structured_note` tool with the merged document."
 )
+
+SUMMARY_SYSTEM = (
+    "You write a retrieval-oriented summary of ONE complete note (it may span several "
+    "pages, already merged). Return via the `emit_summary` tool: `topic_line`, a single "
+    "short line naming the topic; and `gist`, 2-4 sentences (~150 tokens) covering what "
+    "the note actually contains — its key terms, definitions, and claims — so a later "
+    "note can judge whether this one is relevant. Be faithful: only what is in the note."
+)
+
+SUMMARY_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "topic_line": {"type": "string"},
+        "gist": {"type": "string"},
+    },
+    "required": ["topic_line", "gist"],
+    "additionalProperties": False,
+}
+
+
+def _summary_input(note_doc: dict) -> str:
+    from miso.export import render_note_markdown
+    return ("Summarize this complete note:\n\n" + render_note_markdown(note_doc))
 
 
 def _merge_prompt(page_docs: list[dict]) -> str:
@@ -44,7 +67,12 @@ class ExtractionAdapter(Protocol):
         retrieved: list[RetrievedSummary],
         glossary: list[str],
         cfg: ExtractionConfig,
+        prior_pages_md: list[str] | None = None,
     ) -> ExtractedNote: ...
+
+    def summarize(self, note_doc: dict) -> tuple[str, str]:
+        """Whole-note summary (topic_line, gist) over a complete (merged) note IR."""
+        ...
 
 
 class StubExtractor:
@@ -58,24 +86,40 @@ class StubExtractor:
         retrieved: list[RetrievedSummary],
         glossary: list[str],
         cfg: ExtractionConfig,
+        prior_pages_md: list[str] | None = None,
     ) -> ExtractedNote:
         assemble_prompt(
             corrected_ocr=corrected_ocr, retrieved=retrieved, glossary=glossary, cfg=cfg,
+            prior_pages_md=prior_pages_md,
         )
         layout = (corrected_ocr.layout_text or corrected_ocr.corrected_text) if corrected_ocr else ""
         payload = _layout_to_document(layout, course_id=note.course_id)
         return _to_note(note, payload, model_id="stub-extractor-v1")
 
     def combine(self, page_docs: list[dict]) -> dict:
-        """Deterministic merge: concatenate blocks, keep the first title, join gists."""
+        """Deterministic merge: concatenate blocks, keep the first title."""
         if not page_docs:
             return {"title": "(empty)", "blocks": [], "summary_topic_line": "", "summary_gist": ""}
         return {
             "title": page_docs[0].get("title", "(untitled)"),
             "blocks": [b for d in page_docs for b in d.get("blocks", [])],
-            "summary_topic_line": page_docs[0].get("summary_topic_line", ""),
-            "summary_gist": " ".join(d.get("summary_gist", "") for d in page_docs).strip(),
+            "summary_topic_line": "",
+            "summary_gist": "",
         }
+
+    def summarize(self, note_doc: dict) -> tuple[str, str]:
+        """Deterministic whole-note summary: title + the note's leading text."""
+        topic = note_doc.get("title") or "(untitled)"
+        texts: list[str] = []
+        for b in note_doc.get("blocks", []):
+            if b.get("text"):
+                texts.append(b["text"])
+            for it in b.get("items", []):
+                if isinstance(it, dict) and it.get("text"):
+                    texts.append(it["text"])
+            if len(texts) >= 3:
+                break
+        return topic, " ".join(texts[:3])
 
 
 def _layout_to_document(layout_text: str, *, course_id: str) -> dict:
@@ -126,12 +170,14 @@ class AnthropicExtractor:
         retrieved: list[RetrievedSummary],
         glossary: list[str],
         cfg: ExtractionConfig,
+        prior_pages_md: list[str] | None = None,
     ) -> ExtractedNote:
         text_prompt = assemble_prompt(
             corrected_ocr=corrected_ocr,
             retrieved=retrieved,
             glossary=glossary,
             cfg=cfg,
+            prior_pages_md=prior_pages_md,
         )
 
         content: list[dict] = []
@@ -169,6 +215,25 @@ class AnthropicExtractor:
             payload = {}
 
         return _to_note(note, payload, model_id=self.model_id)
+
+    def summarize(self, note_doc: dict) -> tuple[str, str]:
+        """Dedicated whole-note summary via a focused, text-only call."""
+        msg = self._client.messages.create(
+            model=self.model_id,
+            max_tokens=512,
+            system=SUMMARY_SYSTEM,
+            tools=[{
+                "name": _SUMMARY_TOOL,
+                "description": "Return the note's topic line and gist.",
+                "input_schema": SUMMARY_SCHEMA,
+            }],
+            tool_choice={"type": "tool", "name": _SUMMARY_TOOL},
+            messages=[{"role": "user", "content": _summary_input(note_doc)}],
+        )
+        payload = next((b.input for b in msg.content
+                        if getattr(b, "type", None) == "tool_use" and b.name == _SUMMARY_TOOL), None) or {}
+        return (payload.get("topic_line") or note_doc.get("title", ""),
+                payload.get("gist") or "")
 
     def combine(self, page_docs: list[dict]) -> dict:
         """REDUCE: merge per-page IRs into one document via a text-only call."""
@@ -227,9 +292,11 @@ class OpenAIVisionExtractor:
         retrieved: list[RetrievedSummary],
         glossary: list[str],
         cfg: ExtractionConfig,
+        prior_pages_md: list[str] | None = None,
     ) -> ExtractedNote:
         text_prompt = assemble_prompt(
             corrected_ocr=corrected_ocr, retrieved=retrieved, glossary=glossary, cfg=cfg,
+            prior_pages_md=prior_pages_md,
         )
         content: list[dict] = []
         if cfg.use_image:
@@ -254,6 +321,26 @@ class OpenAIVisionExtractor:
             tool_choice={"type": "function", "function": {"name": _TOOL_NAME}},
         )
         return _to_note(note, _payload_from_openai(msg), model_id=self.model_id)
+
+    def summarize(self, note_doc: dict) -> tuple[str, str]:
+        """Dedicated whole-note summary via a focused, text-only call."""
+        msg = self._client.chat.completions.create(
+            model=self.model_id,
+            max_tokens=512,
+            messages=[
+                {"role": "system", "content": SUMMARY_SYSTEM},
+                {"role": "user", "content": _summary_input(note_doc)},
+            ],
+            tools=[{"type": "function", "function": {
+                "name": _SUMMARY_TOOL,
+                "description": "Return the note's topic line and gist.",
+                "parameters": SUMMARY_SCHEMA,
+            }}],
+            tool_choice={"type": "function", "function": {"name": _SUMMARY_TOOL}},
+        )
+        payload = _payload_from_openai(msg)
+        return (payload.get("topic_line") or note_doc.get("title", ""),
+                payload.get("gist") or "")
 
     def combine(self, page_docs: list[dict]) -> dict:
         """REDUCE: merge per-page IRs into one document (text-only — works on any model)."""
