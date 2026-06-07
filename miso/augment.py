@@ -7,10 +7,10 @@ from miso.types import CorrectedOCR, RetrievedSummary
 
 SYSTEM_PROMPT = (
     "You extract a structured note from a page image.\n"
-    "Image is the source of truth. OCR is a weak hint. Related prior notes "
-    "and course terms are additional weak hints — useful for disambiguating "
-    "abbreviations, recurring terminology, and math notation, but the image "
-    "always wins.\n"
+    "The page image is the source of truth. The OCR text, the related notes "
+    "from earlier in this course, and the course terms are all hints — use them "
+    "to disambiguate messy handwriting, abbreviations, and notation, but when a "
+    "hint disagrees with the image, follow the image.\n"
     "Call the `emit_structured_note` tool to return the note as an ordered list "
     "of document blocks that mirror the page's layout:\n"
     "  - `heading` (with `level` 1-3) for titles and section headings;\n"
@@ -37,11 +37,18 @@ def assemble_prompt(
     parts: list[str] = [SYSTEM_PROMPT, ""]
 
     if cfg.use_retrieved_summaries and retrieved:
-        parts.append("Related prior notes (weak context):")
-        # Most-relevant placed adjacent to the OCR.
+        parts.append(
+            "Related notes from earlier in this course (most relevant last) — "
+            "background for how this course uses recurring terms and notation. "
+            "They are context only: do not copy from them, and the page image "
+            "still wins. Each is tagged (note N) by its order in the course:"
+        )
+        # Most-relevant placed last, adjacent to the OCR.
         for r in reversed(retrieved):
-            tag = f"[course={r.summary.course_id} order={r.summary.processing_order}]"
-            parts.append(f"- {tag} {r.summary.topic_line}\n  {r.summary.gist}")
+            parts.append(
+                f"- (note {r.summary.processing_order}) {r.summary.topic_line}\n"
+                f"  {r.summary.gist}"
+            )
         parts.append("")
 
     if cfg.use_glossary and glossary:
@@ -52,7 +59,7 @@ def assemble_prompt(
     if cfg.use_ocr_hint and corrected_ocr is not None:
         # Prefer layout text so structure survives; fall back to flat text.
         ocr_hint = corrected_ocr.layout_text or corrected_ocr.corrected_text
-        parts.append("OCR (weak hint, line breaks and indentation preserved):")
+        parts.append("OCR (a hint — line breaks and indentation preserved):")
         parts.append(ocr_hint)
         parts.append("")
 
