@@ -25,7 +25,7 @@ def crop_figures(
     out_dir: Path | str,
     *,
     note_id: str = "note",
-    pad: float = 0.02,
+    pad: float = 0.05,
 ) -> dict[str, Any]:
     """Crop every figure block that carries a usable `bbox` from the page image,
     writing one PNG per figure and setting that block's `image` to the file path.
