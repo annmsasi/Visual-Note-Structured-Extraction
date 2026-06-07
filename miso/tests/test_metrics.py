@@ -158,6 +158,16 @@ class TermRecallTests(unittest.TestCase):
         self.assertEqual(term_recall(["dynamic programming"], "we use Dynamic Programming today"), 1.0)
         self.assertEqual(term_recall(["dynamic programming"], "dynamic and programming apart"), 0.0)
 
+    def test_plural_matches_but_misspelling_misses(self):
+        # regular plurals count (the LLM's legitimate morphology)
+        self.assertEqual(term_recall(["eigenvector"], "the eigenvectors shown here"), 1.0)
+        self.assertEqual(term_recall(["spectral theorem"], "by the spectral theorems above"), 1.0)
+        # an unrelated similar word does NOT count
+        self.assertEqual(term_recall(["kernel"], "only the colonel spoke"), 0.0)
+        # the crucial property: a misspelling the cache is meant to FIX stays a miss,
+        # else term-recall couldn't see the cache's benefit
+        self.assertEqual(term_recall(["eigenvector"], "the eigenvecter here"), 0.0)
+
 
 class TermRestrictedCERTests(unittest.TestCase):
     def test_none_when_term_absent_from_reference(self):

@@ -1,5 +1,5 @@
 """Run the ablation grid over a real corpus, then print the eval report
-(term-recall, term CER, raw-OCR CER, faithfulness, 2x2 attribution, cross-grid headline).
+(term-recall, term CER, raw-OCR CER, faithfulness, 2x2 attribution, longitudinal ramp, cross-grid headline).
 
 Three crossed axes — the cache cells (C3-C6) are run inside each (modality, OCR, model)
 sub-grid, so attribution is always computed with OCR + model held fixed:
@@ -115,6 +115,12 @@ def _fmt(x: float | None) -> str:
     return "n/a" if x is None else f"{x:.4f}"
 
 
+def _ramp(rep, attr: str) -> str:
+    """Per-note metric in processing (chronological) order — the F4 longitudinal series."""
+    pts = sorted(rep.per_note, key=lambda p: p.processing_order)
+    return ", ".join(f"({p.processing_order},{_fmt(getattr(p, attr))})" for p in pts)
+
+
 def main(argv: list[str] | None = None) -> int:
     _configure_logging()
     _load_env()
@@ -195,10 +201,20 @@ def main(argv: list[str] | None = None) -> int:
             for k, (mean, lo, hi) in attribution.items():
                 print(f"  {k}: {mean:+.4f} [{lo:+.4f}, {hi:+.4f}]")
 
-        # row for the cross-grid headline (no-cache baseline vs the richest cache cell present)
         base = reports.get("C3_llm_ocr_only")
-        cache_cell = "C6_full" if "C6_full" in reports else (
-            "C4_lexicon_only" if "C4_lexicon_only" in reports else None)
+        cache_cell = ("C6_full" if "C6_full" in reports
+                      else "C4_lexicon_only" if "C4_lexicon_only" in reports else None)
+
+        # longitudinal ramp (F4) — no-cache vs cache by processing order; the cache's
+        # distinctive claim is that it IMPROVES across the note sequence as vocab accrues.
+        ramp_cells = [c for c in ("C3_llm_ocr_only", cache_cell) if c and c in reports]
+        if ramp_cells:
+            print("\nramp (processing_order → term-recall | CER):")
+            for cell in ramp_cells:
+                print(f"  {cell} term-recall: {_ramp(reports[cell], 'term_recall')}")
+                print(f"  {cell} CER:         {_ramp(reports[cell], 'cer')}")
+
+        # row for the cross-grid headline (no-cache baseline vs the richest cache cell present)
         if base and cache_cell:
             cache = reports[cache_cell]
             summary_rows.append({

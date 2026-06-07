@@ -84,21 +84,45 @@ def wer(reference: str, hypothesis: str) -> float:
     return levenshtein(ref, hyp) / len(ref)
 
 
-def term_recall(terms: Iterable[str], text: str) -> float | None:
-    """Fraction of distinct distinctive terms present in `text` (case-insensitive,
-    word/phrase-boundary aware). Returns None when there are no terms, so callers
-    can exclude the note from the average.
-
-    This is the END-TO-END headline metric: did the final extraction surface the
-    recurring course vocabulary the cache targets? It is robust to the LLM's
-    legitimate normalization (unlike global CER), which is why it — not CER — is
-    the number that should move when the cache helps.
+def _stem(tok: str) -> str:
+    """Tiny plural stemmer: regular noun plurals collapse to the singular
+    (eigenvector(s), theorem(s), box/boxes, theory/theories), but misspellings do
+    NOT — `eigenvecter` stays distinct from `eigenvector`. That distinction is the
+    whole point: term-recall must keep SEEING the OCR errors the cache fixes, so
+    edit-distance fuzzing (which would forgive them and flatten the cache's benefit)
+    is deliberately avoided. Crude by design; irregular plurals (matrix/matrices)
+    still need a curated variant in the gold term list.
     """
-    norm_terms = {_norm_phrase(t) for t in terms}
+    if len(tok) <= 3 or tok.endswith("ss"):
+        return tok
+    if tok.endswith("ies") and len(tok) > 4:
+        return tok[:-3] + "y"
+    if tok.endswith(("ses", "xes", "zes", "ches", "shes")):
+        return tok[:-2]
+    if tok.endswith("s"):
+        return tok[:-1]
+    return tok
+
+
+def _stem_phrase(s: str) -> str:
+    return " ".join(_stem(w) for w in _norm_phrase(s).split())
+
+
+def term_recall(terms: Iterable[str], text: str) -> float | None:
+    """Fraction of distinct distinctive terms recovered in `text`. Returns None when
+    there are no terms, so callers can exclude the note from the average.
+
+    Matching is case-insensitive, phrase-boundary aware, and plural-normalised (via a
+    light stemmer) so the LLM's legitimate morphology counts — but it stays STRICT on
+    spelling, so the OCR errors the cache is meant to fix still register as misses
+    (edit-distance fuzzing would forgive them and hide the cache's benefit). This is
+    the END-TO-END headline metric: the number that should move when the cache helps.
+    """
+    norm_terms = {_stem_phrase(t) for t in terms}
     norm_terms.discard("")
     if not norm_terms:
         return None
-    hay = f" {_norm_phrase(text)} "
+    hay = f" {_stem_phrase(text)} "
     hits = sum(1 for t in norm_terms if f" {t} " in hay)
     return hits / len(norm_terms)
 
