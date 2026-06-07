@@ -33,6 +33,12 @@ points, keep it as lists; only use `paragraph` where the writer actually wrote
 running prose. Do not rewrite an outline into prose, or merge separate bullets
 into a paragraph.
 
+Figures are handled by a SEPARATE step: do NOT transcribe or describe the
+contents of any figure, diagram, chart, circuit, plot, or drawing. Emit a single
+`paragraph` block whose text is exactly `[figure]` in its place, and transcribe
+any surrounding handwritten text normally. Never turn a figure's contents into a
+list, paragraph, or equation.
+
 ## Summary
 
 Also fill the piggybacked summary fields:
