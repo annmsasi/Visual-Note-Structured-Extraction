@@ -23,6 +23,9 @@ class PerNote:
     over_correction_rate: float
     term_recall: float | None = None          # end-to-end: terms surfaced in the extraction
     term_restricted_cer: float | None = None   # intrinsic: OCR-corrected term spans vs verbatim
+    ocr_cer: float = 0.0                        # raw-OCR transcription error — the recognizer's own quality
+    ocr_wer: float = 0.0
+    faithfulness: float | None = None           # judge score (1 - hallucination rate); None if not scored
 
 
 @dataclass
@@ -55,8 +58,21 @@ class RunReport:
     def mean_term_restricted_cer(self) -> float | None:
         return _mean_opt(p.term_restricted_cer for p in self.per_note)
 
+    @property
+    def mean_ocr_cer(self) -> float:
+        return _mean(p.ocr_cer for p in self.per_note)
 
-def compute_run_report(records: list[dict], gold: dict[str, GoldNote]) -> RunReport:
+    @property
+    def mean_ocr_wer(self) -> float:
+        return _mean(p.ocr_wer for p in self.per_note)
+
+    @property
+    def mean_faithfulness(self) -> float | None:
+        return _mean_opt(p.faithfulness for p in self.per_note)
+
+
+def compute_run_report(records: list[dict], gold: dict[str, GoldNote],
+                       faithfulness: dict[str, dict] | None = None) -> RunReport:
     tag = records[0]["config_tag"] if records else "unknown"
     report = RunReport(config_tag=tag, n_notes=len(records))
     for r in records:
@@ -79,6 +95,7 @@ def compute_run_report(records: list[dict], gold: dict[str, GoldNote]) -> RunRep
             corrections, g.transcription, raw_text,
         )
         terms = g.distinctive_terms
+        fv = (faithfulness or {}).get(r["note_id"])
         report.per_note.append(PerNote(
             note_id=r["note_id"],
             processing_order=r.get("processing_order", 0),
@@ -94,6 +111,10 @@ def compute_run_report(records: list[dict], gold: dict[str, GoldNote]) -> RunRep
             term_restricted_cer=(
                 term_restricted_cer(g.transcription, corrected_text, terms) if terms else None
             ),
+            # Raw recognizer quality, independent of the cache — the headline x-axis.
+            ocr_cer=cer(g.transcription, raw_text),
+            ocr_wer=wer(g.transcription, raw_text),
+            faithfulness=(fv.get("score") if fv else None),
         ))
     return report
 

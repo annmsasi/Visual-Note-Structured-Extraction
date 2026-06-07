@@ -1,5 +1,5 @@
 """Run the ablation grid over a real corpus, then print the eval report
-(term-recall, term CER, 2x2 attribution, ramp curves).
+(term-recall, term CER, raw-OCR CER, faithfulness, 2x2 attribution, cross-grid headline).
 
 Three crossed axes — the cache cells (C3-C6) are run inside each (modality, OCR, model)
 sub-grid, so attribution is always computed with OCR + model held fixed:
@@ -30,6 +30,7 @@ from pathlib import Path
 
 from miso.config import RunConfig
 from miso.eval.analyze import compare_attribution, compute_run_report
+from miso.eval.faithfulness import make_judge, score_faithfulness
 from miso.eval.gold import load_gold
 from miso.eval.loader import load_trace
 from miso.eval.ocr_runner import _load_env  # reads miso/.env explicitly
@@ -130,6 +131,9 @@ def main(argv: list[str] | None = None) -> int:
                     choices=["ocr+vlm", "vlm-only", "ocr-only"])
     ap.add_argument("--lexicon-mode", default="flag", choices=["flag", "replace"],
                     help="behaviour of the enabled lexicon cells (ocr+vlm); ocr-only forces replace")
+    ap.add_argument("--faithfulness", default="stub",
+                    help="hallucination judge: off | stub (free token-overlap proxy) | a judge model id "
+                         "like claude-haiku-4-5-20251001 (pick a DIFFERENT family than --models)")
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--cold-start", type=int, default=2)
     args = ap.parse_args(argv)
@@ -167,16 +171,19 @@ def main(argv: list[str] | None = None) -> int:
             cfg.traces_dir = Path("runs")
             print(f"  -- {cfg.config_tag} (model={cfg.extraction.model_id}, ocr={cfg.ocr.engine}) --")
             run_dir = run(cfg, notes)
-            reports[cell] = compute_run_report(load_trace(run_dir), gold)
+            records = load_trace(run_dir)
+            faith = (score_faithfulness(records, make_judge(args.faithfulness))
+                     if args.faithfulness != "off" else None)
+            reports[cell] = compute_run_report(records, gold, faithfulness=faith)
 
         # per-cell table
-        print("\n| cell | n | term-recall | term CER | mean CER | mean WER | struct F1 | over-corr |")
-        print("|---|---:|---:|---:|---:|---:|---:|---:|")
+        print("\n| cell | n | term-recall | term CER | mean CER | raw-OCR CER | struct F1 | faith | over-corr |")
+        print("|---|---:|---:|---:|---:|---:|---:|---:|---:|")
         for cell, rep in reports.items():
             print(f"| {cell} | {rep.n_notes} | {_fmt(rep.mean_term_recall)} "
                   f"| {_fmt(rep.mean_term_restricted_cer)} | {rep.mean_cer:.4f} "
-                  f"| {rep.mean_wer:.4f} | {rep.mean_structural_f1:.4f} "
-                  f"| {rep.mean_over_correction:.4f} |")
+                  f"| {rep.mean_ocr_cer:.4f} | {rep.mean_structural_f1:.4f} "
+                  f"| {_fmt(rep.mean_faithfulness)} | {rep.mean_over_correction:.4f} |")
 
         # 2x2 attribution when the full set is present
         if set(_CACHE_CELLS).issubset(reports):

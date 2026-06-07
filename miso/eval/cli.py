@@ -12,6 +12,7 @@ import sys
 from pathlib import Path
 
 from miso.eval.analyze import compare_attribution, compute_run_report, ramp_curve
+from miso.eval.faithfulness import make_judge, score_faithfulness
 from miso.eval.gold import load_gold, synthesize_gold_from_traces
 from miso.eval.loader import discover_runs, load_trace
 
@@ -48,7 +49,14 @@ def cmd_analyze(args) -> int:
         gold = load_gold(Path(args.gold))
         gold_source = args.gold
 
-    reports = {tag: compute_run_report(records, gold) for tag, records in per_tag.items()}
+    judge = make_judge(args.faithfulness) if args.faithfulness != "off" else None
+    reports = {
+        tag: compute_run_report(
+            records, gold,
+            faithfulness=score_faithfulness(records, judge) if judge else None,
+        )
+        for tag, records in per_tag.items()
+    }
 
     print(f"# Eval report\n")
     print(f"- Gold source: `{gold_source}` ({len(gold)} notes)")
@@ -57,15 +65,15 @@ def cmd_analyze(args) -> int:
     print("## Per-config means\n")
     print("_Headline = term-recall (end-to-end) and term CER (intrinsic lexicon); "
           "global CER is secondary — it barely moves even when the cache helps._\n")
-    print("| config_tag | n | term-recall | term CER | mean CER | mean WER "
-          "| structural F1 | over-correction |")
-    print("|---|---:|---:|---:|---:|---:|---:|---:|")
+    print("| config_tag | n | term-recall | term CER | mean CER | raw-OCR CER "
+          "| structural F1 | faith | over-correction |")
+    print("|---|---:|---:|---:|---:|---:|---:|---:|---:|")
     for tag, report in reports.items():
         print(
             f"| `{tag}` | {report.n_notes} | {_fmt_opt(report.mean_term_recall)} "
             f"| {_fmt_opt(report.mean_term_restricted_cer)} | {report.mean_cer:.4f} "
-            f"| {report.mean_wer:.4f} | {report.mean_structural_f1:.4f} "
-            f"| {report.mean_over_correction:.4f} |"
+            f"| {report.mean_ocr_cer:.4f} | {report.mean_structural_f1:.4f} "
+            f"| {_fmt_opt(report.mean_faithfulness)} | {report.mean_over_correction:.4f} |"
         )
     print()
 
@@ -107,6 +115,8 @@ def main(argv: list[str] | None = None) -> int:
                          help="Directory of gold JSON files, one per note.")
     analyze.add_argument("--synth-gold", action="store_true",
                          help="Synthesize gold from traces (smoke-test only).")
+    analyze.add_argument("--faithfulness", default="off",
+                         help="hallucination judge: off | stub | a judge model id (e.g. claude-haiku-4-5-20251001)")
     args = parser.parse_args(argv)
     if args.cmd == "analyze":
         return cmd_analyze(args)
