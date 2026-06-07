@@ -82,6 +82,7 @@ def process_one(src: Path, *, course: str, ocr: str, model: str, out_dir: Path,
         cfg.from_empty_cache = False        # persist the course cache across runs
         cfg.cache_path = cache_path
         cfg.traces_dir = traces_dir
+        cfg.extraction.figures_dir = out_dir / "figures"   # crop figures next to the output
         doc = run_document(cfg, note_id=src.stem[:60], course=course,
                            pages=pages, timestamp=datetime(2026, 1, 1))
     finally:

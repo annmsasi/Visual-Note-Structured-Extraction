@@ -83,6 +83,9 @@ class ExtractionConfig:
     # prompt for cross-page continuity (0 = off, -1 = all). The model still
     # transcribes only the current page.
     prior_page_context: int = 10
+    # where to write cropped figure images; None disables figure extraction (figure
+    # blocks then keep their caption and an empty `image` slot).
+    figures_dir: Path | None = None
 
 
 @dataclass

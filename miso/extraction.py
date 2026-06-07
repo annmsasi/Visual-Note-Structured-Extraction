@@ -83,7 +83,8 @@ class StubExtractor:
         )
         layout = (corrected_ocr.layout_text or corrected_ocr.corrected_text) if corrected_ocr else ""
         payload = _layout_to_document(layout, course_id=note.course_id)
-        return _to_note(note, payload, model_id="stub-extractor-v1")
+        return _to_note(note, payload, model_id="stub-extractor-v1",
+                        figures_dir=cfg.figures_dir)
 
     def combine(self, page_docs: list[dict]) -> dict:
         """Deterministic merge: concatenate blocks, keep the first title."""
@@ -203,7 +204,7 @@ class AnthropicExtractor:
             log.warning("extractor returned no tool_use block; stop_reason=%s", msg.stop_reason)
             payload = {}
 
-        return _to_note(note, payload, model_id=self.model_id)
+        return _to_note(note, payload, model_id=self.model_id, figures_dir=cfg.figures_dir)
 
     def summarize(self, note_doc: dict) -> tuple[str, str]:
         """Dedicated whole-note summary via a focused, text-only call."""
@@ -309,7 +310,8 @@ class OpenAIVisionExtractor:
             tools=tools,
             tool_choice={"type": "function", "function": {"name": _TOOL_NAME}},
         )
-        return _to_note(note, _payload_from_openai(msg), model_id=self.model_id)
+        return _to_note(note, _payload_from_openai(msg), model_id=self.model_id,
+                        figures_dir=cfg.figures_dir)
 
     def summarize(self, note_doc: dict) -> tuple[str, str]:
         """Dedicated whole-note summary via a focused, text-only call."""
@@ -368,8 +370,15 @@ def _payload_from_openai(msg) -> dict:
         return {}
 
 
-def _to_note(note: Note, payload: dict, *, model_id: str) -> ExtractedNote:
+def _to_note(note: Note, payload: dict, *, model_id: str,
+             figures_dir=None) -> ExtractedNote:
     doc = validate(payload)
+    # Per-page seam for figure extraction: `note.image_path` is this single page, so
+    # each figure's normalized bbox maps cleanly onto it. Done here (not after the
+    # multi-page combine) because the merge loses page-to-block association.
+    if figures_dir is not None:
+        from miso.figures import crop_figures
+        crop_figures(doc, note.image_path, figures_dir, note_id=note.note_id)
     return ExtractedNote(
         note_id=note.note_id,
         structured_json=doc,

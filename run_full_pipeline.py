@@ -84,6 +84,7 @@ def main(argv: list[str] | None = None) -> int:
     cfg.ocr.engine = args.ocr
     cfg.extraction.model_id = args.model
     cfg.from_empty_cache = False  # persist the cache across CLI runs so course knowledge accrues
+    cfg.extraction.figures_dir = Path("figures")  # crop figures here (namespaced by note id)
 
     doc = run_document(
         cfg, note_id=src.stem[:60], course=args.course,
