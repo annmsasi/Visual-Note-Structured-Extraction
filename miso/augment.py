@@ -11,6 +11,9 @@ SYSTEM_PROMPT = (
     "and course terms are additional weak hints — useful for disambiguating "
     "abbreviations, recurring terminology, and math notation, but the image "
     "always wins.\n"
+    "When a 'Possible OCR misreads' list is given, each entry is a low-confidence "
+    "word with candidate course terms; choose a candidate only if it matches the "
+    "writing, otherwise transcribe what you see.\n"
     "Call the `emit_structured_note` tool to return the note as an ordered list "
     "of document blocks that mirror the page's layout:\n"
     "  - `heading` (with `level` 1-3) for titles and section headings;\n"
@@ -44,7 +47,18 @@ def assemble_prompt(
             parts.append(f"- {tag} {r.summary.topic_line}\n  {r.summary.gist}")
         parts.append("")
 
-    if cfg.use_glossary and glossary:
+    flags = corrected_ocr.flags if corrected_ocr is not None else []
+    if cfg.use_glossary and flags:
+        # Flag mode: per-word candidate corrections the LLM arbitrates against the image.
+        parts.append(
+            "Possible OCR misreads (low-confidence words with candidate course "
+            "terms — pick one only if it matches the image, else read the page):"
+        )
+        for f in flags:
+            cands = ", ".join(c.term for c in f.candidates)
+            parts.append(f'- "{f.original}" (confidence {f.confidence:.2f}) -> {cands}')
+        parts.append("")
+    elif cfg.use_glossary and glossary:
         parts.append("Course terms appearing in this note:")
         parts.append("- " + ", ".join(sorted(set(glossary))))
         parts.append("")

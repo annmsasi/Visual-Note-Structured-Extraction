@@ -13,10 +13,33 @@ class LexiconConfig:
     enabled: bool = True
     # admit a term only after this many sightings
     n_recurrence: int = 2
-    # only correct OCR words below this confidence
+
+    # How the lexicon feeds the LLM:
+    #   "flag"    — annotate uncertain OCR words with candidate course terms (default)
+    #   "replace" — hard-swap the OCR token for the top candidate (ablation arm)
+    #   "off"     — pass OCR through untouched
+    mode: str = "flag"
+
+    # Continuous candidate score (flag mode) — a bounded pseudo-posterior, so no
+    # hard edit-distance band is needed: every factor is <= 1, frequency can only
+    # down-weight, and the likelihood term makes distance dominate the tail.
+    #   relevance(T) = (1 - confidence)                       # suspicion      (<= 1)
+    #                  * exp(-distance_decay * d_norm(word, T))# OCR likelihood (<= 1)
+    #                  * count(T) / (count(T) + freq_prior_k)  # frequency prior(<= 1)
+    # A saturating prior (not count/sum-count): robust to Zipfian skew, never
+    # crushes a rare-but-close term below the floor — only gently prefers common ones.
+    distance_decay: float = 4.0       # OCR channel temperature: how fast likelihood falls with distance
+    freq_prior_k: float = 5.0         # frequency saturation: prior = count/(count+k); higher k trusts frequency less
+    relevance_floor: float = 0.05     # absolute floor: surface a candidate only above this posterior
+    relative_gate: float = 0.0        # optional: also drop candidates below this fraction of the best (0 = off)
+    max_candidates: int = 3           # cap on candidates offered per uncertain word
+    search_ceiling: float = 0.95      # skip the vocab search for words the OCR is this sure of
+
+    # replace-mode only: hard-correct words below this confidence, boosting the
+    # corrected word's confidence by this magnitude.
     confidence_threshold: float = 0.7
-    max_edit_distance: float = 2.0
     boost_magnitude: float = 0.3
+
     also_feed_llm_glossary: bool = True
 
 
