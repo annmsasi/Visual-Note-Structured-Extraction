@@ -84,6 +84,19 @@ def wer(reference: str, hypothesis: str) -> float:
     return levenshtein(ref, hyp) / len(ref)
 
 
+def normalized_wer(reference: str, hypothesis: str) -> float:
+    """Word Error Rate on normalized tokens (lowercased, surrounding punctuation
+    stripped, empties dropped). Spacing, case, line breaks, and punctuation are
+    collapsed away, so this scores WORD CHOICE only — the right lens for judging a
+    recognizer (or its note) independently of how it laid the text out. Stays strict
+    on spelling, like term_recall, so genuine OCR misreads still count."""
+    ref = [t for t in (_norm_token(w) for w in reference.split()) if t]
+    hyp = [t for t in (_norm_token(w) for w in hypothesis.split()) if t]
+    if not ref:
+        return 0.0 if not hyp else 1.0
+    return levenshtein(ref, hyp) / len(ref)
+
+
 def _stem(tok: str) -> str:
     """Tiny plural stemmer: regular noun plurals collapse to the singular
     (eigenvector(s), theorem(s), box/boxes, theory/theories), but misspellings do

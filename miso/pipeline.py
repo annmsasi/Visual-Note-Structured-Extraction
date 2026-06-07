@@ -113,8 +113,16 @@ def finalize_note(
 ) -> ExtractedNote:
     """Per-note finalize, run once after any multi-page merge: a dedicated
     whole-note summary (stored for retrieval) and the lexicon harvest over the
-    complete note. Mutates `note_doc` to carry the summary for export."""
-    topic, gist = extractor.summarize(note_doc)
+    complete note. Mutates `note_doc` to carry the summary for export.
+
+    The summary's only consumer is retrieval, so when retrieval is off (e.g. eval
+    cells C3/C4) the dedicated summary call is skipped entirely — a cheap, title-
+    based summary is used and nothing is stored. Harvest is independent and always
+    runs when the lexicon is enabled."""
+    if cfg.retrieval.enabled:
+        topic, gist = extractor.summarize(note_doc)
+    else:
+        topic, gist = note_doc.get("title", "") or note_doc.get("summary_topic_line", ""), ""
     note_doc["summary_topic_line"] = topic
     note_doc["summary_gist"] = gist
     ext = ExtractedNote(
@@ -124,7 +132,8 @@ def finalize_note(
         summary_gist=gist,
         model_id=cfg.extraction.model_id,
     )
-    summary_store.add(ext, note)
+    if cfg.retrieval.enabled:
+        summary_store.add(ext, note)
     if cfg.lexicon.enabled:
         lexicon_layer.harvest(ext, note.course_id)
         lexicon_layer.promote_pending(note.course_id, cfg.lexicon.n_recurrence)
