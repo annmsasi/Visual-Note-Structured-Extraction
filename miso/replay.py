@@ -19,7 +19,8 @@ from miso.db import open_db, reset
 from miso.extraction import StubExtractor
 from miso.lexicon import LexiconLayer
 from miso.ocr import StubOCR
-from miso.pipeline import process_note
+from miso.export import render_note_markdown
+from miso.pipeline import finalize_note, process_note
 from miso.retrieval import RetrievalLayer
 from miso.summary_store import SummaryStore
 from miso.trace import TraceWriter
@@ -51,6 +52,13 @@ def _maybe_real_reranker():
 
 
 def _make_ocr(cfg: RunConfig):
+    if cfg.ocr.engine in ("paddle", "tesseract"):
+        try:
+            from miso.ocr import CachedOCR, make_ocr
+            return CachedOCR(make_ocr(cfg.ocr.engine))  # disk-cache so re-runs skip re-OCR
+        except Exception as e:
+            log.warning("%s construction failed (%s); falling back to StubOCR", cfg.ocr.engine, e)
+        return StubOCR()
     if cfg.ocr.engine == "azure":
         endpoint = os.environ.get("AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT")
         key = os.environ.get("AZURE_DOCUMENT_INTELLIGENCE_KEY")
@@ -67,16 +75,27 @@ def _make_ocr(cfg: RunConfig):
 
 
 def _make_extractor(cfg: RunConfig):
-    if cfg.extraction.model_id.startswith("claude"):
+    model = cfg.extraction.model_id
+    if model.startswith("claude"):
         key = os.environ.get("ANTHROPIC_API_KEY")
         if key:
             try:
                 from miso.extraction import AnthropicExtractor
-                return AnthropicExtractor(api_key=key, model_id=cfg.extraction.model_id)
+                return AnthropicExtractor(api_key=key, model_id=model)
             except Exception as e:
                 log.warning("AnthropicExtractor construction failed (%s); falling back to stub", e)
         else:
             log.warning("ANTHROPIC_API_KEY not set; falling back to StubExtractor")
+    elif model not in ("stub", "") and (
+        os.environ.get("OPENROUTER_API_KEY")
+        or os.environ.get("OPENAI_BASE_URL")
+        or os.environ.get("OPENAI_API_KEY")
+    ):
+        try:
+            from miso.extraction import OpenAIVisionExtractor
+            return OpenAIVisionExtractor(model)  # open VLM via OpenRouter/vLLM/Ollama
+        except Exception as e:
+            log.warning("OpenAIVisionExtractor construction failed (%s); falling back to stub", e)
     return StubExtractor()
 
 
@@ -106,14 +125,20 @@ def run(cfg: RunConfig, notes: list[Note]) -> Path:
     cfg.save(run_dir / "config.json")
     with TraceWriter(run_dir) as trace:
         for note in notes:
-            process_note(
+            # In this driver each Note is a whole (single-page) note, so finalize
+            # runs per note right after extraction.
+            ext = process_note(
                 note, cfg,
                 ocr=ocr,
                 lexicon_layer=lexicon_layer,
-                summary_store=summary_store,
                 retrieval_layer=retrieval_layer,
                 extractor=extractor,
                 trace=trace,
+            )
+            finalize_note(
+                ext.structured_json, note,
+                extractor=extractor, summary_store=summary_store,
+                lexicon_layer=lexicon_layer, cfg=cfg,
             )
 
     conn.execute(
@@ -123,6 +148,72 @@ def run(cfg: RunConfig, notes: list[Note]) -> Path:
     conn.commit()
     conn.close()
     return run_dir
+
+
+def _prior_window(prior_md: list[str], k: int) -> list[str]:
+    """The prior-page markdown to inject: all if k<0, none if k==0, else last k."""
+    if k < 0:
+        return list(prior_md)
+    if k == 0:
+        return []
+    return prior_md[-k:]
+
+
+def run_document(cfg: RunConfig, *, note_id: str, course: str,
+                 pages: list[Path], timestamp: datetime) -> dict:
+    """Map-reduce over a multi-page document, through the cache: extract each page
+    (MAP) with the lexicon + retrieval layers warming across the document's pages,
+    then merge the per-page IRs into one combined document (REDUCE). Returns the IR.
+
+    Each MAP call sees a single page image and the REDUCE call is text-only, so this
+    works with any model — including small / short-context open VLMs.
+    """
+    if cfg.from_empty_cache:
+        reset(cfg.cache_path)
+    conn = open_db(cfg.cache_path)
+    embedder = _maybe_real_embedder() if cfg.retrieval.enabled else None
+    reranker = _maybe_real_reranker() if cfg.retrieval.enabled else None
+    ocr = _make_ocr(cfg)
+    lexicon_layer = LexiconLayer(conn)
+    summary_store = SummaryStore(conn, embedder=embedder)
+    retrieval_layer = RetrievalLayer(conn, summary_store,
+                                     embedder=embedder, reranker=reranker)
+    extractor = _make_extractor(cfg)
+    run_dir = cfg.traces_dir / cfg.run_id
+    cfg.save(run_dir / "config.json")
+    page_docs: list[dict] = []
+    prior_md: list[str] = []
+    k = cfg.extraction.prior_page_context
+    with TraceWriter(run_dir) as trace:
+        for i, p in enumerate(pages):
+            note = Note(note_id=f"{note_id}-p{i:03d}", course_id=course,
+                        image_path=p, processing_order=i, timestamp=timestamp)
+            window = _prior_window(prior_md, k)
+            page_doc = process_note(
+                note, cfg, ocr=ocr,
+                lexicon_layer=lexicon_layer,
+                retrieval_layer=retrieval_layer,
+                extractor=extractor, trace=trace,
+                prior_pages_md=window,
+            ).structured_json
+            page_docs.append(page_doc)
+            prior_md.append(render_note_markdown(page_doc))
+
+    if not page_docs:
+        conn.close()
+        return {}
+    if len(page_docs) == 1:
+        combined = page_docs[0]
+    else:
+        log.info("merging %d page extractions into one document", len(page_docs))
+        combined = extractor.combine(page_docs)
+    # One whole-note summary + harvest, stored at note granularity (no -pNNN).
+    whole = Note(note_id=note_id, course_id=course, image_path=pages[0],
+                 processing_order=0, timestamp=timestamp)
+    finalize_note(combined, whole, extractor=extractor,
+                  summary_store=summary_store, lexicon_layer=lexicon_layer, cfg=cfg)
+    conn.close()
+    return combined
 
 
 def _make_fake_notes(course_id: str, n: int) -> list[Note]:
@@ -145,7 +236,9 @@ def _load_env() -> None:
         from dotenv import load_dotenv
     except ImportError:
         return
-    load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+    # override=True: the project .env is authoritative, even over an already-exported
+    # (possibly stale) shell variable.
+    load_dotenv(Path(__file__).resolve().parent.parent / ".env", override=True)
 
 
 def _configure_logging() -> None:

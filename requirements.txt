@@ -5,6 +5,7 @@ azure-core
 anthropic
 python-dotenv
 pillow
+pdf2image          # render PDF pages to images (needs the system 'poppler' binary)
 wordfreq
 pylatexenc
 sentence-transformers

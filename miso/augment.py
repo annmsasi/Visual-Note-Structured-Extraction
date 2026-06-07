@@ -5,6 +5,7 @@ from dataclasses import replace
 
 from miso.config import ExtractionConfig
 from miso.layout import render_layout_text
+from miso.prompts import load as load_prompt
 from miso.types import CorrectedOCR, RetrievedSummary
 
 # Marker wrapped around OCR words the reader was unsure of, spliced inline into
@@ -15,31 +16,8 @@ _FLAG_OPEN = "«OCR? "
 _FLAG_CLOSE = "»"
 
 
-SYSTEM_PROMPT = (
-    "You extract a structured note from a page image.\n"
-    "The page image is the source of truth. The OCR text, the related notes from "
-    "earlier in this course, and any inline term suggestions are all hints — use "
-    "them to disambiguate messy handwriting, abbreviations, and notation, but when "
-    "a hint disagrees with the image, follow the image.\n"
-    "A few OCR words the reader was unsure of are marked inline as "
-    "WORD «OCR? term | term» — the guillemets wrap course terms the word might "
-    "actually be; they are not written on the page. Pick one only if it matches "
-    "the writing; otherwise transcribe what you see. Never copy the «OCR? ...» "
-    "marker into your output.\n"
-    "Call the `emit_structured_note` tool to return the note as an ordered list "
-    "of document blocks that mirror the page's layout:\n"
-    "  - `heading` (with `level` 1-3) for titles and section headings;\n"
-    "  - `list` (with nested `items`) for bulleted/enumerated points — use the "
-    "OCR's preserved line breaks and indentation to recover nesting;\n"
-    "  - `paragraph` for running prose; `equation` (LaTeX) for math.\n"
-    "Be FAITHFUL to the page's own structure: if the source is an outline of "
-    "bulleted points, keep it as lists; only use `paragraph` where the writer "
-    "actually wrote running prose. Do not rewrite an outline into prose, or "
-    "merge separate bullets into a paragraph.\n"
-    "Also fill the piggybacked summary fields:\n"
-    "  - `summary_topic_line`: a single short line naming the topic/section.\n"
-    "  - `summary_gist`: 2-4 sentences (~150 tokens) describing what the note covers.\n"
-)
+# The extraction system prompt is an editable Markdown file — see miso/prompts/.
+SYSTEM_PROMPT = load_prompt("extraction_system")
 
 
 def _ocr_hint(corrected_ocr: CorrectedOCR) -> str:

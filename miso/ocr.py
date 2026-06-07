@@ -70,6 +70,100 @@ def _polygon_to_bbox(polygon) -> tuple[float, float, float, float] | None:
             float(max(xs) - min(xs)), float(max(ys) - min(ys)))
 
 
+class PaddleOCR:
+    """Free, local OCR via PaddleOCR — a drop-in for `AzureOCR` (no cloud, no key,
+    no per-word confidence needed now the cache is optional).
+
+    PaddleOCR detects text *lines*; we split each line into words with proportional
+    boxes so `miso.layout` can still recover line breaks and indentation from the
+    same `(x, y, w, h)` geometry it gets from Azure.
+    """
+
+    def __init__(self, lang: str = "en"):
+        from paddleocr import PaddleOCR as _Engine
+        try:
+            self._engine = _Engine(use_angle_cls=True, lang=lang)
+        except TypeError:  # newer releases dropped/renamed kwargs
+            self._engine = _Engine(lang=lang)
+
+    def run(self, image_path: Path) -> OCRResult:
+        try:
+            result = self._engine.ocr(str(image_path), cls=True)
+        except TypeError:
+            result = self._engine.ocr(str(image_path))
+        lines = result[0] if (result and result[0]) else []
+        words: list[OCRWord] = []
+        for entry in lines:
+            try:
+                box, (text, conf) = entry
+            except (ValueError, TypeError):
+                continue
+            text = (text or "").strip()
+            if text:
+                words.extend(_line_to_words(box, text, float(conf)))
+        return OCRResult.from_words(words)
+
+
+class TesseractOCR:
+    """Free, local OCR via Tesseract — a drop-in for `AzureOCR`. The weakest reader
+    of the free options, but it only needs the system `tesseract` binary (no Python
+    deps) and returns word-level boxes + confidence, so `miso.layout` recovers
+    structure exactly as with Azure. We call the binary directly and parse its TSV
+    output, sidestepping `pytesseract`'s fragile stderr decoding.
+    """
+
+    def __init__(self, lang: str = "eng", binary: str = "tesseract"):
+        self.lang = lang
+        self.binary = binary
+
+    def run(self, image_path: Path) -> OCRResult:
+        import subprocess
+        proc = subprocess.run(
+            [self.binary, str(image_path), "stdout", "-l", self.lang, "tsv"],
+            capture_output=True,
+        )
+        rows = proc.stdout.decode("utf-8", errors="replace").splitlines()
+        words: list[OCRWord] = []
+        for row in rows[1:]:  # skip the TSV header
+            cols = row.split("\t")
+            if len(cols) < 12:
+                continue
+            text = cols[11].strip()
+            if not text:
+                continue
+            try:
+                left, top, width, height, conf = (float(cols[i]) for i in (6, 7, 8, 9, 10))
+            except ValueError:
+                continue
+            words.append(OCRWord(
+                text=text,
+                confidence=conf / 100.0 if conf >= 0 else 0.0,  # tesseract: 0-100, -1 = none
+                bbox=(left, top, width, height),
+            ))
+        return OCRResult.from_words(words)
+
+
+def _line_to_words(box, text: str, conf: float) -> list[OCRWord]:
+    """Spread a recognised line's words across its bounding box by character length."""
+    xs = [p[0] for p in box]
+    ys = [p[1] for p in box]
+    left, top = float(min(xs)), float(min(ys))
+    width = max(float(max(xs)) - left, 1.0)
+    height = max(float(max(ys)) - top, 1.0)
+    toks = text.split()
+    if not toks:
+        return []
+    span = sum(len(t) for t in toks) + (len(toks) - 1)  # chars + inter-word spaces
+    out: list[OCRWord] = []
+    cursor = 0
+    for t in toks:
+        x = left + (cursor / span) * width
+        w = max((len(t) / span) * width, 1.0)
+        out.append(OCRWord(text=t, confidence=conf, bbox=(x, top, w, height)))
+        cursor += len(t) + 1
+    return out
+
+
 class CachedOCR:
     """Content-addressed disk cache around any OCRAdapter."""
 
@@ -117,4 +211,8 @@ def make_ocr(engine: str) -> OCRAdapter:
         endpoint = os.environ["AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT"]
         key = os.environ["AZURE_DOCUMENT_INTELLIGENCE_KEY"]
         return AzureOCR(endpoint, key)
+    if engine == "paddle":
+        return PaddleOCR()
+    if engine == "tesseract":
+        return TesseractOCR()
     raise ValueError(f"Unknown OCR engine: {engine!r}")

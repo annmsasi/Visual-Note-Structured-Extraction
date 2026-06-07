@@ -65,7 +65,7 @@ class AugmentationConfig:
 
 @dataclass
 class OCRConfig:
-    engine: str = "stub"                   # "stub" | "azure"
+    engine: str = "stub"                   # "stub" | "azure" | "paddle" | "tesseract" (last two free, local)
     stub_inject_errors: bool = True
 
 
@@ -76,8 +76,13 @@ class ExtractionConfig:
     use_ocr_hint: bool = True
     use_retrieved_summaries: bool = True
     use_glossary: bool = True
-    # emit summary fields in the extraction JSON, no separate summariser call
+    # emit summary fields in the extraction JSON (per-page); the stored whole-note
+    # summary is produced separately in finalize via extractor.summarize()
     piggyback_summary: bool = True
+    # pages of THIS note's already-extracted markdown to prepend to each page's
+    # prompt for cross-page continuity (0 = off, -1 = all). The model still
+    # transcribes only the current page.
+    prior_page_context: int = 10
 
 
 @dataclass
