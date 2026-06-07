@@ -26,20 +26,25 @@ log = logging.getLogger(__name__)
 
 DRAFT_SYSTEM = (
     "You draft a GOLD-STANDARD reference from a handwritten lecture-notes page image, "
-    "for a human to correct. The IMAGE is the source of truth; the OCR text is a weak, "
-    "error-prone hint.\n\n"
+    "for a human to correct. Transcribe what is written on the page; the OCR text is a "
+    "hint for reading messy handwriting, abbreviations, and notation.\n\n"
     "Output a Markdown document with EXACTLY these three sections and nothing else:\n\n"
-    "## Transcription (verbatim)\n"
-    "A faithful, verbatim transcription of the handwriting EXACTLY as written. Keep the "
-    "writer's own abbreviations, spelling, symbols, capitalization, and line breaks (one "
-    "line per written line). Do NOT expand abbreviations or fix spelling. Mark anything "
-    "illegible as [?]. Mark non-text figures/diagrams as [fig: short description].\n\n"
+    "## Transcription\n"
+    "A faithful transcription of the handwriting. Use STANDARD spelling — silently correct "
+    "obvious misspellings and slips of the pen — but keep the writer's abbreviations, "
+    "symbols, capitalization, and line breaks (one line per written line). Do NOT expand "
+    "abbreviations. Mark anything illegible as [?]. Figures are handled by a SEPARATE step: "
+    "do NOT transcribe or describe "
+    "the contents of any figure/diagram/chart/circuit/plot/drawing — write the single token "
+    "[figure] in its place.\n\n"
     "## Structured note\n"
     "The same content as clean structured Markdown mirroring the page's layout: '# ' for "
     "the page title, '## '/'### ' for section headings, '- ' bullet lists (indent two "
     "spaces per nesting level), plain text for paragraphs, and $...$ or $$...$$ (LaTeX) "
     "for equations. Be faithful to the page's own structure — keep outlines as lists; "
-    "only use paragraphs where prose was actually written.\n\n"
+    "only use paragraphs where prose was actually written. Represent any figure/diagram "
+    "with a single line containing only [figure]; never convert a figure's contents into "
+    "text, lists, or prose.\n\n"
     "## Distinctive terms\n"
     "A bullet list of the technical / course-specific terms appearing on the page (not "
     "general-English words).\n\n"
@@ -60,27 +65,49 @@ def _load_env(root: Path) -> None:
 
 
 def _azure_ocr_hint(image_path: Path) -> str:
+    import tempfile
+
+    from PIL import Image
     from miso.ocr import AzureOCR, CachedOCR
-    ocr = CachedOCR(AzureOCR(
-        os.environ["AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT"],
-        os.environ["AZURE_DOCUMENT_INTELLIGENCE_KEY"],
-    ))
-    r = ocr.run(image_path)
-    return r.layout_text or r.raw_text
+    # Azure caps the input file size; downscale large scans before sending.
+    img = Image.open(image_path).convert("RGB")
+    if max(img.size) > 4000:
+        s = 4000 / max(img.size)
+        img = img.resize((round(img.width * s), round(img.height * s)))
+    fd, name = tempfile.mkstemp(suffix=".jpg")
+    os.close(fd)
+    img.save(name, "JPEG", quality=90)
+    try:
+        ocr = CachedOCR(AzureOCR(
+            os.environ["AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT"],
+            os.environ["AZURE_DOCUMENT_INTELLIGENCE_KEY"],
+        ))
+        r = ocr.run(Path(name))
+        return r.layout_text or r.raw_text
+    finally:
+        Path(name).unlink(missing_ok=True)
 
 
 def _draft_markdown(image_path: Path, ocr_hint: str, model: str) -> str:
+    from io import BytesIO
+
     from anthropic import Anthropic
+    from PIL import Image
     client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-    mime = mimetypes.guess_type(str(image_path))[0] or "image/jpeg"
-    b64 = base64.b64encode(image_path.read_bytes()).decode()
+    img = Image.open(image_path).convert("RGB")   # bound the long edge: Anthropic rejects >8000 px
+    if max(img.size) > 4000:
+        s = 4000 / max(img.size)
+        img = img.resize((round(img.width * s), round(img.height * s)))
+    buf = BytesIO()
+    img.save(buf, "JPEG", quality=90)
+    b64 = base64.b64encode(buf.getvalue()).decode()
     msg = client.messages.create(
         model=model,
         max_tokens=4096,
         system=DRAFT_SYSTEM,
         messages=[{"role": "user", "content": [
-            {"type": "image", "source": {"type": "base64", "media_type": mime, "data": b64}},
-            {"type": "text", "text": f"OCR (weak hint):\n{ocr_hint}\n\nProduce the Markdown gold draft."},
+            {"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": b64}},
+            {"type": "text", "text": f"OCR (hint):\n{ocr_hint}\n\nProduce the Markdown gold draft."},
         ]}],
     )
     return "".join(b.text for b in msg.content if getattr(b, "type", None) == "text").strip()
@@ -120,8 +147,8 @@ def main(argv: list[str] | None = None) -> int:
         header = (
             f"# {nid}\n\n"
             f"> Source: {pdf} p{page} · drafted by {args.model} + Azure OCR.\n"
-            f"> CORRECT this against {nid}.pdf. The transcription must be VERBATIM — keep the\n"
-            f"> writer's exact spelling, abbreviations, symbols, and line breaks.\n\n"
+            f"> CORRECT this against {nid}.pdf. Write the intended text in STANDARD spelling\n"
+            f"> (fix obvious misspellings); keep the writer's abbreviations, symbols, and line breaks.\n\n"
         )
         (d / f"{nid}.md").write_text(header + body + "\n")
         n += 1

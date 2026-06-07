@@ -18,11 +18,11 @@ import argparse
 import base64
 import json
 import logging
-import mimetypes
 import os
 import sys
 from pathlib import Path
 
+from miso.document import validate
 from miso.eval.ocr_runner import _load_env
 
 log = logging.getLogger(__name__)
@@ -34,7 +34,9 @@ _GOLD_SCHEMA = {
     "properties": {
         "transcription": {"type": "string",
                           "description": "Faithful verbatim transcription of the handwriting AS WRITTEN "
-                                         "(keep the page's own abbreviations, casing, line breaks)."},
+                                         "(keep the page's own abbreviations, casing, line breaks). "
+                                         "Replace any figure/diagram/chart/circuit/plot/drawing with the "
+                                         "single token [figure]; never transcribe a figure's contents."},
         "title": {"type": "string"},
         "blocks": {
             "type": "array",
@@ -64,11 +66,16 @@ _GOLD_SCHEMA = {
 
 _DRAFT_PROMPT = (
     "This is a real handwritten study-notes page. Produce a GOLD-STANDARD DRAFT for a human "
-    "to correct. Call emit_gold with: (1) transcription — a faithful verbatim transcription of "
-    "the handwriting exactly as written (keep the page's abbreviations, symbols, spelling, and "
-    "line order); (2) a clean structured extraction (title, blocks = headings/paragraphs/lists/"
+    "to correct. Call emit_gold with: (1) transcription — a faithful transcription using STANDARD "
+    "spelling (silently fix obvious misspellings), keeping the page's abbreviations, symbols, and "
+    "line order; (2) a clean structured extraction (title, blocks = headings/paragraphs/lists/"
     "equations, and the two summary fields); (3) distinctive_terms — the technical/course-specific "
-    "terms that appear (not general-English words). Be accurate and complete."
+    "terms that appear (not general-English words). "
+    "Figures are handled by a SEPARATE step: do NOT transcribe or describe the contents of any "
+    "figure/diagram/chart/circuit/plot/drawing. Put the single token [figure] where each appears "
+    "(in the transcription, and as its own paragraph block whose text is exactly [figure]); transcribe surrounding handwritten "
+    "text normally, but never convert a figure's contents into text, a list, or an equation. "
+    "Be accurate and complete."
 )
 
 
@@ -146,7 +153,23 @@ def stage(repo: str, out_dir: str, course: str, limit: int | None) -> int:
     return i
 
 
-def draft(corpus_dir: str, course: str, model: str) -> int:
+def _img_b64(path: Path, max_edge: int = 4000) -> str:
+    """Base64 JPEG, downscaled so the long edge <= max_edge. The staged page scans are
+    kept high-res for OCR, but Anthropic rejects images over 8000 px (and downsamples
+    large ones anyway), so the draft call sends a bounded copy."""
+    from io import BytesIO
+
+    from PIL import Image
+    img = Image.open(path).convert("RGB")
+    if max(img.size) > max_edge:
+        s = max_edge / max(img.size)
+        img = img.resize((round(img.width * s), round(img.height * s)))
+    buf = BytesIO()
+    img.save(buf, "JPEG", quality=90)
+    return base64.b64encode(buf.getvalue()).decode()
+
+
+def draft(corpus_dir: str, course: str, model: str, limit: int | None = None) -> int:
     _load_env()
     from anthropic import Anthropic
 
@@ -156,18 +179,19 @@ def draft(corpus_dir: str, course: str, model: str) -> int:
     gold_dir.mkdir(parents=True, exist_ok=True)
     imgs = sorted(p for p in corpus.glob("*")
                   if p.suffix.lower() in _EXTS and ".prepared" not in p.name)
+    if limit:
+        imgs = imgs[:limit]
     n = 0
     for i, img in enumerate(imgs):
         nid = f"{course}-{i:03d}"
-        mime = mimetypes.guess_type(str(img))[0] or "image/jpeg"
-        b64 = base64.b64encode(img.read_bytes()).decode()
+        b64 = _img_b64(img)
         msg = client.messages.create(
             model=model, max_tokens=4096,
             tools=[{"name": "emit_gold", "description": "Draft gold for a handwritten page.",
                     "input_schema": _GOLD_SCHEMA}],
             tool_choice={"type": "tool", "name": "emit_gold"},
             messages=[{"role": "user", "content": [
-                {"type": "image", "source": {"type": "base64", "media_type": mime, "data": b64}},
+                {"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": b64}},
                 {"type": "text", "text": _DRAFT_PROMPT},
             ]}],
         )
@@ -178,12 +202,12 @@ def draft(corpus_dir: str, course: str, model: str) -> int:
             continue
         gold = {
             "note_id": nid,
-            "extracted_json": {
+            "extracted_json": validate({
                 "title": payload.get("title", ""),
                 "blocks": payload.get("blocks", []),
                 "summary_topic_line": payload.get("summary_topic_line", ""),
                 "summary_gist": payload.get("summary_gist", ""),
-            },
+            }),
             "transcription": payload.get("transcription", ""),
             "distinctive_terms": payload.get("distinctive_terms", []),
             "_draft": True,  # remove after human correction
@@ -217,13 +241,14 @@ def main(argv: list[str] | None = None) -> int:
     d.add_argument("corpus_dir")
     d.add_argument("--course", required=True)
     d.add_argument("--model", default="claude-sonnet-4-6")
+    d.add_argument("--limit", type=int, default=None, help="only draft the first N pages (smoke test)")
     args = ap.parse_args(argv)
     if args.cmd == "stage":
         return 0 if stage(args.repo, args.out_dir, args.course, args.limit) else 1
     if args.cmd == "stage-local":
         return 0 if stage_local(args.pdfs, args.out_dir, args.course, args.dpi) else 1
     if args.cmd == "draft":
-        return 0 if draft(args.corpus_dir, args.course, args.model) else 1
+        return 0 if draft(args.corpus_dir, args.course, args.model, args.limit) else 1
     return 2
 
 

@@ -59,7 +59,7 @@ class RetrievalConfig:
 class AugmentationConfig:
     inject_position: str = "reverse"       # "reverse" | "forward" | "sides"
     inject_token_budget: int = 700
-    framing: str = "weak_hint"
+    framing: str = "hint"
     inject_glossary: bool = True
 
 
