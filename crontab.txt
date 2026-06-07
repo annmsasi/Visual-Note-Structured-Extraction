@@ -1,5 +1,15 @@
 # crontab.txt
-# To schedule this project, run: crontab -e
-# Then add this line:
 
-0 9 * * * /usr/bin/python3 /path/to/your/main.py
+# run this: which python3 
+# this captures the exact python path on your computer
+
+# run this: pwd 
+# this captures the exact script path to run process_inbox.py
+# <script> + "/process_inbox.py"
+
+# To schedule this project, run: crontab -e
+# Then add your specific paths into the text below and paste this line into the terminal:
+
+# 0 9 * * * <python path> </path/to/process_inbox.py>
+
+# this should run process_inbox at 9 AM every day!
