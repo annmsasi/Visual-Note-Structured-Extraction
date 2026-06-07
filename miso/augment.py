@@ -46,8 +46,22 @@ def assemble_prompt(
     retrieved: list[RetrievedSummary],
     glossary: list[str],
     cfg: ExtractionConfig,
+    prior_pages_md: list[str] | None = None,
 ) -> str:
     parts: list[str] = [SYSTEM_PROMPT, ""]
+
+    if prior_pages_md:
+        # Already-transcribed earlier pages of THIS note (the SYSTEM_PROMPT explains
+        # how to use them); placed before the current page's OCR. The caller has
+        # already trimmed this to cfg.prior_page_context pages.
+        parts.append(
+            "Earlier pages of THIS note, already transcribed — for continuity only. "
+            "A heading, list, or sentence may continue onto the current page. Do NOT "
+            "re-transcribe them; transcribe only the current page:"
+        )
+        for i, md in enumerate(prior_pages_md, 1):
+            parts.append(f"--- earlier page {i} ---\n{md}")
+        parts.append("")
 
     if cfg.use_retrieved_summaries and retrieved:
         parts.append(
