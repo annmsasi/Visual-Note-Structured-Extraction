@@ -1,0 +1,96 @@
+{
+  "note_id": "cse138-013",
+  "transcription": "C-L is decentralized\nSnapshots are for\n\n- Checkpointing: Take periodic snapshots to\nreturn to in case of failure\n\n- Stable property detection (if it's in the\nsnapshot, it's true in the current run/now)\n\nStable property: Once it's true, stays true (deadlock,\ntermination)\nA good snapshot algo will make a consistent\ncut which divides the past and future\nof a system with happens-before relations\nReliable delivery\nidea- keep sending until you get an ack\n\nLecture #8\n- Reg Fault Taxonomy.\n\nOmission Fault: A message is lost\nCrash Fault: A process fails by halting\nTiming Fault: Something happens too late or too early\nByzantine Fault: A process behaves in an arbitrary or\nmalicious way.",
+  "extracted_json": {
+    "title": "Lecture #8",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "C-L is decentralized"
+      },
+      {
+        "type": "paragraph",
+        "text": "Snapshots are for"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Checkpointing: Take periodic snapshots to return to in case of failure",
+            "level": 0
+          },
+          {
+            "text": "Stable property detection (if it's in the snapshot, it's true in the current run/now)",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Stable property: Once it's true, stays true (deadlock, termination)"
+      },
+      {
+        "type": "paragraph",
+        "text": "A good snapshot algo will make a consistent cut which divides the past and future of a system with happens-before relations"
+      },
+      {
+        "type": "paragraph",
+        "text": "Reliable delivery"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "idea — keep sending until you get an ack",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Reg Fault Taxonomy"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Omission Fault: A message is lost",
+            "level": 0
+          },
+          {
+            "text": "Crash Fault: A process fails by halting",
+            "level": 0
+          },
+          {
+            "text": "Timing Fault: Something happens too late",
+            "level": 0
+          },
+          {
+            "text": "Byzantine Fault: A process behaves in an arbitrary or malicious way.",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Lecture #8",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "decentralized",
+    "Snapshots",
+    "Checkpointing",
+    "Stable property detection",
+    "deadlock",
+    "termination",
+    "consistent cut",
+    "happens-before relations",
+    "Reliable delivery",
+    "ack",
+    "Fault Taxonomy",
+    "Omission Fault",
+    "Crash Fault",
+    "Timing Fault",
+    "Byzantine Fault"
+  ]
+}

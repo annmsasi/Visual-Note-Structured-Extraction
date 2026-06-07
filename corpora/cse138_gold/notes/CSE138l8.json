@@ -1,0 +1,164 @@
+{
+  "note_id": "CSE138l8",
+  "transcription": "[figure]\n\nTiming faults\ndon't really apply\nfor asynchronous\nnetwork models, where\nmessages take arbitrarily\nlong to deliver.\n\nOmission faults and crash faults are the main\nsubjects in this class\n\n[figure]\n\nAuthentication\ndetectable Byzantine\nfaults can\nbe downgraded\nto omission\nfaults (drop\nthe messages)\n\n☆ crash model = crash faults may occur\n☆ omission model = omission and crash faults may occur\n\nIn the omission fault model, two participants can't\nreach an agreement (two general's)\n\n\"common knowledge\" solves this\n  ↳\n  - everyone knows P\n  - everyone knows that everyone knows P\n  - everyone knows ... everyone knows P\n        infinite\nThe more message you receive, the more confidence\na process have, but there is no certainty.\n\nReliable delivery: If not <u>all</u> messages are lost, the\nmessage will be eventually delivered.\n\nTo send a messages: (reliable delivery)\n  - put it in a send buffer\n  - After a given timeout send what's in the\n  buffer\n  - when an ack is received, delete it from\n  the buffer\n\n  To receive and deliver a message:\n  - Ack the sender\n(At least once delivery)\n\n<u>Some messages which change state</u> would\nmess up state if duplicated\n\n<u>Idempotent</u> messages can be delivered multiple\ntimes\n\nExactly-once delivery? Only idempotent messages\n— message de-duplication with metadata\n\nRobust design is easier with idempotent messages",
+  "extracted_json": {
+    "title": "Fault Models",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "Timing faults don't really apply for asynchronous network models, where messages take arbitrarily long to deliver."
+      },
+      {
+        "type": "paragraph",
+        "text": "Omission faults and crash faults are the main subjects in this class"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "Authentication detectable Byzantine faults can be downgraded to omission faults (drop the messages)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "☆ crash model = crash faults may occur",
+            "level": 0
+          },
+          {
+            "text": "☆ omission model = omission and crash faults may occur",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "In the omission fault model, two participants can't reach an agreement (two general's)"
+      },
+      {
+        "type": "paragraph",
+        "text": "\"common knowledge\" solves this"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "everyone knows P",
+            "level": 1
+          },
+          {
+            "text": "everyone knows that everyone knows P",
+            "level": 1
+          },
+          {
+            "text": "everyone knows ... everyone knows P",
+            "level": 1
+          },
+          {
+            "text": "infinite",
+            "level": 2
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "The more message you receive, the more confidence a process have, but there is no certainty."
+      },
+      {
+        "type": "paragraph",
+        "text": "Reliable delivery: If not **all** messages are lost, the message will be eventually delivered."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "To send a messages: (reliable delivery)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "put it in a send buffer",
+            "level": 0
+          },
+          {
+            "text": "After a given timeout send what's in the buffer",
+            "level": 0
+          },
+          {
+            "text": "when an ack is received, delete it from the buffer",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "To receive and deliver a message:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Ack the sender",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "(At least once delivery)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Some messages which change state would mess up state if duplicated"
+      },
+      {
+        "type": "paragraph",
+        "text": "Idempotent messages can be delivered multiple times"
+      },
+      {
+        "type": "paragraph",
+        "text": "Exactly-once delivery? Only idempotent messages — message de-duplication with metadata"
+      },
+      {
+        "type": "paragraph",
+        "text": "Robust design is easier with idempotent messages"
+      }
+    ],
+    "summary_topic_line": "Fault Models",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "timing faults",
+    "omission faults",
+    "crash faults",
+    "Byzantine faults",
+    "asynchronous network models",
+    "Authentication detectable Byzantine faults",
+    "crash model",
+    "omission model",
+    "two generals",
+    "common knowledge",
+    "Reliable delivery",
+    "send buffer",
+    "timeout",
+    "ack",
+    "At least once delivery",
+    "Exactly-once delivery",
+    "Idempotent messages",
+    "message de-duplication",
+    "metadata",
+    "safety",
+    "liveness"
+  ],
+  "pages": [
+    "cse138-014",
+    "cse138-015"
+  ]
+}

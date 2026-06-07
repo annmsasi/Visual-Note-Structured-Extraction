@@ -1,0 +1,83 @@
+{
+  "note_id": "tim172a-006",
+  "extracted_json": {
+    "title": "Technology Domains of interest",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "3. Technology Domains of interest"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "(a) IT stack",
+            "level": 0
+          },
+          {
+            "text": "Computer Networks (CISCO)",
+            "level": 1
+          },
+          {
+            "text": "Computer Architecture (Intel)",
+            "level": 1
+          },
+          {
+            "text": "Operating Systems (Microsoft)",
+            "level": 1
+          },
+          {
+            "text": "Databases (Oracle)",
+            "level": 1
+          },
+          {
+            "text": "Application Software (Microsoft, SAP, IBM, ....)",
+            "level": 1
+          },
+          {
+            "text": "(b) Consumer Electronics",
+            "level": 0
+          },
+          {
+            "text": "cell-phones, lap-tops, video-game consoles, smart watches, ....",
+            "level": 1
+          },
+          {
+            "text": "(c) Smart products",
+            "level": 0
+          },
+          {
+            "text": "household robots, driverless cars, smart watches, drones, ....",
+            "level": 1
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "An outline of technology domains of interest: the IT stack, consumer electronics, and smart products.",
+    "summary_gist": "This page lists three technology domains of interest. (a) The IT stack, broken into layers each with a representative vendor: Computer Networks (CISCO), Computer Architecture (Intel), Operating Systems (Microsoft), Databases (Oracle), and Application Software (Microsoft, SAP, IBM, etc.). (b) Consumer Electronics, with examples such as cell-phones, laptops, video-game consoles, and smart watches. (c) Smart products, including household robots, driverless cars, smart watches, and drones."
+  },
+  "transcription": "3.    Technology Domains of interest\n\n   (a) IT stack    - Computer Networks (CISCO)\n                    - Computer Architecture (Intel)\n                    - Operating Systems (Microsoft)\n                    - Databases (Oracle)\n                    - Application Software\n                      (Microsoft, SAP, IBM,....)\n\n   (b) Consumer Electronics\n        cell-phones, lap-tops, video-game consoles,\n        smart watches, ....\n\n   (c) Smart products\n        - household robots, driverless cars,\n          smart watches, drones, ....",
+  "distinctive_terms": [
+    "IT stack",
+    "Computer Networks",
+    "CISCO",
+    "Computer Architecture",
+    "Intel",
+    "Operating Systems",
+    "Microsoft",
+    "Databases",
+    "Oracle",
+    "Application Software",
+    "SAP",
+    "IBM",
+    "Consumer Electronics",
+    "video-game consoles",
+    "smart watches",
+    "Smart products",
+    "household robots",
+    "driverless cars",
+    "drones"
+  ],
+  "_draft": true
+}

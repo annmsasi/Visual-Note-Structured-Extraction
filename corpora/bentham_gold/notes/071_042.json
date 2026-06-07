@@ -1,0 +1,43 @@
+{
+  "note_id": "071_042",
+  "transcription": "1\nC\nServants Law\nA servant ought to behave with the same humility \nand deference to every gentleman as to his own mas=\n=ter, in every thing that is not incompetable with\nhis duty to his master.\nIf a menial servant or day labourer behave in an \naffrontive manner to a gentleman the gentleman\nmay give him moderate chastisement on the spot\nand such chastisement shall not justify the servant for\nassaulting the gentleman in return if he can save himself by\nflight; unless it be to save himself from receiving irreparable\ndamage\nReasons\nA servant has been trained up in the habit of subm=\n=ission and obedience (they are among the necessary duties\nof his calling.) A gentleman is that of independence.\nIt is much less painful therefore for a servant to digest an\naffront even from one of his own rank than it is to a gentleman\nmuch more an affront from a gentleman: A blow from a\ngentleman -\n2\nServants Law\ngentleman to a servant does not dishonour the servant.\nbut a blow from a servant to a gentleman dishonours the\ngentleman.\nC",
+  "extracted_json": {
+    "title": "1",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "C Servants Law A servant ought to behave with the same humility and deference to every gentleman as to his own master, in every thing that is not incompetable with his duty to his master. If a menial servant or day labourer behave in an affrontive manner to a gentleman the gentleman may give him moderate chastisement on the spot and such chastisement shall not justify the servant for assaulting the gentleman in return if he can save himself by flight; unless it be to save himself from receiving irreparable damage Reasons A servant has been trained up in the habit of submission and obedience (they are among the necessary duties of his calling.) A gentleman is that of independence. It is much less painful therefore for a servant to digest an affront even from one of his own rank than it is to a gentleman much more an affront from a gentleman: A blow from a gentleman -"
+      },
+      {
+        "type": "paragraph",
+        "text": "Servants Law gentleman to a servant does not dishonour the servant. but a blow from a servant to a gentleman dishonours the gentleman. C"
+      }
+    ],
+    "summary_topic_line": "1",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "Servants Law",
+    "menial servant",
+    "day labourer",
+    "chastisement",
+    "moderate chastisement",
+    "affront",
+    "deference",
+    "submission",
+    "calling",
+    "irreparable damage",
+    "assaulting",
+    "Servants",
+    "dishonours",
+    "gentleman",
+    "dishonour",
+    "servant",
+    "does",
+    "blow"
+  ],
+  "pages": [
+    "071_042_001",
+    "071_042_002"
+  ]
+}

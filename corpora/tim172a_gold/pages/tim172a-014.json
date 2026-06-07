@@ -1,0 +1,114 @@
+{
+  "note_id": "tim172a-014",
+  "extracted_json": {
+    "title": "Create a plan for solving each sub-problem (SP)",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Create a plan for solving each sub-problem (SP)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "SP1 : Establish needs......."
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Plan",
+            "level": 0
+          },
+          {
+            "text": "how cell-phone work",
+            "level": 1
+          },
+          {
+            "text": "Internet research",
+            "level": 1
+          },
+          {
+            "text": "list of customer needs (functions, features, ...)",
+            "level": 1
+          },
+          {
+            "text": "?",
+            "level": 1
+          },
+          {
+            "text": "?",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "SP2 : Assess how well .... ."
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "your own experience",
+            "level": 0
+          },
+          {
+            "text": "internet consumer research",
+            "level": 0
+          },
+          {
+            "text": "customer surveys, ...",
+            "level": 0
+          },
+          {
+            "text": "...",
+            "level": 0
+          },
+          {
+            "text": "...",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "SP3 : Improve"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "research (internet)",
+            "level": 0
+          },
+          {
+            "text": "creative brainstorming",
+            "level": 0
+          },
+          {
+            "text": "...?",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Planning approaches for solving each sub-problem (SP1–SP3) in a design process.",
+    "summary_gist": "The page outlines a plan for tackling three design sub-problems. SP1 (Establish needs) is addressed by understanding how cell-phones work, internet research, and compiling a list of customer needs (functions, features). SP2 (Assess how well) uses own experience, internet consumer research, and customer surveys. SP3 (Improve) relies on internet research and creative brainstorming."
+  },
+  "transcription": "Create a plan for solving each sub-problem\n                                                    (SP)\n\n\nSP1 :    Establish needs.......\n                  { - how cell-phone work\n        Plan      { - Internet research\n                  { - list of customer needs\n                  {      (functions, features, ...)\n                  {      -    ?\n                  {      -    ?\n\n\nSP2 :    Assess how well .... .\n                  { - your  own experience\n                  { - internet  consumer research\n                  { - customer surveys, ...\n                  { -    ...\n                  { -    ...\n\n\nSP3  :   Improve\n                  { - research (internet)\n                  { - creative brainstorming\n                  { -    ...?",
+  "distinctive_terms": [
+    "sub-problem",
+    "SP",
+    "SP1",
+    "SP2",
+    "SP3",
+    "customer needs",
+    "consumer research",
+    "customer surveys",
+    "creative brainstorming"
+  ],
+  "_draft": true
+}

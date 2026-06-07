@@ -1,0 +1,60 @@
+{
+  "note_id": "tim172a-013",
+  "extracted_json": {
+    "title": "Step 2: Create a Plan",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 2 : Create a PLAN"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "(a) Assumptions",
+            "level": 0
+          },
+          {
+            "text": "whom am I ? : perhaps an engineer or a marketing analyst at a cell-phone company like Apple, Samsung, ...",
+            "level": 1
+          },
+          {
+            "text": "who is the solution for : for the new product development team, ..., CTO, CEO",
+            "level": 1
+          },
+          {
+            "text": "which type (manufacturer) of cell-phones should I (you) focus on : OBVIOUS (\"Be practical\")",
+            "level": 1
+          },
+          {
+            "text": "(b) What information do I need ?",
+            "level": 0
+          },
+          {
+            "text": "how cell-phones work ⇒ functions & customer needs of cell-phones, & how they are realized (made real) or FORM (\"HOW STUFFWORKS.COM\")",
+            "level": 1
+          },
+          {
+            "text": "other (?)",
+            "level": 1
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Step 2 of a problem-solving process: creating a plan via assumptions and information needs.",
+    "summary_gist": "Notes outline Step 2 (Create a Plan) of a problem-solving framework applied to cell-phone design. Part (a) lists assumptions: identifying who you are (an engineer or marketing analyst at a company like Apple or Samsung), who the solution is for (new product development team, CTO, CEO), and which type/manufacturer of cell-phone to focus on (be practical). Part (b) identifies needed information: how cell-phones work (functions, customer needs, and how they are realized as FORM, referencing HowStuffWorks.com) and other unspecified information."
+  },
+  "transcription": "Step 2 :   Create a  PLAN\n\n(a)  Assumptions\n      whom am I ? : perhaps an engineer or\n                        a marketing analyst at\n                        a cell-phone company like\n                        Apple, Samsung, ...\n\n      who is the solution for : for the new product\n                                  development team, ...,\n                                  CTO, CEO\n\n      which type (manufacturer) }  :  OBVIOUS\n      of cell-phones should         (\"Be practical\")\n      I (you) focus on\n\n(b)  What information do I need ?\n      - how cell-phones work ⇒ functions &\n                                  customer needs of\n      (\"HOW STUFFWORKS.COM\")      cell-phones, &\n                                  how they are\n                                  realized (made\n                                  real) or FORM\n\n      - other (?)",
+  "distinctive_terms": [
+    "CTO",
+    "CEO",
+    "cell-phone",
+    "manufacturer",
+    "FORM",
+    "HOW STUFFWORKS.COM",
+    "product development team",
+    "marketing analyst"
+  ],
+  "_draft": true
+}

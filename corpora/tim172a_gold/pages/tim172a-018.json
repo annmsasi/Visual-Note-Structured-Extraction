@@ -1,0 +1,48 @@
+{
+  "note_id": "tim172a-018",
+  "extracted_json": {
+    "title": "Functional Maps: An Introduction",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "2. Functional Maps : An introduction"
+      },
+      {
+        "type": "paragraph",
+        "text": "Functional maps can come in many forms: graph, table, pictorial"
+      },
+      {
+        "type": "paragraph",
+        "text": "Q : How does a tech. company (e.g., Intel, Seagate,..) set technical (product) performance targets for what they plan to do for the next year? for the next 3 years?, ...."
+      },
+      {
+        "type": "paragraph",
+        "text": "A : By creating the appropriate functional maps, that enable the prediction (or forecasting) of the appropriate tech. or product performance parameter."
+      },
+      {
+        "type": "paragraph",
+        "text": "The most famous functional map in the IT industry is Moore's Law."
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      }
+    ],
+    "summary_topic_line": "Introduction to functional maps and how tech companies set performance targets, illustrated by Moore's Law.",
+    "summary_gist": "Functional maps (graphs, tables, pictorials) help technology companies set technical/product performance targets over time by enabling prediction or forecasting of performance parameters. The most famous example in the IT industry is Moore's Law, which states that chip density (transistors/mm^2) doubles every 18 months; a plotted regression line through actual data points is used to forecast a target (e.g., for 2026)."
+  },
+  "transcription": "2.    Functional Maps : An introduction\n\n      Functional maps can come in many forms:\n        graph, table, pictorial\n\n      Q : How does a tech. company (e.g., Intel,\n          Seagate,..) set technical (product) performance\n          targets for what they plan to do for\n          the next year? for the next 3 years?, ....\n\n      A : By creating the appropriate functional maps,\n          that enable the prediction (or forecasting)\n          of the appropriate tech. or product performance\n          parameter.\n          The most famous functional map in the\n          IT industry is Moore's Law.\n\n[figure]",
+  "distinctive_terms": [
+    "Functional maps",
+    "functional map",
+    "Intel",
+    "Seagate",
+    "Moore's Law",
+    "chip density",
+    "transistors/mm^2",
+    "line of regression",
+    "IT industry"
+  ],
+  "_draft": true
+}

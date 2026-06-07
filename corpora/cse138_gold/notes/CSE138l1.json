@@ -1,0 +1,108 @@
+{
+  "note_id": "CSE138l1",
+  "transcription": "CSE 138 · Introduction\nZulip is open-source discord\n5th time teaching the course\n\n[figure]\n\nIf you send a request,\nand don't receive a\nresponse, is impossible\nto know why from inside the\nsystem.\n\nTimeout: After some specified time, if\nno respose, give up and perform an action\nNo good way to pick a timeout length\nWhat if the request that has a side effect?\nNo way of knowing the change-of-state\nByzantine Fault: Lie or interception\nby malicious actor  ??\nAssume Unbounded Latency:\n\nWhy distributed systems? (Have to deal with so much)\nSome systems Machines crash and die,\nso we can backup    (This will come up again\n- Fault Tolerance        implications)\n- Scalability\n- Things are physically distributed in rl\n- Data Locality",
+  "extracted_json": {
+    "title": "CSE 138: Introduction",
+    "blocks": [
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Zulip is open-source discord",
+            "level": 0
+          },
+          {
+            "text": "5th time teaching the course",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "If you send a request, and don't receive a response, is impossible to know why from inside the system."
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Timeout: After some specified time, if no respose, give up and perform an action",
+            "level": 0
+          },
+          {
+            "text": "No good way to pick a timeout length",
+            "level": 0
+          },
+          {
+            "text": "What if the request that has a side effect?",
+            "level": 0
+          },
+          {
+            "text": "No way of knowing the change-of-state",
+            "level": 1
+          },
+          {
+            "text": "Byzantine Fault: Lie or interception by malicious actor ??",
+            "level": 0
+          },
+          {
+            "text": "Assume Unbounded Latency:",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Why distributed systems? (Have to deal with so much)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Machines crash and die, so we can backup (This will come up again — implications)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Fault Tolerance",
+            "level": 0
+          },
+          {
+            "text": "Scalability",
+            "level": 0
+          },
+          {
+            "text": "Things are physically distributed in rl",
+            "level": 0
+          },
+          {
+            "text": "Data Locality",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "CSE 138: Introduction",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "CSE 138",
+    "Zulip",
+    "request / response",
+    "Timeout",
+    "side effect",
+    "change-of-state",
+    "Byzantine Fault",
+    "malicious actor",
+    "Unbounded Latency",
+    "distributed systems",
+    "Fault Tolerance",
+    "Scalability",
+    "Data Locality"
+  ],
+  "pages": [
+    "cse138-000"
+  ]
+}

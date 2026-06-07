@@ -1,0 +1,59 @@
+{
+  "note_id": "tim172a-035",
+  "extracted_json": {
+    "title": "Company Analysis",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "1. Company Analysis"
+      },
+      {
+        "type": "paragraph",
+        "text": "How do you analyze a technology company?"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "[Comment: In general Company Analysis precedes Industry Analysis]"
+      },
+      {
+        "type": "paragraph",
+        "text": "All successful companies have"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "1.1 Vision statement: a high-level vision or idea about the future",
+            "level": 1
+          },
+          {
+            "text": "Example: Microsoft (at its inception ≈ 1985) Vision: \"A world with computers in every home, and at every desktop (in an office)\"",
+            "level": 2
+          },
+          {
+            "text": "1.2 Mission statement: a more specific view (or statement) of how the company might contribute to its vision.",
+            "level": 1
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Framework for analyzing a technology company: vision and mission statements.",
+    "summary_gist": "Introduces company analysis for technology firms, noting the relationship between industry (e.g., microprocessor industry) and company (e.g., Intel) analysis. States that all successful companies have a vision statement (a high-level idea about the future, e.g., Microsoft's 1985 vision of computers in every home and desktop) and a mission statement (a more specific view of how the company contributes to its vision)."
+  },
+  "transcription": "1.    Company   Analysis\n\n      How  do  you  analyze  a  technology  company?\n\n[figure]\n\n[Comment :  In general   Company  Analysis  precedes\n            Industry  Analysis ]\n\n      All  successful  companies  have\n\n1.1  Vision statement : a high-level vision or\n                        idea about the future\n\n      Example :  Microsoft (at its inception ≈ 1985)\n                 Vision : \"A world with computers\n                 in every home, and at every desktop\n                 (in an office)\"\n\n1.2  Mission statement : a more specific view\n                         (or statement) of how the\n                         company might contribute\n                         to its vision.",
+  "distinctive_terms": [
+    "Company Analysis",
+    "Industry Analysis",
+    "Vision statement",
+    "Mission statement",
+    "Microprocessor Industry",
+    "INTEL",
+    "Microsoft"
+  ],
+  "_draft": true
+}

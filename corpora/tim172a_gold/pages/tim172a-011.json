@@ -1,0 +1,64 @@
+{
+  "note_id": "tim172a-011",
+  "extracted_json": {
+    "title": "HW #1, Prob. #1 — Preliminary Instructions",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "HW # 1, Prob. # 1"
+      },
+      {
+        "type": "paragraph",
+        "text": "Pre-liminary instructions (for all the work - homeworks, exams, project tasks - done in TIM 172A/P and beyond.):"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Develop a planning (habit)",
+            "level": 1
+          },
+          {
+            "text": "Create a simple plan (what, when, how long, .....) for doing all the problems in an assigment",
+            "level": 2
+          },
+          {
+            "text": "Develop a structured problem-solving (habit.)",
+            "level": 1
+          },
+          {
+            "text": "Download the SPSP handout on Canvas",
+            "level": 2
+          },
+          {
+            "text": "For every problem, \"copy-and-paste\" the handout into your proposed solution",
+            "level": 2
+          },
+          {
+            "text": "Decide which sub-steps (for each of the 5 primary steps) are relevant or necessary to the solution of your particular problem",
+            "level": 2
+          },
+          {
+            "text": "⇒ Customize the SPSP for your particular problem.",
+            "level": 3
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Preliminary instructions for homework, exams, and project tasks in TIM 172A/P.",
+    "summary_gist": "Two preliminary habits to develop for all course work: (1) a planning habit—create a simple plan (what, when, how long) for doing all problems in an assignment; and (2) a structured problem-solving habit—download the SPSP handout from Canvas, copy-and-paste it into each proposed solution, and decide which sub-steps of the 5 primary steps are relevant, customizing the SPSP for each particular problem."
+  },
+  "transcription": "2.    HW # 1,  Prob. # 1\n\nPre-liminary instructions ( for all the work\n   - homeworks, exams, project tasks - done in\n   TIM 172A/P  and beyond.) :\n\n  1. Develop a planning (habit)\n            - Create a simple plan (what, when,\n              how long, .....) for doing all the\n              problems in an assigment\n\n  2. Develop a structured problem -solving (habit.)\n            - Download the SPSP handout on Canvas\n            - For every problem, \"copy-and-paste\"\n              the handout into your proposed solution\n            - Decide which sub- steps ( for each\n              of the 5 primary steps) are relevant\n              or necessary to the solution of your\n              particular problem\n                 ⇒ Customize the SPSP for\n                    your particular problem.",
+  "distinctive_terms": [
+    "HW #1",
+    "Prob. #1",
+    "TIM 172A/P",
+    "SPSP",
+    "Canvas",
+    "structured problem-solving",
+    "5 primary steps",
+    "sub-steps"
+  ],
+  "_draft": true
+}

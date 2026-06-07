@@ -1,0 +1,71 @@
+{
+  "note_id": "tim172a-019",
+  "extracted_json": {
+    "title": "Definitions: Functions and Dimensions",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Definitions:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "(1) Function refers to organizational functions: Engineering, Manufacturing, Marketing, Finance, ...",
+            "level": 1
+          },
+          {
+            "text": "(2) Each of these functions has important dimensions: For example, the key dimensions of engineering are product performance, critical skills, ...",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Example:"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "You are now ready to attempt HW #2, Prob.1: The Disk Drive Industry"
+      }
+    ],
+    "summary_topic_line": "Definitions of organizational functions and their dimensions, with a Seagate/Intel example and a functional map.",
+    "summary_gist": "Notes defining \"function\" as organizational functions (engineering, manufacturing, marketing, finance) and the idea that each function has key dimensions (e.g., product performance, critical skills for engineering). A tree diagram maps a tech company (Seagate) to functions and their dimensions, and an example chain traces Company (Intel) → Function (Engineering) → Dimension (Performance / chip density) → Functional Map (Moore's Law). Concludes by pointing to HW #2, Prob.1 on the disk drive industry."
+  },
+  "transcription": "Definitions:\n (1) Function refers to organizational functions:\n      Engineering, Manufacturing, Marketing,\n      Finance, ...\n\n (2) Each of these functions has important\n      dimensions:\n       For example, the key dimensions of\n       engineering are product performance, critical\n       skills, ...\n\n[figure]\n\nExample: [figure]\n\nYou are now ready to attempt\n   HW #2, Prob.1: The Disk Drive Industry",
+  "distinctive_terms": [
+    "Function",
+    "organizational functions",
+    "Engineering",
+    "Manufacturing",
+    "Marketing",
+    "Finance",
+    "dimensions",
+    "product performance",
+    "critical skills",
+    "Seagate",
+    "Engr.",
+    "Manf.",
+    "Perf.",
+    "Cost",
+    "Price",
+    "Product functions",
+    "Revenue",
+    "Intel",
+    "chip density",
+    "Functional Map",
+    "Moore's Law",
+    "Disk Drive Industry"
+  ],
+  "_draft": true
+}

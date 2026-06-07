@@ -1,0 +1,86 @@
+{
+  "note_id": "tim172a-036",
+  "extracted_json": {
+    "title": "Business Goals and Strategies of Tech Companies",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Example: Microsoft's mission statement (≈ 1985): \"Every one of these computers will be controlled (or managed) using a MS Operating System (OS)\""
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "1.3 Business Goals (BGs)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Annual Sales Revenue ($)",
+            "level": 0
+          },
+          {
+            "text": "Growth (% per year) in Sales Revenue",
+            "level": 0
+          },
+          {
+            "text": "Profit ($) or Net Income ($)",
+            "level": 0
+          },
+          {
+            "text": "Profit Margin (%) = Net Income x 100 % / Sales Rev.",
+            "level": 0
+          },
+          {
+            "text": ". . . .",
+            "level": 0
+          },
+          {
+            "text": ". . . .",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "equation",
+        "latex": "\\text{Profit Margin (\\%)} = \\frac{\\text{Net Income}}{\\text{Sales Rev.}} \\times 100\\%"
+      },
+      {
+        "type": "paragraph",
+        "text": "Every tech. company has (or needs to articulate) three important strategies:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "its Competitive strategy (see L #3, 4)",
+            "level": 0
+          },
+          {
+            "text": "Technology strategy (TS)",
+            "level": 0
+          },
+          {
+            "text": "Product / Market strategy (P/M s)",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Business goals and the three core strategies of a technology company.",
+    "summary_gist": "Notes give Microsoft's ~1985 mission statement as an example, then list business goals (BGs) including annual sales revenue, growth, profit/net income, and profit margin (Net Income / Sales Rev. × 100%). It concludes that every tech company has three key strategies: competitive, technology (TS), and product/market (P/M s)."
+  },
+  "transcription": "Example :   Microsoft's mission statement (≈ 1985):\n            \"Every one of these computers\n             will be controlled (or managed)\n             using a  MS Operating System (OS)\"\n\n1.3   Business Goals (BGs)\n        - Annual Sales Revenue ($)\n        - Growth (% per year) in Sales Revenue\n        - Profit ($) or Net Income ($)\n        - Profit Margin (%) = Net Income x 100 %\n                              ──────────\n                              Sales Rev.\n\n        - . . . .\n        - . . . .\n_______________________________________\n\n      Every tech. company has (or needs to\narticulate) three important strategies :\n        - its Competitive strategy (see L #3, 4)\n        - Technology strategy (TS)\n\n        - Product / Market strategy (P/M s)",
+  "distinctive_terms": [
+    "mission statement",
+    "MS Operating System (OS)",
+    "Business Goals (BGs)",
+    "Annual Sales Revenue",
+    "Net Income",
+    "Profit Margin",
+    "Competitive strategy",
+    "Technology strategy (TS)",
+    "Product / Market strategy (P/M s)"
+  ],
+  "_draft": true
+}

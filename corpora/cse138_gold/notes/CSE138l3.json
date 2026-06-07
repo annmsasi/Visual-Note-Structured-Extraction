@@ -1,0 +1,176 @@
+{
+  "note_id": "CSE138l3",
+  "transcription": "CSE 138 Lecture 3\nFit by solving: min Cost($\\theta$) }\n\n{Reflexive: Ordering relation includes itself\n{Anti-symmetrical: Ordering relation is not reversible\n{Transitivity: Ordering relations can be put together\n{\n{A real partial ordering has these 3 properties.\n        (not all elements are related).\n\"happens before\" is an irreflexive partial order\nTotally ordered Set: All elements are related\ne.x: Natural numbers, ordered by the usual $\\leq$ relation\nA process order is totally ordered\n\nLogical Clocks (particularly,\n                            Lamport clocks)\n- A way of assigning natural numbers to events\n    LC(A) = 3   $\\leftarrow$ LC = Lamport Clock\nClock condition: If a → b, then LC(a) < LC(b)\nLamport Clocks are consistent with the\nhappens before relation. (also consistent with causal)\n[figure]\nLC algorithm:\n\n1) Every process will keep a counter, initially 0.\n\n2) On every event, a process increments it's counter by 1.\n\n3) When sending a message, a process includes\nits counter with the message.\n\n4) When receiving a message, set your\nclock to [max( local clock, received clock )+1]\n\n- The Lamport clock does not guarentee\na happens before relation (look at nodes E&G)\n↓        (inverse clock condition)\nIf LC(A) < LC(B), this doesn't mean A→B.\nIt can also mean ~~A # B~~.\n\n~~e₁ # e₂~~ e₁→e₂ ⟹ LC(e₁) < LC(e₂)\n            contrapositive:\n   LC(e₁) ≥ LC(e₂) ⟹ ~(e₂→e₁) V (e₁ || e₂)\n\nVector Clocks  guarentee inverse clock condition\n\n1) Every process maintains a vector of natural numbers,\ninitialized to 0. The length of the vector is the\nnumber of processes.\n\n2) On every event, a process increments its own\nposition ~~num~~ in the clock",
+  "extracted_json": {
+    "title": "CSE 138 Lecture 3",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Fit by solving: $\\min \\text{Cost}(\\theta)$"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Reflexive: Ordering relation includes itself",
+            "level": 0
+          },
+          {
+            "text": "Anti-symmetrical: Ordering relation is not reversible",
+            "level": 0
+          },
+          {
+            "text": "Transitivity: Ordering relations can be put together",
+            "level": 0
+          },
+          {
+            "text": "A real partial ordering has these 3 properties (not all elements are related).",
+            "level": 0
+          },
+          {
+            "text": "\"happens before\" is an irreflexive partial order",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Totally ordered Set: All elements are related"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "e.x: Natural numbers, ordered by the usual $\\leq$ relation",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "A process order is totally ordered"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Logical Clocks (particularly, Lamport clocks)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "A way of assigning natural numbers to events",
+            "level": 0
+          },
+          {
+            "text": "$LC(A) = 3 \\leq LC = Lamport Clock$",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Clock condition: If $a \\rightarrow b$, then $LC(a) < LC(b)$"
+      },
+      {
+        "type": "paragraph",
+        "text": "Lamport Clocks are consistent with the happens before relation. (also consistent with causal)"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "LC algorithm"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Every process will keep a counter, initially 0."
+      },
+      {
+        "type": "paragraph",
+        "text": "2. On every event, a process increments it's counter by 1."
+      },
+      {
+        "type": "paragraph",
+        "text": "3. When sending a message, a process includes its counter with the message."
+      },
+      {
+        "type": "paragraph",
+        "text": "4. When receiving a message, set your clock to $[\\max(\\text{local clock}, \\text{received clock})+1]$"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "The Lamport clock does not guarentee a happens before relation (look at nodes E&G) (inverse clock condition)",
+            "level": 0
+          },
+          {
+            "text": "If $LC(A) < LC(B)$, this doesn't mean $A \\to B$.",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "equation",
+        "latex": "e_1 \\to e_2 \\implies LC(e_1) < LC(e_2)"
+      },
+      {
+        "type": "paragraph",
+        "text": "contrapositive:"
+      },
+      {
+        "type": "equation",
+        "latex": "LC(e_1) \\geq LC(e_2) \\implies \\neg(e_2 \\to e_1) \\lor (e_1 \\parallel e_2)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Vector Clocks"
+      },
+      {
+        "type": "paragraph",
+        "text": "Vector Clocks guarentee inverse clock condition"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Every process maintains a vector of natural numbers, initialized to 0. The length of the vector is the number of processes."
+      },
+      {
+        "type": "paragraph",
+        "text": "2. On every event, a process increments its own position in the clock"
+      }
+    ],
+    "summary_topic_line": "CSE 138 Lecture 3",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "Reflexive",
+    "Anti-symmetrical",
+    "Transitivity",
+    "partial ordering",
+    "irreflexive partial order",
+    "happens before",
+    "Totally ordered Set",
+    "process order",
+    "Logical Clocks",
+    "Lamport clocks",
+    "Clock condition",
+    "LC (Lamport Clock)",
+    "consistent with the happens before relation",
+    "LC algorithm",
+    "Lamport clock",
+    "happens before relation",
+    "inverse clock condition",
+    "$LC(A)$, $LC(B)$ (logical clock)",
+    "contrapositive",
+    "Vector Clocks"
+  ],
+  "pages": [
+    "cse138-004",
+    "cse138-005"
+  ]
+}

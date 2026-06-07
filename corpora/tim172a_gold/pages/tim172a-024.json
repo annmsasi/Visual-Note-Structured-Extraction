@@ -1,0 +1,67 @@
+{
+  "note_id": "tim172a-024",
+  "extracted_json": {
+    "title": "Step 3 of the SPSP: Execute the Plan — Structural Map (Five Forces)",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 3 of the SPSP : Execute the plan"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Step 1 : Create a structural map ...."
+      },
+      {
+        "type": "paragraph",
+        "text": "( e.g. Personal Computer Industry)  1980s"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      }
+    ],
+    "summary_topic_line": "Step 1 of executing the SPSP: building a Five Forces structural map of the 1980s PC industry.",
+    "summary_gist": "Notes on Step 3 (Execute the plan) of the SPSP, beginning with Step 1: creating a structural map, illustrated with a Five Forces diagram of the 1980s Personal Computer Industry. The diagram maps Competitors (F1: rivalry) against New entrants (F2, barriers to entry; Compaq, NCR), Suppliers (F4 supplier power; microprocessor Intel/AMD, OS Microsoft, storage Seagate), Buyers (F5 buyer power; consumers, enterprises), and Substitutes (F3, barriers to entry; pen computing GO/Apple, PDA Palm), with PC competitors IBM, HP, Dell, Apple noted."
+  },
+  "transcription": "Step 3 of the SPSP : Execute the plan\n\n  Step 1 :  Create a structural map ....\n              ( e.g. Personal Computer Industry)\n                            1980s\n\n[figure]",
+  "distinctive_terms": [
+    "SPSP",
+    "structural map",
+    "Personal Computer Industry",
+    "New entrants",
+    "Compaq",
+    "NCR",
+    "Competitors in the PC industry",
+    "IBM",
+    "HP",
+    "Dell",
+    "Apple",
+    "Barriers to entry",
+    "F2: threat of new entrants",
+    "Suppliers",
+    "Microprocessor",
+    "Intel",
+    "AMD",
+    "Operating System",
+    "Microsoft",
+    "storage",
+    "Seagate",
+    "F4: Supplier Power",
+    "Competitors",
+    "Force 1 (F1): Rivalry between competitors",
+    "Buyers",
+    "Consumers",
+    "Enterprises",
+    "F5: Buyer Power",
+    "F3: threat of substitutes",
+    "Substitutes",
+    "Pen Computing",
+    "GO",
+    "PDA",
+    "PALM",
+    "Five Forces"
+  ],
+  "_draft": true
+}

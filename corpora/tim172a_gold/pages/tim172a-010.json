@@ -1,0 +1,53 @@
+{
+  "note_id": "tim172a-010",
+  "extracted_json": {
+    "title": "Quick summary of L#1",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Quick summary of L#1"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Fast cycle competitors - FAANG & MANGA - can balance the conflicting trade-offs between product quality, speed, & cost; and can successfully manage risk.",
+            "level": 0
+          },
+          {
+            "text": "This course will develop the building blocks, & a framework - MDC - for integrating these blocks",
+            "level": 0
+          },
+          {
+            "text": "Professionals (Engineering, Business, ....) generally use a 5-step structured problem-solving process (SPSP):",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      }
+    ],
+    "summary_topic_line": "Lecture 1 recap: fast-cycle competitors, MDC framework, and the 5-step SPSP.",
+    "summary_gist": "A recap of Lecture 1: fast-cycle competitors (FAANG & MANGA) balance trade-offs among product quality, speed, and cost while managing risk. The course develops building blocks and an integrating framework (MDC). It introduces the 5-step structured problem-solving process (SPSP): Define → Plan → Execute → Checking → Learn/Generalize."
+  },
+  "transcription": "1.   Quick  summary  of  L # 1\n        - Fast  cycle  competitors - FAANG & MANGA -\n        can  balance  the  conflicting  trade-offs\n        between product quality, speed, & cost ;\n        and  can  successfully manage  risk.\n        -  This  course  will  develop the building blocks,\n           & a  framework - MDC - for integrating\n           these  blocks\n        -  Professionals (Engineering, Business, ....)\n           generally  use  a  5-step  structured\n           problem-solving process (SPSP):\n\n      Define ⟶ Plan (or Process or Approach) ⟶ Execute ⌐\n                  Learn/Generalize ⟵ Checking ⟵",
+  "distinctive_terms": [
+    "L#1",
+    "Fast cycle competitors",
+    "FAANG",
+    "MANGA",
+    "trade-offs",
+    "MDC",
+    "SPSP",
+    "structured problem-solving process",
+    "Define",
+    "Plan",
+    "Execute",
+    "Checking",
+    "Learn/Generalize"
+  ],
+  "_draft": true
+}

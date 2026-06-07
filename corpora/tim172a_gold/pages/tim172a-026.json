@@ -1,0 +1,48 @@
+{
+  "note_id": "tim172a-026",
+  "extracted_json": {
+    "title": "Step 3: Determine the Attractiveness of the Industry as a Whole",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 3 : Determine the attractiveness of the industry as a whole"
+      },
+      {
+        "type": "paragraph",
+        "text": "Qualitative : H, M, L"
+      },
+      {
+        "type": "paragraph",
+        "text": "Def : The attractiveness (i.e., profit potential as measured by the ROIC) is determined by the cumulative (or total) strength of the 5 forces"
+      },
+      {
+        "type": "paragraph",
+        "text": "If the cumulative strength of the 5 forces is high (H), then the industry is not attractive to new entrants or substitutes"
+      },
+      {
+        "type": "paragraph",
+        "text": "Example : From Table 1, which shows the qualitative strength of each force (in column 3), the cumulative (or total) strength of the 5 forces in the PC industry in the 1980s is \"medium (M) to high (H)\""
+      },
+      {
+        "type": "paragraph",
+        "text": "⟹ PC industry (of the 1980s) is (probably) not attractive to new entrants or substitutes."
+      }
+    ],
+    "summary_topic_line": "Determining overall industry attractiveness from the cumulative strength of the five forces (with PC-industry example).",
+    "summary_gist": "Step 3 of industry analysis is determining the overall attractiveness (profit potential as measured by ROIC) of an industry, rated qualitatively as High, Medium, or Low based on the cumulative strength of the five forces. High cumulative strength means the industry is not attractive to new entrants or substitutes. Example: the PC industry of the 1980s had medium-to-high cumulative force strength, so it was probably not attractive."
+  },
+  "transcription": "Step 3 : Determine the attractiveness of\n            the industry as a whole\n                Qualitative : H, M, L\n\nDef :   The attractiveness (i.e., profit potential\n        as measured by the ROIC) is determined\n        by the cumulative (or total) strength\n        of the 5 forces\n\n        If the cumulative strength of the 5 forces\n        is high (H), then the industry is not\n        attractive to new entrants or substitutes\n\nExample :   From Table 1, which shows the\n            qualitative strength of each force\n            (in column 3), the cumulative (or\n            total) strength of the 5 forces in\n            the PC industry in the 1980s is\n            \" medium (M) to high (H) \"\n\n        ⟹ PC industry (of the 1980s) is (probably)\n           not attractive to new entrants or\n           substitutes.",
+  "distinctive_terms": [
+    "attractiveness",
+    "profit potential",
+    "ROIC",
+    "cumulative strength",
+    "5 forces",
+    "new entrants",
+    "substitutes",
+    "qualitative strength",
+    "PC industry"
+  ],
+  "_draft": true
+}

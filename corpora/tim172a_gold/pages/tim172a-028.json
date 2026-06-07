@@ -1,0 +1,58 @@
+{
+  "note_id": "tim172a-028",
+  "extracted_json": {
+    "title": "Porter's Generic Competitive Strategies",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "(PC Industry in the 1980s)"
+      },
+      {
+        "type": "paragraph",
+        "text": "According to Porter, for a company to be successful in a particular industry, it must adopt one (and only one) of the following three competitive strategies :"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "① Differentiated strategy : ..... (fill in)",
+            "level": 0
+          },
+          {
+            "text": "② Cost Leadership : ..... ( \" )",
+            "level": 0
+          },
+          {
+            "text": "③ Focus: .....",
+            "level": 0
+          },
+          {
+            "text": "④ stuck-in-the-middle (not recommended)",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Porter's three generic competitive strategies illustrated with the 1980s PC industry.",
+    "summary_gist": "The page presents Michael Porter's framework of generic competitive strategies, mapped on a matrix of target market (market-wide vs. particular segment) against product (unique product vs. low cost), with examples from the 1980s PC industry (HP, IBM, DELL, Apple). Per Porter, a company must adopt exactly one of three strategies: differentiated strategy, cost leadership, or focus; being 'stuck-in-the-middle' is a fourth, non-recommended outcome."
+  },
+  "transcription": "[figure]\n\n(PC Industry in the 1980s)\n\nAccording to Porter, for a company to be\nsuccessful in a particular industry, it\nmust adopt one (and only one) of the following\nthree competitive strategies :\n   - ① Differentiated strategy : ..... (fill in)\n   - ② Cost Leadership : ..... ( \" )\n   - ③ Focus: .....\n   - ④ stuck-in-the-middle (not recommended)",
+  "distinctive_terms": [
+    "Porter",
+    "Differentiated strategy",
+    "Cost Leadership",
+    "Focus",
+    "stuck-in-the-middle",
+    "competitive strategies",
+    "Target Market",
+    "Market-wide",
+    "Particular segment",
+    "Unique product",
+    "Low cost"
+  ],
+  "_draft": true
+}

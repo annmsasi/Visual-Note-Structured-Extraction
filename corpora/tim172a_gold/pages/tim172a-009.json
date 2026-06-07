@@ -1,0 +1,82 @@
+{
+  "note_id": "tim172a-009",
+  "extracted_json": {
+    "title": "TIM 172A, MOT-I, Lecture #2 — Agenda &amp; Important Note",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "TIM 172 A, MOT-I, Lecture #2, 9/30/25"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Agenda :"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Quick summary of L#1",
+            "level": 0
+          },
+          {
+            "text": "HW #1 (due on Thursday, 10/2/25)",
+            "level": 0
+          },
+          {
+            "text": "TIM 172 P",
+            "level": 0
+          },
+          {
+            "text": "placed all students in group",
+            "level": 1
+          },
+          {
+            "text": "posted the Project Proposal assignment",
+            "level": 1
+          },
+          {
+            "text": "for the whole TIM 172A, the \"FILES\" tab on Canvas will contain a \"TIM 172P\" folder",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "TIM 172A IMPORTANT NOTE :"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "All submitted work must be TYPEWRITTEN",
+            "level": 0
+          },
+          {
+            "text": "We will NOT accept handwritten work",
+            "level": 0
+          },
+          {
+            "text": "Figures, graphics can be hand-drawn, & inserted in the typewritten text.",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Lecture #2 agenda for TIM 172A covering L#1 recap, HW #1, TIM 172P logistics, and a note requiring typewritten submissions.",
+    "summary_gist": "This page lists the agenda for TIM 172A (MOT-I) Lecture #2 on 9/30/25: a quick summary of Lecture 1, HW #1 due Thursday 10/2/25, and TIM 172P updates (students placed in groups, Project Proposal assignment posted, and a \"TIM 172P\" folder added under the \"FILES\" tab on Canvas). An important note states all submitted work must be typewritten, handwritten work will not be accepted, but figures/graphics may be hand-drawn and inserted into the typewritten text."
+  },
+  "transcription": "TIM 172 A, MOT-I, Lecture #2, 9/30/25\n\n   Agenda :\n\n1. Quick summary of  L#1\n\n2.  HW #1 (due on Thursday, 10/2/25)\n\n3.  TIM 172 P\n       • placed all students in group\n       • posted the Project Proposal assignment\n       • for the whole TIM 172A, the \"FILES\"\n         tab on Canvas will contain a \"TIM 172P\" folder\n\nTIM 172A  IMPORTANT NOTE :\n\n  • All submitted work must be TYPEWRITTEN\n  • We will NOT accept handwritten work\n  • Figures, graphics can be hand-drawn, &\n    inserted in the typewritten text.",
+  "distinctive_terms": [
+    "TIM 172A",
+    "MOT-I",
+    "TIM 172P",
+    "Project Proposal",
+    "Canvas",
+    "FILES tab",
+    "HW #1"
+  ],
+  "_draft": true
+}

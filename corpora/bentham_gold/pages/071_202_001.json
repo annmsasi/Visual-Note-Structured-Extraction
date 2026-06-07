@@ -1,0 +1,37 @@
+{
+  "note_id": "071_202_001",
+  "transcription": "Of State-Tumults.\n5\nAny number of persons may shew the affecti=\n:ion in a public manner, for any person whatsoever except \nwhere it would be an offence against Justice, provided they \ndo it spontaneously and peaceably and endeavour not to \ncompel others to join them. \nReasons.\nIn the former article the interests of Peace are provid=\n:ed for: in this the interests of Liberty principally; but in \nsome measure too those of peace. It is very fit the people \nshould have the means of making their sentiments known \nas well to persons in authority as to each other; and \nthat for the sake of persons in authority as well as \nof people themselves. The most effectual as well as \nthe mildest way of preventing their doing it in an \noutrageous, tumultuous and mischievous manner is \nto permit them to do it in a peaceable manner. The \nmore pains have been taken by harsh Laws and a severe \nadministration to oblige the people to stifle their affections, \nwith the more violence they burst forth at last when\ntheir patience is exhausted. \nA tumultuous Assembly is where a number \nin \nof persons assemble together in the Intention of engaging \nbreak out\nC",
+  "extracted_json": {
+    "title": "Of State-Tumults.",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "5 Any number of persons may shew the affectiion in a public manner, for any person whatsoever except where it would be an offence against Justice, provided they do it spontaneously and peaceably and endeavour not to compel others to join them. Reasons. In the former article the interests of Peace are provided for: in this the interests of Liberty principally; but in some measure too those of peace. It is very fit the people should have the means of making their sentiments known as well to persons in authority as to each other; and that for the sake of persons in authority as well as of people themselves. The most effectual as well as the mildest way of preventing their doing it in an outrageous, tumultuous and mischievous manner is to permit them to do it in a peaceable manner. The more pains have been taken by harsh Laws and a severe administration to oblige the people to stifle their affections, with the more violence they burst forth at last when their patience is exhausted. A tumultuous Assembly is where a number in of persons assemble together in the Intention of engaging break out C"
+      }
+    ],
+    "summary_topic_line": "Of State-Tumults.",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "State-Tumults",
+    "Intention",
+    "Assembly",
+    "Justice",
+    "Reasons",
+    "Liberty",
+    "Peace",
+    "Laws",
+    "administration",
+    "spontaneously",
+    "principally",
+    "mischievous",
+    "tumultuous",
+    "affectiion",
+    "whatsoever",
+    "sentiments",
+    "themselves",
+    "preventing",
+    "outrageous",
+    "affections"
+  ]
+}

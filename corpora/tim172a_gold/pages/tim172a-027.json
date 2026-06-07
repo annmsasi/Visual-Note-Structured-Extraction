@@ -1,0 +1,73 @@
+{
+  "note_id": "tim172a-027",
+  "extracted_json": {
+    "title": "Step 4: Determining Company Position / Competitive Strategy in the I/M Landscape",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 4"
+      },
+      {
+        "type": "paragraph",
+        "text": "Determine or decide on the company's position or competitive strategy to compete successfully in the I/M landscape"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Process"
+      },
+      {
+        "type": "paragraph",
+        "text": "Create a 2-dimensional grid"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Product dimension, which has 2 extremes",
+            "level": 0
+          },
+          {
+            "text": "(i) unique product, as perceived by the customers, differentiated by attributes such as quality (additional features), reliability, user-interface, ... .",
+            "level": 1
+          },
+          {
+            "text": "(ii) lowest cost product",
+            "level": 1
+          },
+          {
+            "text": "Market dimension (or Target market for the product), which has 2 extremes",
+            "level": 0
+          },
+          {
+            "text": "(i) a product for the entire market",
+            "level": 1
+          },
+          {
+            "text": "(ii) a product for a particular (or niche) segment of the market.",
+            "level": 1
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Step 4 of competitive strategy: positioning a company on a 2D product/market grid in the I/M landscape.",
+    "summary_gist": "These notes describe Step 4 of a process for deciding a company's competitive strategy to compete in the I/M landscape. The method uses a 2-dimensional grid. The product dimension ranges between two extremes: a unique product (differentiated by attributes like quality, reliability, and user-interface) and a lowest-cost product. The market dimension (target market) also ranges between two extremes: a product for the entire market versus a product for a particular or niche market segment."
+  },
+  "transcription": "Step 4 : Determine or decide on the\n            company's position or competitive\n            strategy to compete successfully\n            in the I/M landscape\n\nProcess :   Create a 2-dimensional grid\n            - Product dimension, which has\n              2 extremes\n              (i) unique product, as perceived\n                  by the customers, differentiated\n                  by attributes such as\n                  quality (additional features),\n                  reliability, user-interface, ... .\n              (ii)  lowest cost product\n\n            - Market dimension (or Target\n              market for the product), which\n              has 2 extremes\n              (i) a product for the entire market\n              (ii) a product for a particular\n                   (or niche) segment of the\n                   market.",
+  "distinctive_terms": [
+    "I/M landscape",
+    "competitive strategy",
+    "company's position",
+    "2-dimensional grid",
+    "Product dimension",
+    "Market dimension",
+    "Target market",
+    "unique product",
+    "lowest cost product",
+    "differentiated",
+    "user-interface",
+    "niche segment"
+  ],
+  "_draft": true
+}

@@ -1,0 +1,135 @@
+{
+  "note_id": "cse138-012",
+  "transcription": "Lecture #7 ← a finite execution can show violation\n- Safety: A bad thing won't happen\nLiveness: A good thing eventually happens\n        ↑ a finite execution can't show violation\nsnapshots are correct when:\n    - They take consistent snapshots (safety)\n    - The snapshot algorithm terminates (liveness)\n\nDoes C-L terminate?\n    - Assumptions\n      - Fixed number of processes\n\nIf every process ① records its own process state\n          ② reads the states of all incoming channels\n  C-L terminates.    ↖ finished when every channel\n                       recieves a marker message\n\nIn C-L algo, at least one process has to initiate.\n\nMultiple process initiation is actually a huge deal, becuz\nif this wasn't true, it would be bad. Processes would\nhave to agree to decide which process gets to initiate.\n       ↓        ↓\n    not good   complexity\n\nDecentralized algorithm: Can be independently\ninitiated by different processes without them needing\nto coordinate with each other\n\nCentralized algorithm: Must exactly have one\ninitiator",
+  "extracted_json": {
+    "title": "Lecture #7",
+    "blocks": [
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Safety: A bad thing won't happen",
+            "level": 0
+          },
+          {
+            "text": "a finite execution can show violation",
+            "level": 1
+          },
+          {
+            "text": "Liveness: A good thing eventually happens",
+            "level": 0
+          },
+          {
+            "text": "a finite execution can't show violation",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "snapshots are correct when:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "They take consistent snapshots (safety)",
+            "level": 0
+          },
+          {
+            "text": "The snapshot algorithm terminates (liveness)",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Does C-L terminate?"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Assumptions",
+            "level": 0
+          },
+          {
+            "text": "Fixed number of processes",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "If every process:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "① records its own process state",
+            "level": 0
+          },
+          {
+            "text": "② reads the states of all incoming channels",
+            "level": 0
+          },
+          {
+            "text": "C-L terminates.",
+            "level": 0
+          },
+          {
+            "text": "finished when every channel recieves a marker message",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "In C-L algo, at least one process has to initiate."
+      },
+      {
+        "type": "paragraph",
+        "text": "Multiple process initiation is actually a huge deal, becuz if this wasn't true, it would be bad. Processes would have to agree to decide which process gets to initiate."
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "not good",
+            "level": 0
+          },
+          {
+            "text": "complexity",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Decentralized algorithm: Can be independently initiated by different processes without them needing to coordinate with each other"
+      },
+      {
+        "type": "paragraph",
+        "text": "Centralized algorithm: Must exactly have one initiator"
+      }
+    ],
+    "summary_topic_line": "Lecture #7",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "Safety",
+    "Liveness",
+    "snapshot",
+    "consistent snapshots",
+    "C-L (Chandy-Lamport)",
+    "marker message",
+    "incoming channels",
+    "process state",
+    "initiate / initiator",
+    "Decentralized algorithm",
+    "Centralized algorithm"
+  ]
+}

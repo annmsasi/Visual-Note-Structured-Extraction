@@ -1,0 +1,49 @@
+{
+  "note_id": "tim172a-034",
+  "extracted_json": {
+    "title": "A note on Complementors",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "0. A note on Complementors"
+      },
+      {
+        "type": "paragraph",
+        "text": "A sixth set of players was added to Porter's Positioning (aka Competitive Strategy) framework: \"Complementors\", which gives rise to a sixth force: \"power to influence\"."
+      },
+      {
+        "type": "paragraph",
+        "text": "Example: Health-Care (Industry)"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "Pharmaceutical companies (e.g., Pfizer, ....) are competitors in the \"medical drug delivery industry\"."
+      },
+      {
+        "type": "paragraph",
+        "text": "HW #"
+      }
+    ],
+    "summary_topic_line": "Complementors as a sixth force added to Porter's competitive strategy framework",
+    "summary_gist": "Notes introduce \"Complementors\" as a sixth set of players added to Porter's Positioning (Competitive Strategy) framework, giving rise to a sixth force: \"power to influence.\" A health-care example illustrates this: pharmaceutical companies (e.g., Pfizer) compete in the medical drug delivery industry, while doctors act as complementors."
+  },
+  "transcription": "0.   A note on Complementors\n↑\n\"zero\"\n\n      A sixth set of players was added to\n   Porter's Positioning (aka Competitive Strategy)\n   framework :\n    \" Complementors \", which gives rise to a sixth\n     force :  \"power to influence\"\n\n        Example  :   Health- Care  (Industry)\n\n      Pharmaceutical companies  ⟷  Doctor\n         e.g., Pfizer, ....              complementor\n\n      competitors in the\n     \"medical drug delivery\n        industry\n\n     HW #",
+  "distinctive_terms": [
+    "Complementors",
+    "Porter's Positioning",
+    "Competitive Strategy framework",
+    "sixth force",
+    "power to influence",
+    "complementor",
+    "Pharmaceutical companies",
+    "Pfizer",
+    "medical drug delivery industry",
+    "Health-Care industry"
+  ],
+  "_draft": true
+}

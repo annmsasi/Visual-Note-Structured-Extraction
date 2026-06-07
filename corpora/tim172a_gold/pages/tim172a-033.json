@@ -1,0 +1,57 @@
+{
+  "note_id": "tim172a-033",
+  "extracted_json": {
+    "title": "TIM 172A, Lecture #5 — Agenda",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "TIM 172A, Lecture #5, 10/9/25"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Agenda:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "0: A note on Complementors (not Complimentors)",
+            "level": 0
+          },
+          {
+            "text": "1. Company Analysis",
+            "level": 0
+          },
+          {
+            "text": "2. HW #2, Prob 2 (Intel)",
+            "level": 0
+          },
+          {
+            "text": "3. HW #3, has been posted & will be strictly due, on time, on Thursday, next week, 10/16/25",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "HW #2 is now strictly due on Friday, 10/10/25, 11:59 pm."
+      }
+    ],
+    "summary_topic_line": "Lecture #5 agenda and homework deadlines for TIM 172A.",
+    "summary_gist": "Agenda for TIM 172A Lecture #5 (10/9/25): a note on Complementors (not Complimentors), Company Analysis, and HW #2 Problem 2 (Intel). HW #2 is now strictly due Friday 10/10/25 at 11:59 pm, and HW #3 has been posted and will be strictly due on time Thursday 10/16/25."
+  },
+  "transcription": "TIM 172A , Lecture #5, 10/9/25\n\nAgenda :\n0:  A note on Complementors (not Complimentors)\n1.  Company Analysis\n\n2.  HW #2, Prob 2 (Intel)\n\n    HW #2 is now strictly due on Friday, 10/10/25,\n                                          11:59 pm.\n\n3.  HW #3, has been posted & will be strictly\n    due, on time, on Thursday, next week, 10/16/25",
+  "distinctive_terms": [
+    "TIM 172A",
+    "Complementors",
+    "Complimentors",
+    "Company Analysis",
+    "HW #2",
+    "HW #3",
+    "Prob 2",
+    "Intel"
+  ],
+  "_draft": true
+}

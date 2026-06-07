@@ -1,0 +1,77 @@
+{
+  "note_id": "tim172a-003",
+  "extracted_json": {
+    "title": "Managing Risk and Fast-Cycle Companies (TIM 172A/P)",
+    "blocks": [
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "In addition, the tech. company needs to be able to successfully manage RISK:",
+            "level": 1
+          },
+          {
+            "text": "(a) Technology (Product Development) RISK",
+            "level": 2
+          },
+          {
+            "text": "(b) Commercialization (Market) RISK",
+            "level": 2
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Companies that can successfully manage RISK, and at the same time develop high-quality products, rapidly, and at low cost are called FAST-CYCLE companies"
+      },
+      {
+        "type": "paragraph",
+        "text": "Examples: Toyota, Intel, Microsoft, Google, Apple, Nvidia, Cisco, Seagate."
+      },
+      {
+        "type": "paragraph",
+        "text": "a few years ago : F A A N G"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "Facebook, Amazon, Apple, Netflix, Google"
+      },
+      {
+        "type": "paragraph",
+        "text": "and now : M A N G A"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "Meta Apple Nvidia (same as above)"
+      },
+      {
+        "type": "paragraph",
+        "text": "The objective of this course, TIM 172A/P, is to develop the building blocks (tools, techniques,...) & a framework (or methodology) integrating these BBs, in order to be a fast-cycle company or competitor."
+      }
+    ],
+    "summary_topic_line": "Risk management and fast-cycle companies as the objective of course TIM 172A/P",
+    "summary_gist": "Tech companies must manage technology (product development) and commercialization (market) risk. Companies that manage risk while developing high-quality products rapidly and at low cost are called fast-cycle companies (e.g., Toyota, Intel, Microsoft, Google, Apple, Nvidia, Cisco, Seagate; FAANG previously, MANGA now). The course TIM 172A/P aims to develop the building blocks and a framework to become a fast-cycle company."
+  },
+  "transcription": "2. In addition, the tech. company needs to\nbe able to successfully manage RISK:\n   (a) Technology (Product Development) RISK\n   (b) Commercialization (Market) RISK\n\n3. Companies that can successfully manage RISK,\nand at the same time develop high-quality\nproducts, rapidly, and at low cost are called\nFAST-CYCLE companies\n\n   Examples: Toyota, Intel, Microsoft,\n             Google, Apple, Nvidia, Cisco,\n             Seagate.\n\n   a few years ago : F A A N G\n                     [figure]\n   Facebook, Amazon, Apple, Netflix,\n                                Google\n\n   and now        : M A N G A\n                    [figure]\n   Meta Apple Nvidia        same as\n                            above\n\n4. The objective of this course, TIM 172A/P,\nis to develop the building blocks (tools, techniques,...)\n& a framework (or methodology) integrating\nthese BBs, in order to be a fast-cycle\ncompany or competitor.",
+  "distinctive_terms": [
+    "RISK",
+    "Technology (Product Development) RISK",
+    "Commercialization (Market) RISK",
+    "FAST-CYCLE companies",
+    "fast-cycle",
+    "FAANG",
+    "MANGA",
+    "TIM 172A/P",
+    "building blocks",
+    "BBs"
+  ],
+  "_draft": true
+}

@@ -1,0 +1,119 @@
+{
+  "note_id": "cse138-007",
+  "transcription": "Vector clock rules:\n\nAll elements are ≤, one element must be <: Happens before\nAll elements are ≥, one element must be >: Happens after\nOtherwise: Concurrent\n\nLamport Clocks use up less bandwidth in a network\nthan VCs, which could be significant.\n- Also have to know number of total participants\n(Some implementations could work around these shortcomings)\n\nProtocol: A set of rules that processes use\nto communicate with each other, telling you\nwhat messages you can send, in terms of what\nmessages you've recieved → or what you can\ndo locally\nAlice Bob Alice Bob\n\nSafety Properties\nSending a message is something you do.\nFIFO message delivery violation\nP₁ P₂\n[figure]\nReceiving a message is something that happens to you\nDelivering a message is\nsomething you choose (or not)\nto do with a message\nyou've recieved.",
+  "extracted_json": {
+    "title": "Vector clock rules",
+    "blocks": [
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "All elements are $\\leq$, one element must be <: Happens before",
+            "level": 0
+          },
+          {
+            "text": "All elements are $\\geq$, one element must be >: Happens after",
+            "level": 0
+          },
+          {
+            "text": "Otherwise: Concurrent",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Lamport Clocks use up less bandwidth in a network than VCs, which could be significant."
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Also have to know number of total participants",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "(Some implementations could work around these shortcomings)"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Protocol"
+      },
+      {
+        "type": "paragraph",
+        "text": "A set of rules that processes use to communicate with each other, telling you what messages you can send, in terms of what messages you've recieved → or what you can do locally"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Alice Bob",
+            "level": 0
+          },
+          {
+            "text": "Alice Bob",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Safety Properties"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Sending a message is something you do.",
+            "level": 0
+          },
+          {
+            "text": "FIFO message delivery violation",
+            "level": 0
+          },
+          {
+            "text": "$P_1$ $P_2$",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Receiving a message is something that happens to you",
+            "level": 0
+          },
+          {
+            "text": "Delivering a message is something you choose (or not) to do with a message you've recieved.",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Vector clock rules",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "Vector clock",
+    "Lamport Clocks",
+    "VCs (Vector Clocks)",
+    "Happens before / Happens after",
+    "Concurrent",
+    "bandwidth",
+    "Protocol",
+    "Safety Properties",
+    "FIFO message delivery",
+    "FIFO violation",
+    "Sending / Receiving / Delivering a message"
+  ]
+}

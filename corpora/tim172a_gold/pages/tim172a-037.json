@@ -1,0 +1,61 @@
+{
+  "note_id": "tim172a-037",
+  "extracted_json": {
+    "title": "1.4 Technology Strategy (TS)",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "1.4 Technology Strategy (TS)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Definitions (in the form of questions) — Example (CISCO)",
+            "level": 0
+          },
+          {
+            "text": "(i) What are the core technologies that give the company a technological advantage over its competitors",
+            "level": 1
+          },
+          {
+            "text": "Example: advanced, state-of-the-art Computer Network (CN) Technologies (routers, switches,...) for a wide variety of customers",
+            "level": 2
+          },
+          {
+            "text": "(ii) What is the company's approach to product & technology development",
+            "level": 1
+          },
+          {
+            "text": "Example: World Leader in CN Technologies, based on advanced R&D, new product development, & acquisitions",
+            "level": 2
+          },
+          {
+            "text": "R&D: research & development",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Technology Strategy (TS): defining questions illustrated with CISCO.",
+    "summary_gist": "Notes frame Technology Strategy as a set of questions paired with a CISCO example. (i) Identifies the core technologies giving a company a technological advantage over competitors—for CISCO, advanced state-of-the-art Computer Network (CN) technologies like routers and switches for a wide variety of customers. (ii) Asks about the company's approach to product and technology development—CISCO is a world leader in CN technologies, driven by advanced R&D, new product development, and acquisitions."
+  },
+  "transcription": "1.4   Technology Strategy (TS)\n\n        Definitions              Example\n   (in the form of questions)    (CISCO)\n\n(i) What are the core        - advanced, state-of-the-\n   technologies that give      art Computer Network (CN)\n   the company a               Technologies (routers, switches,...)\n   technological advantage     for a wide variety of\n   over its competitors        customers\n\n(ii) What is the company's   - World Leader in CN\n    approach to product &       Technologies, based on\n    technology development      advanced R&D, new\n                               product development, &\n                               acquisitions\n\n                               R&D: research & development",
+  "distinctive_terms": [
+    "Technology Strategy",
+    "TS",
+    "CISCO",
+    "core technologies",
+    "technological advantage",
+    "Computer Network",
+    "CN",
+    "routers",
+    "switches",
+    "R&D",
+    "research & development",
+    "product development",
+    "acquisitions"
+  ],
+  "_draft": true
+}

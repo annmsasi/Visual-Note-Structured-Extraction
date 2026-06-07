@@ -1,0 +1,78 @@
+{
+  "note_id": "tim172a-012",
+  "extracted_json": {
+    "title": "HW #1, Prob #1 — Applying the SPSP to \"Improve the existing cell-phone\"",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "(back to) HW # 1 , Prob # 1"
+      },
+      {
+        "type": "paragraph",
+        "text": "Problem as given : \"Improve the existing cell-phone.\""
+      },
+      {
+        "type": "paragraph",
+        "text": "⟹ Vague, open-ended statement"
+      },
+      {
+        "type": "paragraph",
+        "text": "Apply the SPSP to this problem"
+      },
+      {
+        "type": "paragraph",
+        "text": "Step 1 : Define the (real) problem (requires reflection, thinking, asking questions)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Rough conceptual sketch }"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Establish the sub-problems ( SPs )"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "SP1 : Establish customer needs that all (generic) cell-phones should satisfy",
+            "level": 0
+          },
+          {
+            "text": "SP2 : Assess existing cell-phone products to determine how well these customer needs are satisfied",
+            "level": 0
+          },
+          {
+            "text": "SP3 : Identify (generate) ways (or solutions) to improve existing cell-phones w.r.t. (a) customer needs (from SP1) & assessment (from SP2)",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "w.r.t.: with respect to"
+      }
+    ],
+    "summary_topic_line": "Applying the SPSP method to define and decompose the vague problem of improving an existing cell-phone.",
+    "summary_gist": "The page works HW #1, Prob #1, where the given problem (\"Improve the existing cell-phone\") is identified as vague and open-ended. Step 1 of the SPSP is to define the real problem, which requires reflection and questioning, illustrated with a rough conceptual sketch (Customer Needs → Assess → Improve). The problem is then broken into three sub-problems: SP1 establishes generic customer needs, SP2 assesses how well existing products satisfy them, and SP3 identifies ways to improve cell-phones with respect to SP1's needs and SP2's assessment."
+  },
+  "transcription": "(back to)    HW # 1 , Prob # 1\n\n        Problem  as given   :  \"Improve the existing\n                                          cell-phone.\"\n                ⟹ Vague, open-ended statement\n\n        Apply  the  SPSP  to  this  problem\n\n        Step 1 :   Define the (real) problem\n                    (requires reflection, thinking, asking\n                      questions)\n\n   Rough conceptual  } [figure]\n   sketch\n\n        Establish  the  sub-problems  ( SPs )\n\n   SP1 :   Establish  customer  needs that all (generic)\n              cell-phones  should satisfy\n\n   SP2 :  Assess  existing  cell-phone products to\n              determine how  well these customer needs\n   w.r.t.:   are  satisfied\n\n   with\n   respect to   SP3 :    Identify (generate) ways (or solutions)\n                    to improve existing cell-phones  w.r.t.\n                    (a) customer needs(from SP1)& assessment\n                       (from SP2)",
+  "distinctive_terms": [
+    "SPSP",
+    "sub-problems",
+    "SPs",
+    "SP1",
+    "SP2",
+    "SP3",
+    "customer needs",
+    "w.r.t.",
+    "conceptual sketch"
+  ],
+  "_draft": true
+}

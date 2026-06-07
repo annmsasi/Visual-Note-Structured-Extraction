@@ -1,0 +1,393 @@
+{
+  "note_id": "TIM-172A-Lecture-4-10-07-25",
+  "transcription": "Step 3 of the SPSP : Execute the plan\n\n  Step 1 :  Create a structural map ....\n              ( e.g. Personal Computer Industry)\n                            1980s\n\n[figure]\nStep 2 : Perform a five (or six) forces analysis\n          of the I/M landscape or structure\n\nProcess :\n(a) — For each force, there is a set of\n       determinants that affect the intensity\n       (or strength) of the force\n\nExample : Force 1 ( Rivalry between\n          competitors) is affected by\n          concentration (or # of competitors),\n          the size (or Sales Revenue $, of\n          each competitor)\n\n(b) — A list of determinants for each of\n      the 5 forces is given in Table 1 of\n      the LNCS handout (column 2)\n\n(c) — For each force, determine the\n      qualitative strength of that force\n      ( High, Medium, Low) based on the\n      determinants in Table 1, column 2\n\n(d) — Table 1, Column 3, shows the qualitative\n      strength of each of the 5 forces for\n      the PC industry in the 1980s\nStep 3 : Determine the attractiveness of\n            the industry as a whole\n                Qualitative : H, M, L\n\nDef :   The attractiveness (i.e., profit potential\n        as measured by the ROIC) is determined\n        by the cumulative (or total) strength\n        of the 5 forces\n\n        If the cumulative strength of the 5 forces\n        is high (H), then the industry is not\n        attractive to new entrants or substitutes\n\nExample :   From Table 1, which shows the\n            qualitative strength of each force\n            (in column 3), the cumulative (or\n            total) strength of the 5 forces in\n            the PC industry in the 1980s is\n            \" medium (M) to high (H) \"\n\n        ⟹ PC industry (of the 1980s) is (probably)\n           not attractive to new entrants or\n           substitutes.\nStep 4 : Determine or decide on the\n            company's position or competitive\n            strategy to compete successfully\n            in the I/M landscape\n\nProcess :   Create a 2-dimensional grid\n            - Product dimension, which has\n              2 extremes\n              (i) unique product, as perceived\n                  by the customers, differentiated\n                  by attributes such as\n                  quality (additional features),\n                  reliability, user-interface, ... .\n              (ii)  lowest cost product\n\n            - Market dimension (or Target\n              market for the product), which\n              has 2 extremes\n              (i) a product for the entire market\n              (ii) a product for a particular\n                   (or niche) segment of the\n                   market.\n[figure]\n\n(PC Industry in the 1980s)\n\nAccording to Porter, for a company to be\nsuccessful in a particular industry, it\nmust adopt one (and only one) of the following\nthree competitive strategies :\n   - ① Differentiated strategy : ..... (fill in)\n   - ② Cost Leadership : ..... ( \" )\n   - ③ Focus: .....\n   - ④ stuck-in-the-middle (not recommended)\nComment : Competitive strategy is dynamic\n(evolutionary) ⟹ companies change\ntheir competitive strategy with time\n⟹ the creation of functional\nmaps guides the evolution of\nstrategy\n\nStep 5 : Determine the relationships between\nthe different sets of players in\nthe I/M landscape\n\nExample : The Intel Case Study (HW#2, Prob#2)\n\n— What relationships did Intel\n(the competitor in the micro-\nprocessor industry) have with\nits suppliers?\n— Single sourcing\n— ...\n\n— What relationships have with\nits buyers (i.e., computer\nmanufacturers)\ne.g. \"Intel Inside\"\n...\nWINTEL\nTIM 172 A, Lecture # 4 (10/07/25)\n\n   Agenda:\n\n1. Complete the I/M Structural (aka\n      Competitive) Analysis\n              — done (see above)\n\n2.   HW # 2, Prob. 2 (Intel)\n\n3.   Functional Maps (HW #2, Prob. 1)\nHW # 2, Prob. 2\n\nContext :\n\n[figure]\n\nDisk-\nDrive\nIndustry\n(Prob. 1)\n\nmicroprocessor\nindustry\n(Prob # 2 )\nIntel\n\nIntel :\n\nHW # 2,        ⎧ — Intel as a DRAM company (1968 - ~1974)\nProb 2          ⎨\n                    ⎩ — Intel as a Microprocessor company\n                                                    (~1974 — present)\n                                                              1997\n\nHW # 2, Prob 2 :  Analyse Intel, the Microprocessor\n                            company\n\n                          — structural analysis, etc.",
+  "extracted_json": {
+    "title": "Step 3 of the SPSP: Execute the Plan — Structural Map (Five Forces)",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 3 of the SPSP : Execute the plan"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Step 1 : Create a structural map ...."
+      },
+      {
+        "type": "paragraph",
+        "text": "( e.g. Personal Computer Industry)  1980s"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 2: Perform a five (or six) forces analysis of the I/M landscape or structure"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Process:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "For each force, there is a set of determinants that affect the intensity (or strength) of the force",
+            "level": 1
+          },
+          {
+            "text": "Example: Force 1 (Rivalry between competitors) is affected by concentration (or # of competitors), the size (or Sales Revenue $, of each competitor)",
+            "level": 2
+          },
+          {
+            "text": "A list of determinants for each of the 5 forces is given in Table 1 of the LNCS handout (column 2)",
+            "level": 1
+          },
+          {
+            "text": "For each force, determine the qualitative strength of that force (High, Medium, Low) based on the determinants in Table 1, column 2",
+            "level": 1
+          },
+          {
+            "text": "Table 1, Column 3, shows the qualitative strength of each of the 5 forces for the PC industry in the 1980s",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 3 : Determine the attractiveness of the industry as a whole"
+      },
+      {
+        "type": "paragraph",
+        "text": "Qualitative : H, M, L"
+      },
+      {
+        "type": "paragraph",
+        "text": "Def : The attractiveness (i.e., profit potential as measured by the ROIC) is determined by the cumulative (or total) strength of the 5 forces"
+      },
+      {
+        "type": "paragraph",
+        "text": "If the cumulative strength of the 5 forces is high (H), then the industry is not attractive to new entrants or substitutes"
+      },
+      {
+        "type": "paragraph",
+        "text": "Example : From Table 1, which shows the qualitative strength of each force (in column 3), the cumulative (or total) strength of the 5 forces in the PC industry in the 1980s is \"medium (M) to high (H)\""
+      },
+      {
+        "type": "paragraph",
+        "text": "⟹ PC industry (of the 1980s) is (probably) not attractive to new entrants or substitutes."
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 4"
+      },
+      {
+        "type": "paragraph",
+        "text": "Determine or decide on the company's position or competitive strategy to compete successfully in the I/M landscape"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Process"
+      },
+      {
+        "type": "paragraph",
+        "text": "Create a 2-dimensional grid"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Product dimension, which has 2 extremes",
+            "level": 0
+          },
+          {
+            "text": "(i) unique product, as perceived by the customers, differentiated by attributes such as quality (additional features), reliability, user-interface, ... .",
+            "level": 1
+          },
+          {
+            "text": "(ii) lowest cost product",
+            "level": 1
+          },
+          {
+            "text": "Market dimension (or Target market for the product), which has 2 extremes",
+            "level": 0
+          },
+          {
+            "text": "(i) a product for the entire market",
+            "level": 1
+          },
+          {
+            "text": "(ii) a product for a particular (or niche) segment of the market.",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "(PC Industry in the 1980s)"
+      },
+      {
+        "type": "paragraph",
+        "text": "According to Porter, for a company to be successful in a particular industry, it must adopt one (and only one) of the following three competitive strategies :"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "① Differentiated strategy : ..... (fill in)",
+            "level": 0
+          },
+          {
+            "text": "② Cost Leadership : ..... ( \" )",
+            "level": 0
+          },
+          {
+            "text": "③ Focus: .....",
+            "level": 0
+          },
+          {
+            "text": "④ stuck-in-the-middle (not recommended)",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Comment: Competitive strategy is dynamic (evolutionary) ⟹ companies change their competitive strategy with time ⟹ the creation of functional maps guides the evolution of strategy"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Step 5: Determine the relationships between the different sets of players in the I/M landscape"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Example: The Intel Case Study (HW#2, Prob#2)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "What relationships did Intel (the competitor in the microprocessor industry) have with its suppliers?",
+            "level": 1
+          },
+          {
+            "text": "Single sourcing",
+            "level": 2
+          },
+          {
+            "text": "...",
+            "level": 2
+          },
+          {
+            "text": "What relationships have with its buyers (i.e., computer manufacturers)",
+            "level": 1
+          },
+          {
+            "text": "e.g. \"Intel Inside\"",
+            "level": 2
+          },
+          {
+            "text": "...",
+            "level": 2
+          },
+          {
+            "text": "WINTEL",
+            "level": 2
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "TIM 172 A, Lecture # 4 (10/07/25)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Agenda:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Complete the I/M Structural (aka Competitive) Analysis — done (see above)",
+            "level": 1
+          },
+          {
+            "text": "HW # 2, Prob. 2 (Intel)",
+            "level": 1
+          },
+          {
+            "text": "Functional Maps (HW #2, Prob. 1)",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "HW # 2, Prob. 2"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Context :"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "Disk-Drive Industry (Prob. 1)"
+      },
+      {
+        "type": "paragraph",
+        "text": "microprocessor industry (Prob # 2) Intel"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Intel :"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "HW # 2, Prob 2: Intel as a DRAM company (1968 - ~1974)",
+            "level": 0
+          },
+          {
+            "text": "Intel as a Microprocessor company (~1974 — present / 1997)",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "HW # 2, Prob 2 : Analyse Intel, the Microprocessor company"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "structural analysis, etc.",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Step 1 of executing the SPSP: building a Five Forces structural map of the 1980s PC industry.",
+    "summary_gist": "Notes on Step 3 (Execute the plan) of the SPSP, beginning with Step 1: creating a structural map, illustrated with a Five Forces diagram of the 1980s Personal Computer Industry. The diagram maps Competitors (F1: rivalry) against New entrants (F2, barriers to entry; Compaq, NCR), Suppliers (F4 supplier power; microprocessor Intel/AMD, OS Microsoft, storage Seagate), Buyers (F5 buyer power; consumers, enterprises), and Substitutes (F3, barriers to entry; pen computing GO/Apple, PDA Palm), with PC competitors IBM, HP, Dell, Apple noted. Outlines the process for a five/six forces analysis of an industry/market landscape. Each force has determinants that affect its intensity (e.g., Force 1 Rivalry is affected by concentration and competitor size/sales revenue). Determinants for the 5 forces are listed in Table 1 column 2 of the LNCS handout; the qualitative strength (High/Medium/Low) of each force is determined from these, with Table 1 column 3 showing strengths for the 1980s PC industry. Step 3 of industry analysis is determining the overall attractiveness (profit potential as measured by ROIC) of an industry, rated qualitatively as High, Medium, or Low based on the cumulative strength of the five forces. High cumulative strength means the industry is not attractive to new entrants or substitutes. Example: the PC industry of the 1980s had medium-to-high cumulative force strength, so it was probably not attractive. These notes describe Step 4 of a process for deciding a company's competitive strategy to compete in the I/M landscape. The method uses a 2-dimensional grid. The product dimension ranges between two extremes: a unique product (differentiated by attributes like quality, reliability, and user-interface) and a lowest-cost product. The market dimension (target market) also ranges between two extremes: a product for the entire market versus a product for a particular or niche market segment. The page presents Michael Porter's framework of generic competitive strategies, mapped on a matrix of target market (market-wide vs. particular segment) against product (unique product vs. low cost), with examples from the 1980s PC industry (HP, IBM, DELL, Apple). Per Porter, a company must adopt exactly one of three strategies: differentiated strategy, cost leadership, or focus; being 'stuck-in-the-middle' is a fourth, non-recommended outcome. The page notes that competitive strategy is dynamic and evolutionary, with functional maps guiding its evolution. Step 5 is to determine the relationships between different sets of players in the I/M landscape. The Intel Case Study (HW#2, Prob#2) is used as an example, examining Intel's relationships with its suppliers (e.g., single sourcing) and with its buyers/computer manufacturers (e.g., the \"Intel Inside\" campaign and WINTEL). This is the opening agenda page for TIM 172A, Lecture #4 (10/07/25). It lists three items: (1) completing the I/M Structural (aka Competitive) Analysis, noted as done; (2) HW #2, Prob. 2 (Intel); and (3) Functional Maps (HW #2, Prob. 1). Frames Homework #2, Problem 2 in the context of the IT industry, which contains the computer industry, disk-drive industry (Prob. 1) and microprocessor industry (Prob. 2, Intel). Intel is described in two phases: as a DRAM company (1968–~1974) and as a microprocessor company (~1974–present/1997). The assigned task is to analyze Intel, the microprocessor company, including a structural analysis."
+  },
+  "distinctive_terms": [
+    "SPSP",
+    "structural map",
+    "Personal Computer Industry",
+    "New entrants",
+    "Compaq",
+    "NCR",
+    "Competitors in the PC industry",
+    "IBM",
+    "HP",
+    "Dell",
+    "Apple",
+    "Barriers to entry",
+    "F2: threat of new entrants",
+    "Suppliers",
+    "Microprocessor",
+    "Intel",
+    "AMD",
+    "Operating System",
+    "Microsoft",
+    "storage",
+    "Seagate",
+    "F4: Supplier Power",
+    "Competitors",
+    "Force 1 (F1): Rivalry between competitors",
+    "Buyers",
+    "Consumers",
+    "Enterprises",
+    "F5: Buyer Power",
+    "F3: threat of substitutes",
+    "Substitutes",
+    "Pen Computing",
+    "GO",
+    "PDA",
+    "PALM",
+    "Five Forces",
+    "five (or six) forces analysis",
+    "I/M landscape",
+    "determinants",
+    "intensity",
+    "Rivalry between competitors",
+    "concentration",
+    "Sales Revenue",
+    "Table 1",
+    "LNCS handout",
+    "qualitative strength",
+    "PC industry",
+    "attractiveness",
+    "profit potential",
+    "ROIC",
+    "cumulative strength",
+    "5 forces",
+    "competitive strategy",
+    "company's position",
+    "2-dimensional grid",
+    "Product dimension",
+    "Market dimension",
+    "Target market",
+    "unique product",
+    "lowest cost product",
+    "differentiated",
+    "user-interface",
+    "niche segment",
+    "Porter",
+    "Differentiated strategy",
+    "Cost Leadership",
+    "Focus",
+    "stuck-in-the-middle",
+    "competitive strategies",
+    "Market-wide",
+    "Particular segment",
+    "Low cost",
+    "functional maps",
+    "microprocessor industry",
+    "single sourcing",
+    "Intel Inside",
+    "WINTEL",
+    "Step 5",
+    "TIM 172A",
+    "I/M Structural Analysis",
+    "Competitive Analysis",
+    "IT Industry",
+    "Computer industry",
+    "Disk-Drive Industry",
+    "DRAM",
+    "structural analysis"
+  ],
+  "pages": [
+    "tim172a-024",
+    "tim172a-025",
+    "tim172a-026",
+    "tim172a-027",
+    "tim172a-028",
+    "tim172a-029",
+    "tim172a-030",
+    "tim172a-031"
+  ]
+}

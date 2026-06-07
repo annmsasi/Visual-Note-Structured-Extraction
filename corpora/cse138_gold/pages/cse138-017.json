@@ -1,0 +1,88 @@
+{
+  "note_id": "cse138-017",
+  "transcription": "Replication\nAvailability\n- Guarding against data loss\n- data locality\n- dividing up the work (scalability), handling\nmore requests\n\nBUT... keeping replicas consistent is very\ndifficult\n\nViolation of totally ordered delivery can lead to\ninconsistent replicas (nondeterministic) due to network fluctuations\n\nDeterminism: is about the relationship between different\nexecutions to each other\nDifferent\nConsistency: A replicated storage system is\nstrongly consistent if a client couldn't tell\nthat the data is replicated\n\nSomehow, we need totally ordered message delivery\nin order to guarantee strong consistency.",
+  "extracted_json": {
+    "title": "Replication",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Availability"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Guarding against data loss",
+            "level": 0
+          },
+          {
+            "text": "data locality",
+            "level": 0
+          },
+          {
+            "text": "dividing up the work (scalability), handling more requests",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "BUT... keeping replicas consistent is very difficult"
+      },
+      {
+        "type": "paragraph",
+        "text": "Violation of totally ordered delivery can lead to inconsistent replicas (nondeterministic) due to network fluctuations"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Determinism"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "is about the relationship between different executions to each other",
+            "level": 0
+          },
+          {
+            "text": "Different",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Consistency"
+      },
+      {
+        "type": "paragraph",
+        "text": "A replicated storage system is strongly consistent if a client couldn't tell that the data is replicated"
+      },
+      {
+        "type": "paragraph",
+        "text": "Somehow, we need totally ordered message delivery in order to guarantee strong consistency."
+      }
+    ],
+    "summary_topic_line": "Replication",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "Replication",
+    "Availability",
+    "data locality",
+    "scalability",
+    "replicas",
+    "totally ordered delivery",
+    "inconsistent replicas",
+    "nondeterministic",
+    "Determinism",
+    "Consistency",
+    "replicated storage system",
+    "strongly consistent",
+    "totally ordered message delivery",
+    "strong consistency"
+  ]
+}

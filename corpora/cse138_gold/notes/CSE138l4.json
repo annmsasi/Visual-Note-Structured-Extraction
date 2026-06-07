@@ -1,0 +1,255 @@
+{
+  "note_id": "CSE138l4",
+  "transcription": "3) When sending a message, a process\nattaches its vector clock to the message.\n\n4) When receiving a message, you take the\nmaximum of the recieved VC and your own local VC\nand increment your own position by 1 because reciev\nis an event.\n\npointwise maximum: Max ([1,12,4], [7,0,2]\n= [7,12,4]\n\nCSE138 Lecture #4\n\n[figure]\n\nHappens before vector clock\n$e_1 \\to e_2 \\Longleftrightarrow VC(e_1) < VC(e_2)$\nVector clock rules:\n\nAll elements are ≤, one element must be <: Happens before\nAll elements are ≥, one element must be >: Happens after\nOtherwise: Concurrent\n\nLamport Clocks use up less bandwidth in a network\nthan VCs, which could be significant.\n- Also have to know number of total participants\n(Some implementations could work around these shortcomings)\n\nProtocol: A set of rules that processes use\nto communicate with each other, telling you\nwhat messages you can send, in terms of what\nmessages you've recieved → or what you can\ndo locally\nAlice Bob Alice Bob\n\nSafety Properties\nSending a message is something you do.\nFIFO message delivery violation\nP₁ P₂\n[figure]\nReceiving a message is something that happens to you\nDelivering a message is\nsomething you choose (or not)\nto do with a message\nyou've recieved.\nFIFO message delivery: If a process sends message\nm₂ after message m₁, then a process delivering\nboth delivers m₁ first. (2 messages, same sender and rec.)\n\nHow to implement?\n\nSequence numbers (TCP)\n        - Messages have id and sequence #s.\n        - Messages are delivered when they are one more than\n          the last sequence number.\n\nWhat if a message gets lost?\n        It breaks\n        This strategy only works if you have reliable\n        delivery (TCP does)\n\n                    (TCP also does this)\nAcknowledgements\n        - Can only send one once an acknowledgement\nis received\n        - Slower, more steps and also a risk of ack being\ndropped\n\nCausal Message Delivery:\n        If the send of a message m₁ happens before\n        the send of a message m₂, then any process\n        delivering both delivers m₁ first. (m₁ & m₂ could\n        have different senders.)\n                - All FIFO violations are causal delivery\n                violations, (not vice versa)\n        vector clocks can ensure causal message delivery",
+  "extracted_json": {
+    "title": "CSE138 Lecture #4",
+    "blocks": [
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "3) When sending a message, a process attaches its vector clock to the message.",
+            "level": 0
+          },
+          {
+            "text": "4) When receiving a message, you take the maximum of the recieved VC and your own local VC and increment your own position by 1 because reciev is an event.",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "pointwise maximum:"
+      },
+      {
+        "type": "equation",
+        "latex": "\\text{Max}([1,12,4],[7,0,2]) = [7,12,4]"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Happens before vector clock"
+      },
+      {
+        "type": "equation",
+        "latex": "e_1 \\to e_2 \\Longleftrightarrow VC(e_1) < VC(e_2)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "All elements are $\\leq$, one element must be <: Happens before",
+            "level": 0
+          },
+          {
+            "text": "All elements are $\\geq$, one element must be >: Happens after",
+            "level": 0
+          },
+          {
+            "text": "Otherwise: Concurrent",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Lamport Clocks use up less bandwidth in a network than VCs, which could be significant."
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Also have to know number of total participants",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "(Some implementations could work around these shortcomings)"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Protocol"
+      },
+      {
+        "type": "paragraph",
+        "text": "A set of rules that processes use to communicate with each other, telling you what messages you can send, in terms of what messages you've recieved → or what you can do locally"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Alice Bob",
+            "level": 0
+          },
+          {
+            "text": "Alice Bob",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Safety Properties"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Sending a message is something you do.",
+            "level": 0
+          },
+          {
+            "text": "FIFO message delivery violation",
+            "level": 0
+          },
+          {
+            "text": "$P_1$ $P_2$",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Receiving a message is something that happens to you",
+            "level": 0
+          },
+          {
+            "text": "Delivering a message is something you choose (or not) to do with a message you've recieved.",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "If a process sends message $m_2$ after message $m_1$, then a process delivering both delivers $m_1$ first. (2 messages, same sender and receiver)"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "How to implement?"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Sequence numbers (TCP)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Messages have id and sequence #s.",
+            "level": 0
+          },
+          {
+            "text": "Messages are delivered when they are one more than the last sequence number.",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "What if a message gets lost?"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "It breaks",
+            "level": 0
+          },
+          {
+            "text": "This strategy only works if you have reliable delivery (TCP does)",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Acknowledgements (TCP also does this)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Can only send one once an acknowledgement is received",
+            "level": 0
+          },
+          {
+            "text": "Slower, more steps and also a risk of ack being dropped",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Causal Message Delivery"
+      },
+      {
+        "type": "paragraph",
+        "text": "If the send of a message $m_1$ happens before the send of a message $m_2$, then any process delivering both delivers $m_1$ first. ($m_1$ & $m_2$ could have different senders.)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "All FIFO violations are causal delivery violations, (not vice versa)",
+            "level": 0
+          },
+          {
+            "text": "vector clocks can ensure causal message delivery",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "CSE138 Lecture #4",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "vector clock",
+    "VC",
+    "pointwise maximum",
+    "CSE138",
+    "Happens before",
+    "$e_1 \\to e_2$",
+    "$VC(e_1) < VC(e_2)$",
+    "Lamport Clocks",
+    "VCs (Vector Clocks)",
+    "Happens before / Happens after",
+    "Concurrent",
+    "bandwidth",
+    "Protocol",
+    "Safety Properties",
+    "FIFO message delivery",
+    "FIFO violation",
+    "Sending / Receiving / Delivering a message",
+    "TCP",
+    "sequence numbers",
+    "acknowledgements",
+    "ack",
+    "Causal Message Delivery",
+    "vector clocks"
+  ],
+  "pages": [
+    "cse138-006",
+    "cse138-007",
+    "cse138-008"
+  ]
+}

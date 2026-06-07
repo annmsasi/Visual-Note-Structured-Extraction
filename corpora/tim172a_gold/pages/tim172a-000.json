@@ -1,0 +1,95 @@
+{
+  "note_id": "tim172a-000",
+  "extracted_json": {
+    "title": "TIM 172A: Introduction to MOT-I — Lecture #1",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "TIM 172A : Introduction to MOT-I : Management, Development, and Commercialization (MDC) of New Products and Technologies"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Lecture # 1 (9/25/24)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Subhas Desa"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Instructor, TIM 172A/P, TIM 172B/Q, TIM170, TIM80C",
+            "level": 1
+          },
+          {
+            "text": "Academic Advisor for all students in the Major & Minor.",
+            "level": 1
+          },
+          {
+            "text": "Undergraduate Director of TIM",
+            "level": 1
+          },
+          {
+            "text": "Director (chair) of TIM",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Agenda (for today):"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Structure and Logic of the course",
+            "level": 1
+          },
+          {
+            "text": "Course Overview / syllabus / operation",
+            "level": 1
+          },
+          {
+            "text": "Technology domains of interest",
+            "level": 1
+          },
+          {
+            "text": "Problem-solving",
+            "level": 1
+          },
+          {
+            "text": "HW # 1",
+            "level": 1
+          },
+          {
+            "text": "Relationship of TIM 172A (subject-matter) to TIM 172P (project)",
+            "level": 1
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Introductory lecture for TIM 172A covering instructor background and the day's agenda.",
+    "summary_gist": "First lecture (9/25/24) of TIM 172A, Introduction to MOT-I: Management, Development, and Commercialization (MDC) of New Products and Technologies. Lists instructor Subhas Desa's roles (instructor of several TIM courses, academic advisor, undergraduate director, and chair of TIM). The agenda for the day includes course structure and logic, course overview/syllabus/operation, technology domains of interest, problem-solving, HW #1, and the relationship between TIM 172A (subject-matter) and TIM 172P (project)."
+  },
+  "transcription": "TIM 172A : Introduction to MOT-I :\nManagement, Development, and Commercialization\n(MDC) of New Products and Technologies\nLecture # 1 (9/25/24\n\n        Subhas Desa\n1. Instructor , TIM 172A/P, TIM172B/Q, TIM170,\n        TIM80C\n\n2. Academic Advisor for all students in\n   the Major & Minor.\n\n3. Undergraduate Director of TIM\n\n4. Director (chair) of TIM\n\n   Agenda (for today):\n\n1. Structure and Logic of the course\n\n2. Course Overview / syllabus /operation\n\n3. Technology domains of interest\n\n4. Problem-solving\n\n5. HW # 1\n\n6. Relationship of TIM 172A to TIM 172P\n                    subject-matter      project",
+  "distinctive_terms": [
+    "TIM 172A",
+    "MOT-I",
+    "Management, Development, and Commercialization",
+    "MDC",
+    "TIM 172A/P",
+    "TIM 172B/Q",
+    "TIM170",
+    "TIM80C",
+    "Subhas Desa",
+    "TIM",
+    "TIM 172P",
+    "HW # 1"
+  ],
+  "_draft": true
+}

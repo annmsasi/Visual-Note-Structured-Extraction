@@ -1,0 +1,498 @@
+{
+  "note_id": "TIM-172A-Lecture-2-09-30-25",
+  "transcription": "TIM 172 A, MOT-I, Lecture #2, 9/30/25\n\n   Agenda :\n\n1. Quick summary of  L#1\n\n2.  HW #1 (due on Thursday, 10/2/25)\n\n3.  TIM 172 P\n       • placed all students in group\n       • posted the Project Proposal assignment\n       • for the whole TIM 172A, the \"FILES\"\n         tab on Canvas will contain a \"TIM 172P\" folder\n\nTIM 172A  IMPORTANT NOTE :\n\n  • All submitted work must be TYPEWRITTEN\n  • We will NOT accept handwritten work\n  • Figures, graphics can be hand-drawn, &\n    inserted in the typewritten text.\n1.   Quick  summary  of  L # 1\n        - Fast  cycle  competitors - FAANG & MANGA -\n        can  balance  the  conflicting  trade-offs\n        between product quality, speed, & cost ;\n        and  can  successfully manage  risk.\n        -  This  course  will  develop the building blocks,\n           & a  framework - MDC - for integrating\n           these  blocks\n        -  Professionals (Engineering, Business, ....)\n           generally  use  a  5-step  structured\n           problem-solving process (SPSP):\n\n      Define ⟶ Plan (or Process or Approach) ⟶ Execute ⌐\n                  Learn/Generalize ⟵ Checking ⟵\n2.    HW # 1,  Prob. # 1\n\nPre-liminary instructions ( for all the work\n   - homeworks, exams, project tasks - done in\n   TIM 172A/P  and beyond.) :\n\n  1. Develop a planning (habit)\n            - Create a simple plan (what, when,\n              how long, .....) for doing all the\n              problems in an assigment\n\n  2. Develop a structured problem -solving (habit.)\n            - Download the SPSP handout on Canvas\n            - For every problem, \"copy-and-paste\"\n              the handout into your proposed solution\n            - Decide which sub- steps ( for each\n              of the 5 primary steps) are relevant\n              or necessary to the solution of your\n              particular problem\n                 ⇒ Customize the SPSP for\n                    your particular problem.\n(back to)    HW # 1 , Prob # 1\n\n        Problem  as given   :  \"Improve the existing\n                                          cell-phone.\"\n                ⟹ Vague, open-ended statement\n\n        Apply  the  SPSP  to  this  problem\n\n        Step 1 :   Define the (real) problem\n                    (requires reflection, thinking, asking\n                      questions)\n\n   Rough conceptual  } [figure]\n   sketch\n\n        Establish  the  sub-problems  ( SPs )\n\n   SP1 :   Establish  customer  needs that all (generic)\n              cell-phones  should satisfy\n\n   SP2 :  Assess  existing  cell-phone products to\n              determine how  well these customer needs\n   w.r.t.:   are  satisfied\n\n   with\n   respect to   SP3 :    Identify (generate) ways (or solutions)\n                    to improve existing cell-phones  w.r.t.\n                    (a) customer needs(from SP1)& assessment\n                       (from SP2)\nStep 2 :   Create a  PLAN\n\n(a)  Assumptions\n      whom am I ? : perhaps an engineer or\n                        a marketing analyst at\n                        a cell-phone company like\n                        Apple, Samsung, ...\n\n      who is the solution for : for the new product\n                                  development team, ...,\n                                  CTO, CEO\n\n      which type (manufacturer) }  :  OBVIOUS\n      of cell-phones should         (\"Be practical\")\n      I (you) focus on\n\n(b)  What information do I need ?\n      - how cell-phones work ⇒ functions &\n                                  customer needs of\n      (\"HOW STUFFWORKS.COM\")      cell-phones, &\n                                  how they are\n                                  realized (made\n                                  real) or FORM\n\n      - other (?)\nCreate a plan for solving each sub-problem\n                                                    (SP)\n\n\nSP1 :    Establish needs.......\n                  { - how cell-phone work\n        Plan      { - Internet research\n                  { - list of customer needs\n                  {      (functions, features, ...)\n                  {      -    ?\n                  {      -    ?\n\n\nSP2 :    Assess how well .... .\n                  { - your  own experience\n                  { - internet  consumer research\n                  { - customer surveys, ...\n                  { -    ...\n                  { -    ...\n\n\nSP3  :   Improve\n                  { - research (internet)\n                  { - creative brainstorming\n                  { -    ...?\nStep 3 :   Execute  the  plan\n\nof the SPSP                    SP1 : (from the   : execute : 1-2 hrs\nprocess                                  plan)              plan\n                                              steps\n\n                                   SP2 :   . . . . .   execute : 2-4hrs\n                                                              plan\n\n                                   SP3 :   . - - - - -   execute : 2-4 hrs\n                                                              plan\n\n\n            How  should  I  present  my  results :\n                        Table ?\n\n\nexamples\n\n[figure]\nStep 4         :    Check  your  work\n(of the SPSP)        (Reflect, ... ask questions, ...)\n\n  Step 5         :    Learn & generalize\n                       — about cell-phones & improving\n                          them\n                       —  yourself  as  a  problem-solver\n\n\n   HW # 1 , Prob 2\n\n        simpler  version  of  Prob 1\n\n\n            TA  structure  for  TIM 172A\n\n[figure]\n\n      Infrastructure              Customer & Grader\n     (Canvas, ....)                     facing\n          Vihan                          Fariha\n\n\n   Please  do  not  use  \"Canvas Notifications\"\n        to  contact us",
+  "extracted_json": {
+    "title": "TIM 172A, MOT-I, Lecture #2 — Agenda &amp; Important Note",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "TIM 172 A, MOT-I, Lecture #2, 9/30/25"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Agenda :"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Quick summary of L#1",
+            "level": 0
+          },
+          {
+            "text": "HW #1 (due on Thursday, 10/2/25)",
+            "level": 0
+          },
+          {
+            "text": "TIM 172 P",
+            "level": 0
+          },
+          {
+            "text": "placed all students in group",
+            "level": 1
+          },
+          {
+            "text": "posted the Project Proposal assignment",
+            "level": 1
+          },
+          {
+            "text": "for the whole TIM 172A, the \"FILES\" tab on Canvas will contain a \"TIM 172P\" folder",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "TIM 172A IMPORTANT NOTE :"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "All submitted work must be TYPEWRITTEN",
+            "level": 0
+          },
+          {
+            "text": "We will NOT accept handwritten work",
+            "level": 0
+          },
+          {
+            "text": "Figures, graphics can be hand-drawn, & inserted in the typewritten text.",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Quick summary of L#1"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Fast cycle competitors - FAANG & MANGA - can balance the conflicting trade-offs between product quality, speed, & cost; and can successfully manage risk.",
+            "level": 0
+          },
+          {
+            "text": "This course will develop the building blocks, & a framework - MDC - for integrating these blocks",
+            "level": 0
+          },
+          {
+            "text": "Professionals (Engineering, Business, ....) generally use a 5-step structured problem-solving process (SPSP):",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "HW # 1, Prob. # 1"
+      },
+      {
+        "type": "paragraph",
+        "text": "Pre-liminary instructions (for all the work - homeworks, exams, project tasks - done in TIM 172A/P and beyond.):"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Develop a planning (habit)",
+            "level": 1
+          },
+          {
+            "text": "Create a simple plan (what, when, how long, .....) for doing all the problems in an assigment",
+            "level": 2
+          },
+          {
+            "text": "Develop a structured problem-solving (habit.)",
+            "level": 1
+          },
+          {
+            "text": "Download the SPSP handout on Canvas",
+            "level": 2
+          },
+          {
+            "text": "For every problem, \"copy-and-paste\" the handout into your proposed solution",
+            "level": 2
+          },
+          {
+            "text": "Decide which sub-steps (for each of the 5 primary steps) are relevant or necessary to the solution of your particular problem",
+            "level": 2
+          },
+          {
+            "text": "⇒ Customize the SPSP for your particular problem.",
+            "level": 3
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "(back to) HW # 1 , Prob # 1"
+      },
+      {
+        "type": "paragraph",
+        "text": "Problem as given : \"Improve the existing cell-phone.\""
+      },
+      {
+        "type": "paragraph",
+        "text": "⟹ Vague, open-ended statement"
+      },
+      {
+        "type": "paragraph",
+        "text": "Apply the SPSP to this problem"
+      },
+      {
+        "type": "paragraph",
+        "text": "Step 1 : Define the (real) problem (requires reflection, thinking, asking questions)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Rough conceptual sketch }"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Establish the sub-problems ( SPs )"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "SP1 : Establish customer needs that all (generic) cell-phones should satisfy",
+            "level": 0
+          },
+          {
+            "text": "SP2 : Assess existing cell-phone products to determine how well these customer needs are satisfied",
+            "level": 0
+          },
+          {
+            "text": "SP3 : Identify (generate) ways (or solutions) to improve existing cell-phones w.r.t. (a) customer needs (from SP1) & assessment (from SP2)",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "w.r.t.: with respect to"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 2 : Create a PLAN"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "(a) Assumptions",
+            "level": 0
+          },
+          {
+            "text": "whom am I ? : perhaps an engineer or a marketing analyst at a cell-phone company like Apple, Samsung, ...",
+            "level": 1
+          },
+          {
+            "text": "who is the solution for : for the new product development team, ..., CTO, CEO",
+            "level": 1
+          },
+          {
+            "text": "which type (manufacturer) of cell-phones should I (you) focus on : OBVIOUS (\"Be practical\")",
+            "level": 1
+          },
+          {
+            "text": "(b) What information do I need ?",
+            "level": 0
+          },
+          {
+            "text": "how cell-phones work ⇒ functions & customer needs of cell-phones, & how they are realized (made real) or FORM (\"HOW STUFFWORKS.COM\")",
+            "level": 1
+          },
+          {
+            "text": "other (?)",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Create a plan for solving each sub-problem (SP)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "SP1 : Establish needs......."
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Plan",
+            "level": 0
+          },
+          {
+            "text": "how cell-phone work",
+            "level": 1
+          },
+          {
+            "text": "Internet research",
+            "level": 1
+          },
+          {
+            "text": "list of customer needs (functions, features, ...)",
+            "level": 1
+          },
+          {
+            "text": "?",
+            "level": 1
+          },
+          {
+            "text": "?",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "SP2 : Assess how well .... ."
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "your own experience",
+            "level": 0
+          },
+          {
+            "text": "internet consumer research",
+            "level": 0
+          },
+          {
+            "text": "customer surveys, ...",
+            "level": 0
+          },
+          {
+            "text": "...",
+            "level": 0
+          },
+          {
+            "text": "...",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "SP3 : Improve"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "research (internet)",
+            "level": 0
+          },
+          {
+            "text": "creative brainstorming",
+            "level": 0
+          },
+          {
+            "text": "...?",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 3: Execute the plan"
+      },
+      {
+        "type": "paragraph",
+        "text": "of the SPSP process"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "SP1: (from the plan) steps : execute : 1-2 hrs plan",
+            "level": 0
+          },
+          {
+            "text": "SP2: . . . . . execute : 2-4 hrs plan",
+            "level": 0
+          },
+          {
+            "text": "SP3: . - - - - - execute : 2-4 hrs plan",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "How should I present my results: Table ?"
+      },
+      {
+        "type": "paragraph",
+        "text": "examples"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Step 4 (of the SPSP)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Check your work (Reflect, ... ask questions, ...)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Step 5"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Learn & generalize",
+            "level": 0
+          },
+          {
+            "text": "about cell-phones & improving them",
+            "level": 2
+          },
+          {
+            "text": "yourself as a problem-solver",
+            "level": 2
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "HW #1, Prob 2"
+      },
+      {
+        "type": "paragraph",
+        "text": "simpler version of Prob 1"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "TA structure for TIM 172A"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Infrastructure (Canvas, ....) — Vihan",
+            "level": 0
+          },
+          {
+            "text": "Customer & Grader facing — Fariha",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Please do not use \"Canvas Notifications\" to contact us"
+      }
+    ],
+    "summary_topic_line": "Lecture #2 agenda for TIM 172A covering L#1 recap, HW #1, TIM 172P logistics, and a note requiring typewritten submissions.",
+    "summary_gist": "This page lists the agenda for TIM 172A (MOT-I) Lecture #2 on 9/30/25: a quick summary of Lecture 1, HW #1 due Thursday 10/2/25, and TIM 172P updates (students placed in groups, Project Proposal assignment posted, and a \"TIM 172P\" folder added under the \"FILES\" tab on Canvas). An important note states all submitted work must be typewritten, handwritten work will not be accepted, but figures/graphics may be hand-drawn and inserted into the typewritten text. A recap of Lecture 1: fast-cycle competitors (FAANG & MANGA) balance trade-offs among product quality, speed, and cost while managing risk. The course develops building blocks and an integrating framework (MDC). It introduces the 5-step structured problem-solving process (SPSP): Define → Plan → Execute → Checking → Learn/Generalize. Two preliminary habits to develop for all course work: (1) a planning habit—create a simple plan (what, when, how long) for doing all problems in an assignment; and (2) a structured problem-solving habit—download the SPSP handout from Canvas, copy-and-paste it into each proposed solution, and decide which sub-steps of the 5 primary steps are relevant, customizing the SPSP for each particular problem. The page works HW #1, Prob #1, where the given problem (\"Improve the existing cell-phone\") is identified as vague and open-ended. Step 1 of the SPSP is to define the real problem, which requires reflection and questioning, illustrated with a rough conceptual sketch (Customer Needs → Assess → Improve). The problem is then broken into three sub-problems: SP1 establishes generic customer needs, SP2 assesses how well existing products satisfy them, and SP3 identifies ways to improve cell-phones with respect to SP1's needs and SP2's assessment. Notes outline Step 2 (Create a Plan) of a problem-solving framework applied to cell-phone design. Part (a) lists assumptions: identifying who you are (an engineer or marketing analyst at a company like Apple or Samsung), who the solution is for (new product development team, CTO, CEO), and which type/manufacturer of cell-phone to focus on (be practical). Part (b) identifies needed information: how cell-phones work (functions, customer needs, and how they are realized as FORM, referencing HowStuffWorks.com) and other unspecified information. The page outlines a plan for tackling three design sub-problems. SP1 (Establish needs) is addressed by understanding how cell-phones work, internet research, and compiling a list of customer needs (functions, features). SP2 (Assess how well) uses own experience, internet consumer research, and customer surveys. SP3 (Improve) relies on internet research and creative brainstorming. These notes cover Step 3 (Execute the plan) of the SPSP process. The plan is executed across sub-plans SP1, SP2, and SP3, each with estimated time durations (1-2 hrs, 2-4 hrs, 2-4 hrs). The notes then ask how to present results, suggesting a table format with a Needs column (examples: ease of use, performance, reliability), an Assessment column, and additional unspecified columns. Notes covering the final steps of the SPSP method (Step 4: check your work/reflect; Step 5: learn & generalize about cell-phones and yourself as a problem-solver), a note that HW #1 Prob 2 is a simpler version of Prob 1, and the TA structure for TIM 172A split into Infrastructure (Canvas) handled by Vihan and Customer & Grader facing handled by Fariha. Reminder: do not use Canvas Notifications to contact the staff."
+  },
+  "distinctive_terms": [
+    "TIM 172A",
+    "MOT-I",
+    "TIM 172P",
+    "Project Proposal",
+    "Canvas",
+    "FILES tab",
+    "HW #1",
+    "L#1",
+    "Fast cycle competitors",
+    "FAANG",
+    "MANGA",
+    "trade-offs",
+    "MDC",
+    "SPSP",
+    "structured problem-solving process",
+    "Define",
+    "Plan",
+    "Execute",
+    "Checking",
+    "Learn/Generalize",
+    "Prob. #1",
+    "TIM 172A/P",
+    "structured problem-solving",
+    "5 primary steps",
+    "sub-steps",
+    "sub-problems",
+    "SPs",
+    "SP1",
+    "SP2",
+    "SP3",
+    "customer needs",
+    "w.r.t.",
+    "conceptual sketch",
+    "CTO",
+    "CEO",
+    "cell-phone",
+    "manufacturer",
+    "FORM",
+    "HOW STUFFWORKS.COM",
+    "product development team",
+    "marketing analyst",
+    "sub-problem",
+    "SP",
+    "consumer research",
+    "customer surveys",
+    "creative brainstorming",
+    "ease of use",
+    "performance",
+    "reliability",
+    "Prob 2",
+    "Prob 1",
+    "TA",
+    "Infrastructure",
+    "Customer & Grader facing",
+    "Vihan",
+    "Fariha",
+    "Canvas Notifications",
+    "problem-solver"
+  ],
+  "pages": [
+    "tim172a-009",
+    "tim172a-010",
+    "tim172a-011",
+    "tim172a-012",
+    "tim172a-013",
+    "tim172a-014",
+    "tim172a-015",
+    "tim172a-016"
+  ]
+}

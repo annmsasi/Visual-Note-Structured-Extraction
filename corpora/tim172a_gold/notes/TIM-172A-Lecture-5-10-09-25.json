@@ -1,0 +1,442 @@
+{
+  "note_id": "TIM-172A-Lecture-5-10-09-25",
+  "transcription": "Step 3 of the SPSP : Execute the plan\n\n   Step 1 :  Create a structural map ....\n              ( e.g. Personal Computer Industry)\n                        1980s\n\n[figure]\nTIM 172A , Lecture #5, 10/9/25\n\nAgenda :\n0:  A note on Complementors (not Complimentors)\n1.  Company Analysis\n\n2.  HW #2, Prob 2 (Intel)\n\n    HW #2 is now strictly due on Friday, 10/10/25,\n                                          11:59 pm.\n\n3.  HW #3, has been posted & will be strictly\n    due, on time, on Thursday, next week, 10/16/25\n0.   A note on Complementors\n↑\n\"zero\"\n\n      A sixth set of players was added to\n   Porter's Positioning (aka Competitive Strategy)\n   framework :\n    \" Complementors \", which gives rise to a sixth\n     force :  \"power to influence\"\n\n        Example  :   Health- Care  (Industry)\n\n      Pharmaceutical companies  ⟷  Doctor\n         e.g., Pfizer, ....              complementor\n\n      competitors in the\n     \"medical drug delivery\n        industry\n\n     HW #\n1.    Company   Analysis\n\n      How  do  you  analyze  a  technology  company?\n\n[figure]\n\n[Comment :  In general   Company  Analysis  precedes\n            Industry  Analysis ]\n\n      All  successful  companies  have\n\n1.1  Vision statement : a high-level vision or\n                        idea about the future\n\n      Example :  Microsoft (at its inception ≈ 1985)\n                 Vision : \"A world with computers\n                 in every home, and at every desktop\n                 (in an office)\"\n\n1.2  Mission statement : a more specific view\n                         (or statement) of how the\n                         company might contribute\n                         to its vision.\nExample :   Microsoft's mission statement (≈ 1985):\n            \"Every one of these computers\n             will be controlled (or managed)\n             using a  MS Operating System (OS)\"\n\n1.3   Business Goals (BGs)\n        - Annual Sales Revenue ($)\n        - Growth (% per year) in Sales Revenue\n        - Profit ($) or Net Income ($)\n        - Profit Margin (%) = Net Income x 100 %\n                              ──────────\n                              Sales Rev.\n\n        - . . . .\n        - . . . .\n_______________________________________\n\n      Every tech. company has (or needs to\narticulate) three important strategies :\n        - its Competitive strategy (see L #3, 4)\n        - Technology strategy (TS)\n\n        - Product / Market strategy (P/M s)\n1.4   Technology Strategy (TS)\n\n        Definitions              Example\n   (in the form of questions)    (CISCO)\n\n(i) What are the core        - advanced, state-of-the-\n   technologies that give      art Computer Network (CN)\n   the company a               Technologies (routers, switches,...)\n   technological advantage     for a wide variety of\n   over its competitors        customers\n\n(ii) What is the company's   - World Leader in CN\n    approach to product &       Technologies, based on\n    technology development      advanced R&D, new\n                               product development, &\n                               acquisitions\n\n                               R&D: research & development\n1.5  Product/Market Strategy (P/MS)\n\nDefinitions          Example\n                     (CISCO)\n\n1. What differentiates    - reliability\nthe company's products    - security\nfrom its competitors      - Quality-of-service\n                            to its customers\n\n2. What markets           Cisco segments\ndoes the company          its market into\nserve?                    - enterprises: Fortune\n                                    100 companies\n                          - Internet Service Providers\n                            (ISP): AT&T, Comcast, ....\n                          - Commercial (all other\n                            companies)\n                          - Consumers\n1.5  Product/Market Strategy (P/MS)\n\nDefinitions          Example\n                     (CISCO)\n\n1. What differentiates    - reliability\n   the company's products  - security\n   from its competitors    - Quality-of-service\n                             to its customers\n\n2. What markets         Cisco segments\n   does the company     its market into\n   serve?               - enterprises: Fortune\n                                     100 companies\n                        - Internet Service Providers\n                          (ISP): AT&T, Comcast, ....\n                        - Commercial (all other\n                            companies)\n                        - Consumers",
+  "extracted_json": {
+    "title": "Step 3 of the SPSP: Execute the plan — Structural map (PC Industry, 1980s)",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 3 of the SPSP : Execute the plan"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Step 1 : Create a structural map ...."
+      },
+      {
+        "type": "paragraph",
+        "text": "( e.g. Personal Computer Industry) 1980s"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "TIM 172A, Lecture #5, 10/9/25"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Agenda:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "0: A note on Complementors (not Complimentors)",
+            "level": 0
+          },
+          {
+            "text": "1. Company Analysis",
+            "level": 0
+          },
+          {
+            "text": "2. HW #2, Prob 2 (Intel)",
+            "level": 0
+          },
+          {
+            "text": "3. HW #3, has been posted & will be strictly due, on time, on Thursday, next week, 10/16/25",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "HW #2 is now strictly due on Friday, 10/10/25, 11:59 pm."
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "0. A note on Complementors"
+      },
+      {
+        "type": "paragraph",
+        "text": "A sixth set of players was added to Porter's Positioning (aka Competitive Strategy) framework: \"Complementors\", which gives rise to a sixth force: \"power to influence\"."
+      },
+      {
+        "type": "paragraph",
+        "text": "Example: Health-Care (Industry)"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "Pharmaceutical companies (e.g., Pfizer, ....) are competitors in the \"medical drug delivery industry\"."
+      },
+      {
+        "type": "paragraph",
+        "text": "HW #"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "1. Company Analysis"
+      },
+      {
+        "type": "paragraph",
+        "text": "How do you analyze a technology company?"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "[Comment: In general Company Analysis precedes Industry Analysis]"
+      },
+      {
+        "type": "paragraph",
+        "text": "All successful companies have"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "1.1 Vision statement: a high-level vision or idea about the future",
+            "level": 1
+          },
+          {
+            "text": "Example: Microsoft (at its inception ≈ 1985) Vision: \"A world with computers in every home, and at every desktop (in an office)\"",
+            "level": 2
+          },
+          {
+            "text": "1.2 Mission statement: a more specific view (or statement) of how the company might contribute to its vision.",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Example: Microsoft's mission statement (≈ 1985): \"Every one of these computers will be controlled (or managed) using a MS Operating System (OS)\""
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "1.3 Business Goals (BGs)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Annual Sales Revenue ($)",
+            "level": 0
+          },
+          {
+            "text": "Growth (% per year) in Sales Revenue",
+            "level": 0
+          },
+          {
+            "text": "Profit ($) or Net Income ($)",
+            "level": 0
+          },
+          {
+            "text": "Profit Margin (%) = Net Income x 100 % / Sales Rev.",
+            "level": 0
+          },
+          {
+            "text": ". . . .",
+            "level": 0
+          },
+          {
+            "text": ". . . .",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "equation",
+        "latex": "\\text{Profit Margin (\\%)} = \\frac{\\text{Net Income}}{\\text{Sales Rev.}} \\times 100\\%"
+      },
+      {
+        "type": "paragraph",
+        "text": "Every tech. company has (or needs to articulate) three important strategies:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "its Competitive strategy (see L #3, 4)",
+            "level": 0
+          },
+          {
+            "text": "Technology strategy (TS)",
+            "level": 0
+          },
+          {
+            "text": "Product / Market strategy (P/M s)",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "1.4 Technology Strategy (TS)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Definitions (in the form of questions) — Example (CISCO)",
+            "level": 0
+          },
+          {
+            "text": "(i) What are the core technologies that give the company a technological advantage over its competitors",
+            "level": 1
+          },
+          {
+            "text": "Example: advanced, state-of-the-art Computer Network (CN) Technologies (routers, switches,...) for a wide variety of customers",
+            "level": 2
+          },
+          {
+            "text": "(ii) What is the company's approach to product & technology development",
+            "level": 1
+          },
+          {
+            "text": "Example: World Leader in CN Technologies, based on advanced R&D, new product development, & acquisitions",
+            "level": 2
+          },
+          {
+            "text": "R&D: research & development",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "1.5 Product/Market Strategy (P/MS)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Definitions"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "What differentiates the company's products from its competitors",
+            "level": 1
+          },
+          {
+            "text": "What markets does the company serve?",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Example (CISCO)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "reliability",
+            "level": 1
+          },
+          {
+            "text": "security",
+            "level": 1
+          },
+          {
+            "text": "Quality-of-service to its customers",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Cisco segments its market into"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "enterprises: Fortune 100 companies",
+            "level": 1
+          },
+          {
+            "text": "Internet Service Providers (ISP): AT&T, Comcast, ....",
+            "level": 1
+          },
+          {
+            "text": "Commercial (all other companies)",
+            "level": 1
+          },
+          {
+            "text": "Consumers",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "1.5 Product/Market Strategy (P/MS)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "What differentiates the company's products from its competitors",
+            "level": 0
+          },
+          {
+            "text": "Example (CISCO): reliability; security; Quality-of-service to its customers",
+            "level": 1
+          },
+          {
+            "text": "What markets does the company serve?",
+            "level": 0
+          },
+          {
+            "text": "Example (CISCO): Cisco segments its market into:",
+            "level": 1
+          },
+          {
+            "text": "enterprises: Fortune 100 companies",
+            "level": 2
+          },
+          {
+            "text": "Internet Service Providers (ISP): AT&T, Comcast, ....",
+            "level": 2
+          },
+          {
+            "text": "Commercial (all other companies)",
+            "level": 2
+          },
+          {
+            "text": "Consumers",
+            "level": 2
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Step 3 of the SPSP: building a structural (Five Forces) map of the PC industry in the 1980s.",
+    "summary_gist": "This page covers Step 3 of the SPSP (Execute the plan), specifically Step 1: creating a structural map, illustrated with the Personal Computer Industry of the 1980s. The diagram maps the competitive forces around central Competitors (F1: Rivalry between Competitors), including New entrants (Compaq, NCR) with F2 threat of new entrants and barriers to entry; Suppliers (microprocessors—Intel, AMD; operating systems—Microsoft; storage—Seagate) with F4 supplier power; Buyers (consumers, enterprises) with F5 buyer power; Substitutes (pen computing—GO, Apple; PDA—Palm) with F3 threat of substitutes; Complementors (Intel) with F6 power to influence; and the existing PC competitors (IBM, HP, Dell, Apple). Agenda for TIM 172A Lecture #5 (10/9/25): a note on Complementors (not Complimentors), Company Analysis, and HW #2 Problem 2 (Intel). HW #2 is now strictly due Friday 10/10/25 at 11:59 pm, and HW #3 has been posted and will be strictly due on time Thursday 10/16/25. Notes introduce \"Complementors\" as a sixth set of players added to Porter's Positioning (Competitive Strategy) framework, giving rise to a sixth force: \"power to influence.\" A health-care example illustrates this: pharmaceutical companies (e.g., Pfizer) compete in the medical drug delivery industry, while doctors act as complementors. Introduces company analysis for technology firms, noting the relationship between industry (e.g., microprocessor industry) and company (e.g., Intel) analysis. States that all successful companies have a vision statement (a high-level idea about the future, e.g., Microsoft's 1985 vision of computers in every home and desktop) and a mission statement (a more specific view of how the company contributes to its vision). Notes give Microsoft's ~1985 mission statement as an example, then list business goals (BGs) including annual sales revenue, growth, profit/net income, and profit margin (Net Income / Sales Rev. × 100%). It concludes that every tech company has three key strategies: competitive, technology (TS), and product/market (P/M s). Notes frame Technology Strategy as a set of questions paired with a CISCO example. (i) Identifies the core technologies giving a company a technological advantage over competitors—for CISCO, advanced state-of-the-art Computer Network (CN) technologies like routers and switches for a wide variety of customers. (ii) Asks about the company's approach to product and technology development—CISCO is a world leader in CN technologies, driven by advanced R&D, new product development, and acquisitions. This page introduces Product/Market Strategy (P/MS) through two guiding questions: (1) what differentiates the company's products from competitors, and (2) what markets the company serves. Using Cisco as an example, differentiators include reliability, security, and quality-of-service to customers. Cisco's market is segmented into enterprises (Fortune 100 companies), Internet Service Providers (ISPs like AT&T and Comcast), commercial (all other companies), and consumers. Notes on Product/Market Strategy organized as a two-column table (Definitions vs. Example using Cisco). Two key questions: (1) What differentiates the company's products from competitors — for Cisco, reliability, security, and quality-of-service to customers. (2) What markets does the company serve — Cisco segments its market into enterprises (Fortune 100), Internet Service Providers (AT&T, Comcast), Commercial (all other companies), and Consumers."
+  },
+  "distinctive_terms": [
+    "SPSP",
+    "structural map",
+    "Personal Computer Industry",
+    "New entrants",
+    "Compaq",
+    "NCR",
+    "Competitors",
+    "PC industry",
+    "IBM",
+    "HP",
+    "Dell",
+    "Apple",
+    "Suppliers",
+    "Microprocessor",
+    "Intel",
+    "AMD",
+    "Operating System",
+    "Microsoft",
+    "Storage",
+    "Seagate",
+    "Buyers",
+    "Consumers",
+    "Enterprises",
+    "Complementors",
+    "Substitutes",
+    "Pen Computing",
+    "GO",
+    "PDA",
+    "PALM",
+    "Force 1",
+    "F1",
+    "Rivalry between Competitors",
+    "F2",
+    "threat of new entrants",
+    "Barriers to entry",
+    "F3",
+    "threat of substitutes",
+    "F4",
+    "Supplier Power",
+    "F5",
+    "Buyer Power",
+    "F6",
+    "power to influence",
+    "Five Forces",
+    "TIM 172A",
+    "Complimentors",
+    "Company Analysis",
+    "HW #2",
+    "HW #3",
+    "Prob 2",
+    "Porter's Positioning",
+    "Competitive Strategy framework",
+    "sixth force",
+    "complementor",
+    "Pharmaceutical companies",
+    "Pfizer",
+    "medical drug delivery industry",
+    "Health-Care industry",
+    "Industry Analysis",
+    "Vision statement",
+    "Mission statement",
+    "Microprocessor Industry",
+    "MS Operating System (OS)",
+    "Business Goals (BGs)",
+    "Annual Sales Revenue",
+    "Net Income",
+    "Profit Margin",
+    "Competitive strategy",
+    "Technology strategy (TS)",
+    "Product / Market strategy (P/M s)",
+    "Technology Strategy",
+    "TS",
+    "CISCO",
+    "core technologies",
+    "technological advantage",
+    "Computer Network",
+    "CN",
+    "routers",
+    "switches",
+    "R&D",
+    "research & development",
+    "product development",
+    "acquisitions",
+    "Product/Market Strategy",
+    "P/MS",
+    "Quality-of-service",
+    "Fortune 100 companies",
+    "Internet Service Providers",
+    "ISP",
+    "AT&T",
+    "Comcast",
+    "Commercial",
+    "market segmentation",
+    "Fortune 100"
+  ],
+  "pages": [
+    "tim172a-032",
+    "tim172a-033",
+    "tim172a-034",
+    "tim172a-035",
+    "tim172a-036",
+    "tim172a-037",
+    "tim172a-038",
+    "tim172a-039"
+  ]
+}

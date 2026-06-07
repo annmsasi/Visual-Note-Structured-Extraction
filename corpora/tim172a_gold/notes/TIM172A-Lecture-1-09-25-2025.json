@@ -1,0 +1,512 @@
+{
+  "note_id": "TIM172A-Lecture-1-09-25-2025",
+  "transcription": "TIM 172A : Introduction to MOT-I :\nManagement, Development, and Commercialization\n(MDC) of New Products and Technologies\nLecture # 1 (9/25/24\n\n        Subhas Desa\n1. Instructor , TIM 172A/P, TIM172B/Q, TIM170,\n        TIM80C\n\n2. Academic Advisor for all students in\n   the Major & Minor.\n\n3. Undergraduate Director of TIM\n\n4. Director (chair) of TIM\n\n   Agenda (for today):\n\n1. Structure and Logic of the course\n\n2. Course Overview / syllabus /operation\n\n3. Technology domains of interest\n\n4. Problem-solving\n\n5. HW # 1\n\n6. Relationship of TIM 172A to TIM 172P\n                    subject-matter      project\nNote :\n1. TIM 172P is only required for the TIM Majors\n\n2. If you are a TIM Major, you need to\nenroll in TIM172A and TIM172P during\nthe same qtr.\n\n3. If you are a TIM Minor, then you\ndo not enroll in TIM172P\n1. Structure of the course:\n\nMotivation:\n\n1. In today's global, highly-competitive\nenvironment in order to be successful (i.e.,\nbe profitable, satisfy real customer needs, .....)\nthe company needs to develop\n\n(a) high-quality products (because customers\nare more demanding, competition is more\nintense, .....)\n\n(b) rapidly, and\n\n(c) at low cost\n\nThese are 3 conflicting requirements:\n\n[figure]\n2. In addition, the tech. company needs to\nbe able to successfully manage RISK:\n   (a) Technology (Product Development) RISK\n   (b) Commercialization (Market) RISK\n\n3. Companies that can successfully manage RISK,\nand at the same time develop high-quality\nproducts, rapidly, and at low cost are called\nFAST-CYCLE companies\n\n   Examples: Toyota, Intel, Microsoft,\n             Google, Apple, Nvidia, Cisco,\n             Seagate.\n\n   a few years ago : F A A N G\n                     [figure]\n   Facebook, Amazon, Apple, Netflix,\n                                Google\n\n   and now        : M A N G A\n                    [figure]\n   Meta Apple Nvidia        same as\n                            above\n\n4. The objective of this course, TIM 172A/P,\nis to develop the building blocks (tools, techniques,...)\n& a framework (or methodology) integrating\nthese BBs, in order to be a fast-cycle\ncompany or competitor.\n2.    Course operation / Syllabus\n\n            Lectures   (SD)                    You\n\n   BBs ⟶ Methods, Tools, ...  }  ⟶  Homework (weekly),\n           Framework                  Case Studies,\n                                      Midterm, Final\n                                      ___________\n                                       Take - home\n                                          exams\n\n       Home-work cycle:\n       You try the problems   complete the HW\n       [figure]\n       Thurs              Tue          Thurs\n                                       HW Solution (perfect)\n       Assignment    discuss          from you\n       to You        HW in\n                     class\nInteractions with the TAs:\n\nIf you have any issues related to the course.\n(e.g., fall ill, grading concern, ....)\n\nplease send e-mail to,\n    Fariha Lateef (flateef@ucsc.edu)\n\ncc to the instructor (sdesa@ucsc.edu)\n\nBe sure to put an appropriate header in your\nmessage :  TIM 172A .....\n\nCorrecting your mistakes in HWs.& Midterm:\nRe - submission policy:\n\n1. You have to submit (on-time)\n\n2. After you submission is graded,\n   you can correct your mistakes, and\n   re-submit, for partial credit: upto 60%\n   of your lost grade\n\n3. Work submitted at the end of the\n   quarter (last HW set; final exam)\n   cannot be re-submitted.\n3.    Technology Domains of interest\n\n   (a) IT stack    - Computer Networks (CISCO)\n                    - Computer Architecture (Intel)\n                    - Operating Systems (Microsoft)\n                    - Databases (Oracle)\n                    - Application Software\n                      (Microsoft, SAP, IBM,....)\n\n   (b) Consumer Electronics\n        cell-phones, lap-tops, video-game consoles,\n        smart watches, ....\n\n   (c) Smart products\n        - household robots, driverless cars,\n          smart watches, drones, ....\n4.   Problem - Solving\n\n      Complex problems ( the type of problems\n      addressed in TIM 172 A/B/P/Q )\n\n         Two examples :\n\n      - What technologies & products should\n        company X develop during the next\n        1- 3 years ?\n\n      -    How should incoming , real-time data\n          (aka \"Big Data\") be used in order to\n          design better products & services\n                  ↳ more customer centric, more\n                    reliable,....\n\n      How do professionals (in Engineering,\n      Business, Medicine, Law) solve complex problems?\n\n      Professionals use a systematic structured\n      problem solving process ( SPSP) to solve\n      complex problems, which has 5 steps\n      as follows :\n1. Define the real problem\n\n2. Plan the approach (or treatment) for\n\nsolving the problem\n\n3. Execute or implement the plan,\n        which leads to\n            - Results\n            - drawing conclusions\n            - making recommendations\n\n4. Check your work/results\n\n5. Learn & Generalize\n\nEach of the above steps has a set of\nsub-steps & questions that need to be\nanswered\n            refer to the SPSP handout on CANVAS\n\n\n5.  . HW # 1\n        You are now ready to tackle HW#1",
+  "extracted_json": {
+    "title": "TIM 172A: Introduction to MOT-I — Lecture #1",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "TIM 172A : Introduction to MOT-I : Management, Development, and Commercialization (MDC) of New Products and Technologies"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Lecture # 1 (9/25/24)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Subhas Desa"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Instructor, TIM 172A/P, TIM 172B/Q, TIM170, TIM80C",
+            "level": 1
+          },
+          {
+            "text": "Academic Advisor for all students in the Major & Minor.",
+            "level": 1
+          },
+          {
+            "text": "Undergraduate Director of TIM",
+            "level": 1
+          },
+          {
+            "text": "Director (chair) of TIM",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Agenda (for today):"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Structure and Logic of the course",
+            "level": 1
+          },
+          {
+            "text": "Course Overview / syllabus / operation",
+            "level": 1
+          },
+          {
+            "text": "Technology domains of interest",
+            "level": 1
+          },
+          {
+            "text": "Problem-solving",
+            "level": 1
+          },
+          {
+            "text": "HW # 1",
+            "level": 1
+          },
+          {
+            "text": "Relationship of TIM 172A (subject-matter) to TIM 172P (project)",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Note:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "TIM 172P is only required for the TIM Majors",
+            "level": 1
+          },
+          {
+            "text": "If you are a TIM Major, you need to enroll in TIM172A and TIM172P during the same qtr.",
+            "level": 1
+          },
+          {
+            "text": "If you are a TIM Minor, then you do not enroll in TIM172P",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Structure of the course:"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Motivation:"
+      },
+      {
+        "type": "paragraph",
+        "text": "In today's global, highly-competitive environment in order to be successful (i.e., be profitable, satisfy real customer needs, .....) the company needs to develop"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "(a) high-quality products (because customers are more demanding, competition is more intense, .....)",
+            "level": 1
+          },
+          {
+            "text": "(b) rapidly, and",
+            "level": 1
+          },
+          {
+            "text": "(c) at low cost",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "These are 3 conflicting requirements:"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "In addition, the tech. company needs to be able to successfully manage RISK:",
+            "level": 1
+          },
+          {
+            "text": "(a) Technology (Product Development) RISK",
+            "level": 2
+          },
+          {
+            "text": "(b) Commercialization (Market) RISK",
+            "level": 2
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Companies that can successfully manage RISK, and at the same time develop high-quality products, rapidly, and at low cost are called FAST-CYCLE companies"
+      },
+      {
+        "type": "paragraph",
+        "text": "Examples: Toyota, Intel, Microsoft, Google, Apple, Nvidia, Cisco, Seagate."
+      },
+      {
+        "type": "paragraph",
+        "text": "a few years ago : F A A N G"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "Facebook, Amazon, Apple, Netflix, Google"
+      },
+      {
+        "type": "paragraph",
+        "text": "and now : M A N G A"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "Meta Apple Nvidia (same as above)"
+      },
+      {
+        "type": "paragraph",
+        "text": "The objective of this course, TIM 172A/P, is to develop the building blocks (tools, techniques,...) & a framework (or methodology) integrating these BBs, in order to be a fast-cycle company or competitor."
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "2. Course operation / Syllabus"
+      },
+      {
+        "type": "paragraph",
+        "text": "Lectures (SD)   |   You"
+      },
+      {
+        "type": "paragraph",
+        "text": "BBs ⟶ Methods, Tools, ... Framework } ⟶ Homework (weekly), Case Studies, Midterm, Final"
+      },
+      {
+        "type": "paragraph",
+        "text": "Take-home exams"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Home-work cycle:"
+      },
+      {
+        "type": "paragraph",
+        "text": "You try the problems   complete the HW"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Thurs — Assignment to You",
+            "level": 0
+          },
+          {
+            "text": "Tue — discuss HW in class",
+            "level": 0
+          },
+          {
+            "text": "Thurs — HW Solution (perfect) from you",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Interactions with the TAs:"
+      },
+      {
+        "type": "paragraph",
+        "text": "If you have any issues related to the course. (e.g., fall ill, grading concern, ....)"
+      },
+      {
+        "type": "paragraph",
+        "text": "please send e-mail to, Fariha Lateef (flateef@ucsc.edu)"
+      },
+      {
+        "type": "paragraph",
+        "text": "cc to the instructor (sdesa@ucsc.edu)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Be sure to put an appropriate header in your message :  TIM 172A ....."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Correcting your mistakes in HWs. & Midterm: Re - submission policy:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "You have to submit (on-time)",
+            "level": 0
+          },
+          {
+            "text": "After you submission is graded, you can correct your mistakes, and re-submit, for partial credit: upto 60% of your lost grade",
+            "level": 0
+          },
+          {
+            "text": "Work submitted at the end of the quarter (last HW set; final exam) cannot be re-submitted.",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "3. Technology Domains of interest"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "(a) IT stack",
+            "level": 0
+          },
+          {
+            "text": "Computer Networks (CISCO)",
+            "level": 1
+          },
+          {
+            "text": "Computer Architecture (Intel)",
+            "level": 1
+          },
+          {
+            "text": "Operating Systems (Microsoft)",
+            "level": 1
+          },
+          {
+            "text": "Databases (Oracle)",
+            "level": 1
+          },
+          {
+            "text": "Application Software (Microsoft, SAP, IBM, ....)",
+            "level": 1
+          },
+          {
+            "text": "(b) Consumer Electronics",
+            "level": 0
+          },
+          {
+            "text": "cell-phones, lap-tops, video-game consoles, smart watches, ....",
+            "level": 1
+          },
+          {
+            "text": "(c) Smart products",
+            "level": 0
+          },
+          {
+            "text": "household robots, driverless cars, smart watches, drones, ....",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "4. Problem - Solving"
+      },
+      {
+        "type": "paragraph",
+        "text": "Complex problems (the type of problems addressed in TIM 172 A/B/P/Q)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Two examples:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "What technologies & products should company X develop during the next 1-3 years?",
+            "level": 0
+          },
+          {
+            "text": "How should incoming, real-time data (aka \"Big Data\") be used in order to design better products & services → more customer centric, more reliable,....",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "How do professionals (in Engineering, Business, Medicine, Law) solve complex problems?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Professionals use a systematic structured problem solving process (SPSP) to solve complex problems, which has 5 steps as follows:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Define the real problem",
+            "level": 0
+          },
+          {
+            "text": "Plan the approach (or treatment) for solving the problem",
+            "level": 0
+          },
+          {
+            "text": "Execute or implement the plan, which leads to",
+            "level": 0
+          },
+          {
+            "text": "Results",
+            "level": 1
+          },
+          {
+            "text": "drawing conclusions",
+            "level": 1
+          },
+          {
+            "text": "making recommendations",
+            "level": 1
+          },
+          {
+            "text": "Check your work/results",
+            "level": 0
+          },
+          {
+            "text": "Learn & Generalize",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Each of the above steps has a set of sub-steps & questions that need to be answered"
+      },
+      {
+        "type": "paragraph",
+        "text": "refer to the SPSP handout on CANVAS"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "HW # 1"
+      },
+      {
+        "type": "paragraph",
+        "text": "You are now ready to tackle HW#1"
+      }
+    ],
+    "summary_topic_line": "Introductory lecture for TIM 172A covering instructor background and the day's agenda.",
+    "summary_gist": "First lecture (9/25/24) of TIM 172A, Introduction to MOT-I: Management, Development, and Commercialization (MDC) of New Products and Technologies. Lists instructor Subhas Desa's roles (instructor of several TIM courses, academic advisor, undergraduate director, and chair of TIM). The agenda for the day includes course structure and logic, course overview/syllabus/operation, technology domains of interest, problem-solving, HW #1, and the relationship between TIM 172A (subject-matter) and TIM 172P (project). These notes clarify enrollment requirements for TIM 172P. The course is only required for TIM Majors. TIM Majors must enroll in both TIM172A and TIM172P during the same quarter, while TIM Minors do not enroll in TIM172P. Introductory course notes explaining the motivation: in a competitive global environment, a company must develop high-quality products rapidly and at low cost. These three goals (quality, time/speed, cost/efficiency) are conflicting requirements, illustrated by a triangle diagram. Tech companies must manage technology (product development) and commercialization (market) risk. Companies that manage risk while developing high-quality products rapidly and at low cost are called fast-cycle companies (e.g., Toyota, Intel, Microsoft, Google, Apple, Nvidia, Cisco, Seagate; FAANG previously, MANGA now). The course TIM 172A/P aims to develop the building blocks and a framework to become a fast-cycle company. Notes outlining how the course operates. Lectures (SD) cover building blocks (BBs) — methods, tools, and a framework — which feed into student deliverables: weekly homework, case studies, midterm, and final (take-home exams). A timeline shows the homework cycle across two sprints: assignment given Thursday, HW discussed in class Tuesday, and a perfect HW solution due the following Thursday. Students with course issues (illness, grading concerns) should email TA Fariha Lateef and cc the instructor, using a clear \"TIM 172A\" subject header. The re-submission policy allows correcting graded, on-time submissions for partial credit (up to 60% of lost grade), but end-of-quarter work (the last HW set and final exam) cannot be re-submitted. This page lists three technology domains of interest. (a) The IT stack, broken into layers each with a representative vendor: Computer Networks (CISCO), Computer Architecture (Intel), Operating Systems (Microsoft), Databases (Oracle), and Application Software (Microsoft, SAP, IBM, etc.). (b) Consumer Electronics, with examples such as cell-phones, laptops, video-game consoles, and smart watches. (c) Smart products, including household robots, driverless cars, smart watches, and drones. The page introduces problem-solving for complex problems of the kind addressed in TIM 172A/B/P/Q. Two example problems are given: deciding what technologies and products a company should develop over the next 1-3 years, and how incoming real-time data (\"Big Data\") can be used to design better, more customer-centric and reliable products and services. It notes that professionals in engineering, business, medicine, and law solve complex problems using a systematic, structured problem solving process (SPSP) consisting of 5 steps. Lists the five steps of a structured problem-solving process: (1) define the real problem, (2) plan the approach/treatment for solving it, (3) execute/implement the plan, which leads to results, drawing conclusions, and making recommendations, (4) check your work/results, and (5) learn & generalize. Notes that each step has sub-steps and questions to answer, directing students to the SPSP handout on Canvas, and states they are now ready to tackle HW#1."
+  },
+  "distinctive_terms": [
+    "TIM 172A",
+    "MOT-I",
+    "Management, Development, and Commercialization",
+    "MDC",
+    "TIM 172A/P",
+    "TIM 172B/Q",
+    "TIM170",
+    "TIM80C",
+    "Subhas Desa",
+    "TIM",
+    "TIM 172P",
+    "HW # 1",
+    "TIM Major",
+    "TIM Minor",
+    "high-quality products",
+    "conflicting requirements",
+    "Time (speed)",
+    "Cost (Efficiency)",
+    "Quality",
+    "RISK",
+    "Technology (Product Development) RISK",
+    "Commercialization (Market) RISK",
+    "FAST-CYCLE companies",
+    "fast-cycle",
+    "FAANG",
+    "MANGA",
+    "building blocks",
+    "BBs",
+    "Syllabus",
+    "Lectures",
+    "SD",
+    "Framework",
+    "Case Studies",
+    "Midterm",
+    "Final",
+    "Take-home exams",
+    "Home-work cycle",
+    "Sprint 1",
+    "Sprint 2",
+    "HW",
+    "HW Solution",
+    "TAs",
+    "Fariha Lateef",
+    "flateef@ucsc.edu",
+    "sdesa@ucsc.edu",
+    "Re-submission policy",
+    "HWs",
+    "final exam",
+    "IT stack",
+    "Computer Networks",
+    "CISCO",
+    "Computer Architecture",
+    "Intel",
+    "Operating Systems",
+    "Microsoft",
+    "Databases",
+    "Oracle",
+    "Application Software",
+    "SAP",
+    "IBM",
+    "Consumer Electronics",
+    "video-game consoles",
+    "smart watches",
+    "Smart products",
+    "household robots",
+    "driverless cars",
+    "drones",
+    "TIM 172A/B/P/Q",
+    "Big Data",
+    "real-time data",
+    "customer centric",
+    "structured problem solving process",
+    "SPSP",
+    "CANVAS",
+    "HW #1",
+    "Learn & Generalize",
+    "Execute or implement the plan"
+  ],
+  "pages": [
+    "tim172a-000",
+    "tim172a-001",
+    "tim172a-002",
+    "tim172a-003",
+    "tim172a-004",
+    "tim172a-005",
+    "tim172a-006",
+    "tim172a-007",
+    "tim172a-008"
+  ]
+}

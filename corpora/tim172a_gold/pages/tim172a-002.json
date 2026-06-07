@@ -1,0 +1,58 @@
+{
+  "note_id": "tim172a-002",
+  "extracted_json": {
+    "title": "Structure of the course: Motivation",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Structure of the course:"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Motivation:"
+      },
+      {
+        "type": "paragraph",
+        "text": "In today's global, highly-competitive environment in order to be successful (i.e., be profitable, satisfy real customer needs, .....) the company needs to develop"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "(a) high-quality products (because customers are more demanding, competition is more intense, .....)",
+            "level": 1
+          },
+          {
+            "text": "(b) rapidly, and",
+            "level": 1
+          },
+          {
+            "text": "(c) at low cost",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "These are 3 conflicting requirements:"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      }
+    ],
+    "summary_topic_line": "Course motivation: developing high-quality products rapidly and at low cost amid three conflicting requirements.",
+    "summary_gist": "Introductory course notes explaining the motivation: in a competitive global environment, a company must develop high-quality products rapidly and at low cost. These three goals (quality, time/speed, cost/efficiency) are conflicting requirements, illustrated by a triangle diagram."
+  },
+  "transcription": "1. Structure of the course:\n\nMotivation:\n\n1. In today's global, highly-competitive\nenvironment in order to be successful (i.e.,\nbe profitable, satisfy real customer needs, .....)\nthe company needs to develop\n\n(a) high-quality products (because customers\nare more demanding, competition is more\nintense, .....)\n\n(b) rapidly, and\n\n(c) at low cost\n\nThese are 3 conflicting requirements:\n\n[figure]",
+  "distinctive_terms": [
+    "high-quality products",
+    "conflicting requirements",
+    "Time (speed)",
+    "Cost (Efficiency)",
+    "Quality"
+  ],
+  "_draft": true
+}

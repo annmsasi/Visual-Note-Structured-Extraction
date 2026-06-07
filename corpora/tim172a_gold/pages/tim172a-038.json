@@ -1,0 +1,97 @@
+{
+  "note_id": "tim172a-038",
+  "extracted_json": {
+    "title": "1.5 Product/Market Strategy (P/MS)",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "1.5 Product/Market Strategy (P/MS)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Definitions"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "What differentiates the company's products from its competitors",
+            "level": 1
+          },
+          {
+            "text": "What markets does the company serve?",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Example (CISCO)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "reliability",
+            "level": 1
+          },
+          {
+            "text": "security",
+            "level": 1
+          },
+          {
+            "text": "Quality-of-service to its customers",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Cisco segments its market into"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "enterprises: Fortune 100 companies",
+            "level": 1
+          },
+          {
+            "text": "Internet Service Providers (ISP): AT&T, Comcast, ....",
+            "level": 1
+          },
+          {
+            "text": "Commercial (all other companies)",
+            "level": 1
+          },
+          {
+            "text": "Consumers",
+            "level": 1
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Product/Market Strategy: defining product differentiation and market segments, illustrated with Cisco.",
+    "summary_gist": "This page introduces Product/Market Strategy (P/MS) through two guiding questions: (1) what differentiates the company's products from competitors, and (2) what markets the company serves. Using Cisco as an example, differentiators include reliability, security, and quality-of-service to customers. Cisco's market is segmented into enterprises (Fortune 100 companies), Internet Service Providers (ISPs like AT&T and Comcast), commercial (all other companies), and consumers."
+  },
+  "transcription": "1.5  Product/Market Strategy (P/MS)\n\nDefinitions          Example\n                     (CISCO)\n\n1. What differentiates    - reliability\nthe company's products    - security\nfrom its competitors      - Quality-of-service\n                            to its customers\n\n2. What markets           Cisco segments\ndoes the company          its market into\nserve?                    - enterprises: Fortune\n                                    100 companies\n                          - Internet Service Providers\n                            (ISP): AT&T, Comcast, ....\n                          - Commercial (all other\n                            companies)\n                          - Consumers",
+  "distinctive_terms": [
+    "Product/Market Strategy",
+    "P/MS",
+    "CISCO",
+    "Quality-of-service",
+    "enterprises",
+    "Fortune 100 companies",
+    "Internet Service Providers",
+    "ISP",
+    "AT&T",
+    "Comcast",
+    "Commercial",
+    "Consumers",
+    "market segmentation"
+  ],
+  "_draft": true
+}

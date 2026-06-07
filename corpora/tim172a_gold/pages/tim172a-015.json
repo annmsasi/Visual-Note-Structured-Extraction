@@ -1,0 +1,59 @@
+{
+  "note_id": "tim172a-015",
+  "extracted_json": {
+    "title": "Step 3: Execute the Plan (SPSP Process)",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 3: Execute the plan"
+      },
+      {
+        "type": "paragraph",
+        "text": "of the SPSP process"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "SP1: (from the plan) steps : execute : 1-2 hrs plan",
+            "level": 0
+          },
+          {
+            "text": "SP2: . . . . . execute : 2-4 hrs plan",
+            "level": 0
+          },
+          {
+            "text": "SP3: . - - - - - execute : 2-4 hrs plan",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "How should I present my results: Table ?"
+      },
+      {
+        "type": "paragraph",
+        "text": "examples"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      }
+    ],
+    "summary_topic_line": "Step 3 of the SPSP process: executing the plan and presenting results in a table.",
+    "summary_gist": "These notes cover Step 3 (Execute the plan) of the SPSP process. The plan is executed across sub-plans SP1, SP2, and SP3, each with estimated time durations (1-2 hrs, 2-4 hrs, 2-4 hrs). The notes then ask how to present results, suggesting a table format with a Needs column (examples: ease of use, performance, reliability), an Assessment column, and additional unspecified columns."
+  },
+  "transcription": "Step 3 :   Execute  the  plan\n\nof the SPSP                    SP1 : (from the   : execute : 1-2 hrs\nprocess                                  plan)              plan\n                                              steps\n\n                                   SP2 :   . . . . .   execute : 2-4hrs\n                                                              plan\n\n                                   SP3 :   . - - - - -   execute : 2-4 hrs\n                                                              plan\n\n\n            How  should  I  present  my  results :\n                        Table ?\n\n\nexamples\n\n[figure]",
+  "distinctive_terms": [
+    "SPSP",
+    "SP1",
+    "SP2",
+    "SP3",
+    "ease of use",
+    "performance",
+    "reliability"
+  ],
+  "_draft": true
+}

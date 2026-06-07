@@ -1,0 +1,121 @@
+{
+  "note_id": "cse138-002",
+  "transcription": "happens before is useful in system design & debugging\n↓\nLamport Diagrams\n\n[figure]\n\nX, R: Message Send Event\nQ, Z: Message Receive Event\ny: Internal Event\n\n~~Where two events e₁ e₂~~\n\ne₁ → e₂  IF: - e₁ and e₂ occur on the same\n                process with e₁ first\n\n              - e₁ is a message send\n                event and e₂ is the corresponding\n                receive event\n\nmakes →)    {  - if there's another event, e'\na transitive {     such that e₁ → e' and e' → e₂,\nrelation    {     then e₁ → e₂\n\n- Violation of causal message delivery: when a Message B\ncaused by Message A arrives before the Message A.\n- Latency, unbounded in distributed systems, causes all sorts\nof problems like this\nNetwork Models { set of assumptions about\n                  network behavior\n  - Synchronous Network: No message takes longer\n      than Δ units of time to be delivered\n                          ↑physical    (Not for this class)",
+  "extracted_json": {
+    "title": "Lamport Diagrams",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "happens before is useful in system design & debugging"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "X, R: Message Send Event",
+            "level": 0
+          },
+          {
+            "text": "Q, Z: Message Receive Event",
+            "level": 0
+          },
+          {
+            "text": "y: Internal Event",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "happens-before relation"
+      },
+      {
+        "type": "paragraph",
+        "text": "$e_1 \\to e_2$ IF:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "$e_1$ and $e_2$ occur on the same process with $e_1$ first",
+            "level": 0
+          },
+          {
+            "text": "$e_1$ is a message send event and $e_2$ is the corresponding receive event",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "makes $\\to$ a transitive relation:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "if there's another event, $e'$, such that $e_1 \\to e'$ and $e' \\to e_2$, then $e_1 \\to e_2$",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Notes"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Violation of causal message delivery: when a Message B caused by Message A arrives before the Message A.",
+            "level": 0
+          },
+          {
+            "text": "Latency, unbounded in distributed systems, causes all sorts of problems like this",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Network Models"
+      },
+      {
+        "type": "paragraph",
+        "text": "set of assumptions about network behavior"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Synchronous Network: No message takes longer than $\\Delta$ units of time (physical) to be delivered (Not for this class)",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Lamport Diagrams",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "happens before",
+    "Lamport Diagrams",
+    "Message Send Event",
+    "Message Receive Event",
+    "Internal Event",
+    "transitive relation",
+    "causal message delivery",
+    "latency",
+    "distributed systems",
+    "Network Models",
+    "Synchronous Network",
+    "$\\Delta$ (units of time)"
+  ]
+}

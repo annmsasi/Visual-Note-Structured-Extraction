@@ -1,0 +1,46 @@
+{
+  "note_id": "tim172a-030",
+  "extracted_json": {
+    "title": "TIM 172A, Lecture #4 — Agenda",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "TIM 172 A, Lecture # 4 (10/07/25)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Agenda:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Complete the I/M Structural (aka Competitive) Analysis — done (see above)",
+            "level": 1
+          },
+          {
+            "text": "HW # 2, Prob. 2 (Intel)",
+            "level": 1
+          },
+          {
+            "text": "Functional Maps (HW #2, Prob. 1)",
+            "level": 1
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Lecture #4 agenda for TIM 172A covering competitive analysis and homework problems.",
+    "summary_gist": "This is the opening agenda page for TIM 172A, Lecture #4 (10/07/25). It lists three items: (1) completing the I/M Structural (aka Competitive) Analysis, noted as done; (2) HW #2, Prob. 2 (Intel); and (3) Functional Maps (HW #2, Prob. 1)."
+  },
+  "transcription": "TIM 172 A, Lecture # 4 (10/07/25)\n\n   Agenda:\n\n1. Complete the I/M Structural (aka\n      Competitive) Analysis\n              — done (see above)\n\n2.   HW # 2, Prob. 2 (Intel)\n\n3.   Functional Maps (HW #2, Prob. 1)",
+  "distinctive_terms": [
+    "TIM 172A",
+    "I/M Structural Analysis",
+    "Competitive Analysis",
+    "Intel",
+    "Functional Maps"
+  ],
+  "_draft": true
+}

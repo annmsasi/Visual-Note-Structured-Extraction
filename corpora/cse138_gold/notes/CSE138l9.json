@@ -1,0 +1,155 @@
+{
+  "note_id": "CSE138l9",
+  "transcription": "Best form of fault-tolerance preserves both safety\nand liveness... but sometimes you have\nto prioritize\n\nLecture #9\n\nReliable broadcast:\n   - Problem: we could crash between unique\nmessages. We want the broadcast to be all or noone\n   → If a process (which hasn't crashed) delivers\na message, then all other (correct) processes\ndeliver that message\n\nIf a process crashes before it can deliver a message\nthen this doesn't violate reliable broadcast.\n\nIf a process crashes in the middle of a broadcast,\ndoes violate reliable delivery.\n\nHow to implement?\n   - Upon receiving a message, broadcast to every\nother process, before delivering\n            except the process which sent (optimization)\n\n- could result in duplicate messages in reliable\nbroadcast (also called atomic broadcast)\n   ┌─────────────────────────────────────┐\n   │ fault tolerance often involves        │\n   │ making copies                         │\n   └─────────────────────────────────────┘\nReplication\nAvailability\n- Guarding against data loss\n- data locality\n- dividing up the work (scalability), handling\nmore requests\n\nBUT... keeping replicas consistent is very\ndifficult\n\nViolation of totally ordered delivery can lead to\ninconsistent replicas (nondeterministic) due to network fluctuations\n\nDeterminism: is about the relationship between different\nexecutions to each other\nDifferent\nConsistency: A replicated storage system is\nstrongly consistent if a client couldn't tell\nthat the data is replicated\n\nSomehow, we need totally ordered message delivery\nin order to guarantee strong consistency.",
+  "extracted_json": {
+    "title": "Lecture #9",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Best form of fault-tolerance preserves both safety and liveness... but sometimes you have to prioritize"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Reliable broadcast:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Problem: we could crash between unique messages. We want the broadcast to be all or noone",
+            "level": 0
+          },
+          {
+            "text": "If a process (which hasn't crashed) delivers a message, then all other (correct) processes deliver that message",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "If a process crashes before it can deliver a message then this doesn't violate reliable broadcast."
+      },
+      {
+        "type": "paragraph",
+        "text": "If a process crashes in the middle of a broadcast, does violate reliable delivery."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "How to implement?"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Upon receiving a message, broadcast to every other process, before delivering",
+            "level": 0
+          },
+          {
+            "text": "except the process which sent (optimization)",
+            "level": 1
+          },
+          {
+            "text": "could result in duplicate messages in reliable broadcast (also called atomic broadcast)",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "> fault tolerance often involves making copies"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Availability"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Guarding against data loss",
+            "level": 0
+          },
+          {
+            "text": "data locality",
+            "level": 0
+          },
+          {
+            "text": "dividing up the work (scalability), handling more requests",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "BUT... keeping replicas consistent is very difficult"
+      },
+      {
+        "type": "paragraph",
+        "text": "Violation of totally ordered delivery can lead to inconsistent replicas (nondeterministic) due to network fluctuations"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Determinism"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "is about the relationship between different executions to each other",
+            "level": 0
+          },
+          {
+            "text": "Different",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Consistency"
+      },
+      {
+        "type": "paragraph",
+        "text": "A replicated storage system is strongly consistent if a client couldn't tell that the data is replicated"
+      },
+      {
+        "type": "paragraph",
+        "text": "Somehow, we need totally ordered message delivery in order to guarantee strong consistency."
+      }
+    ],
+    "summary_topic_line": "Lecture #9",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "fault-tolerance",
+    "safety",
+    "liveness",
+    "Reliable broadcast",
+    "correct processes",
+    "reliable delivery",
+    "atomic broadcast",
+    "Replication",
+    "Availability",
+    "data locality",
+    "scalability",
+    "replicas",
+    "totally ordered delivery",
+    "inconsistent replicas",
+    "nondeterministic",
+    "Determinism",
+    "Consistency",
+    "replicated storage system",
+    "strongly consistent",
+    "totally ordered message delivery",
+    "strong consistency"
+  ],
+  "pages": [
+    "cse138-016",
+    "cse138-017"
+  ]
+}

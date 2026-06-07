@@ -1,0 +1,60 @@
+{
+  "note_id": "tim172a-025",
+  "extracted_json": {
+    "title": "Step 2: Five (or Six) Forces Analysis — Process",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 2: Perform a five (or six) forces analysis of the I/M landscape or structure"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Process:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "For each force, there is a set of determinants that affect the intensity (or strength) of the force",
+            "level": 1
+          },
+          {
+            "text": "Example: Force 1 (Rivalry between competitors) is affected by concentration (or # of competitors), the size (or Sales Revenue $, of each competitor)",
+            "level": 2
+          },
+          {
+            "text": "A list of determinants for each of the 5 forces is given in Table 1 of the LNCS handout (column 2)",
+            "level": 1
+          },
+          {
+            "text": "For each force, determine the qualitative strength of that force (High, Medium, Low) based on the determinants in Table 1, column 2",
+            "level": 1
+          },
+          {
+            "text": "Table 1, Column 3, shows the qualitative strength of each of the 5 forces for the PC industry in the 1980s",
+            "level": 1
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Step 2 of strategic analysis: performing a five (or six) forces analysis of industry structure.",
+    "summary_gist": "Outlines the process for a five/six forces analysis of an industry/market landscape. Each force has determinants that affect its intensity (e.g., Force 1 Rivalry is affected by concentration and competitor size/sales revenue). Determinants for the 5 forces are listed in Table 1 column 2 of the LNCS handout; the qualitative strength (High/Medium/Low) of each force is determined from these, with Table 1 column 3 showing strengths for the 1980s PC industry."
+  },
+  "transcription": "Step 2 : Perform a five (or six) forces analysis\n          of the I/M landscape or structure\n\nProcess :\n(a) — For each force, there is a set of\n       determinants that affect the intensity\n       (or strength) of the force\n\nExample : Force 1 ( Rivalry between\n          competitors) is affected by\n          concentration (or # of competitors),\n          the size (or Sales Revenue $, of\n          each competitor)\n\n(b) — A list of determinants for each of\n      the 5 forces is given in Table 1 of\n      the LNCS handout (column 2)\n\n(c) — For each force, determine the\n      qualitative strength of that force\n      ( High, Medium, Low) based on the\n      determinants in Table 1, column 2\n\n(d) — Table 1, Column 3, shows the qualitative\n      strength of each of the 5 forces for\n      the PC industry in the 1980s",
+  "distinctive_terms": [
+    "five (or six) forces analysis",
+    "I/M landscape",
+    "determinants",
+    "intensity",
+    "Rivalry between competitors",
+    "concentration",
+    "Sales Revenue",
+    "Table 1",
+    "LNCS handout",
+    "qualitative strength",
+    "PC industry"
+  ],
+  "_draft": true
+}

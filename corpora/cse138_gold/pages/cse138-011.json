@@ -1,0 +1,92 @@
+{
+  "note_id": "cse138-011",
+  "transcription": "Lecture #6. Chandy Lamport Algo\n\nChannel: FIFO, reliable connection from one\nprocess to the other (one way)\n\nTo init a snapshot: a process\n- records its own state\n- sends a marker message out on all outgoing channels\n- starts recording the messages it receives on all\nincoming channels\n\nRecieve a marker message: send marker message\nto all other processes.\n1st ever: Record state and start recording\nincoming messages, mark channel of marker\nmessage as empty\n\nNOT 1st ever:\nIf process has sent or recieved a marker message:\nstop recording from that channel, state of\nchannel in snapshot is the current state of channel\n(marker messages not on snapshots)\n↳ Chandy-Lamport\n\nConsistent snapshot: If an event e is in the snapshot,\nall events which happened before e are also recorded\n\nO(n²) marker messages for a snapshot with n processes\n\nIt works with multiple initiators",
+  "extracted_json": {
+    "title": "Lecture #6: Chandy Lamport Algo",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Channel: FIFO, reliable connection from one process to the other (one way)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "To init a snapshot: a process"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "records its own state",
+            "level": 0
+          },
+          {
+            "text": "sends a marker message out on all outgoing channels",
+            "level": 0
+          },
+          {
+            "text": "starts recording the messages it receives on all incoming channels",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Recieve a marker message: send marker message to all other processes"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "1st ever: Record state and start recording incoming messages, mark channel of marker message as empty",
+            "level": 0
+          },
+          {
+            "text": "If process has sent or recieved a marker message: stop recording from that channel, state of channel in snapshot is the current state of channel",
+            "level": 0
+          },
+          {
+            "text": "(marker messages not on snapshots)",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Chandy-Lamport"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Consistent snapshot"
+      },
+      {
+        "type": "paragraph",
+        "text": "If an event e is in the snapshot, all events which happened before e are also recorded"
+      },
+      {
+        "type": "paragraph",
+        "text": "$O(n^2)$ marker messages for a snapshot with n processes"
+      },
+      {
+        "type": "paragraph",
+        "text": "It works with multiple initiators"
+      }
+    ],
+    "summary_topic_line": "Lecture #6: Chandy Lamport Algo",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "Chandy Lamport Algo",
+    "FIFO",
+    "snapshot",
+    "marker message",
+    "outgoing channels",
+    "incoming channels",
+    "consistent snapshot",
+    "happened before",
+    "$O(n^2)$",
+    "initiators"
+  ]
+}

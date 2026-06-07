@@ -1,0 +1,107 @@
+{
+  "note_id": "tim172a-020",
+  "extracted_json": {
+    "title": "Organizing the Readings — Guide for Reading LNCS",
+    "blocks": [
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Organizing the readings (on Canvas)",
+            "level": 1
+          },
+          {
+            "text": "2.1. Read the \"Lecture Notes for Competitive Strategy ...\" (LNCS)",
+            "level": 2
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Guide for reading LNCS"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "Industry Analysis (e.g. Microprocessor Industry)"
+      },
+      {
+        "type": "paragraph",
+        "text": "(e.g., Intel)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Topics in LNCS | Section/Pages | Lecture #",
+            "level": 1
+          },
+          {
+            "text": "1. Process (or Plan or Approach) → Pages 17-19 (Section 5)",
+            "level": 1
+          },
+          {
+            "text": "- Company Analysis → L#4 (next Tue)",
+            "level": 2
+          },
+          {
+            "text": "- Industry Analysis → L#3 (Intro)",
+            "level": 2
+          },
+          {
+            "text": "- Assessment/Evolution → L#4 (Details)",
+            "level": 2
+          },
+          {
+            "text": "2. Industry Analysis | Section 3 (Pages 11-15), 5-step process | Main topic for today",
+            "level": 1
+          },
+          {
+            "text": "3. Functional Maps | Section 4 (Page 15) | L#3 (Intro), L#4 (Details)",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "2.2 Read the \"Intel Case Study\" (on Canvas)",
+            "level": 1
+          },
+          {
+            "text": "Use the SPSP to solve HW#2, Prob #2",
+            "level": 2
+          },
+          {
+            "text": "Focus on the Industry Analysis for now",
+            "level": 2
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Reading guide mapping LNCS topics (Process, Industry Analysis, Functional Maps) to sections, pages, and lectures.",
+    "summary_gist": "A reading guide for the \"Lecture Notes for Competitive Strategy\" (LNCS) on Canvas. A diagram shows Company Analysis nested within Industry Analysis (e.g., Intel within the microprocessor industry). A table maps LNCS topics to sections/pages and lectures: (1) Process covering Company Analysis (L#4 next Tue), Industry Analysis (L#3 Intro), and Assessment/Evolution (L#4 Details) on pages 17-19 (Section 5); (2) Industry Analysis in Section 3 (pages 11-15) with a 5-step process, the main topic for today; and (3) Functional Maps in Section 4 (page 15) for L#3 and L#4. Item 2.2 directs reading the \"Intel Case Study\" and using the SPSP to solve HW#2 Prob #2, focusing on Industry Analysis for now."
+  },
+  "transcription": "2.  Organizing the readings (on Canvas)\n   2.1.  Read the \"Lecture Notes for Competitive\n          Strategy ...\" (LNCS)\n\n   Guide for reading LNCS\n\n[figure]\n\n   Industry Analysis\n   (e.g. Microprocessor\n       Industry)\n\n   (e.g., Intel)\n\n| Topics in          | Section/Pages          | Lecture #        |\n| LNCS               |                        |                  |\n| 1. Process (or Plan or Approach) → Pages 17-19 (Section 5) | |\n|   - Company Analysis  |                     | → L#4 (next Tue) |\n|   - Industry Analysis |                     | → L#3 (Intro)    |\n|   - Assessment/Evolution |                  | → L#4 (Details)  |\n| 2.  Industry Analysis | Section 3 (Pages 11-15) | Main topic     |\n|                       | 5-step process       | for today        |\n| 3. Functional Maps    | Section 4 (Page 15)  | L#3 (Intro)      |\n|                       |                      | L#4 (Details)    |\n\n   2.2  Read the \"Intel Case Study\" (on Canvas)\n        Use the SPSP to solve HW#2, Prob #2\n        Focus on the Industry Analysis for now",
+  "distinctive_terms": [
+    "LNCS",
+    "Lecture Notes for Competitive Strategy",
+    "Company Analysis",
+    "Industry Analysis",
+    "Microprocessor Industry",
+    "Intel",
+    "Process (Plan/Approach)",
+    "Assessment/Evolution",
+    "Functional Maps",
+    "5-step process",
+    "Intel Case Study",
+    "SPSP",
+    "Canvas"
+  ],
+  "_draft": true
+}

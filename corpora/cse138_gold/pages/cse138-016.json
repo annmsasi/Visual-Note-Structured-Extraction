@@ -1,0 +1,76 @@
+{
+  "note_id": "cse138-016",
+  "transcription": "Best form of fault-tolerance preserves both safety\nand liveness... but sometimes you have\nto prioritize\n\nLecture #9\n\nReliable broadcast:\n   - Problem: we could crash between unique\nmessages. We want the broadcast to be all or noone\n   → If a process (which hasn't crashed) delivers\na message, then all other (correct) processes\ndeliver that message\n\nIf a process crashes before it can deliver a message\nthen this doesn't violate reliable broadcast.\n\nIf a process crashes in the middle of a broadcast,\ndoes violate reliable delivery.\n\nHow to implement?\n   - Upon receiving a message, broadcast to every\nother process, before delivering\n            except the process which sent (optimization)\n\n- could result in duplicate messages in reliable\nbroadcast (also called atomic broadcast)\n   ┌─────────────────────────────────────┐\n   │ fault tolerance often involves        │\n   │ making copies                         │\n   └─────────────────────────────────────┘",
+  "extracted_json": {
+    "title": "Lecture #9",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Best form of fault-tolerance preserves both safety and liveness... but sometimes you have to prioritize"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Reliable broadcast:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Problem: we could crash between unique messages. We want the broadcast to be all or noone",
+            "level": 0
+          },
+          {
+            "text": "If a process (which hasn't crashed) delivers a message, then all other (correct) processes deliver that message",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "If a process crashes before it can deliver a message then this doesn't violate reliable broadcast."
+      },
+      {
+        "type": "paragraph",
+        "text": "If a process crashes in the middle of a broadcast, does violate reliable delivery."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "How to implement?"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Upon receiving a message, broadcast to every other process, before delivering",
+            "level": 0
+          },
+          {
+            "text": "except the process which sent (optimization)",
+            "level": 1
+          },
+          {
+            "text": "could result in duplicate messages in reliable broadcast (also called atomic broadcast)",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "> fault tolerance often involves making copies"
+      }
+    ],
+    "summary_topic_line": "Lecture #9",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "fault-tolerance",
+    "safety",
+    "liveness",
+    "Reliable broadcast",
+    "correct processes",
+    "reliable delivery",
+    "atomic broadcast"
+  ]
+}

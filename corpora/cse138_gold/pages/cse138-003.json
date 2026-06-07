@@ -1,0 +1,95 @@
+{
+  "note_id": "cse138-003",
+  "transcription": "-Asynchronous Network: A network which\nhas no bound for the length of physical time for\na message to be delivered\n\nSpore & Events    [Example: Event Spore]\n                          ↘ history of\nP₁  P₂   If we know the events we can\n[figure]  figure out the state\n\n         Given a state, you cannot\n         determine the history of events\n         which lead to this state\n\nI rove that distributed systems professor going to write\non the board because of the complexity of\nthe distributed system caused things to break.\n\n[figure]  A→C   C||F, C and F\n          A→B          are concurrent,\n          A→D          or independent\n                          mellowing\n   the (→) relation is a partial order\n\n   the events on a process happen on a total [?]",
+  "extracted_json": {
+    "title": "Asynchronous Network",
+    "blocks": [
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Asynchronous Network: A network which has no bound for the length of physical time for a message to be delivered",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "State & Events"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Example: Event Spore (history of)"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "If we know the events we can figure out the state",
+            "level": 0
+          },
+          {
+            "text": "Given a state, you cannot determine the history of events which lead to this state",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "I rove that distributed systems professor going to write on the board because of the complexity of the distributed system caused things to break."
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "$A \\to C$",
+            "level": 0
+          },
+          {
+            "text": "$A \\to B$",
+            "level": 0
+          },
+          {
+            "text": "$A \\to D$",
+            "level": 0
+          },
+          {
+            "text": "$C \\| F$, C and F are concurrent, or independent",
+            "level": 0
+          },
+          {
+            "text": "the $(\\to)$ relation is a partial order",
+            "level": 0
+          },
+          {
+            "text": "the events on a process happen on a total [?]",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Asynchronous Network",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "Asynchronous Network",
+    "State & Events",
+    "Event Spore",
+    "history of events",
+    "distributed systems",
+    "concurrent",
+    "independent",
+    "partial order",
+    "total order"
+  ]
+}

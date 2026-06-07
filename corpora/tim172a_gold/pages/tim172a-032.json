@@ -1,0 +1,76 @@
+{
+  "note_id": "tim172a-032",
+  "extracted_json": {
+    "title": "Step 3 of the SPSP: Execute the plan — Structural map (PC Industry, 1980s)",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 3 of the SPSP : Execute the plan"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Step 1 : Create a structural map ...."
+      },
+      {
+        "type": "paragraph",
+        "text": "( e.g. Personal Computer Industry) 1980s"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      }
+    ],
+    "summary_topic_line": "Step 3 of the SPSP: building a structural (Five Forces) map of the PC industry in the 1980s.",
+    "summary_gist": "This page covers Step 3 of the SPSP (Execute the plan), specifically Step 1: creating a structural map, illustrated with the Personal Computer Industry of the 1980s. The diagram maps the competitive forces around central Competitors (F1: Rivalry between Competitors), including New entrants (Compaq, NCR) with F2 threat of new entrants and barriers to entry; Suppliers (microprocessors—Intel, AMD; operating systems—Microsoft; storage—Seagate) with F4 supplier power; Buyers (consumers, enterprises) with F5 buyer power; Substitutes (pen computing—GO, Apple; PDA—Palm) with F3 threat of substitutes; Complementors (Intel) with F6 power to influence; and the existing PC competitors (IBM, HP, Dell, Apple)."
+  },
+  "transcription": "Step 3 of the SPSP : Execute the plan\n\n   Step 1 :  Create a structural map ....\n              ( e.g. Personal Computer Industry)\n                        1980s\n\n[figure]",
+  "distinctive_terms": [
+    "SPSP",
+    "structural map",
+    "Personal Computer Industry",
+    "New entrants",
+    "Compaq",
+    "NCR",
+    "Competitors",
+    "PC industry",
+    "IBM",
+    "HP",
+    "Dell",
+    "Apple",
+    "Suppliers",
+    "Microprocessor",
+    "Intel",
+    "AMD",
+    "Operating System",
+    "Microsoft",
+    "Storage",
+    "Seagate",
+    "Buyers",
+    "Consumers",
+    "Enterprises",
+    "Complementors",
+    "Substitutes",
+    "Pen Computing",
+    "GO",
+    "PDA",
+    "PALM",
+    "Force 1",
+    "F1",
+    "Rivalry between Competitors",
+    "F2",
+    "threat of new entrants",
+    "Barriers to entry",
+    "F3",
+    "threat of substitutes",
+    "F4",
+    "Supplier Power",
+    "F5",
+    "Buyer Power",
+    "F6",
+    "power to influence",
+    "Five Forces"
+  ],
+  "_draft": true
+}

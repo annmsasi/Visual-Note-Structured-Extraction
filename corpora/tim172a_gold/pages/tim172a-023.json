@@ -1,0 +1,69 @@
+{
+  "note_id": "tim172a-023",
+  "extracted_json": {
+    "title": "Step 3 of the SPSP: Execute the plan",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 3 of the SPSP : Execute the plan"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Step 1: Create a structural map ...."
+      },
+      {
+        "type": "paragraph",
+        "text": "( e.g. Personal Computer Industry) 1980s"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "IBM",
+            "level": 1
+          },
+          {
+            "text": "HP",
+            "level": 1
+          },
+          {
+            "text": "Dell",
+            "level": 1
+          },
+          {
+            "text": "Apple",
+            "level": 1
+          },
+          {
+            "text": "....",
+            "level": 1
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Step 3 of the SPSP: executing the plan by creating a structural map of an industry.",
+    "summary_gist": "These notes cover Step 3 of the SPSP (executing the plan), beginning with Step 1: creating a structural map of an industry, illustrated with the Personal Computer Industry of the 1980s. The diagram maps the five-forces-style relationships among New entrants, Competitors, Suppliers, Buyers, and Substitutes, and lists example competitors in the PC industry: IBM, HP, Dell, and Apple."
+  },
+  "transcription": "Step 3 of the SPSP : Execute the plan\n   Step 1 :  Create a structural map ....\n             ( e.g. Personal Computer Industry)\n                        1980s\n\n[figure]\n\nCompetitors in\nthe PC industry\n • IBM\n • HP\n • Dell\n • Apple\n • ....",
+  "distinctive_terms": [
+    "SPSP",
+    "structural map",
+    "New entrants",
+    "Competitors",
+    "Suppliers",
+    "Buyers",
+    "Substitutes",
+    "PC industry",
+    "IBM",
+    "HP",
+    "Dell",
+    "Apple"
+  ],
+  "_draft": true
+}

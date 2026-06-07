@@ -1,0 +1,95 @@
+{
+  "note_id": "cse138-009",
+  "transcription": "CSE 138 Lecture #5\n- When using a logical clock, you must choose\nthe important elements to track\n  - Only deliver a message when every\nmessage in its causal history has been delivered\n  - Overkill for implementing FIFO delivery\ncausal broadcast protocol\n  - NOT totally ordered, as concurrent\nmessages can go in any order\n[1,0,0,0]                    [0,0,0,1]\n        VCs of independent events\n      neither is bigger\n  - They could still disagree, which would be\nproblematic\n\n- Totally ordered + causally ordered message\ndelivery is possible, but hard (w/ fault tolerance)\n\nUnicast Message: One sender, one receiver\n\nBroadcast Message: One sender, everyone receives\n                            (including sender)\nMulticast Message: One sender, multiple receivers\n                        (not necessarily everybody)\n\nDistributed Snapshot\n  - We need an algorithm, a time of day\nclock is not enough, no perfectly synchronized",
+  "extracted_json": {
+    "title": "CSE 138 Lecture #5",
+    "blocks": [
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "When using a logical clock, you must choose the important elements to track",
+            "level": 0
+          },
+          {
+            "text": "Only deliver a message when every message in its causal history has been delivered",
+            "level": 1
+          },
+          {
+            "text": "Overkill for implementing FIFO delivery causal broadcast protocol",
+            "level": 1
+          },
+          {
+            "text": "NOT totally ordered, as concurrent messages can go in any order",
+            "level": 1
+          },
+          {
+            "text": "$[1,0,0,0]$        $[0,0,0,1]$",
+            "level": 2
+          },
+          {
+            "text": "VCs of independent events",
+            "level": 2
+          },
+          {
+            "text": "neither is bigger",
+            "level": 2
+          },
+          {
+            "text": "They could still disagree, which would be problematic",
+            "level": 1
+          },
+          {
+            "text": "Totally ordered + causally ordered message delivery is possible, but hard (w/ fault tolerance)",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Unicast Message: One sender, one receiver"
+      },
+      {
+        "type": "paragraph",
+        "text": "Broadcast Message: One sender, everyone receives (including sender)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Multicast Message: One sender, multiple receivers (not necessarily everybody)"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Distributed Snapshot"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "We need an algorithm, a time of day clock is not enough, no perfectly synchronized",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "CSE 138 Lecture #5",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "logical clock",
+    "causal history",
+    "FIFO delivery",
+    "causal broadcast protocol",
+    "totally ordered",
+    "causally ordered",
+    "concurrent messages",
+    "VCs (vector clocks)",
+    "fault tolerance",
+    "Unicast Message",
+    "Broadcast Message",
+    "Multicast Message",
+    "Distributed Snapshot",
+    "time of day clock",
+    "synchronized"
+  ]
+}

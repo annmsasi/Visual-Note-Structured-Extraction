@@ -1,0 +1,68 @@
+{
+  "note_id": "tim172a-021",
+  "extracted_json": {
+    "title": "Structural Analysis of Industry (Competitive Strategy Analysis)",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Structural Analysis of Industry (aka Competitive Strategy Analysis)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Competitive Strategy comes from \"The Positioning School\" (Porter ≈ 1980)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Terminology:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Industry: The set of players for some technology or product type, e.g., disk-drive industry, consumer electronics, health-care industry, ....",
+            "level": 0
+          },
+          {
+            "text": "Players (in the industry): Competitors, new entrants, substitutes, suppliers",
+            "level": 0
+          },
+          {
+            "text": "Market: Buyers (or customers) of the product/service",
+            "level": 0
+          },
+          {
+            "text": "Forces: The micro-economic forces that exist among the players.",
+            "level": 0
+          },
+          {
+            "text": "Company (or Firm or Enterprise): is embedded in the industry of interest",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Terminology of Porter's structural/competitive strategy analysis of industry",
+    "summary_gist": "Introduces structural analysis of industry (competitive strategy analysis), attributed to Porter's \"Positioning School\" (~1980), and defines key terminology: industry, players, market, forces, and company/firm/enterprise."
+  },
+  "transcription": "3. Structural Analysis of Industry (aka\n      Competitive Strategy Analysis)\n            Competitive Strategy comes from\n   \"The Positioning School\" (\"Porter ≈ 1980)\n\n      Terminology :\n\n      Industry : The set of players for some\n                 technology or product type, e.g.,\n                 disk-drive industry, consumer electronics,\n                 health-care industry, ....\n\n      Players (in    : Competitors, new entrants,\n      the industry)     substitutes, suppliers\n\n      Market : Buyers (or customers) of the\n               product/service\n\n      Forces : The micro-economic forces that\n               exist among the players.\n\n      Company (or Firm or Enterprise) : is embedded in\n                                        the industry of\n                                        interest",
+  "distinctive_terms": [
+    "Structural Analysis of Industry",
+    "Competitive Strategy Analysis",
+    "Positioning School",
+    "Porter",
+    "Industry",
+    "Players",
+    "Market",
+    "Forces",
+    "micro-economic forces",
+    "new entrants",
+    "substitutes",
+    "suppliers",
+    "Company",
+    "Firm",
+    "Enterprise"
+  ],
+  "_draft": true
+}

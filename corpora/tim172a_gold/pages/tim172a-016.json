@@ -1,0 +1,93 @@
+{
+  "note_id": "tim172a-016",
+  "extracted_json": {
+    "title": "TIM 172A — SPSP Steps 4–5, HW #1, and TA Structure",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Step 4 (of the SPSP)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Check your work (Reflect, ... ask questions, ...)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Step 5"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Learn & generalize",
+            "level": 0
+          },
+          {
+            "text": "about cell-phones & improving them",
+            "level": 2
+          },
+          {
+            "text": "yourself as a problem-solver",
+            "level": 2
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "HW #1, Prob 2"
+      },
+      {
+        "type": "paragraph",
+        "text": "simpler version of Prob 1"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "TA structure for TIM 172A"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Infrastructure (Canvas, ....) — Vihan",
+            "level": 0
+          },
+          {
+            "text": "Customer & Grader facing — Fariha",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Please do not use \"Canvas Notifications\" to contact us"
+      }
+    ],
+    "summary_topic_line": "SPSP steps 4–5, HW #1 note, and TA structure for TIM 172A.",
+    "summary_gist": "Notes covering the final steps of the SPSP method (Step 4: check your work/reflect; Step 5: learn & generalize about cell-phones and yourself as a problem-solver), a note that HW #1 Prob 2 is a simpler version of Prob 1, and the TA structure for TIM 172A split into Infrastructure (Canvas) handled by Vihan and Customer & Grader facing handled by Fariha. Reminder: do not use Canvas Notifications to contact the staff."
+  },
+  "transcription": "Step 4         :    Check  your  work\n(of the SPSP)        (Reflect, ... ask questions, ...)\n\n  Step 5         :    Learn & generalize\n                       — about cell-phones & improving\n                          them\n                       —  yourself  as  a  problem-solver\n\n\n   HW # 1 , Prob 2\n\n        simpler  version  of  Prob 1\n\n\n            TA  structure  for  TIM 172A\n\n[figure]\n\n      Infrastructure              Customer & Grader\n     (Canvas, ....)                     facing\n          Vihan                          Fariha\n\n\n   Please  do  not  use  \"Canvas Notifications\"\n        to  contact us",
+  "distinctive_terms": [
+    "SPSP",
+    "HW #1",
+    "Prob 2",
+    "Prob 1",
+    "TA",
+    "TIM 172A",
+    "Infrastructure",
+    "Canvas",
+    "Customer & Grader facing",
+    "Vihan",
+    "Fariha",
+    "Canvas Notifications",
+    "problem-solver"
+  ],
+  "_draft": true
+}

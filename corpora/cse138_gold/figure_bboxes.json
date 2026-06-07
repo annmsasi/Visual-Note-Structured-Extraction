@@ -1,0 +1,106 @@
+{
+  "cse138-000": [
+    {
+      "bbox": [
+        0.05,
+        0.15,
+        0.4,
+        0.23
+      ],
+      "description": "Diagram of two boxed machines M1 and M2 connected by arrows labeled 'request' (M1 to M2) and 'response' (M2 to M1), illustrating message exchange between processes."
+    }
+  ],
+  "cse138-002": [
+    {
+      "bbox": [
+        0.0,
+        0.18,
+        0.45,
+        0.21
+      ],
+      "description": "A Lamport (spacetime) diagram with two vertical process timelines, Process (M1) and M2. On M1's timeline are events X, Y, Z (labeled as send/internal events); arrows cross to M2's timeline at events Q and R. Legend: X, R = Message Send Event; Q, Z = Message Receive Event; Y = Internal Event."
+    }
+  ],
+  "cse138-003": [
+    {
+      "bbox": [
+        0.05,
+        0.24,
+        0.3,
+        0.17
+      ],
+      "description": "Spacetime diagram of two processes P1 and P2 drawn as vertical timelines with downward arrows. P1 has an event labeled x=1 and x=2; a message arrow crosses from P2 (x=2) to P1, illustrating how events relate across processes."
+    },
+    {
+      "bbox": [
+        0.05,
+        0.55,
+        0.45,
+        0.197
+      ],
+      "description": "Spacetime / happens-before diagram with three process timelines (A/B, C/D/E, F) and message arrows (m1, m2) showing events A, B, C, D, E, F. Illustrates causal ordering: A→C, A→B, A→D, and that C and F are concurrent (C||F)."
+    }
+  ],
+  "cse138-004": [
+    {
+      "bbox": [
+        0.05,
+        0.804,
+        0.92,
+        0.186
+      ],
+      "description": "A spacetime/process diagram with three vertical process timelines (left, middle, right). Events labeled A, B, C on the left line (LC 1,2,3 with vector clocks [1,0,0], [2,0,0], [3,0,0]); D, E on the middle line ([1,1,0], [1,2,1]); F, G on the right line ([0,0,1], [3,0,2]). Diagonal arrows show messages passing between processes, illustrating Lamport/vector clock propagation."
+    }
+  ],
+  "cse138-006": [
+    {
+      "bbox": [
+        0.05,
+        0.436,
+        0.9,
+        0.434
+      ],
+      "description": "Vector-clock spacetime diagram with three vertical process timelines labeled Alice, Bob, and Carol, each starting at [0,0,0]. Diagonal arrows represent messages carrying vector clocks (e.g. VC=[0,0,1], VC=[0,2,1], VC=[0,3,1], VC=[2,2,1], VC=[0,3,3], VC=[2,5,1], VC=[2,5,5]); event states are annotated such as [0,1,1],[0,2,1],[0,3,1],[0,3,2],[1,2,1],[2,2,1],[2,4,1],[2,5,1],[0,3,3],[3,3,3],[2,5,4],[4,5,5],[2,5,6]. It illustrates how processes merge and increment vector clocks across message sends and receives."
+    }
+  ],
+  "cse138-007": [
+    {
+      "bbox": [
+        0.05,
+        0.5,
+        0.6,
+        0.2
+      ],
+      "description": "Two side-by-side message-sequence sketches labeled 'Alice / Bob' showing processes exchanging messages, with downward arrows branching toward 'Safety Properties' and 'FIFO message delivery'."
+    },
+    {
+      "bbox": [
+        0.08,
+        0.73,
+        0.35,
+        0.17
+      ],
+      "description": "A space-time diagram with two vertical process timelines P1 and P2; crossing diagonal message arrows between them illustrate a FIFO message delivery violation (messages received out of order)."
+    }
+  ],
+  "cse138-014": [
+    {
+      "bbox": [
+        0.0,
+        0.0,
+        0.68,
+        0.256
+      ],
+      "description": "A nested-ellipse (containment) diagram showing the hierarchy of fault types: an outer ellipse labeled 'Byzantine faults' containing 'Timing faults', which contains 'Omission faults', which contains the innermost 'Crash faults'."
+    },
+    {
+      "bbox": [
+        0.08,
+        0.38,
+        0.62,
+        0.266
+      ],
+      "description": "A second nested-ellipse containment diagram with an arrow pointing into it: outer ellipse 'Byzantine faults', containing 'Omission faults', containing innermost 'Crash faults'. An annotation with an arrow notes that authentication / detectable Byzantine faults can be downgraded to omission faults."
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "note_id": "tim172a-001",
+  "extracted_json": {
+    "title": "Note: TIM 172P Enrollment Requirements",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Note:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "TIM 172P is only required for the TIM Majors",
+            "level": 1
+          },
+          {
+            "text": "If you are a TIM Major, you need to enroll in TIM172A and TIM172P during the same qtr.",
+            "level": 1
+          },
+          {
+            "text": "If you are a TIM Minor, then you do not enroll in TIM172P",
+            "level": 1
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Enrollment notes for TIM 172P based on major or minor status.",
+    "summary_gist": "These notes clarify enrollment requirements for TIM 172P. The course is only required for TIM Majors. TIM Majors must enroll in both TIM172A and TIM172P during the same quarter, while TIM Minors do not enroll in TIM172P."
+  },
+  "transcription": "Note :\n1. TIM 172P is only required for the TIM Majors\n\n2. If you are a TIM Major, you need to\nenroll in TIM172A and TIM172P during\nthe same qtr.\n\n3. If you are a TIM Minor, then you\ndo not enroll in TIM172P",
+  "distinctive_terms": [
+    "TIM 172P",
+    "TIM 172A",
+    "TIM Major",
+    "TIM Minor"
+  ],
+  "_draft": true
+}

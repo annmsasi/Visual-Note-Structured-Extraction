@@ -1,0 +1,88 @@
+{
+  "note_id": "tim172a-022",
+  "extracted_json": {
+    "title": "Structured Problem-Solving Process (SPSP): Steps 1 & 2",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 1 of the SPSP : Definition of the problem"
+      },
+      {
+        "type": "paragraph",
+        "text": "Porter asked the following questions"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "How attractive is an industry from the point of view of the players?",
+            "level": 0
+          },
+          {
+            "text": "What position or competitive strategy should a competitor (in the industry) adopt?",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Example: The Personal Computer Industry ≈ 1980s"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 2 of the SPSP: Plan or Process"
+      },
+      {
+        "type": "paragraph",
+        "text": "5-step process"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Create a structural map of the industry/market (I/M) landscape in which the company is embedded",
+            "level": 0
+          },
+          {
+            "text": "Perform a five (or six) forces analysis of the I/M landscape",
+            "level": 0
+          },
+          {
+            "text": "Determine the attractiveness (as measured by the profit potential, the Return on Invested Capital [ROIC]) of the industry",
+            "level": 0
+          },
+          {
+            "text": "Determine or decide on the company's position or competitive strategy.",
+            "level": 0
+          },
+          {
+            "text": "What are the relationships between the players in the I/M landscape.",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Steps 1 and 2 of the Structured Problem-Solving Process (SPSP), including Porter's defining questions and the 5-step plan.",
+    "summary_gist": "Notes outline the first two steps of the SPSP. Step 1 (define the problem) frames Porter's two guiding questions about industry attractiveness and the competitive strategy a competitor should adopt, with the 1980s PC industry as an example. Step 2 (plan/process) lists a 5-step procedure: map the industry/market (I/M) landscape, run a five (or six) forces analysis, assess attractiveness via profit potential/ROIC, decide the company's competitive position, and analyze relationships among players in the landscape."
+  },
+  "transcription": "Step 1 of the SPSP : Definition of the problem\n         Porter asked the following questions\n              - How attractive is an industry from\n                the point of view of the players ?\n              - What position or competitive strategy\n                should a competitor (in the industry)\n                adopt ?\n\n     Example : The Personal Computer Industry ≈ 1980s\n\n     Step 2 of the SPSP: Plan or Process :\n              5-step process\n                 [figure]\n\n   1. Create a structural map of the industry/market\n      (I/M) landscape in which the company is embedded\n\n   2. Perform a five (or six) forces analysis of the\n      I/M landscape\n\n   3. Determine the attractiveness (as measured by\n      the profit potential, the Return on Invested\n      Capital [ROIC]) of the industry\n\n   4. Determine or decide on the company's\n      position or competitive strategy.\n\n   5. What are the relationships between the\n      players in the I/M landscape.",
+  "distinctive_terms": [
+    "SPSP",
+    "Porter",
+    "competitive strategy",
+    "industry/market (I/M) landscape",
+    "five forces analysis",
+    "attractiveness",
+    "profit potential",
+    "Return on Invested Capital",
+    "ROIC",
+    "Personal Computer Industry"
+  ],
+  "_draft": true
+}

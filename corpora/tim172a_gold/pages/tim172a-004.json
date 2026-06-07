@@ -1,0 +1,75 @@
+{
+  "note_id": "tim172a-004",
+  "extracted_json": {
+    "title": "Course operation / Syllabus",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "2. Course operation / Syllabus"
+      },
+      {
+        "type": "paragraph",
+        "text": "Lectures (SD)   |   You"
+      },
+      {
+        "type": "paragraph",
+        "text": "BBs ⟶ Methods, Tools, ... Framework } ⟶ Homework (weekly), Case Studies, Midterm, Final"
+      },
+      {
+        "type": "paragraph",
+        "text": "Take-home exams"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Home-work cycle:"
+      },
+      {
+        "type": "paragraph",
+        "text": "You try the problems   complete the HW"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Thurs — Assignment to You",
+            "level": 0
+          },
+          {
+            "text": "Tue — discuss HW in class",
+            "level": 0
+          },
+          {
+            "text": "Thurs — HW Solution (perfect) from you",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Course operation and syllabus: lecture-to-assessment flow and the weekly homework cycle.",
+    "summary_gist": "Notes outlining how the course operates. Lectures (SD) cover building blocks (BBs) — methods, tools, and a framework — which feed into student deliverables: weekly homework, case studies, midterm, and final (take-home exams). A timeline shows the homework cycle across two sprints: assignment given Thursday, HW discussed in class Tuesday, and a perfect HW solution due the following Thursday."
+  },
+  "transcription": "2.    Course operation / Syllabus\n\n            Lectures   (SD)                    You\n\n   BBs ⟶ Methods, Tools, ...  }  ⟶  Homework (weekly),\n           Framework                  Case Studies,\n                                      Midterm, Final\n                                      ___________\n                                       Take - home\n                                          exams\n\n       Home-work cycle:\n       You try the problems   complete the HW\n       [figure]\n       Thurs              Tue          Thurs\n                                       HW Solution (perfect)\n       Assignment    discuss          from you\n       to You        HW in\n                     class",
+  "distinctive_terms": [
+    "Syllabus",
+    "Lectures",
+    "SD",
+    "BBs",
+    "Framework",
+    "Case Studies",
+    "Midterm",
+    "Final",
+    "Take-home exams",
+    "Home-work cycle",
+    "Sprint 1",
+    "Sprint 2",
+    "HW",
+    "HW Solution"
+  ],
+  "_draft": true
+}

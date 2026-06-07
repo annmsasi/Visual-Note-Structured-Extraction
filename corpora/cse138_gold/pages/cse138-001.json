@@ -1,0 +1,126 @@
+{
+  "note_id": "cse138-001",
+  "transcription": "CSE 138 Lecture #2\n\nWhy is time useful? Coordination\n\nHow do we use clocks?  1) Mark particular instances\nin time\n\n2) Measure durations or\nintervals of time\nPhysical\nComputers have 2 clocks:  time-of-day clocks\n- synchronized between\nMonotonic clocks  machines using NTP (Network\nTime Protocol)\n\n- only go forward\n- bad for timestamping  - bad for measuring durations\nparticular points in time  intervals of time\n- because they can jump\n- good for measuring durations  backwards and forwards\nintervals of time  (2016 Cloudflare leap\nsecond bug)\n\nBook Rev. Designing Data Intensive\nApplications  - Ok (ish) for timestamping\nwhy?  points in time\n\nAny out of sync  consensus\nclocks can lead to confusion of ordering\n\nLogical clocks: Only measure the ordering of\nevents\nA→B: A happened before B\n- A could have caused B, B could not have caused A",
+  "extracted_json": {
+    "title": "CSE 138 Lecture #2",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Why is time useful? Coordination"
+      },
+      {
+        "type": "paragraph",
+        "text": "How do we use clocks?"
+      },
+      {
+        "type": "paragraph",
+        "text": "1. Mark particular instances in time"
+      },
+      {
+        "type": "paragraph",
+        "text": "2. Measure durations or intervals of time"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Physical"
+      },
+      {
+        "type": "paragraph",
+        "text": "Computers have 2 clocks:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "**Monotonic clocks**",
+            "level": 0
+          },
+          {
+            "text": "only go forward",
+            "level": 1
+          },
+          {
+            "text": "bad for timestamping particular points in time",
+            "level": 1
+          },
+          {
+            "text": "good for measuring durations / intervals of time",
+            "level": 1
+          },
+          {
+            "text": "**Time-of-day clocks**",
+            "level": 0
+          },
+          {
+            "text": "synchronized between machines using NTP (Network Time Protocol)",
+            "level": 1
+          },
+          {
+            "text": "bad for measuring durations / intervals of time",
+            "level": 1
+          },
+          {
+            "text": "because they can jump backwards and forwards (2016 Cloudflare leap second bug)",
+            "level": 2
+          },
+          {
+            "text": "Ok (ish) for timestamping points in time",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Book Rev. Designing Data Intensive Applications"
+      },
+      {
+        "type": "paragraph",
+        "text": "why?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Any out of sync clocks can lead to confusion of ordering"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Logical clocks"
+      },
+      {
+        "type": "paragraph",
+        "text": "Only measure the ordering of events"
+      },
+      {
+        "type": "equation",
+        "latex": "A \\rightarrow B : \\text{A happened before B}"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "A could have caused B, B could not have caused A",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "CSE 138 Lecture #2",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "Coordination",
+    "Physical clocks",
+    "Monotonic clocks",
+    "Time-of-day clocks",
+    "NTP (Network Time Protocol)",
+    "timestamping",
+    "Cloudflare leap second bug",
+    "Designing Data Intensive Applications",
+    "consensus",
+    "Logical clocks",
+    "ordering of events",
+    "happened before (A→B)"
+  ]
+}

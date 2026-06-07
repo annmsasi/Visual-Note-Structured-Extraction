@@ -1,0 +1,66 @@
+{
+  "note_id": "tim172a-005",
+  "extracted_json": {
+    "title": "Interactions with the TAs",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Interactions with the TAs:"
+      },
+      {
+        "type": "paragraph",
+        "text": "If you have any issues related to the course. (e.g., fall ill, grading concern, ....)"
+      },
+      {
+        "type": "paragraph",
+        "text": "please send e-mail to, Fariha Lateef (flateef@ucsc.edu)"
+      },
+      {
+        "type": "paragraph",
+        "text": "cc to the instructor (sdesa@ucsc.edu)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Be sure to put an appropriate header in your message :  TIM 172A ....."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Correcting your mistakes in HWs. & Midterm: Re - submission policy:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "You have to submit (on-time)",
+            "level": 0
+          },
+          {
+            "text": "After you submission is graded, you can correct your mistakes, and re-submit, for partial credit: upto 60% of your lost grade",
+            "level": 0
+          },
+          {
+            "text": "Work submitted at the end of the quarter (last HW set; final exam) cannot be re-submitted.",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Course logistics: how to contact TAs/instructor and the homework/midterm re-submission policy.",
+    "summary_gist": "Students with course issues (illness, grading concerns) should email TA Fariha Lateef and cc the instructor, using a clear \"TIM 172A\" subject header. The re-submission policy allows correcting graded, on-time submissions for partial credit (up to 60% of lost grade), but end-of-quarter work (the last HW set and final exam) cannot be re-submitted."
+  },
+  "transcription": "Interactions with the TAs:\n\nIf you have any issues related to the course.\n(e.g., fall ill, grading concern, ....)\n\nplease send e-mail to,\n    Fariha Lateef (flateef@ucsc.edu)\n\ncc to the instructor (sdesa@ucsc.edu)\n\nBe sure to put an appropriate header in your\nmessage :  TIM 172A .....\n\nCorrecting your mistakes in HWs.& Midterm:\nRe - submission policy:\n\n1. You have to submit (on-time)\n\n2. After you submission is graded,\n   you can correct your mistakes, and\n   re-submit, for partial credit: upto 60%\n   of your lost grade\n\n3. Work submitted at the end of the\n   quarter (last HW set; final exam)\n   cannot be re-submitted.",
+  "distinctive_terms": [
+    "TAs",
+    "TIM 172A",
+    "Fariha Lateef",
+    "flateef@ucsc.edu",
+    "sdesa@ucsc.edu",
+    "Re-submission policy",
+    "HWs",
+    "Midterm",
+    "final exam"
+  ],
+  "_draft": true
+}

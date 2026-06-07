@@ -1,0 +1,74 @@
+{
+  "note_id": "tim172a-031",
+  "extracted_json": {
+    "title": "HW #2, Prob. 2 — Intel, the Microprocessor Company",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "HW # 2, Prob. 2"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Context :"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "Disk-Drive Industry (Prob. 1)"
+      },
+      {
+        "type": "paragraph",
+        "text": "microprocessor industry (Prob # 2) Intel"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Intel :"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "HW # 2, Prob 2: Intel as a DRAM company (1968 - ~1974)",
+            "level": 0
+          },
+          {
+            "text": "Intel as a Microprocessor company (~1974 — present / 1997)",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "HW # 2, Prob 2 : Analyse Intel, the Microprocessor company"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "structural analysis, etc.",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Setup for HW #2, Prob. 2: analyzing Intel as a microprocessor company within the IT industry.",
+    "summary_gist": "Frames Homework #2, Problem 2 in the context of the IT industry, which contains the computer industry, disk-drive industry (Prob. 1) and microprocessor industry (Prob. 2, Intel). Intel is described in two phases: as a DRAM company (1968–~1974) and as a microprocessor company (~1974–present/1997). The assigned task is to analyze Intel, the microprocessor company, including a structural analysis."
+  },
+  "transcription": "HW # 2, Prob. 2\n\nContext :\n\n[figure]\n\nDisk-\nDrive\nIndustry\n(Prob. 1)\n\nmicroprocessor\nindustry\n(Prob # 2 )\nIntel\n\nIntel :\n\nHW # 2,        ⎧ — Intel as a DRAM company (1968 - ~1974)\nProb 2          ⎨\n                    ⎩ — Intel as a Microprocessor company\n                                                    (~1974 — present)\n                                                              1997\n\nHW # 2, Prob 2 :  Analyse Intel, the Microprocessor\n                            company\n\n                          — structural analysis, etc.",
+  "distinctive_terms": [
+    "IT Industry",
+    "Computer industry",
+    "microprocessor industry",
+    "Disk-Drive Industry",
+    "Intel",
+    "DRAM",
+    "structural analysis"
+  ],
+  "_draft": true
+}

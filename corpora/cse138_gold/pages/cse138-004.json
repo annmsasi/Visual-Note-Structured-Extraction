@@ -1,0 +1,102 @@
+{
+  "note_id": "cse138-004",
+  "transcription": "CSE 138 Lecture 3\nFit by solving: min Cost($\\theta$) }\n\n{Reflexive: Ordering relation includes itself\n{Anti-symmetrical: Ordering relation is not reversible\n{Transitivity: Ordering relations can be put together\n{\n{A real partial ordering has these 3 properties.\n        (not all elements are related).\n\"happens before\" is an irreflexive partial order\nTotally ordered Set: All elements are related\ne.x: Natural numbers, ordered by the usual $\\leq$ relation\nA process order is totally ordered\n\nLogical Clocks (particularly,\n                            Lamport clocks)\n- A way of assigning natural numbers to events\n    LC(A) = 3   $\\leftarrow$ LC = Lamport Clock\nClock condition: If a → b, then LC(a) < LC(b)\nLamport Clocks are consistent with the\nhappens before relation. (also consistent with causal)\n[figure]",
+  "extracted_json": {
+    "title": "CSE 138 Lecture 3",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Fit by solving: $\\min \\text{Cost}(\\theta)$"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Reflexive: Ordering relation includes itself",
+            "level": 0
+          },
+          {
+            "text": "Anti-symmetrical: Ordering relation is not reversible",
+            "level": 0
+          },
+          {
+            "text": "Transitivity: Ordering relations can be put together",
+            "level": 0
+          },
+          {
+            "text": "A real partial ordering has these 3 properties (not all elements are related).",
+            "level": 0
+          },
+          {
+            "text": "\"happens before\" is an irreflexive partial order",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Totally ordered Set: All elements are related"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "e.x: Natural numbers, ordered by the usual $\\leq$ relation",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "A process order is totally ordered"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Logical Clocks (particularly, Lamport clocks)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "A way of assigning natural numbers to events",
+            "level": 0
+          },
+          {
+            "text": "$LC(A) = 3 \\leq LC = Lamport Clock$",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Clock condition: If $a \\rightarrow b$, then $LC(a) < LC(b)$"
+      },
+      {
+        "type": "paragraph",
+        "text": "Lamport Clocks are consistent with the happens before relation. (also consistent with causal)"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      }
+    ],
+    "summary_topic_line": "CSE 138 Lecture 3",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "Reflexive",
+    "Anti-symmetrical",
+    "Transitivity",
+    "partial ordering",
+    "irreflexive partial order",
+    "happens before",
+    "Totally ordered Set",
+    "process order",
+    "Logical Clocks",
+    "Lamport clocks",
+    "Clock condition",
+    "LC (Lamport Clock)",
+    "consistent with the happens before relation"
+  ]
+}

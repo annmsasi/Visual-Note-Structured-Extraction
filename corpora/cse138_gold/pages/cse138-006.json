@@ -1,0 +1,54 @@
+{
+  "note_id": "cse138-006",
+  "transcription": "3) When sending a message, a process\nattaches its vector clock to the message.\n\n4) When receiving a message, you take the\nmaximum of the recieved VC and your own local VC\nand increment your own position by 1 because reciev\nis an event.\n\npointwise maximum: Max ([1,12,4], [7,0,2]\n= [7,12,4]\n\nCSE138 Lecture #4\n\n[figure]\n\nHappens before vector clock\n$e_1 \\to e_2 \\Longleftrightarrow VC(e_1) < VC(e_2)$",
+  "extracted_json": {
+    "title": "CSE138 Lecture #4",
+    "blocks": [
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "3) When sending a message, a process attaches its vector clock to the message.",
+            "level": 0
+          },
+          {
+            "text": "4) When receiving a message, you take the maximum of the recieved VC and your own local VC and increment your own position by 1 because reciev is an event.",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "pointwise maximum:"
+      },
+      {
+        "type": "equation",
+        "latex": "\\text{Max}([1,12,4],[7,0,2]) = [7,12,4]"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Happens before vector clock"
+      },
+      {
+        "type": "equation",
+        "latex": "e_1 \\to e_2 \\Longleftrightarrow VC(e_1) < VC(e_2)"
+      }
+    ],
+    "summary_topic_line": "CSE138 Lecture #4",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "vector clock",
+    "VC",
+    "pointwise maximum",
+    "CSE138",
+    "Happens before",
+    "$e_1 \\to e_2$",
+    "$VC(e_1) < VC(e_2)$"
+  ]
+}

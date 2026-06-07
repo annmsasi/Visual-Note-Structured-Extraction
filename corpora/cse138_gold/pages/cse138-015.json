@@ -1,0 +1,88 @@
+{
+  "note_id": "cse138-015",
+  "transcription": "The more message you receive, the more confidence\na process have, but there is no certainty.\n\nReliable delivery: If not <u>all</u> messages are lost, the\nmessage will be eventually delivered.\n\nTo send a messages: (reliable delivery)\n  - put it in a send buffer\n  - After a given timeout send what's in the\n  buffer\n  - when an ack is received, delete it from\n  the buffer\n\n  To receive and deliver a message:\n  - Ack the sender\n(At least once delivery)\n\n<u>Some messages which change state</u> would\nmess up state if duplicated\n\n<u>Idempotent</u> messages can be delivered multiple\ntimes\n\nExactly-once delivery? Only idempotent messages\n— message de-duplication with metadata\n\nRobust design is easier with idempotent messages",
+  "extracted_json": {
+    "title": "(untitled)",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "The more message you receive, the more confidence a process have, but there is no certainty."
+      },
+      {
+        "type": "paragraph",
+        "text": "Reliable delivery: If not **all** messages are lost, the message will be eventually delivered."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "To send a messages: (reliable delivery)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "put it in a send buffer",
+            "level": 0
+          },
+          {
+            "text": "After a given timeout send what's in the buffer",
+            "level": 0
+          },
+          {
+            "text": "when an ack is received, delete it from the buffer",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "To receive and deliver a message:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Ack the sender",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "(At least once delivery)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Some messages which change state would mess up state if duplicated"
+      },
+      {
+        "type": "paragraph",
+        "text": "Idempotent messages can be delivered multiple times"
+      },
+      {
+        "type": "paragraph",
+        "text": "Exactly-once delivery? Only idempotent messages — message de-duplication with metadata"
+      },
+      {
+        "type": "paragraph",
+        "text": "Robust design is easier with idempotent messages"
+      }
+    ],
+    "summary_topic_line": "",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "Reliable delivery",
+    "send buffer",
+    "timeout",
+    "ack",
+    "At least once delivery",
+    "Exactly-once delivery",
+    "Idempotent messages",
+    "message de-duplication",
+    "metadata",
+    "safety",
+    "liveness"
+  ]
+}

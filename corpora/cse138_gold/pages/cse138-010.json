@@ -1,0 +1,38 @@
+{
+  "note_id": "cse138-010",
+  "transcription": "-snapshot is of the state, which is just a\nhistory of all events\n\n-A snapshot is correct when it observes\nit has all such that if an event is in the\nsnapshot, then all events that happen before\nit should be too.\n\nA snapshot satisfying this property is called\na consistent global snapshot\n\nChandy-Lamport algorithm",
+  "extracted_json": {
+    "title": "(untitled)",
+    "blocks": [
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "snapshot is of the state, which is just a history of all events",
+            "level": 0
+          },
+          {
+            "text": "A snapshot is correct when it observes it has all such that if an event is in the snapshot, then all events that happen before it should be too.",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "A snapshot satisfying this property is called a consistent global snapshot"
+      },
+      {
+        "type": "paragraph",
+        "text": "Chandy-Lamport algorithm"
+      }
+    ],
+    "summary_topic_line": "",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "snapshot",
+    "consistent global snapshot",
+    "Chandy-Lamport algorithm",
+    "event"
+  ]
+}

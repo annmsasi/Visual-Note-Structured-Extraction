@@ -1,0 +1,106 @@
+{
+  "note_id": "cse138-008",
+  "transcription": "FIFO message delivery: If a process sends message\nm₂ after message m₁, then a process delivering\nboth delivers m₁ first. (2 messages, same sender and rec.)\n\nHow to implement?\n\nSequence numbers (TCP)\n        - Messages have id and sequence #s.\n        - Messages are delivered when they are one more than\n          the last sequence number.\n\nWhat if a message gets lost?\n        It breaks\n        This strategy only works if you have reliable\n        delivery (TCP does)\n\n                    (TCP also does this)\nAcknowledgements\n        - Can only send one once an acknowledgement\nis received\n        - Slower, more steps and also a risk of ack being\ndropped\n\nCausal Message Delivery:\n        If the send of a message m₁ happens before\n        the send of a message m₂, then any process\n        delivering both delivers m₁ first. (m₁ & m₂ could\n        have different senders.)\n                - All FIFO violations are causal delivery\n                violations, (not vice versa)\n        vector clocks can ensure causal message delivery",
+  "extracted_json": {
+    "title": "FIFO message delivery",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "If a process sends message $m_2$ after message $m_1$, then a process delivering both delivers $m_1$ first. (2 messages, same sender and receiver)"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "How to implement?"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Sequence numbers (TCP)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Messages have id and sequence #s.",
+            "level": 0
+          },
+          {
+            "text": "Messages are delivered when they are one more than the last sequence number.",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "What if a message gets lost?"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "It breaks",
+            "level": 0
+          },
+          {
+            "text": "This strategy only works if you have reliable delivery (TCP does)",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Acknowledgements (TCP also does this)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Can only send one once an acknowledgement is received",
+            "level": 0
+          },
+          {
+            "text": "Slower, more steps and also a risk of ack being dropped",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Causal Message Delivery"
+      },
+      {
+        "type": "paragraph",
+        "text": "If the send of a message $m_1$ happens before the send of a message $m_2$, then any process delivering both delivers $m_1$ first. ($m_1$ & $m_2$ could have different senders.)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "All FIFO violations are causal delivery violations, (not vice versa)",
+            "level": 0
+          },
+          {
+            "text": "vector clocks can ensure causal message delivery",
+            "level": 0
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "FIFO message delivery",
+    "summary_gist": ""
+  },
+  "distinctive_terms": [
+    "FIFO message delivery",
+    "TCP",
+    "sequence numbers",
+    "acknowledgements",
+    "ack",
+    "Causal Message Delivery",
+    "happens before",
+    "vector clocks"
+  ]
+}

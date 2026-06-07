@@ -1,0 +1,54 @@
+{
+  "note_id": "tim172a-007",
+  "extracted_json": {
+    "title": "Problem-Solving",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "4. Problem - Solving"
+      },
+      {
+        "type": "paragraph",
+        "text": "Complex problems (the type of problems addressed in TIM 172 A/B/P/Q)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Two examples:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "What technologies & products should company X develop during the next 1-3 years?",
+            "level": 0
+          },
+          {
+            "text": "How should incoming, real-time data (aka \"Big Data\") be used in order to design better products & services → more customer centric, more reliable,....",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "How do professionals (in Engineering, Business, Medicine, Law) solve complex problems?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Professionals use a systematic structured problem solving process (SPSP) to solve complex problems, which has 5 steps as follows:"
+      }
+    ],
+    "summary_topic_line": "Introduction to problem-solving and the structured problem solving process (SPSP) for complex problems.",
+    "summary_gist": "The page introduces problem-solving for complex problems of the kind addressed in TIM 172A/B/P/Q. Two example problems are given: deciding what technologies and products a company should develop over the next 1-3 years, and how incoming real-time data (\"Big Data\") can be used to design better, more customer-centric and reliable products and services. It notes that professionals in engineering, business, medicine, and law solve complex problems using a systematic, structured problem solving process (SPSP) consisting of 5 steps."
+  },
+  "transcription": "4.   Problem - Solving\n\n      Complex problems ( the type of problems\n      addressed in TIM 172 A/B/P/Q )\n\n         Two examples :\n\n      - What technologies & products should\n        company X develop during the next\n        1- 3 years ?\n\n      -    How should incoming , real-time data\n          (aka \"Big Data\") be used in order to\n          design better products & services\n                  ↳ more customer centric, more\n                    reliable,....\n\n      How do professionals (in Engineering,\n      Business, Medicine, Law) solve complex problems?\n\n      Professionals use a systematic structured\n      problem solving process ( SPSP) to solve\n      complex problems, which has 5 steps\n      as follows :",
+  "distinctive_terms": [
+    "TIM 172A/B/P/Q",
+    "Big Data",
+    "real-time data",
+    "customer centric",
+    "structured problem solving process",
+    "SPSP"
+  ],
+  "_draft": true
+}

@@ -1,0 +1,73 @@
+{
+  "note_id": "tim172a-008",
+  "extracted_json": {
+    "title": "Structured Problem-Solving Process (SPSP) Steps",
+    "blocks": [
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Define the real problem",
+            "level": 0
+          },
+          {
+            "text": "Plan the approach (or treatment) for solving the problem",
+            "level": 0
+          },
+          {
+            "text": "Execute or implement the plan, which leads to",
+            "level": 0
+          },
+          {
+            "text": "Results",
+            "level": 1
+          },
+          {
+            "text": "drawing conclusions",
+            "level": 1
+          },
+          {
+            "text": "making recommendations",
+            "level": 1
+          },
+          {
+            "text": "Check your work/results",
+            "level": 0
+          },
+          {
+            "text": "Learn & Generalize",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Each of the above steps has a set of sub-steps & questions that need to be answered"
+      },
+      {
+        "type": "paragraph",
+        "text": "refer to the SPSP handout on CANVAS"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "HW # 1"
+      },
+      {
+        "type": "paragraph",
+        "text": "You are now ready to tackle HW#1"
+      }
+    ],
+    "summary_topic_line": "The five-step structured problem-solving process and a pointer to HW#1.",
+    "summary_gist": "Lists the five steps of a structured problem-solving process: (1) define the real problem, (2) plan the approach/treatment for solving it, (3) execute/implement the plan, which leads to results, drawing conclusions, and making recommendations, (4) check your work/results, and (5) learn & generalize. Notes that each step has sub-steps and questions to answer, directing students to the SPSP handout on Canvas, and states they are now ready to tackle HW#1."
+  },
+  "transcription": "1. Define the real problem\n\n2. Plan the approach (or treatment) for\n\nsolving the problem\n\n3. Execute or implement the plan,\n        which leads to\n            - Results\n            - drawing conclusions\n            - making recommendations\n\n4. Check your work/results\n\n5. Learn & Generalize\n\nEach of the above steps has a set of\nsub-steps & questions that need to be\nanswered\n            refer to the SPSP handout on CANVAS\n\n\n5.  . HW # 1\n        You are now ready to tackle HW#1",
+  "distinctive_terms": [
+    "SPSP",
+    "CANVAS",
+    "HW #1",
+    "Learn & Generalize",
+    "Execute or implement the plan"
+  ],
+  "_draft": true
+}

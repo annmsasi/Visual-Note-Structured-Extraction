@@ -1,0 +1,70 @@
+{
+  "note_id": "tim172a-029",
+  "extracted_json": {
+    "title": "Step 5: Relationships Between Players in the I/M Landscape (Intel Case Study)",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Comment: Competitive strategy is dynamic (evolutionary) ⟹ companies change their competitive strategy with time ⟹ the creation of functional maps guides the evolution of strategy"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Step 5: Determine the relationships between the different sets of players in the I/M landscape"
+      },
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Example: The Intel Case Study (HW#2, Prob#2)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "What relationships did Intel (the competitor in the microprocessor industry) have with its suppliers?",
+            "level": 1
+          },
+          {
+            "text": "Single sourcing",
+            "level": 2
+          },
+          {
+            "text": "...",
+            "level": 2
+          },
+          {
+            "text": "What relationships have with its buyers (i.e., computer manufacturers)",
+            "level": 1
+          },
+          {
+            "text": "e.g. \"Intel Inside\"",
+            "level": 2
+          },
+          {
+            "text": "...",
+            "level": 2
+          },
+          {
+            "text": "WINTEL",
+            "level": 2
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "Step 5 of strategy analysis: determining relationships between players in the I/M landscape, illustrated by the Intel case study.",
+    "summary_gist": "The page notes that competitive strategy is dynamic and evolutionary, with functional maps guiding its evolution. Step 5 is to determine the relationships between different sets of players in the I/M landscape. The Intel Case Study (HW#2, Prob#2) is used as an example, examining Intel's relationships with its suppliers (e.g., single sourcing) and with its buyers/computer manufacturers (e.g., the \"Intel Inside\" campaign and WINTEL)."
+  },
+  "transcription": "Comment : Competitive strategy is dynamic\n(evolutionary) ⟹ companies change\ntheir competitive strategy with time\n⟹ the creation of functional\nmaps guides the evolution of\nstrategy\n\nStep 5 : Determine the relationships between\nthe different sets of players in\nthe I/M landscape\n\nExample : The Intel Case Study (HW#2, Prob#2)\n\n— What relationships did Intel\n(the competitor in the micro-\nprocessor industry) have with\nits suppliers?\n— Single sourcing\n— ...\n\n— What relationships have with\nits buyers (i.e., computer\nmanufacturers)\ne.g. \"Intel Inside\"\n...\nWINTEL",
+  "distinctive_terms": [
+    "competitive strategy",
+    "functional maps",
+    "I/M landscape",
+    "Intel",
+    "microprocessor industry",
+    "single sourcing",
+    "Intel Inside",
+    "WINTEL",
+    "Step 5"
+  ],
+  "_draft": true
+}

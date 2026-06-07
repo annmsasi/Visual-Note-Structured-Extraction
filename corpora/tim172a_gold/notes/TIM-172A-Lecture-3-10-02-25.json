@@ -1,0 +1,432 @@
+{
+  "note_id": "TIM-172A-Lecture-3-10-02-25",
+  "transcription": "TIM172A : MOT-I , Lecture, 10/2/25\n\nAgenda :\n\n1. Organize the readings [Lecture Notes for\nCompetitive Strategies (LNCS), available on Canvas;\nThe Disk Drive Industry]\n\n2. Introduction to Functional Maps\n( HW#2, Prob 1 : The Disk Drive Industry)\n↑ also on Canvas\n\n3. Main topic : Industry Analysis\n- Personal Computer Industry\n(HW#2, Prob. 2 : INTEL)\n↑ handout on Canvas\n\n4. HW#2 has been posted : due Thursday, next week\n\n____________________________________________\n\nTIM172A is an engineering course :\n- Please do not submit essays as\nsolutions\n- Structure your work to maximize\ninformation content : readability, user-\nfriendly\n2.    Functional Maps : An introduction\n\n      Functional maps can come in many forms:\n        graph, table, pictorial\n\n      Q : How does a tech. company (e.g., Intel,\n          Seagate,..) set technical (product) performance\n          targets for what they plan to do for\n          the next year? for the next 3 years?, ....\n\n      A : By creating the appropriate functional maps,\n          that enable the prediction (or forecasting)\n          of the appropriate tech. or product performance\n          parameter.\n          The most famous functional map in the\n          IT industry is Moore's Law.\n\n[figure]\nDefinitions:\n (1) Function refers to organizational functions:\n      Engineering, Manufacturing, Marketing,\n      Finance, ...\n\n (2) Each of these functions has important\n      dimensions:\n       For example, the key dimensions of\n       engineering are product performance, critical\n       skills, ...\n\n[figure]\n\nExample: [figure]\n\nYou are now ready to attempt\n   HW #2, Prob.1: The Disk Drive Industry\n2.  Organizing the readings (on Canvas)\n   2.1.  Read the \"Lecture Notes for Competitive\n          Strategy ...\" (LNCS)\n\n   Guide for reading LNCS\n\n[figure]\n\n   Industry Analysis\n   (e.g. Microprocessor\n       Industry)\n\n   (e.g., Intel)\n\n| Topics in          | Section/Pages          | Lecture #        |\n| LNCS               |                        |                  |\n| 1. Process (or Plan or Approach) → Pages 17-19 (Section 5) | |\n|   - Company Analysis  |                     | → L#4 (next Tue) |\n|   - Industry Analysis |                     | → L#3 (Intro)    |\n|   - Assessment/Evolution |                  | → L#4 (Details)  |\n| 2.  Industry Analysis | Section 3 (Pages 11-15) | Main topic     |\n|                       | 5-step process       | for today        |\n| 3. Functional Maps    | Section 4 (Page 15)  | L#3 (Intro)      |\n|                       |                      | L#4 (Details)    |\n\n   2.2  Read the \"Intel Case Study\" (on Canvas)\n        Use the SPSP to solve HW#2, Prob #2\n        Focus on the Industry Analysis for now\n3. Structural Analysis of Industry (aka\n      Competitive Strategy Analysis)\n            Competitive Strategy comes from\n   \"The Positioning School\" (\"Porter ≈ 1980)\n\n      Terminology :\n\n      Industry : The set of players for some\n                 technology or product type, e.g.,\n                 disk-drive industry, consumer electronics,\n                 health-care industry, ....\n\n      Players (in    : Competitors, new entrants,\n      the industry)     substitutes, suppliers\n\n      Market : Buyers (or customers) of the\n               product/service\n\n      Forces : The micro-economic forces that\n               exist among the players.\n\n      Company (or Firm or Enterprise) : is embedded in\n                                        the industry of\n                                        interest\nStep 1 of the SPSP : Definition of the problem\n         Porter asked the following questions\n              - How attractive is an industry from\n                the point of view of the players ?\n              - What position or competitive strategy\n                should a competitor (in the industry)\n                adopt ?\n\n     Example : The Personal Computer Industry ≈ 1980s\n\n     Step 2 of the SPSP: Plan or Process :\n              5-step process\n                 [figure]\n\n   1. Create a structural map of the industry/market\n      (I/M) landscape in which the company is embedded\n\n   2. Perform a five (or six) forces analysis of the\n      I/M landscape\n\n   3. Determine the attractiveness (as measured by\n      the profit potential, the Return on Invested\n      Capital [ROIC]) of the industry\n\n   4. Determine or decide on the company's\n      position or competitive strategy.\n\n   5. What are the relationships between the\n      players in the I/M landscape.\nStep 3 of the SPSP : Execute the plan\n   Step 1 :  Create a structural map ....\n             ( e.g. Personal Computer Industry)\n                        1980s\n\n[figure]\n\nCompetitors in\nthe PC industry\n • IBM\n • HP\n • Dell\n • Apple\n • ....",
+  "extracted_json": {
+    "title": "TIM172A: MOT-I, Lecture, 10/2/25 — Agenda",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "TIM172A : MOT-I, Lecture, 10/2/25"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Agenda :"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Organize the readings [Lecture Notes for Competitive Strategies (LNCS), available on Canvas; The Disk Drive Industry]",
+            "level": 1
+          },
+          {
+            "text": "Introduction to Functional Maps (HW#2, Prob 1 : The Disk Drive Industry) — also on Canvas",
+            "level": 1
+          },
+          {
+            "text": "Main topic : Industry Analysis",
+            "level": 1
+          },
+          {
+            "text": "Personal Computer Industry (HW#2, Prob. 2 : INTEL) — handout on Canvas",
+            "level": 2
+          },
+          {
+            "text": "HW#2 has been posted : due Thursday, next week",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "TIM172A is an engineering course :"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Please do not submit essays as solutions",
+            "level": 1
+          },
+          {
+            "text": "Structure your work to maximize information content : readability, user-friendly",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "2. Functional Maps : An introduction"
+      },
+      {
+        "type": "paragraph",
+        "text": "Functional maps can come in many forms: graph, table, pictorial"
+      },
+      {
+        "type": "paragraph",
+        "text": "Q : How does a tech. company (e.g., Intel, Seagate,..) set technical (product) performance targets for what they plan to do for the next year? for the next 3 years?, ...."
+      },
+      {
+        "type": "paragraph",
+        "text": "A : By creating the appropriate functional maps, that enable the prediction (or forecasting) of the appropriate tech. or product performance parameter."
+      },
+      {
+        "type": "paragraph",
+        "text": "The most famous functional map in the IT industry is Moore's Law."
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Definitions:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "(1) Function refers to organizational functions: Engineering, Manufacturing, Marketing, Finance, ...",
+            "level": 1
+          },
+          {
+            "text": "(2) Each of these functions has important dimensions: For example, the key dimensions of engineering are product performance, critical skills, ...",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Example:"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "You are now ready to attempt HW #2, Prob.1: The Disk Drive Industry"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Organizing the readings (on Canvas)",
+            "level": 1
+          },
+          {
+            "text": "2.1. Read the \"Lecture Notes for Competitive Strategy ...\" (LNCS)",
+            "level": 2
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Guide for reading LNCS"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "paragraph",
+        "text": "Industry Analysis (e.g. Microprocessor Industry)"
+      },
+      {
+        "type": "paragraph",
+        "text": "(e.g., Intel)"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Topics in LNCS | Section/Pages | Lecture #",
+            "level": 1
+          },
+          {
+            "text": "1. Process (or Plan or Approach) → Pages 17-19 (Section 5)",
+            "level": 1
+          },
+          {
+            "text": "- Company Analysis → L#4 (next Tue)",
+            "level": 2
+          },
+          {
+            "text": "- Industry Analysis → L#3 (Intro)",
+            "level": 2
+          },
+          {
+            "text": "- Assessment/Evolution → L#4 (Details)",
+            "level": 2
+          },
+          {
+            "text": "2. Industry Analysis | Section 3 (Pages 11-15), 5-step process | Main topic for today",
+            "level": 1
+          },
+          {
+            "text": "3. Functional Maps | Section 4 (Page 15) | L#3 (Intro), L#4 (Details)",
+            "level": 1
+          }
+        ]
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "2.2 Read the \"Intel Case Study\" (on Canvas)",
+            "level": 1
+          },
+          {
+            "text": "Use the SPSP to solve HW#2, Prob #2",
+            "level": 2
+          },
+          {
+            "text": "Focus on the Industry Analysis for now",
+            "level": 2
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Structural Analysis of Industry (aka Competitive Strategy Analysis)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Competitive Strategy comes from \"The Positioning School\" (Porter ≈ 1980)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Terminology:"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Industry: The set of players for some technology or product type, e.g., disk-drive industry, consumer electronics, health-care industry, ....",
+            "level": 0
+          },
+          {
+            "text": "Players (in the industry): Competitors, new entrants, substitutes, suppliers",
+            "level": 0
+          },
+          {
+            "text": "Market: Buyers (or customers) of the product/service",
+            "level": 0
+          },
+          {
+            "text": "Forces: The micro-economic forces that exist among the players.",
+            "level": 0
+          },
+          {
+            "text": "Company (or Firm or Enterprise): is embedded in the industry of interest",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 1 of the SPSP : Definition of the problem"
+      },
+      {
+        "type": "paragraph",
+        "text": "Porter asked the following questions"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "How attractive is an industry from the point of view of the players?",
+            "level": 0
+          },
+          {
+            "text": "What position or competitive strategy should a competitor (in the industry) adopt?",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "Example: The Personal Computer Industry ≈ 1980s"
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 2 of the SPSP: Plan or Process"
+      },
+      {
+        "type": "paragraph",
+        "text": "5-step process"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "Create a structural map of the industry/market (I/M) landscape in which the company is embedded",
+            "level": 0
+          },
+          {
+            "text": "Perform a five (or six) forces analysis of the I/M landscape",
+            "level": 0
+          },
+          {
+            "text": "Determine the attractiveness (as measured by the profit potential, the Return on Invested Capital [ROIC]) of the industry",
+            "level": 0
+          },
+          {
+            "text": "Determine or decide on the company's position or competitive strategy.",
+            "level": 0
+          },
+          {
+            "text": "What are the relationships between the players in the I/M landscape.",
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 1,
+        "text": "Step 3 of the SPSP : Execute the plan"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Step 1: Create a structural map ...."
+      },
+      {
+        "type": "paragraph",
+        "text": "( e.g. Personal Computer Industry) 1980s"
+      },
+      {
+        "type": "paragraph",
+        "text": "[figure]"
+      },
+      {
+        "type": "list",
+        "items": [
+          {
+            "text": "IBM",
+            "level": 1
+          },
+          {
+            "text": "HP",
+            "level": 1
+          },
+          {
+            "text": "Dell",
+            "level": 1
+          },
+          {
+            "text": "Apple",
+            "level": 1
+          },
+          {
+            "text": "....",
+            "level": 1
+          }
+        ]
+      }
+    ],
+    "summary_topic_line": "TIM172A MOT-I lecture agenda: readings, Functional Maps, Industry Analysis, and HW#2.",
+    "summary_gist": "Lecture agenda for TIM172A (MOT-I) on 10/2/25: organize the readings (LNCS and The Disk Drive Industry, on Canvas), an introduction to Functional Maps tied to HW#2 Prob 1, the main topic of Industry Analysis covering the Personal Computer Industry (HW#2 Prob 2: INTEL handout on Canvas), and a note that HW#2 is posted and due Thursday next week. Closing reminder that TIM172A is an engineering course: do not submit essays as solutions, and structure work to maximize information content with readability and user-friendliness. Functional maps (graphs, tables, pictorials) help technology companies set technical/product performance targets over time by enabling prediction or forecasting of performance parameters. The most famous example in the IT industry is Moore's Law, which states that chip density (transistors/mm^2) doubles every 18 months; a plotted regression line through actual data points is used to forecast a target (e.g., for 2026). Notes defining \"function\" as organizational functions (engineering, manufacturing, marketing, finance) and the idea that each function has key dimensions (e.g., product performance, critical skills for engineering). A tree diagram maps a tech company (Seagate) to functions and their dimensions, and an example chain traces Company (Intel) → Function (Engineering) → Dimension (Performance / chip density) → Functional Map (Moore's Law). Concludes by pointing to HW #2, Prob.1 on the disk drive industry. A reading guide for the \"Lecture Notes for Competitive Strategy\" (LNCS) on Canvas. A diagram shows Company Analysis nested within Industry Analysis (e.g., Intel within the microprocessor industry). A table maps LNCS topics to sections/pages and lectures: (1) Process covering Company Analysis (L#4 next Tue), Industry Analysis (L#3 Intro), and Assessment/Evolution (L#4 Details) on pages 17-19 (Section 5); (2) Industry Analysis in Section 3 (pages 11-15) with a 5-step process, the main topic for today; and (3) Functional Maps in Section 4 (page 15) for L#3 and L#4. Item 2.2 directs reading the \"Intel Case Study\" and using the SPSP to solve HW#2 Prob #2, focusing on Industry Analysis for now. Introduces structural analysis of industry (competitive strategy analysis), attributed to Porter's \"Positioning School\" (~1980), and defines key terminology: industry, players, market, forces, and company/firm/enterprise. Notes outline the first two steps of the SPSP. Step 1 (define the problem) frames Porter's two guiding questions about industry attractiveness and the competitive strategy a competitor should adopt, with the 1980s PC industry as an example. Step 2 (plan/process) lists a 5-step procedure: map the industry/market (I/M) landscape, run a five (or six) forces analysis, assess attractiveness via profit potential/ROIC, decide the company's competitive position, and analyze relationships among players in the landscape. These notes cover Step 3 of the SPSP (executing the plan), beginning with Step 1: creating a structural map of an industry, illustrated with the Personal Computer Industry of the 1980s. The diagram maps the five-forces-style relationships among New entrants, Competitors, Suppliers, Buyers, and Substitutes, and lists example competitors in the PC industry: IBM, HP, Dell, and Apple."
+  },
+  "distinctive_terms": [
+    "TIM172A",
+    "MOT-I",
+    "Lecture Notes for Competitive Strategies",
+    "LNCS",
+    "Canvas",
+    "Functional Maps",
+    "Disk Drive Industry",
+    "Industry Analysis",
+    "Personal Computer Industry",
+    "INTEL",
+    "HW#2",
+    "functional map",
+    "Seagate",
+    "Moore's Law",
+    "chip density",
+    "transistors/mm^2",
+    "line of regression",
+    "IT industry",
+    "Function",
+    "organizational functions",
+    "Engineering",
+    "Manufacturing",
+    "Marketing",
+    "Finance",
+    "dimensions",
+    "product performance",
+    "critical skills",
+    "Engr.",
+    "Manf.",
+    "Perf.",
+    "Cost",
+    "Price",
+    "Product functions",
+    "Revenue",
+    "Lecture Notes for Competitive Strategy",
+    "Company Analysis",
+    "Microprocessor Industry",
+    "Process (Plan/Approach)",
+    "Assessment/Evolution",
+    "5-step process",
+    "Intel Case Study",
+    "SPSP",
+    "Structural Analysis of Industry",
+    "Competitive Strategy Analysis",
+    "Positioning School",
+    "Porter",
+    "Industry",
+    "Players",
+    "Market",
+    "Forces",
+    "micro-economic forces",
+    "new entrants",
+    "substitutes",
+    "suppliers",
+    "Company",
+    "Firm",
+    "Enterprise",
+    "competitive strategy",
+    "industry/market (I/M) landscape",
+    "five forces analysis",
+    "attractiveness",
+    "profit potential",
+    "Return on Invested Capital",
+    "ROIC",
+    "structural map",
+    "Competitors",
+    "Buyers",
+    "PC industry",
+    "IBM",
+    "HP",
+    "Dell",
+    "Apple"
+  ],
+  "pages": [
+    "tim172a-017",
+    "tim172a-018",
+    "tim172a-019",
+    "tim172a-020",
+    "tim172a-021",
+    "tim172a-022",
+    "tim172a-023"
+  ]
+}
