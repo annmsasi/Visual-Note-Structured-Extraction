@@ -107,8 +107,9 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.drive:
         # HTML import gives the better-looking Doc; markdown is the local format.
-        url = export.upload_html_to_drive(
-            export.render_note_html(doc), name=doc.get("title") or stem, folder=args.course)
+        # upload_note_to_drive also embeds any figure images inline via the Docs API.
+        url = export.upload_note_to_drive(
+            doc, name=doc.get("title") or stem, folder=args.course, fmt="html")
         print(f"Google Doc: {url}")
     return 0
 

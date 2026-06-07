@@ -10,6 +10,7 @@ import argparse
 import html
 import json
 import logging
+import mimetypes
 import os
 import re
 import sqlite3
@@ -239,12 +240,10 @@ def _ensure_folder(service, name: str) -> str:
     return folder["id"]
 
 
-def _create_doc(content: str, src_mimetype: str, name: str, folder: str | None) -> str:
-    """Create a Google Doc by uploading `content` and letting Drive convert it."""
-    from googleapiclient.discovery import build
+def _create_doc_with(service, content: str, src_mimetype: str,
+                     name: str, folder: str | None) -> tuple[str, str]:
+    """Upload `content`, let Drive convert it to a Doc; return (doc_id, web_link)."""
     from googleapiclient.http import MediaInMemoryUpload
-
-    service = build("drive", "v3", credentials=_drive_credentials())
     body: dict[str, Any] = {"name": name, "mimeType": "application/vnd.google-apps.document"}
     if folder:
         body["parents"] = [_ensure_folder(service, folder)]
@@ -252,7 +251,14 @@ def _create_doc(content: str, src_mimetype: str, name: str, folder: str | None) 
     created = service.files().create(
         body=body, media_body=media, fields="id,webViewLink",
     ).execute()
-    return created.get("webViewLink", created.get("id", ""))
+    return created.get("id", ""), created.get("webViewLink", created.get("id", ""))
+
+
+def _create_doc(content: str, src_mimetype: str, name: str, folder: str | None) -> str:
+    """Create a Google Doc by uploading `content` and letting Drive convert it."""
+    from googleapiclient.discovery import build
+    service = build("drive", "v3", credentials=_drive_credentials())
+    return _create_doc_with(service, content, src_mimetype, name, folder)[1]
 
 
 def upload_html_to_drive(html_doc: str, name: str, folder: str | None = None) -> str:
@@ -264,6 +270,125 @@ def upload_markdown_to_drive(md_doc: str, name: str, folder: str | None = None) 
     """Create a Google Doc from Markdown. Drive's markdown importer maps headings,
     lists, and spacing to native Doc styles — cleaner than the HTML importer."""
     return _create_doc(md_doc, "text/markdown", name, folder)
+
+
+# ----------------------------------------------------------------------------- figures → inline images
+
+# A unique sentinel that survives the Drive markdown/HTML importer as plain text, so
+# we can find it again in the converted Doc and swap it for an inline image. The
+# guillemet-style brackets never occur in normal note text.
+_FIG_TOKEN = "⟦MISO_FIGURE_{}⟧"   # ⟦MISO_FIGURE_0⟧
+
+
+def _stage_figures(doc: dict[str, Any]) -> tuple[dict[str, Any], list[tuple[str, str]]]:
+    """Swap every figure block that HAS an image for a paragraph holding a unique
+    token, returning the rewritten doc and an ordered (token, image_path) list.
+
+    Figures whose `image` slot is still empty are left untouched (they render as
+    their caption). This is the seam the crop step plugs into: once it fills
+    `image`, that figure starts embedding with no further export changes.
+    """
+    pending: list[tuple[str, str]] = []
+    blocks_out: list[dict[str, Any]] = []
+    for b in doc.get("blocks") or []:
+        if b.get("type") == "figure" and (b.get("image") or "").strip():
+            token = _FIG_TOKEN.format(len(pending))
+            pending.append((token, b["image"].strip()))
+            blocks_out.append({"type": "paragraph", "text": token})
+        else:
+            blocks_out.append(b)
+    return {**doc, "blocks": blocks_out}, pending
+
+
+def _token_ranges(document: dict[str, Any], tokens: list[str]) -> dict[str, tuple[int, int]]:
+    """Locate each token's (startIndex, endIndex) in a Docs API `documents.get`
+    response, by walking the body's paragraph textRuns. A token carries no markup,
+    so it lives inside a single run; we match the substring within the run."""
+    ranges: dict[str, tuple[int, int]] = {}
+    for el in document.get("body", {}).get("content", []):
+        for pe in (el.get("paragraph") or {}).get("elements", []):
+            tr = pe.get("textRun")
+            start = pe.get("startIndex")
+            if not tr or start is None:
+                continue
+            content = tr.get("content", "")
+            for tok in tokens:
+                pos = content.find(tok)
+                if pos >= 0:
+                    ranges[tok] = (start + pos, start + pos + len(tok))
+    return ranges
+
+
+def _inline_image_requests(ranges: dict[str, tuple[int, int]],
+                           token_to_url: dict[str, str]) -> list[dict[str, Any]]:
+    """Build batchUpdate requests that replace each token with an inline image.
+
+    Processed bottom-to-top (highest index first) so each edit leaves the indices of
+    not-yet-processed tokens valid. Per token: delete its text, then insert the image
+    where it started.
+    """
+    reqs: list[dict[str, Any]] = []
+    for tok, (start, end) in sorted(ranges.items(), key=lambda kv: -kv[1][0]):
+        url = token_to_url.get(tok)
+        if not url:
+            continue
+        reqs.append({"deleteContentRange": {"range": {"startIndex": start, "endIndex": end}}})
+        reqs.append({"insertInlineImage": {"location": {"index": start}, "uri": url}})
+    return reqs
+
+
+def _upload_drive_image(service, path: Path, parent_id: str | None) -> str:
+    """Upload an image to Drive, make it link-readable, and return a URL the Docs
+    image fetcher can reach. Uses `drive.file`, valid here because the app creates
+    the file. NOTE: Google fetches this URL server-side, so the file must be shared
+    `anyone/reader`; some `uc?export=view` links fetch unreliably — if an image
+    fails to appear, host it somewhere with a direct image content-type instead."""
+    from googleapiclient.http import MediaFileUpload
+    mime = mimetypes.guess_type(str(path))[0] or "image/png"
+    body: dict[str, Any] = {"name": path.name}
+    if parent_id:
+        body["parents"] = [parent_id]
+    created = service.files().create(
+        body=body, media_body=MediaFileUpload(str(path), mimetype=mime), fields="id",
+    ).execute()
+    fid = created["id"]
+    service.permissions().create(fileId=fid, body={"type": "anyone", "role": "reader"}).execute()
+    return f"https://drive.google.com/uc?export=view&id={fid}"
+
+
+def upload_note_to_drive(doc: dict[str, Any], name: str, folder: str | None = None,
+                         *, fmt: str = "markdown") -> str:
+    """Create a Google Doc from the note IR and embed any figure images inline.
+
+    Figures whose `image` slot is filled (a local crop path) are uploaded to Drive
+    and inserted as inline images via the Docs API; the rest of the note imports as
+    before. With no filled figure images this is exactly the old text upload, so it
+    is a safe drop-in for `upload_markdown_to_drive` / `upload_html_to_drive`.
+    """
+    from googleapiclient.discovery import build
+    render_doc, pending = _stage_figures(doc)
+    content, mime = ((render_note_html(render_doc), "text/html") if fmt == "html"
+                     else (render_note_markdown(render_doc), "text/markdown"))
+    creds = _drive_credentials()
+    drive = build("drive", "v3", credentials=creds)
+    doc_id, link = _create_doc_with(drive, content, mime, name, folder)
+    if not pending:
+        return link
+
+    parent = _ensure_folder(drive, folder) if folder else None
+    token_to_url: dict[str, str] = {}
+    for token, image_path in pending:
+        try:
+            token_to_url[token] = _upload_drive_image(drive, Path(image_path), parent)
+        except Exception as e:  # one bad crop shouldn't sink the whole upload
+            log.warning("figure image %s not embedded: %s", image_path, e)
+
+    docs = build("docs", "v1", credentials=creds)
+    document = docs.documents().get(documentId=doc_id).execute()
+    requests = _inline_image_requests(_token_ranges(document, list(token_to_url)), token_to_url)
+    if requests:
+        docs.documents().batchUpdate(documentId=doc_id, body={"requests": requests}).execute()
+    return link
 
 
 # ----------------------------------------------------------------------------- CLI
@@ -292,7 +417,8 @@ def main(argv: list[str] | None = None) -> int:
         if args.drive:
             name = doc.get("title") or note_id
             folder = args.folder or course_id
-            line += f"  →  [{folder}] Google Doc: {upload_html_to_drive(html_doc, name=name, folder=folder)}"
+            url = upload_note_to_drive(doc, name=name, folder=folder, fmt="html")
+            line += f"  →  [{folder}] Google Doc: {url}"
         print(line)
     return 0
 

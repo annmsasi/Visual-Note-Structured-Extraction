@@ -98,8 +98,8 @@ def process_one(src: Path, *, course: str, ocr: str, model: str, out_dir: Path,
 
     url = ""
     if drive:
-        url = export.upload_markdown_to_drive(
-            md, name=doc.get("title") or src.stem, folder=folder or course)
+        url = export.upload_note_to_drive(
+            doc, name=doc.get("title") or src.stem, folder=folder or course, fmt="markdown")
     return {"md": md_path, "title": doc.get("title"), "pages": len(pages), "url": url}
 
 
