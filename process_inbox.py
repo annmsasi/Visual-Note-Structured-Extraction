@@ -7,7 +7,7 @@ moves the source into the 'processed' folder so it is never handled twice.
 
 This is the only script the scheduled job needs to call. To run on a schedule,
 point cron (or launchd) at it — nothing else required. Example crontab line,
-every 10 minutes (see HANDOFF.md):
+every 10 minutes:
 
     */10 * * * * cd /ABSOLUTE/PATH/TO/repo && .venv/bin/python process_inbox.py >> data/process.log 2>&1
 
@@ -23,7 +23,7 @@ Folders (override with flags):
     data/processed/  source files are moved here after a successful run
     data/failed/     source files are moved here if a run errors (see data/process.log)
 
-One-time setup (see HANDOFF.md): ./install.sh, a .env with ANTHROPIC_API_KEY and
+One-time setup: ./install.sh, a .env with ANTHROPIC_API_KEY and
 AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT/KEY, and — for Drive upload — credentials.json
 plus one interactive run to create token.json.
 """
