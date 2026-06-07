@@ -14,11 +14,20 @@ DOCUMENT_SCHEMA: dict[str, Any] = {
             "items": {
                 "type": "object",
                 "properties": {
-                    "type": {"type": "string", "enum": ["heading", "paragraph", "list", "equation"]},
+                    "type": {"type": "string",
+                             "enum": ["heading", "paragraph", "list", "equation", "figure"]},
                     "level": {"type": "integer", "minimum": 1, "maximum": 3,
                               "description": "Heading depth (heading blocks only)."},
                     "text": {"type": "string", "description": "Text for heading/paragraph blocks."},
                     "latex": {"type": "string", "description": "LaTeX source for equation blocks."},
+                    "description": {"type": "string",
+                                    "description": "What a figure depicts (figure blocks only)."},
+                    "bbox": {"type": "array", "items": {"type": "number"},
+                             "description": "Optional figure location, normalized 0–1 as "
+                                            "[x, y, width, height] (figure blocks only)."},
+                    "image": {"type": "string",
+                              "description": "Reserved for the extracted figure image, filled by a "
+                                             "later step — leave unset (figure blocks only)."},
                     "items": {
                         "type": "array",
                         "description": "List entries (list blocks only).",
@@ -42,7 +51,7 @@ DOCUMENT_SCHEMA: dict[str, Any] = {
     "required": ["title", "blocks", "summary_topic_line", "summary_gist"],
 }
 
-_BLOCK_TYPES = {"heading", "paragraph", "list", "equation"}
+_BLOCK_TYPES = {"heading", "paragraph", "list", "equation", "figure"}
 
 
 def validate(payload: Any) -> dict[str, Any]:
@@ -94,7 +103,30 @@ def _clean_block(raw: Any) -> dict[str, Any] | None:
                 items.append({"text": _as_str(it["text"]),
                               "level": lvl if isinstance(lvl, int) and lvl >= 0 else 0})
         return {"type": "list", "items": items} if items else None
+    if t == "figure":
+        # The VLM describes the figure now; a later step crops the page image and
+        # fills `image`. The `image` slot is ALWAYS present (empty until then) so
+        # every downstream step can carry it; `bbox` is an optional location hint.
+        description = (_as_str(raw.get("description"))
+                       or _as_str(raw.get("caption")) or _as_str(raw.get("text")))
+        if not description:
+            return None
+        block = {"type": "figure", "description": description, "image": _as_str(raw.get("image"))}
+        bbox = _clean_bbox(raw.get("bbox"))
+        if bbox is not None:
+            block["bbox"] = bbox
+        return block
     return None
+
+
+def _clean_bbox(v: Any) -> list[float] | None:
+    """A figure's normalized [x, y, width, height] box, or None if not 4 numbers."""
+    if not isinstance(v, (list, tuple)) or len(v) != 4:
+        return None
+    try:
+        return [float(n) for n in v]
+    except (TypeError, ValueError):
+        return None
 
 
 def _empty(title: str) -> dict[str, Any]:

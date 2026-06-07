@@ -1,7 +1,7 @@
 import unittest
 
 from miso.document import validate
-from miso.export import latex_to_unicode, render_note_html
+from miso.export import latex_to_unicode, render_note_html, render_note_markdown
 
 try:
     import pylatexenc  # noqa: F401
@@ -74,6 +74,57 @@ class RenderTests(unittest.TestCase):
         h = render_note_html(doc)
         self.assertNotIn("</ul><ul>", h)                      # one shared list, not two
         self.assertIn("<li>a</li><li>b</li>", h)
+
+
+class FigureTests(unittest.TestCase):
+    """A figure block carries the VLM's description now and an `image` slot a later
+    crop step fills — so every step supports an image before the cropping exists."""
+
+    def test_validate_keeps_figure_with_empty_image_slot(self):
+        out = validate({"title": "t", "blocks": [
+            {"type": "figure", "description": "A state diagram", "bbox": [0.1, 0.2, 0.3, 0.4]},
+        ]})
+        b = out["blocks"][0]
+        self.assertEqual(b["type"], "figure")
+        self.assertEqual(b["description"], "A state diagram")
+        self.assertEqual(b["image"], "")            # slot present, empty until the crop step
+        self.assertEqual(b["bbox"], [0.1, 0.2, 0.3, 0.4])
+
+    def test_validate_drops_figure_without_description(self):
+        out = validate({"title": "t", "blocks": [{"type": "figure", "bbox": [0, 0, 1, 1]}]})
+        self.assertEqual(out["blocks"], [])
+
+    def test_validate_drops_malformed_bbox_but_keeps_figure(self):
+        out = validate({"title": "t", "blocks": [
+            {"type": "figure", "description": "d", "bbox": [1, 2, 3]},   # wrong length
+        ]})
+        self.assertEqual(out["blocks"][0]["description"], "d")
+        self.assertNotIn("bbox", out["blocks"][0])
+
+    def test_figure_html_renders_image_when_slot_filled(self):
+        doc = {"title": "t", "summary_topic_line": "", "summary_gist": "", "blocks": [
+            {"type": "figure", "description": "A circuit", "image": "fig1.png"},
+        ]}
+        h = render_note_html(doc)
+        self.assertIn("<figcaption>A circuit</figcaption>", h)
+        self.assertIn('<img src="fig1.png"', h)
+
+    def test_figure_html_caption_only_until_image_exists(self):
+        doc = {"title": "t", "summary_topic_line": "", "summary_gist": "", "blocks": [
+            {"type": "figure", "description": "A circuit"},
+        ]}
+        h = render_note_html(doc)
+        self.assertIn("<figcaption>A circuit</figcaption>", h)
+        self.assertNotIn("<img", h)
+
+    def test_figure_markdown_with_and_without_image(self):
+        base = {"title": "t", "summary_topic_line": "", "summary_gist": ""}
+        no_img = render_note_markdown({**base, "blocks": [
+            {"type": "figure", "description": "A circuit"}]})
+        self.assertIn("*[Figure: A circuit]*", no_img)
+        with_img = render_note_markdown({**base, "blocks": [
+            {"type": "figure", "description": "A circuit", "image": "f.png"}]})
+        self.assertIn("![A circuit](f.png)", with_img)
 
 
 @unittest.skipUnless(_HAS_PYLATEXENC, "pylatexenc not installed")

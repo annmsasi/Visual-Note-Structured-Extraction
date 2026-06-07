@@ -33,11 +33,13 @@ points, keep it as lists; only use `paragraph` where the writer actually wrote
 running prose. Do not rewrite an outline into prose, or merge separate bullets
 into a paragraph.
 
-Figures are handled by a SEPARATE step: do NOT transcribe or describe the
-contents of any figure, diagram, chart, circuit, plot, or drawing. Emit a single
-`paragraph` block whose text is exactly `[figure]` in its place, and transcribe
-any surrounding handwritten text normally. Never turn a figure's contents into a
-list, paragraph, or equation.
+For any figure, diagram, chart, circuit, plot, or drawing, emit a `figure` block.
+Give it a `description`: 1–2 sentences saying what the figure depicts — its kind
+(graph, flowchart, circuit, …), its axis or node labels, and what it illustrates —
+and, if you can, a `bbox` locating it on the page as `[x, y, width, height]`
+normalized to 0–1. Do NOT turn the figure's contents into a paragraph, list, or
+equation, and do not fill `image` — the image itself is captured by a later step.
+Transcribe any handwritten text AROUND the figure normally.
 
 ## Summary
 

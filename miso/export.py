@@ -96,6 +96,12 @@ def _render_block(block: dict[str, Any]) -> str:
         return f'<p>{html.escape(latex_to_unicode(block.get("latex", "")))}</p>'
     if t == "list":
         return _render_list(block.get("items") or [])
+    if t == "figure":
+        desc = html.escape(block.get("description", ""))
+        img = (block.get("image") or "").strip()
+        img_tag = f'<img src="{html.escape(img)}" alt="{desc}">' if img else ""
+        cap = f"<figcaption>{desc}</figcaption>" if desc else ""
+        return f"<figure>{img_tag}{cap}</figure>"
     return ""
 
 
@@ -150,6 +156,12 @@ def _block_to_md(block: dict[str, Any]) -> str:
             f"{'  ' * max(0, int(it.get('level', 0)))}- {(it.get('text') or '').strip()}"
             for it in items
         )
+    if t == "figure":
+        desc = (block.get("description") or "").strip()
+        img = (block.get("image") or "").strip()
+        if img:
+            return f"![{desc}]({img})"
+        return f"*[Figure: {desc}]*" if desc else "*[Figure]*"
     return ""
 
 
