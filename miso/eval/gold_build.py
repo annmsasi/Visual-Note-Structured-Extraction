@@ -298,15 +298,24 @@ def augment_bentham(src_dir: Path, out_dir: Path, terms_mode: str, note_regex: s
 # edited gold markdown (draft_gold_md format) -> GoldNote JSON
 # --------------------------------------------------------------------------- #
 
+# The three top-level sections of a gold-markdown doc. Only these `## ` headers
+# delimit sections; any OTHER `## ` line is a sub-heading inside the structured-note
+# body (e.g. "## How to implement?") and must stay with its section, not start a new one.
+_SECTION_HEADERS = ("transcription", "structured note", "distinctive terms")
+
+
 def _split_sections(md: str) -> dict[str, str]:
-    """Split a gold markdown doc into its `## `-delimited sections (lowercased keys)."""
+    """Split a gold markdown doc into its known `## `-delimited sections (lowercased
+    keys). A `## ` line whose heading is not a known section header is kept as body
+    content (a structured-note sub-heading), not treated as a section boundary."""
     sections: dict[str, str] = {}
     current, buf = None, []
     for line in md.splitlines():
-        if line.startswith("## "):
+        heading = line[3:].strip().lower() if line.startswith("## ") else None
+        if heading is not None and any(heading.startswith(h) for h in _SECTION_HEADERS):
             if current is not None:
                 sections[current] = "\n".join(buf).strip()
-            current, buf = line[3:].strip().lower(), []
+            current, buf = heading, []
         elif current is not None:
             buf.append(line)
     if current is not None:
