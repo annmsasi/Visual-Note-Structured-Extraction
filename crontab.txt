@@ -1,1 +1,11 @@
-0 9 * * * /opt/homebrew/bin/python3 /Users/farihalateef/ocr-project/Visual-Note-Structured-Extraction/run_full_pipeline_.py
+# Inbox watcher schedule for the VNSE pipeline.
+#
+# Install it with:   ./setup.sh
+# which fills in the absolute repo path + venv Python for THIS machine and loads it.
+#
+# Or copy the line below, replace the path, and add it with `crontab -e`:
+#
+#   0 9 * * * cd /ABSOLUTE/PATH/TO/Visual-Note-Structured-Extraction && .venv/bin/python process_inbox.py >> data/process.log 2>&1
+#
+# It runs every day at 9am: every PDF/image dropped in data/inbox/ becomes a
+# Markdown note + a Google Doc, and the source is moved to data/processed/.

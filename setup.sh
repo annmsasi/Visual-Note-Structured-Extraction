@@ -1,16 +1,37 @@
 #!/bin/bash
+# Install the daily inbox cron job for THIS machine — paths + Python resolved
+# automatically, so it works wherever the repo is checked out.
+set -u
 
-# Finds the path to python3 on this computer
-PYTHON_PATH=$(which python3)
+# Repo root = the folder this script lives in.
+REPO="$(cd "$(dirname "$0")" && pwd)"
 
-# Finds the path to main.py based on where this script lives
-SCRIPT_PATH="$(cd "$(dirname "$0")" && pwd)/run_full_pipeline_.py"
+# Prefer the project venv (it has the pipeline deps); fall back to system python3.
+if [ -x "$REPO/.venv/bin/python" ]; then
+  PYTHON="$REPO/.venv/bin/python"
+else
+  PYTHON="$(command -v python3)"
+  echo "WARNING: $REPO/.venv not found — using $PYTHON." >&2
+  echo "         Run ./install.sh first so the pipeline's dependencies are available." >&2
+fi
 
-# Writes the cron line into crontab.txt
-echo "0 9 * * * $PYTHON_PATH $SCRIPT_PATH" > crontab.txt
+# process_inbox.py is the scheduled entry point: it drains data/inbox/ -> Markdown +
+# Google Doc and moves each source to data/processed/. cd into the repo so .env,
+# credentials.json, token.json, and the data/ paths all resolve.
+CRON_LINE="0 9 * * * cd $REPO && $PYTHON process_inbox.py >> data/process.log 2>&1"
 
-# Loads it into the system
-crontab crontab.txt
+# Install idempotently: keep any other crontab entries, replace only our line.
+# `grep -v ... || true` so an empty/all-filtered crontab doesn't abort the install.
+EXISTING="$(crontab -l 2>/dev/null | grep -v 'process_inbox.py' || true)"
+printf '%s\n' "$EXISTING" "$CRON_LINE" | grep -v '^$' | crontab -
 
-echo "Cron job set up successfully!"
-echo "It will run: $PYTHON_PATH $SCRIPT_PATH"
+echo "Installed cron job (runs daily at 9am):"
+echo "  $CRON_LINE"
+echo
+echo "  view:   crontab -l"
+echo "  remove: crontab -l | grep -v process_inbox.py | crontab -"
+echo "  logs:   $REPO/data/process.log"
+echo
+echo "macOS note: the cron daemon needs Full Disk Access to run a job under ~/Documents."
+echo "  System Settings -> Privacy & Security -> Full Disk Access -> enable /usr/sbin/cron"
+echo "  (without this, cron is silently blocked from reading the repo)."
