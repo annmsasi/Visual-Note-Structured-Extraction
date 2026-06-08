@@ -26,8 +26,11 @@ DOCUMENT_SCHEMA: dict[str, Any] = {
                     "bbox": {"type": "array", "items": {"type": "number"},
                              "description": "Optional figure location, normalized 0–1 as "
                                             "[x, y, width, height] (figure blocks only)."},
+                    "mermaid": {"type": "string",
+                                "description": "Reserved for the figure's Mermaid diagram source, "
+                                               "filled by a later step — leave unset (figure blocks only)."},
                     "image": {"type": "string",
-                              "description": "Reserved for the extracted figure image, filled by a "
+                              "description": "Reserved for the rendered figure image, filled by a "
                                              "later step — leave unset (figure blocks only)."},
                     "items": {
                         "type": "array",
@@ -105,14 +108,16 @@ def _clean_block(raw: Any) -> dict[str, Any] | None:
                               "level": lvl if isinstance(lvl, int) and lvl >= 0 else 0})
         return {"type": "list", "items": items} if items else None
     if t == "figure":
-        # The VLM describes the figure now; a later step crops the page image and
-        # fills `image`. The `image` slot is ALWAYS present (empty until then) so
-        # every downstream step can carry it; `bbox` is an optional location hint.
+        # The VLM describes the figure now; a later Mermaid pass reads the page image
+        # and fills `mermaid` (and renders it to `image`). Both slots are ALWAYS present
+        # (empty until then) so every downstream step can carry them; `bbox` is an
+        # optional location hint the Mermaid pass uses to find the figure on the page.
         description = (_as_str(raw.get("description"))
                        or _as_str(raw.get("caption")) or _as_str(raw.get("text")))
         if not description:
             return None
-        block = {"type": "figure", "description": description, "image": _as_str(raw.get("image"))}
+        block = {"type": "figure", "description": description,
+                 "mermaid": _as_str(raw.get("mermaid")), "image": _as_str(raw.get("image"))}
         bbox = _clean_bbox(raw.get("bbox"))
         if bbox is not None:
             block["bbox"] = bbox

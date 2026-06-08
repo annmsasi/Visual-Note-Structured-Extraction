@@ -63,6 +63,17 @@ class ExtractionAdapter(Protocol):
         """Whole-note summary (topic_line, gist) over a complete (merged) note IR."""
         ...
 
+    def vision_text(self, image_path, prompt: str) -> str:
+        """Free-form '(page image + prompt) -> text' call used by the Mermaid pass."""
+        ...
+
+
+def _image_b64(image_path) -> tuple[str, str]:
+    """Return (mime, base64) for an image file, defaulting the mime to JPEG."""
+    mime, _ = mimetypes.guess_type(str(image_path))
+    with open(image_path, "rb") as fh:
+        return (mime or "image/jpeg"), base64.b64encode(fh.read()).decode()
+
 
 class StubExtractor:
     """Deterministic extractor that maps layout-structured OCR to a document IR."""
@@ -96,6 +107,10 @@ class StubExtractor:
             "summary_topic_line": "",
             "summary_gist": "",
         }
+
+    def vision_text(self, image_path, prompt: str) -> str:
+        """Stub has no model, so it draws no diagram (the Mermaid pass becomes a no-op)."""
+        return ""
 
     def summarize(self, note_doc: dict) -> tuple[str, str]:
         """Deterministic whole-note summary: title + the note's leading text."""
@@ -204,7 +219,23 @@ class AnthropicExtractor:
             log.warning("extractor returned no tool_use block; stop_reason=%s", msg.stop_reason)
             payload = {}
 
-        return _to_note(note, payload, model_id=self.model_id, figures_dir=cfg.figures_dir)
+        return _to_note(note, payload, model_id=self.model_id, figures_dir=cfg.figures_dir,
+                        vision_text=(self.vision_text if cfg.use_image else None),
+                        mermaid=cfg.mermaid, repair=cfg.mermaid_repair)
+
+    def vision_text(self, image_path, prompt: str) -> str:
+        """One '(page image + prompt) -> text' turn (no tools) for the Mermaid pass."""
+        mime, b64 = _image_b64(image_path)
+        msg = self._client.messages.create(
+            model=self.model_id,
+            max_tokens=2048,
+            messages=[{"role": "user", "content": [
+                {"type": "image", "source": {"type": "base64", "media_type": mime, "data": b64}},
+                {"type": "text", "text": prompt},
+            ]}],
+        )
+        return "".join(b.text for b in msg.content
+                       if getattr(b, "type", None) == "text").strip()
 
     def summarize(self, note_doc: dict) -> tuple[str, str]:
         """Dedicated whole-note summary via a focused, text-only call."""
@@ -311,7 +342,22 @@ class OpenAIVisionExtractor:
             tool_choice={"type": "function", "function": {"name": _TOOL_NAME}},
         )
         return _to_note(note, _payload_from_openai(msg), model_id=self.model_id,
-                        figures_dir=cfg.figures_dir)
+                        figures_dir=cfg.figures_dir,
+                        vision_text=(self.vision_text if cfg.use_image else None),
+                        mermaid=cfg.mermaid, repair=cfg.mermaid_repair)
+
+    def vision_text(self, image_path, prompt: str) -> str:
+        """One '(page image + prompt) -> text' turn for the Mermaid pass."""
+        mime, b64 = _image_b64(image_path)
+        msg = self._client.chat.completions.create(
+            model=self.model_id,
+            max_tokens=2048,
+            messages=[{"role": "user", "content": [
+                {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{b64}"}},
+                {"type": "text", "text": prompt},
+            ]}],
+        )
+        return (msg.choices[0].message.content or "").strip()
 
     def summarize(self, note_doc: dict) -> tuple[str, str]:
         """Dedicated whole-note summary via a focused, text-only call."""
@@ -371,14 +417,16 @@ def _payload_from_openai(msg) -> dict:
 
 
 def _to_note(note: Note, payload: dict, *, model_id: str,
-             figures_dir=None) -> ExtractedNote:
+             figures_dir=None, vision_text=None, mermaid: bool = True,
+             repair: bool = True) -> ExtractedNote:
     doc = validate(payload)
-    # Per-page seam for figure extraction: `note.image_path` is this single page, so
-    # each figure's normalized bbox maps cleanly onto it. Done here (not after the
+    # Per-page seam for the figure pass: `note.image_path` is this single page, so
+    # each figure's bbox and the page image line up. Done here (not after the
     # multi-page combine) because the merge loses page-to-block association.
-    if figures_dir is not None:
-        from miso.figures import crop_figures
-        crop_figures(doc, note.image_path, figures_dir, note_id=note.note_id)
+    if figures_dir is not None and mermaid and vision_text is not None:
+        from miso.mermaid import add_mermaid
+        add_mermaid(doc, note.image_path, vision_text, figures_dir,
+                    note_id=note.note_id, repair=repair)
     return ExtractedNote(
         note_id=note.note_id,
         structured_json=doc,

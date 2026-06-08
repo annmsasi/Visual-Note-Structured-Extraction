@@ -83,9 +83,15 @@ class ExtractionConfig:
     # prompt for cross-page continuity (0 = off, -1 = all). The model still
     # transcribes only the current page.
     prior_page_context: int = 10
-    # where to write cropped figure images; None disables figure extraction (figure
-    # blocks then keep their caption and an empty `image` slot).
+    # where to write rendered figure images (the Mermaid pass renders each figure's
+    # Mermaid source to a PNG here, namespaced by note id); None disables the figure
+    # pass entirely (figure blocks then keep only their caption).
     figures_dir: Path | None = None
+    # second pass: convert each figure block into a Mermaid diagram (needs the page
+    # image, so it is skipped when use_image is False). `mermaid_repair` re-prompts
+    # the model once with the renderer's error when Mermaid fails to render.
+    mermaid: bool = True
+    mermaid_repair: bool = True
 
 
 @dataclass

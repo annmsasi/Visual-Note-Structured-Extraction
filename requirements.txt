@@ -9,6 +9,15 @@ pdf2image          # render PDF pages to images (needs the system 'poppler' bina
 wordfreq
 pylatexenc
 sentence-transformers
+reportlab          # --format pdf: lay the note out as a PDF with figure diagrams
+
+# Figure pass renders each figure's Mermaid to a PNG via the Mermaid CLI (mmdc),
+# a Node tool — NOT pip-installable. Install separately for PNG/PDF/Docs figures:
+#   npm install -g @mermaid-js/mermaid-cli
+# (needs a headless Chromium; on restricted hosts add a puppeteer-config.json with
+#  {"args": ["--no-sandbox"]} in the repo root — mmdc picks it up automatically).
+# Without mmdc, HTML/Markdown still render figures (mermaid.js / ```mermaid fence);
+# only the rasterized PNG embed (PDF, Google Docs) is skipped.
 
 # Open VLMs via OpenRouter / any OpenAI-compatible endpoint (eval suite).
 # Without this, _make_extractor SILENTLY falls back to the StubExtractor for any

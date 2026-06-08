@@ -71,8 +71,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--model", default="claude-sonnet-4-6",
                     help="extraction model: a claude-* id, or an open VLM id like "
                          "qwen/qwen2.5-vl-72b-instruct (served via OPENROUTER_API_KEY)")
-    ap.add_argument("--format", choices=["md", "html"], default="md",
-                    help="output format (default: md)")
+    ap.add_argument("--format", choices=["md", "html", "pdf"], default="md",
+                    help="output format (default: md); pdf embeds rendered figure diagrams")
     ap.add_argument("--out", type=Path, help="output path (default: <name>.<format>)")
     ap.add_argument("--drive", action="store_true", help="also upload to Google Docs")
     args = ap.parse_args(argv)
@@ -84,7 +84,7 @@ def main(argv: list[str] | None = None) -> int:
     cfg.ocr.engine = args.ocr
     cfg.extraction.model_id = args.model
     cfg.from_empty_cache = False  # persist the cache across CLI runs so course knowledge accrues
-    cfg.extraction.figures_dir = Path("figures")  # crop figures here (namespaced by note id)
+    cfg.extraction.figures_dir = Path("figures")  # render figure diagrams here (namespaced by note id)
 
     doc = run_document(
         cfg, note_id=src.stem[:60], course=args.course,
@@ -95,12 +95,16 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     stem = src.stem[:60]
-    if args.format == "md":
-        body, default_out = export.render_note_markdown(doc), Path(f"{stem}.md")
+    if args.format == "pdf":
+        out = args.out or Path(f"{stem}.pdf")
+        export.render_note_pdf(doc, out)
     else:
-        body, default_out = export.render_note_html(doc), Path(f"{stem}.html")
-    out = args.out or default_out
-    out.write_text(body)
+        if args.format == "md":
+            body, default_out = export.render_note_markdown(doc), Path(f"{stem}.md")
+        else:
+            body, default_out = export.render_note_html(doc), Path(f"{stem}.html")
+        out = args.out or default_out
+        out.write_text(body)
     # save the IR alongside, so you can re-render to any format later without re-running
     out.with_suffix(".json").write_text(json.dumps(doc, ensure_ascii=False, indent=2))
     print(f"Structured note: {doc.get('title')!r}  ({len(pages)} page(s) merged)")

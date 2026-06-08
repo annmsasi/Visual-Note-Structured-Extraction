@@ -85,17 +85,18 @@ class RenderTests(unittest.TestCase):
 
 
 class FigureTests(unittest.TestCase):
-    """A figure block carries the VLM's description now and an `image` slot a later
-    crop step fills — so every step supports an image before the cropping exists."""
+    """A figure block carries the VLM's description now, plus `mermaid`/`image` slots
+    the later Mermaid pass fills — so every step supports a diagram before it exists."""
 
-    def test_validate_keeps_figure_with_empty_image_slot(self):
+    def test_validate_keeps_figure_with_empty_diagram_slots(self):
         out = validate({"title": "t", "blocks": [
             {"type": "figure", "description": "A state diagram", "bbox": [0.1, 0.2, 0.3, 0.4]},
         ]})
         b = out["blocks"][0]
         self.assertEqual(b["type"], "figure")
         self.assertEqual(b["description"], "A state diagram")
-        self.assertEqual(b["image"], "")            # slot present, empty until the crop step
+        self.assertEqual(b["mermaid"], "")          # slot present, empty until the Mermaid pass
+        self.assertEqual(b["image"], "")            # slot present, empty until rendering
         self.assertEqual(b["bbox"], [0.1, 0.2, 0.3, 0.4])
 
     def test_validate_drops_figure_without_description(self):
@@ -133,6 +134,48 @@ class FigureTests(unittest.TestCase):
         with_img = render_note_markdown({**base, "blocks": [
             {"type": "figure", "description": "A circuit", "image": "f.png"}]})
         self.assertIn("![A circuit](f.png)", with_img)
+
+    def test_figure_mermaid_renders_div_and_loads_script(self):
+        doc = {"title": "t", "summary_topic_line": "", "summary_gist": "", "blocks": [
+            {"type": "figure", "description": "A flowchart",
+             "mermaid": "flowchart TD\n  A-->B"},
+        ]}
+        h = render_note_html(doc)
+        self.assertIn('<pre class="mermaid">flowchart TD', h)   # raw source, client-rendered
+        self.assertIn("mermaid.initialize", h)                  # script pulled in only when needed
+        self.assertNotIn("<img", h)                             # mermaid preferred over a raster
+
+    def test_no_mermaid_script_without_a_diagram(self):
+        self.assertNotIn("mermaid.initialize", render_note_html(DOC))
+
+    def test_figure_markdown_prefers_mermaid_fence(self):
+        doc = {"title": "t", "summary_topic_line": "", "summary_gist": "", "blocks": [
+            {"type": "figure", "description": "A flowchart",
+             "mermaid": "flowchart TD\n  A-->B", "image": "f.png"},
+        ]}
+        md = render_note_markdown(doc)
+        self.assertIn("```mermaid\nflowchart TD\n  A-->B\n```", md)
+        self.assertIn("*A flowchart*", md)
+        self.assertNotIn("![", md)                              # fence beats the PNG locally
+
+
+@unittest.skipUnless(__import__("importlib").util.find_spec("reportlab"), "reportlab not installed")
+class PdfTests(unittest.TestCase):
+    def test_render_note_pdf_writes_a_pdf(self):
+        import tempfile
+        from pathlib import Path
+
+        from miso.export import render_note_pdf
+        doc = {"title": "t", "summary_topic_line": "", "summary_gist": "g", "blocks": [
+            {"type": "heading", "level": 1, "text": "H"},
+            {"type": "list", "items": [
+                {"text": "a", "level": 0}, {"text": "a.1", "level": 1}]},
+            {"type": "figure", "description": "A flowchart", "mermaid": "flowchart TD\n A-->B"},
+        ]}
+        with tempfile.TemporaryDirectory() as td:
+            out = render_note_pdf(doc, Path(td) / "note.pdf")
+            self.assertTrue(out.exists() and out.stat().st_size > 0)
+            self.assertEqual(out.read_bytes()[:5], b"%PDF-")
 
 
 class FigureEmbedTests(unittest.TestCase):

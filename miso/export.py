@@ -69,10 +69,13 @@ def latex_to_unicode(latex: str) -> str:
 def render_note_html(doc: dict[str, Any]) -> str:
     """Render one note's document IR to a full HTML page."""
     title = html.escape(doc.get("title") or "(untitled)")
+    blocks = _coalesce_lists(doc.get("blocks") or [])
     parts = [f"<h1>{title}</h1>"]
-    for block in _coalesce_lists(doc.get("blocks") or []):
+    for block in blocks:
         parts.append(_render_block(block))
-    return _page(title, "\n".join(p for p in parts if p))
+    has_mermaid = any(b.get("type") == "figure" and (b.get("mermaid") or "").strip()
+                      for b in blocks)
+    return _page(title, "\n".join(p for p in parts if p), mermaid=has_mermaid)
 
 
 def _coalesce_lists(blocks: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -99,9 +102,14 @@ def _render_block(block: dict[str, Any]) -> str:
         return _render_list(block.get("items") or [])
     if t == "figure":
         desc = html.escape(block.get("description", ""))
+        cap = f"<figcaption>{desc}</figcaption>" if desc else ""
+        mermaid = (block.get("mermaid") or "").strip()
+        if mermaid:
+            # Rendered client-side by mermaid.js (see _page); the raw source is the
+            # diagram's source of truth and stays editable in the page.
+            return f'<figure><pre class="mermaid">{html.escape(mermaid)}</pre>{cap}</figure>'
         img = (block.get("image") or "").strip()
         img_tag = f'<img src="{html.escape(img)}" alt="{desc}">' if img else ""
-        cap = f"<figcaption>{desc}</figcaption>" if desc else ""
         return f"<figure>{img_tag}{cap}</figure>"
     return ""
 
@@ -121,10 +129,19 @@ def _render_list(items: list[dict[str, Any]]) -> str:
     return "".join(out)
 
 
-def _page(title: str, body: str) -> str:
+_MERMAID_SCRIPT = (
+    "<script type=\"module\">"
+    "import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';"
+    "mermaid.initialize({startOnLoad:true});"
+    "</script>"
+)
+
+
+def _page(title: str, body: str, *, mermaid: bool = False) -> str:
+    script = _MERMAID_SCRIPT if mermaid else ""
     return (
         "<!doctype html><html><head><meta charset='utf-8'>"
-        f"<title>{html.escape(title)}</title></head><body>\n{body}\n</body></html>"
+        f"<title>{html.escape(title)}</title>{script}</head><body>\n{body}\n</body></html>"
     )
 
 
@@ -159,11 +176,115 @@ def _block_to_md(block: dict[str, Any]) -> str:
         )
     if t == "figure":
         desc = (block.get("description") or "").strip()
+        mermaid = (block.get("mermaid") or "").strip()
+        if mermaid:
+            # A ```mermaid fence renders natively on GitHub / Obsidian; the caption
+            # follows as italic text.
+            fence = f"```mermaid\n{mermaid}\n```"
+            return f"{fence}\n\n*{desc}*" if desc else fence
         img = (block.get("image") or "").strip()
         if img:
             return f"![{desc}]({img})"
         return f"*[Figure: {desc}]*" if desc else "*[Figure]*"
     return ""
+
+
+# ----------------------------------------------------------------------------- pdf
+
+def _pdf_escape(text: str) -> str:
+    """Escape the &, <, > that reportlab's Paragraph treats as markup."""
+    return html.escape(text or "", quote=False)
+
+
+def _nest_items(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Flat `[{text, level}]` → nested `[{text, children}]` by indentation level."""
+    root: list[dict[str, Any]] = []
+    stack: list[tuple[int, list]] = [(-1, root)]   # (level, sibling list)
+    for it in items:
+        lvl = max(0, int(it.get("level", 0)))
+        node = {"text": (it.get("text") or "").strip(), "children": []}
+        while stack[-1][0] >= lvl:
+            stack.pop()
+        stack[-1][1].append(node)
+        stack.append((lvl, node["children"]))
+    return root
+
+
+def _pdf_list(nodes: list[dict[str, Any]], styles) -> list:
+    from reportlab.platypus import ListFlowable, ListItem, Paragraph
+    out = []
+    for n in nodes:
+        flow = [Paragraph(_pdf_escape(n["text"]), styles["BodyText"])]
+        if n["children"]:
+            flow.append(ListFlowable(_pdf_list(n["children"], styles),
+                                     bulletType="bullet", leftIndent=18))
+        out.append(ListItem(flow))
+    return out
+
+
+def render_note_pdf(doc: dict[str, Any], out_path: Path | str) -> Path:
+    """Render one note's IR to a PDF, embedding each figure's rendered Mermaid PNG.
+
+    A figure whose Mermaid did not render to a PNG (no `mmdc` / parse error) falls
+    back to its caption plus the Mermaid source in a monospace block.
+    """
+    try:
+        from reportlab.lib.pagesizes import letter
+        from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+        from reportlab.platypus import (Image as RLImage, ListFlowable, Paragraph,
+                                         SimpleDocTemplate, Spacer)
+    except ImportError as e:
+        raise RuntimeError("PDF output needs reportlab — `pip install reportlab`.") from e
+
+    out_path = Path(out_path)
+    styles = getSampleStyleSheet()
+    code = ParagraphStyle("Mono", parent=styles["BodyText"], fontName="Courier",
+                          fontSize=8, leading=11)
+    story = [Paragraph(_pdf_escape(doc.get("title") or "(untitled)"), styles["Title"]),
+             Spacer(1, 10)]
+    gist = (doc.get("summary_gist") or "").strip()
+    if gist:
+        story += [Paragraph(_pdf_escape(gist), styles["BodyText"]), Spacer(1, 16)]
+
+    n_fig = 0
+    for block in _coalesce_lists(doc.get("blocks") or []):
+        t = block.get("type")
+        if t == "heading":
+            lvl = min(6, int(block.get("level", 1)) + 1)   # the note title owns the top level
+            story += [Paragraph(_pdf_escape(block.get("text", "")), styles[f"Heading{lvl}"]),
+                      Spacer(1, 6)]
+        elif t == "paragraph":
+            story += [Paragraph(_pdf_escape(block.get("text", "")), styles["BodyText"]),
+                      Spacer(1, 8)]
+        elif t == "equation":
+            story += [Paragraph(_pdf_escape(latex_to_unicode(block.get("latex", ""))), code),
+                      Spacer(1, 8)]
+        elif t == "list":
+            story += [ListFlowable(_pdf_list(_nest_items(block.get("items") or []), styles),
+                                   bulletType="bullet", leftIndent=18), Spacer(1, 8)]
+        elif t == "figure":
+            n_fig += 1
+            story.append(Paragraph(f"Figure {n_fig}", styles["Heading3"]))
+            desc = (block.get("description") or "").strip()
+            if desc:
+                story += [Paragraph(_pdf_escape(desc), styles["BodyText"]), Spacer(1, 4)]
+            img = (block.get("image") or "").strip()
+            mermaid = (block.get("mermaid") or "").strip()
+            if img and Path(img).exists():
+                pic = RLImage(img)
+                pic._restrictSize(460, 360)
+                story += [pic, Spacer(1, 12)]
+            elif mermaid:
+                for line in mermaid.splitlines():
+                    story.append(Paragraph(_pdf_escape(line) or "&nbsp;", code))
+                story.append(Spacer(1, 12))
+            else:
+                story.append(Spacer(1, 8))
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    SimpleDocTemplate(str(out_path), pagesize=letter, rightMargin=50, leftMargin=50,
+                      topMargin=50, bottomMargin=50).build(story)
+    return out_path
 
 
 # ----------------------------------------------------------------------------- data access

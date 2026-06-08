@@ -44,9 +44,10 @@ For any figure, diagram, chart, circuit, plot, or drawing, emit a `figure` block
 Give it a `description`: 1–2 sentences saying what the figure depicts — its kind
 (graph, flowchart, circuit, …), its axis or node labels, and what it illustrates —
 and, if you can, a `bbox` locating it on the page as `[x, y, width, height]`
-normalized to 0–1. Do NOT turn the figure's contents into a paragraph, list, or
-equation, and do not fill `image` — the image itself is captured by a later step.
-Transcribe any handwritten text AROUND the figure normally.
+normalized to 0–1 (a later step uses the box to find the figure). Do NOT turn the
+figure's contents into a paragraph, list, or equation, and do not fill `image` or
+`mermaid` — a later step redraws the figure from the page. Transcribe any
+handwritten text AROUND the figure normally.
 
 ## Summary
 
