@@ -4,14 +4,14 @@
 # this captures the exact python path on your computer
 
 # run this: pwd 
-# this captures the exact script path to run process_inbox.py
-# <script> + "/process_inbox.py"
+# this captures the exact script path to run run_full_pipeline.py
+# <script> + "/run_full_pipeline.py"
 
 # To schedule this project, run: crontab -e
 # Then add your specific paths into the text below and paste this line into the terminal:
 
-# 0 9 * * * <python path> </path/to/process_inbox.py>
+# 0 9 * * * <python path> </path/to/run_full_pipeline.py>
 
-# this should run process_inbox at 9 AM every day!
+# this should run run_full_pipeline at 9 AM every day!
 
 # confirm it's been saved with crontab -l
