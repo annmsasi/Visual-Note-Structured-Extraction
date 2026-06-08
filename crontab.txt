@@ -1,17 +1,1 @@
-# crontab.txt
-
-# run this: which python3 
-# this captures the exact python path on your computer
-
-# run this: pwd 
-# this captures the exact script path to run run_full_pipeline.py
-# <script> + "/run_full_pipeline.py"
-
-# To schedule this project, run: crontab -e
-# Then add your specific paths into the text below and paste this line into the terminal:
-
-# 0 9 * * * <python path> </path/to/run_full_pipeline.py>
-
-# this should run run_full_pipeline at 9 AM every day!
-
-# confirm it's been saved with crontab -l
+0 9 * * * /opt/homebrew/bin/python3 /Users/farihalateef/ocr-project/Visual-Note-Structured-Extraction/run_full_pipeline_.py
