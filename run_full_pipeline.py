@@ -22,6 +22,15 @@ from miso.replay import _configure_logging, _load_env, _prepare_image, run_docum
 
 _IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".tif", ".tiff", ".bmp", ".webp"}
 
+import os
+
+# Finds the folder where run_full_pipeline.py lives, on ANY computer
+base_folder = os.path.dirname(os.path.abspath(__file__))
+
+# Builds paths relative to that folder (DOUBLE CHECK THIS)
+image_folder = os.path.join(base_folder, "images")
+output_folder = os.path.join(base_folder, "output")
+
 
 def _default_image() -> Path:
     imgs = sorted(p for p in Path("data/inbox").glob("*") if p.suffix.lower() in _IMAGE_EXTS)
