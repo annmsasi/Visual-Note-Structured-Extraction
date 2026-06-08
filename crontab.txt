@@ -13,3 +13,5 @@
 # 0 9 * * * <python path> </path/to/process_inbox.py>
 
 # this should run process_inbox at 9 AM every day!
+
+# confirm it's been saved with crontab -l
