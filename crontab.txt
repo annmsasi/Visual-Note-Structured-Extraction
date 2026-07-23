@@ -1,1 +1,1 @@
-0 9 * * * /opt/homebrew/bin/python3 /Users/farihalateef/ocr-project/Visual-Note-Structured-Extraction/run_full_pipeline_.py
+*/15 * * * * cd /Users/alecraymond/Documents/systems_project/Visual-Note-Structured-Extraction && /Users/alecraymond/Documents/systems_project/Visual-Note-Structured-Extraction/.venv/bin/python process_inbox.py --inbox /Users/alecraymond/Documents/systems_project/Visual-Note-Structured-Extraction/data/inbox --output /Users/alecraymond/Documents/systems_project/Visual-Note-Structured-Extraction/data/output >> data/process.log 2>&1
