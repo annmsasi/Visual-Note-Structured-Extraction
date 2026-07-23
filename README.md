@@ -53,8 +53,14 @@ That's it. Add more courses by adding more subfolders.
 ### Run it now instead of waiting
 
 ```bash
-.venv/bin/python process_inbox.py --inbox ~/notes --output ~/markdown
-.venv/bin/python process_inbox.py --drive     # also upload each note as a Google Doc
+./run.sh                       # process the inbox once, right now
+./run.sh ~/notes ~/markdown    # ...with the same folders you gave setup.sh
+```
+
+To also upload each note to Google Drive as a Google Doc:
+
+```bash
+.venv/bin/python process_inbox.py --inbox ~/notes --output ~/markdown --drive
 ```
 
 `--drive` needs a Google OAuth client (`credentials.json` in the repo root, Drive
