@@ -4,7 +4,7 @@ Drop a handwritten note into a folder; a few minutes later a clean Markdown
 version appears in another folder. Under the hood: OCR → a per-course vocabulary
 cache → Claude → Markdown.
 
-## 1. Install (once)
+## 1. Installation
 
 ```bash
 ./install.sh
@@ -18,7 +18,7 @@ AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT=https://<resource>.cognitiveservices.azure.
 AZURE_DOCUMENT_INTELLIGENCE_KEY=...
 ```
 
-## 2. Start it (once)
+## 2. Scheduling
 
 ```bash
 ./setup.sh                       # uses ./data/inbox and ./data/output
@@ -29,7 +29,7 @@ This schedules a job that checks the input folder **every 15 minutes**. Works on
 macOS and Linux. On macOS, grant Full Disk Access to `/usr/sbin/cron` (System
 Settings → Privacy & Security → Full Disk Access) so it can read your files.
 
-## 3. Use it
+## 3. Usage
 
 Make a folder per course inside your input folder, and drop notes in:
 
@@ -50,7 +50,7 @@ That's it. Add more courses by adding more subfolders.
 
 ---
 
-### Run it now instead of waiting
+### Running on demand
 
 ```bash
 ./run.sh                       # process the inbox once, right now
